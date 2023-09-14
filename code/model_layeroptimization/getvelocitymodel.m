@@ -137,8 +137,8 @@ for ir = 1: xLen
             for i = 1: numLayer  % length(idx)
                 tmp = find(zArrayMat(:, i) <= zMat(ir, ic, idepth), 1);
                 if isempty(tmp), tmp = (numLayer - i + 1) + 1;   end
-                velocityModel(tmp, i) = velocityModel(idx(i), i) + velocityMat(ir, ic, idepth);
-                velocityCount(tmp, i) = velocityCount(idx(i), i) + 1;
+                velocityModel(tmp, i) = velocityModel(tmp, i) + velocityMat(ir, ic, idepth);
+                velocityCount(tmp, i) = velocityCount(tmp, i) + 1;
             end
             %             if (velocityCount(2, 1) - velocityCount(1, 2))
             %                 disp(['error is here: ',  num2str(ir), ', ', num2str(ic)]);

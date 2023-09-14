@@ -77,7 +77,10 @@ for i = 1: numRow
     xMat(irow, icol) = txtData(i, 4);
     yMat(irow, icol) = txtData(i, 5);
     zMat(irow, icol, idepth) = txtData(i, 6);
-    velocityMat(irow, icol, idepth) = 304800 / txtData(i, 7);   %  unit: m /s.
+     velocityMat(irow, icol, idepth) = txtData(i, 7);   %  unit: m /s.
+    if (txtData(i, 7) < 1000)
+        velocityMat(irow, icol, idepth) = 304800 / txtData(i, 7);   %  unit: m /s.
+    end
 end
 % 
 [z0, idx] = max(txtData(:, 6));
