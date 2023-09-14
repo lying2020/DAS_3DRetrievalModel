@@ -22,9 +22,10 @@ disp(['func_name: ', func_name, '. ', 'output_data_path: ', output_data_path]);
 disp(['func_name: ', func_name, '. ', 'current_data_path: ', current_data_path]);
 
 %
-geological_model_name = 'geological_model_xinjiang_2020';
-% geological_model_name = 'geological_model_2023';
-geological_model_file_path = [current_data_path, filesep, 'mat_data', filesep, geological_model_name, '.mat'];
+geological_model_name = 'geological_model_xinjiang_2020_XJ';
+% geological_model_name = 'geological_model_2023_T106';
+% geological_model_name = 'geological_model_2023_T131';
+geological_model_file_path = [current_data_path, filesep, geological_model_name, '.mat'];
 disp(['func_name: ', func_name, '. ', 'geological_model_file_path: ', geological_model_file_path]);
 if exist('geological_model', 'var')
     disp(['func_name: ', func_name, '. ', 'Variable geological_model exists']);
@@ -37,6 +38,10 @@ layerGridModel = load_mat_data('layergriddata1000.mat');
 layerCoeffModel = load_mat_data('layerModel1000.mat');
 velocityModel =  load_mat_data('VelModnew.mat');
 
+layerGridModel = geological_model.layerGridModel;
+layerCoeffModel = geological_model.layerCoeffModel;
+velocityModel = geological_model.velocityModel;
+
 sensorsCoord = geological_model.sensorData;
 undergroundCoordsSet = sensorsCoord((sensorsCoord(:, 3) < 0), :);
 % bottom_sensor_coordinate:  [-3.05915354378521,-45.6872047241777,-4050.73588976378];
@@ -47,6 +52,7 @@ sensors_num = size(undergroundCoordsSet,1);
 disp(['func_name: ', func_name, '. ', 'sensors_num: ', num2str(sensors_num), 'bottom_sensor_coordinate: ', num2str(bottom_sensor_coordinate)]);
 
 retrieval_model_area = [-2800, 3100; -2800, 3100 ; -600, 1000];
+
 % retrieval_model_grid_size:  [delta_x; delta_y; delta_z]; % 3 * 1
 retrieval_model_grid_size = [10; 10; 10];
 disp(['func_name: ', func_name, '. ', 'retrieval_model_area: x = ', num2str(retrieval_model_area(1, :)), ...

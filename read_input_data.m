@@ -69,9 +69,9 @@ geological_model.layerCoeffModel = layerCoeffModel;
 time_layers = showtimenow;
 disp(['func_name: ', func_name, '. ', 'time_layers: ', time_layers]);
 
-axs= axes(figure);
-sourceplot3D(axs, layerGridModel, wellData(:, [1, 2, 3])) ; % , sensorCoord);
-% if strcmp(type, 'fault'),    colormap(axs, 'jet');    end
+% axs= axes(figure);
+% sourceplot3D(axs, layerGridModel, wellData(:, [1, 2, 3])) ; % , sensorCoord);
+% % if strcmp(type, 'fault'),    colormap(axs, 'jet');    end
 
 path_faults_data_folder = [geological_data_path.path_geological_model, filesep, geological_data_path.path_faults_data_folder];
 disp(['func_name: ', func_name, '. ', 'path_faults_data_folder: ', path_faults_data_folder]);

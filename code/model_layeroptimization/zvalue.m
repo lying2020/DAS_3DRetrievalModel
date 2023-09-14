@@ -18,6 +18,9 @@ function [z0, rc] = zvalue(coeffMat, xMat, yMat, xy0, intervalM)
 % xy0: 1*2 array. the x, y coordinates of a point on a stratigraphic interface.
 % OUTPUT:
 % z0: z coordinate of a point with fixed x, y on a stratigraphic interface.
+% func_name = mfilename;
+% disp(['func_name: ', func_name]);
+
 %% -----------------------------------------------------------------------------------------------------
 %
 [rLen, cLen] = size(xMat);

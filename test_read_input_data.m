@@ -55,7 +55,7 @@ geological_data_path.path_sensor_data =['sensorsCoordSet', well_name, '.csv'];
 output_mat_data_path = [current_data_path, filesep, 'mat_data', well_name];
 mkdir(output_mat_data_path);
 
-diary_file_name = [output_mat_data_path, filesep, 'LOG_INFO', geological_model_path, well_name, showtimenow(0), '.txt'];
+diary_file_name = [output_mat_data_path, filesep, 'LOG_INFO_', geological_model_path, well_name, showtimenow(0), '.txt'];
 diary(diary_file_name);
 diary on;
 
