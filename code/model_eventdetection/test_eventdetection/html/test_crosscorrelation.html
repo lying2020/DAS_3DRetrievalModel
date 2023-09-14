@@ -1,0 +1,219 @@
+
+<!DOCTYPE html
+  PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html><head>
+      <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+   <!--
+This HTML was auto-generated from MATLAB code.
+To make changes, update the MATLAB code and republish this document.
+      --><title>test_crosscorrelation</title><meta name="generator" content="MATLAB 9.6"><link rel="schema.DC" href="http://purl.org/dc/elements/1.1/"><meta name="DC.date" content="2020-12-11"><meta name="DC.source" content="test_crosscorrelation.m"><style type="text/css">
+html,body,div,span,applet,object,iframe,h1,h2,h3,h4,h5,h6,p,blockquote,pre,a,abbr,acronym,address,big,cite,code,del,dfn,em,font,img,ins,kbd,q,s,samp,small,strike,strong,sub,sup,tt,var,b,u,i,center,dl,dt,dd,ol,ul,li,fieldset,form,label,legend,table,caption,tbody,tfoot,thead,tr,th,td{margin:0;padding:0;border:0;outline:0;font-size:100%;vertical-align:baseline;background:transparent}body{line-height:1}ol,ul{list-style:none}blockquote,q{quotes:none}blockquote:before,blockquote:after,q:before,q:after{content:'';content:none}:focus{outine:0}ins{text-decoration:none}del{text-decoration:line-through}table{border-collapse:collapse;border-spacing:0}
+
+html { min-height:100%; margin-bottom:1px; }
+html body { height:100%; margin:0px; font-family:Arial, Helvetica, sans-serif; font-size:10px; color:#000; line-height:140%; background:#fff none; overflow-y:scroll; }
+html body td { vertical-align:top; text-align:left; }
+
+h1 { padding:0px; margin:0px 0px 25px; font-family:Arial, Helvetica, sans-serif; font-size:1.5em; color:#d55000; line-height:100%; font-weight:normal; }
+h2 { padding:0px; margin:0px 0px 8px; font-family:Arial, Helvetica, sans-serif; font-size:1.2em; color:#000; font-weight:bold; line-height:140%; border-bottom:1px solid #d6d4d4; display:block; }
+h3 { padding:0px; margin:0px 0px 5px; font-family:Arial, Helvetica, sans-serif; font-size:1.1em; color:#000; font-weight:bold; line-height:140%; }
+
+a { color:#005fce; text-decoration:none; }
+a:hover { color:#005fce; text-decoration:underline; }
+a:visited { color:#004aa0; text-decoration:none; }
+
+p { padding:0px; margin:0px 0px 20px; }
+img { padding:0px; margin:0px 0px 20px; border:none; }
+p img, pre img, tt img, li img, h1 img, h2 img { margin-bottom:0px; } 
+
+ul { padding:0px; margin:0px 0px 20px 23px; list-style:square; }
+ul li { padding:0px; margin:0px 0px 7px 0px; }
+ul li ul { padding:5px 0px 0px; margin:0px 0px 7px 23px; }
+ul li ol li { list-style:decimal; }
+ol { padding:0px; margin:0px 0px 20px 0px; list-style:decimal; }
+ol li { padding:0px; margin:0px 0px 7px 23px; list-style-type:decimal; }
+ol li ol { padding:5px 0px 0px; margin:0px 0px 7px 0px; }
+ol li ol li { list-style-type:lower-alpha; }
+ol li ul { padding-top:7px; }
+ol li ul li { list-style:square; }
+
+.content { font-size:1.2em; line-height:140%; padding: 20px; }
+
+pre, code { font-size:12px; }
+tt { font-size: 1.2em; }
+pre { margin:0px 0px 20px; }
+pre.codeinput { padding:10px; border:1px solid #d3d3d3; background:#f7f7f7; }
+pre.codeoutput { padding:10px 11px; margin:0px 0px 20px; color:#4c4c4c; }
+pre.error { color:red; }
+
+@media print { pre.codeinput, pre.codeoutput { word-wrap:break-word; width:100%; } }
+
+span.keyword { color:#0000FF }
+span.comment { color:#228B22 }
+span.string { color:#A020F0 }
+span.untermstring { color:#B20000 }
+span.syscmd { color:#B28C00 }
+
+.footer { width:auto; padding:10px 0px; margin:25px 0px 0px; border-top:1px dotted #878787; font-size:0.8em; line-height:140%; font-style:italic; color:#878787; text-align:left; float:none; }
+.footer p { margin:0px; }
+.footer a { color:#878787; }
+.footer a:hover { color:#878787; text-decoration:underline; }
+.footer a:visited { color:#878787; }
+
+table th { padding:7px 5px; text-align:left; vertical-align:middle; border: 1px solid #d6d4d4; font-weight:bold; }
+table td { padding:7px 5px; text-align:left; vertical-align:top; border:1px solid #d6d4d4; }
+
+
+
+
+
+  </style></head><body><div class="content"><h2>Contents</h2><div><ul><li><a href="#1">test crosscorrelation function</a></li><li><a href="#2">DEBUG ! ! !</a></li><li><a href="#3"># test 1</a></li><li><a href="#5"># test 2</a></li><li><a href="#10"># test 3</a></li></ul></div><h2 id="1">test crosscorrelation function</h2><p>this is a demo of the crosscorrelation function</p><pre class="codeinput">close <span class="string">all</span>;
+<span class="comment">% clear</span>
+clc
+</pre><h2 id="2">DEBUG ! ! !</h2><pre class="codeinput">dbstop <span class="string">if</span> <span class="string">error</span>;
+format <span class="string">long</span>
+addpath(genpath(<span class="string">'../../../include'</span>));
+<span class="comment">% -----------------------------------------------------------------------------------------------------</span>
+<span class="comment">% clear all; clc; close all;</span>
+</pre><h2 id="3"># test 1</h2><pre class="codeinput">arr1 = [1 2 3 4 5 6 7];
+arr2 = [3 4 5 6 7 1 2];
+[xcorrArray1, timeLag1, fig1] = crosscorrelation(arr1, arr2);
+</pre><pre class="codeoutput"># the cost of  cross correlation is: 0.10485 s.
+</pre><img vspace="5" hspace="5" src="test_crosscorrelation_01.png" alt=""> <pre>We can see the maximum correlation coefficient and the delay</pre><pre class="codeinput">disp([<span class="string">'maxCoor1 = '</span>, num2str(max(xcorrArray1)), <span class="string">', timeLag1 = '</span>, num2str(timeLag1)]);
+</pre><pre class="codeoutput">maxCoor1 = 0.96429, timeLag1 = 2
+</pre><h2 id="5"># test 2</h2><pre class="codeinput">x1 = [0,0,1,2,3,7,9,8,0,0];
+x2 = [1,2,3,7,9,8,0,0,0,0];
+[xcorrArray2, timeLag2, fig2] = crosscorrelation(x1, x2);
+</pre><pre class="codeoutput"># the cost of  cross correlation is: 0.08891 s.
+</pre><img vspace="5" hspace="5" src="test_crosscorrelation_02.png" alt=""> <p>the maximum correlation coefficient and the delay</p><pre class="codeinput">disp([<span class="string">'maxCoor2 = '</span>, num2str(max(xcorrArray2)), <span class="string">', timeLag1 = '</span>, num2str(timeLag2)]);
+
+xcorrTime = (1 : length(xcorrArray2)) - length(x1) - 1;
+</pre><pre class="codeoutput">maxCoor2 = 1, timeLag1 = 2
+</pre><p>Matlab call function xcorr</p><pre class="codeinput">[xcorrMat, lag] = xcorr(x1, x2, <span class="string">'coeff'</span>);
+</pre><p>plot lag-corr graph.</p><pre class="codeinput">figure; hold <span class="string">on</span>;
+plot(lag, xcorrMat, <span class="string">'b'</span>, <span class="string">'linewidth'</span>, 3);
+plot(xcorrTime, xcorrArray2, <span class="string">'ro-'</span>);
+legend(<span class="string">'xcorr'</span>, <span class="string">'crosscorrelation'</span>);  xlabel(<span class="string">'time lag'</span>);  ylabel(<span class="string">'normalized coeff'</span>);
+</pre><img vspace="5" hspace="5" src="test_crosscorrelation_03.png" alt=""> <p>You can see two points ahead</p><h2 id="10"># test 3</h2><pre class="codeinput">filename = <span class="string">'..\..\testdata\strainMat17.mat'</span>;
+</pre><p>filename = '..\..\testdata\strainMat61.mat'; filename = '..\..\testdata\strainMat44.mat'; filename = '..\..\testdata\strainMat103.mat';</p><pre class="codeinput">strainMat0 = importdata(filename);
+[lenPosition,  lenTime] = size(strainMat0);
+time = (1:lenTime);  <span class="comment">% *0.064;</span>
+[strainMat, timeLag2, maxCorr2, fig]= filteringfunc(strainMat0);
+n = lenPosition - 1; plot(axes(figure), time, strainMat0(n, :), <span class="string">'b'</span>, time, strainMat(n, :), <span class="string">'r'</span>);
+legend(<span class="string">'strain'</span>, <span class="string">'filtered strain'</span>);
+
+
+
+
+
+
+
+<span class="comment">%{
+</span><span class="comment">1.&#24052;&#29305;&#27779;&#26031;&#28388;&#27874;&#21644;&#21345;&#23572;&#26364;&#28388;&#27874;&#37117;&#21487;&#20197;&#65292;&#20851;&#38190;&#26159;&#39640;&#20302;&#25130;&#39057;&#30340;&#36873;&#21462;&#65292;&#36825;&#20010;&#35201;&#26681;&#25454;&#25968;&#25454;&#30340;&#24773;&#20917;&#36873;&#25321;&#21512;&#36866;&#30340;&#21442;&#25968;&#12290;&#28388;&#27874;&#30340;&#24847;&#20041;&#22312;&#20110;&#20351;&#24471;PS&#27874;&#30340;&#21021;&#33267;&#26356;&#28165;&#26224;&#34987;&#25342;&#21462;&#21040;&#12290;
+</span><span class="comment">2.&#38271;&#30701;&#26102;&#31383;&#27861;&#26159;&#32463;&#20856;&#30340;triggering&#26041;&#27861;&#65292;&#22312;&#24494;&#22320;&#38663;&#30417;&#27979;&#35302;&#21457;&#20107;&#20214;&#20013;&#20351;&#29992;&#65292;
+</span><span class="comment">&#19968;&#33324;&#26681;&#25454;PS&#27874;&#26368;&#38271;&#26102;&#24046;&#26469;&#36873;&#21462;&#65292;&#21363;&#38271;&#26102;&#31383;&#26368;&#22909;&#19981;&#35201;&#21516;&#26102;&#21253;&#21547;PS&#27874;&#20449;&#24687;&#65292;&#27604;&#22914;&#24120;&#29992;&#21442;&#25968;60/20 ms&#65292;&#36825;&#26679;&#12290;
+</span><span class="comment">&#38376;&#27099;&#20540;&#38656;&#35201;&#26681;&#25454;&#25968;&#25454;&#20449;&#22122;&#27604;&#26469;&#27979;&#35797;&#19968;&#19979;&#65292;&#27604;&#22914;1.9 2.0.&#36807;&#20302;&#20250;&#25918;&#36827;&#26469;&#24456;&#22810;&#22122;&#38899;&#20449;&#21495;&#65292;&#36807;&#39640;&#26377;&#20123;&#20107;&#20214;&#20250;&#28431;&#25481;&#12290;
+</span><span class="comment">3. &#20809;&#32420;&#30340;&#25968;&#25454;&#29305;&#28857;&#25105;&#36824;&#27809;&#26377;&#20102;&#35299;&#65292;&#19981;&#33021;&#22238;&#31572;&#36825;&#20010;&#12290;
+</span><span class="comment">4. &#24494;&#22320;&#38663;&#20027;&#35201;&#29992;&#22320;&#19979;&#30772;&#35010;&#20107;&#20214;&#30340;&#36879;&#23556;&#27874;&#26469;&#23450;&#20301;&#65292;&#21453;&#23556;&#27874;&#25240;&#23556;&#27874;&#22522;&#26412;&#37117;&#24403;&#22122;&#38899;&#22788;&#29702;&#20102;&#65292;
+</span><span class="comment">&#20307;&#29616;&#22312;&#21040;&#26102;&#26202;&#20110;&#36879;&#23556;&#27874;&#20449;&#21495;&#12290;&#25342;&#21462;&#21021;&#33267;&#26102;&#21482;&#25342;&#21462;&#26368;&#26089;&#21040;&#36798;&#30340;&#12290;
+</span><span class="comment">&#22320;&#23618;&#30340;&#20542;&#35282;&#31561;&#21464;&#21270;&#20449;&#24687;&#22522;&#26412;&#20307;&#29616;&#22312;&#36895;&#24230;&#27169;&#22411;&#19978;&#65292;&#30001;&#20110;&#22320;&#38663;&#23450;&#20301;&#38656;&#35201;&#19968;&#20010;&#24179;&#34913;&#30340;&#36895;&#24230;&#22330;&#26469;&#35745;&#31639;&#36208;&#26102;&#65292;&#25152;&#20197;&#23618;&#29366;&#36895;&#24230;&#27169;&#22411;&#35201;&#20570;&#24179;&#34913;&#22788;&#29702;&#65292;&#19981;&#20351;&#29992;&#20998;&#27573;&#20989;&#25968;&#12290;
+</span><span class="comment">
+</span><span class="comment">
+</span><span class="comment">%}</span>
+</pre><img vspace="5" hspace="5" src="test_crosscorrelation_04.png" alt=""> <img vspace="5" hspace="5" src="test_crosscorrelation_05.png" alt=""> <p class="footer"><br><a href="https://www.mathworks.com/products/matlab/">Published with MATLAB&reg; R2019a</a><br></p></div><!--
+##### SOURCE BEGIN #####
+%% test crosscorrelation function
+% this is a demo of the crosscorrelation function
+%
+close all;
+% clear
+clc
+%%  DEBUG ! ! !
+dbstop if error;
+format long
+addpath(genpath('../../../include'));
+% REPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASH-
+% clear all; clc; close all;
+
+%% # test 1
+arr1 = [1 2 3 4 5 6 7];
+arr2 = [3 4 5 6 7 1 2];
+[xcorrArray1, timeLag1, fig1] = crosscorrelation(arr1, arr2);
+
+%%
+%  We can see the maximum correlation coefficient and the delay
+disp(['maxCoor1 = ', num2str(max(xcorrArray1)), ', timeLag1 = ', num2str(timeLag1)]);
+
+%% # test 2
+x1 = [0,0,1,2,3,7,9,8,0,0];
+x2 = [1,2,3,7,9,8,0,0,0,0];
+[xcorrArray2, timeLag2, fig2] = crosscorrelation(x1, x2);
+
+%%
+% the maximum correlation coefficient and the delay
+disp(['maxCoor2 = ', num2str(max(xcorrArray2)), ', timeLag1 = ', num2str(timeLag2)]);
+
+xcorrTime = (1 : length(xcorrArray2)) - length(x1) - 1;
+
+%%
+% Matlab call function xcorr
+[xcorrMat, lag] = xcorr(x1, x2, 'coeff');
+%%
+% plot lag-corr graph.
+figure; hold on;
+plot(lag, xcorrMat, 'b', 'linewidth', 3);
+plot(xcorrTime, xcorrArray2, 'ro-');
+legend('xcorr', 'crosscorrelation');  xlabel('time lag');  ylabel('normalized coeff');
+%%
+% You can see two points ahead
+
+%% # test 3
+%
+filename = '..\..\testdata\strainMat17.mat';
+%%
+% filename = '..\..\testdata\strainMat61.mat';
+% filename = '..\..\testdata\strainMat44.mat';
+% filename = '..\..\testdata\strainMat103.mat';
+%
+strainMat0 = importdata(filename);
+[lenPosition,  lenTime] = size(strainMat0);
+time = (1:lenTime);  % *0.064;
+[strainMat, timeLag2, maxCorr2, fig]= filteringfunc(strainMat0);
+n = lenPosition - 1; plot(axes(figure), time, strainMat0(n, :), 'b', time, strainMat(n, :), 'r');
+legend('strain', 'filtered strain');
+
+
+
+
+
+
+
+%{
+1.巴特沃斯滤波和卡尔曼滤波都可以，关键是高低截频的选取，这个要根据数据的情况选择合适的参数。滤波的意义在于使得PS波的初至更清晰被拾取到。
+2.长短时窗法是经典的triggering方法，在微地震监测触发事件中使用，
+一般根据PS波最长时差来选取，即长时窗最好不要同时包含PS波信息，比如常用参数60/20 ms，这样。
+门槛值需要根据数据信噪比来测试一下，比如1.9 2.0.过低会放进来很多噪音信号，过高有些事件会漏掉。
+3. 光纤的数据特点我还没有了解，不能回答这个。
+4. 微地震主要用地下破裂事件的透射波来定位，反射波折射波基本都当噪音处理了，
+体现在到时晚于透射波信号。拾取初至时只拾取最早到达的。
+地层的倾角等变化信息基本体现在速度模型上，由于地震定位需要一个平衡的速度场来计算走时，所以层状速度模型要做平衡处理，不使用分段函数。
+
+
+%}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+##### SOURCE END #####
+--></body></html>

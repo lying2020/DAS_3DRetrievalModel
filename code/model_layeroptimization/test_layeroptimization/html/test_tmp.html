@@ -1,0 +1,184 @@
+
+<!DOCTYPE html
+  PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html><head>
+      <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+   <!--
+This HTML was auto-generated from MATLAB code.
+To make changes, update the MATLAB code and republish this document.
+      --><title>test_tmp</title><meta name="generator" content="MATLAB 9.6"><link rel="schema.DC" href="http://purl.org/dc/elements/1.1/"><meta name="DC.date" content="2020-12-11"><meta name="DC.source" content="test_tmp.m"><style type="text/css">
+html,body,div,span,applet,object,iframe,h1,h2,h3,h4,h5,h6,p,blockquote,pre,a,abbr,acronym,address,big,cite,code,del,dfn,em,font,img,ins,kbd,q,s,samp,small,strike,strong,sub,sup,tt,var,b,u,i,center,dl,dt,dd,ol,ul,li,fieldset,form,label,legend,table,caption,tbody,tfoot,thead,tr,th,td{margin:0;padding:0;border:0;outline:0;font-size:100%;vertical-align:baseline;background:transparent}body{line-height:1}ol,ul{list-style:none}blockquote,q{quotes:none}blockquote:before,blockquote:after,q:before,q:after{content:'';content:none}:focus{outine:0}ins{text-decoration:none}del{text-decoration:line-through}table{border-collapse:collapse;border-spacing:0}
+
+html { min-height:100%; margin-bottom:1px; }
+html body { height:100%; margin:0px; font-family:Arial, Helvetica, sans-serif; font-size:10px; color:#000; line-height:140%; background:#fff none; overflow-y:scroll; }
+html body td { vertical-align:top; text-align:left; }
+
+h1 { padding:0px; margin:0px 0px 25px; font-family:Arial, Helvetica, sans-serif; font-size:1.5em; color:#d55000; line-height:100%; font-weight:normal; }
+h2 { padding:0px; margin:0px 0px 8px; font-family:Arial, Helvetica, sans-serif; font-size:1.2em; color:#000; font-weight:bold; line-height:140%; border-bottom:1px solid #d6d4d4; display:block; }
+h3 { padding:0px; margin:0px 0px 5px; font-family:Arial, Helvetica, sans-serif; font-size:1.1em; color:#000; font-weight:bold; line-height:140%; }
+
+a { color:#005fce; text-decoration:none; }
+a:hover { color:#005fce; text-decoration:underline; }
+a:visited { color:#004aa0; text-decoration:none; }
+
+p { padding:0px; margin:0px 0px 20px; }
+img { padding:0px; margin:0px 0px 20px; border:none; }
+p img, pre img, tt img, li img, h1 img, h2 img { margin-bottom:0px; } 
+
+ul { padding:0px; margin:0px 0px 20px 23px; list-style:square; }
+ul li { padding:0px; margin:0px 0px 7px 0px; }
+ul li ul { padding:5px 0px 0px; margin:0px 0px 7px 23px; }
+ul li ol li { list-style:decimal; }
+ol { padding:0px; margin:0px 0px 20px 0px; list-style:decimal; }
+ol li { padding:0px; margin:0px 0px 7px 23px; list-style-type:decimal; }
+ol li ol { padding:5px 0px 0px; margin:0px 0px 7px 0px; }
+ol li ol li { list-style-type:lower-alpha; }
+ol li ul { padding-top:7px; }
+ol li ul li { list-style:square; }
+
+.content { font-size:1.2em; line-height:140%; padding: 20px; }
+
+pre, code { font-size:12px; }
+tt { font-size: 1.2em; }
+pre { margin:0px 0px 20px; }
+pre.codeinput { padding:10px; border:1px solid #d3d3d3; background:#f7f7f7; }
+pre.codeoutput { padding:10px 11px; margin:0px 0px 20px; color:#4c4c4c; }
+pre.error { color:red; }
+
+@media print { pre.codeinput, pre.codeoutput { word-wrap:break-word; width:100%; } }
+
+span.keyword { color:#0000FF }
+span.comment { color:#228B22 }
+span.string { color:#A020F0 }
+span.untermstring { color:#B20000 }
+span.syscmd { color:#B28C00 }
+
+.footer { width:auto; padding:10px 0px; margin:25px 0px 0px; border-top:1px dotted #878787; font-size:0.8em; line-height:140%; font-style:italic; color:#878787; text-align:left; float:none; }
+.footer p { margin:0px; }
+.footer a { color:#878787; }
+.footer a:hover { color:#878787; text-decoration:underline; }
+.footer a:visited { color:#878787; }
+
+table th { padding:7px 5px; text-align:left; vertical-align:middle; border: 1px solid #d6d4d4; font-weight:bold; }
+table td { padding:7px 5px; text-align:left; vertical-align:top; border:1px solid #d6d4d4; }
+
+
+
+
+
+  </style></head><body><div class="content"><h2>Contents</h2><div><ul><li><a href="#2">-----------------------------------------------------------------------------------------------------</a></li><li><a href="#3">--------------------------------------------</a></li><li><a href="#4">--------------------------------------------</a></li></ul></div><pre class="codeinput"><span class="comment">%</span>
+<span class="comment">%</span>
+<span class="comment">%</span>
+<span class="comment">% close all;</span>
+<span class="comment">% clear</span>
+<span class="comment">%  DEBUG ! ! !</span>
+dbstop <span class="string">if</span> <span class="string">error</span>;
+format <span class="string">long</span>
+addpath(genpath(<span class="string">'../../../include'</span>));
+</pre><h2 id="2">-----------------------------------------------------------------------------------------------------</h2><pre class="codeinput">sp =  [14621234 4650653 -2000.00; 14619460 4650140 -110;   14619580 4650100 -2130; 14619460,4650100,-2110; 14619460 4650140 -2110; 14619430 4650140 -2000; 14620022 4650108 1200; 14619240 4650620 -800];  <span class="comment">%</span>
+ep =   [14619869 4649742 -2990; 14618970 4649700 -2300; 14618900 4649720 -2250; 14618900,4649720,-2340; 14618870 4649700 -2300; 14618920 4649740 -2300];
+</pre><h2 id="3">--------------------------------------------</h2><pre class="codeinput">n = 1;
+startpoint = sp(n, :);
+endpoint = ep(n, :);
+baseCoord = startpoint; <span class="comment">% [14621234 4650653 2000];</span>
+se = [startpoint; endpoint] - baseCoord;
+<span class="comment">%</span>
+typeFitting = <span class="string">'nonlinear'</span>;
+[baseCoord, coeffModel, layerGridModel, ax1] = test_first(baseCoord, typeFitting);
+num = size(layerGridModel, 1);
+<span class="comment">%</span>
+</pre><img vspace="5" hspace="5" src="test_tmp_01.png" alt=""> <h2 id="4">--------------------------------------------</h2><p>ax1 = axes(figure);</p><pre class="codeinput">hold(ax1, <span class="string">'on'</span>);
+scatter3(ax1, se(:, 1), se(:, 2), se(:, 3), 50, <span class="string">'filled'</span>);
+plot3(ax1, se(:, 1), se(:, 2), se(:, 3), <span class="string">'b-'</span>, <span class="string">'linewidth'</span>, 1.5);
+<span class="comment">%</span>
+tic
+[intersection1, idxLayer, pointSet, coeffSet]  = layerintersects(coeffModel, layerGridModel, se(1, :), se(2, :));
+
+<span class="comment">% ax1 = axes(figure); surf(ax1, xMat, yMat, ones(189, 65))</span>
+<span class="comment">% hold(ax1, 'on'); sourceplot3D(ax1 , layerGridModel(1, :));</span>
+toc
+<span class="comment">% dejong5fcn</span>
+<span class="comment">% x = simulannealbnd(fun,x0);</span>
+<span class="comment">%</span>
+<span class="comment">% a1 = [14620310.4784803,4650036.64241430,-1376.09698426868];  % quadratic</span>
+<span class="comment">%</span>
+<span class="comment">% a2 = [14620310.4784799,4650036.64241408,-1376.09698546316];   % linear</span>
+<span class="comment">%</span>
+<span class="comment">% a3 = [14620310.4784799,4650036.64241408,-1376.09698546337];   % linear</span>
+<span class="comment">%</span>
+<span class="comment">% a4 = [14620310.4784803,4650036.64241430,-1376.09698425412];</span>
+<span class="comment">%</span>
+<span class="comment">% delta12 = a1 - a2</span>
+<span class="comment">% delta13 = a1 - a3</span>
+<span class="comment">% delta14 = a1 - a4</span>
+<span class="comment">% delta23 = a2 - a3</span>
+<span class="comment">%</span>
+<span class="comment">% a5 = [-923.528603328752,-616.362313283878,-3376.12287956811] + [14621234 4650653 2000]</span>
+<span class="comment">% a6 = [-9.235286033287517e+02,-6.163623132838775e+02,-3.376122879568111e+03] + [14621234 4650653 2000];</span>
+<span class="comment">% delta45 = a4 - a5</span>
+<span class="comment">% a5 - a6</span>
+</pre><pre class="codeoutput">&#26102;&#38388;&#24050;&#36807; 0.102889 &#31186;&#12290;
+</pre><img vspace="5" hspace="5" src="test_tmp_02.png" alt=""> <p class="footer"><br><a href="https://www.mathworks.com/products/matlab/">Published with MATLAB&reg; R2019a</a><br></p></div><!--
+##### SOURCE BEGIN #####
+%
+%
+%
+% close all;
+% clear
+%  DEBUG ! ! !
+dbstop if error;
+format long
+addpath(genpath('../../../include'));
+%% REPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASH-
+%
+sp =  [14621234 4650653 -2000.00; 14619460 4650140 -110;   14619580 4650100 -2130; 14619460,4650100,-2110; 14619460 4650140 -2110; 14619430 4650140 -2000; 14620022 4650108 1200; 14619240 4650620 -800];  %
+ep =   [14619869 4649742 -2990; 14618970 4649700 -2300; 14618900 4649720 -2250; 14618900,4649720,-2340; 14618870 4649700 -2300; 14618920 4649740 -2300];
+%% REPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASH
+n = 1;
+startpoint = sp(n, :);
+endpoint = ep(n, :);
+baseCoord = startpoint; % [14621234 4650653 2000];
+se = [startpoint; endpoint] - baseCoord;
+%
+typeFitting = 'nonlinear';  
+[baseCoord, coeffModel, layerGridModel, ax1] = test_first(baseCoord, typeFitting);
+num = size(layerGridModel, 1);
+%
+%% REPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASH
+% ax1 = axes(figure);  
+hold(ax1, 'on');
+scatter3(ax1, se(:, 1), se(:, 2), se(:, 3), 50, 'filled');
+plot3(ax1, se(:, 1), se(:, 2), se(:, 3), 'b-', 'linewidth', 1.5);
+%
+tic
+[intersection1, idxLayer, pointSet, coeffSet]  = layerintersects(coeffModel, layerGridModel, se(1, :), se(2, :));
+
+% ax1 = axes(figure); surf(ax1, xMat, yMat, ones(189, 65))
+% hold(ax1, 'on'); sourceplot3D(ax1 , layerGridModel(1, :));
+toc
+% dejong5fcn
+% x = simulannealbnd(fun,x0);
+% 
+% a1 = [14620310.4784803,4650036.64241430,-1376.09698426868];  % quadratic
+% 
+% a2 = [14620310.4784799,4650036.64241408,-1376.09698546316];   % linear
+% 
+% a3 = [14620310.4784799,4650036.64241408,-1376.09698546337];   % linear
+% 
+% a4 = [14620310.4784803,4650036.64241430,-1376.09698425412];  
+% 
+% delta12 = a1 - a2
+% delta13 = a1 - a3
+% delta14 = a1 - a4
+% delta23 = a2 - a3
+% 
+% a5 = [-923.528603328752,-616.362313283878,-3376.12287956811] + [14621234 4650653 2000]
+% a6 = [-9.235286033287517e+02,-6.163623132838775e+02,-3.376122879568111e+03] + [14621234 4650653 2000];
+% delta45 = a4 - a5
+% a5 - a6
+
+
+
+
+##### SOURCE END #####
+--></body></html>
