@@ -9,11 +9,9 @@ dbstop if error;
 format long % short % 
 %
 % clear
-
 warning off;
 
 func_name = mfilename;
-disp(['func_name: ', func_name]);
 
 %% %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 if exist('input_data_path', 'var')
@@ -23,6 +21,11 @@ else
     [input_data_path, output_data_path, current_data_path] = add_default_folder_path();
 end
 
+diary_file_name = [output_data_path, filesep, 'LOG_INFO', showtimenow(0), '.txt'];
+diary(diary_file_name);
+diary on;
+
+disp(['func_name: ', func_name]);
 %% input data path: geological model data path
 % geological_model_path = 'geological_model_xinjiang_2020';
 % input_geological_model_path = [input_data_path, geological_model_path];
@@ -70,4 +73,5 @@ geological_model.input_data_path = input_geological_model_path;
 
 savedata(geological_model, [current_data_path, filesep], [geological_model_path, well_name], '.mat');
 
+diary off;
 

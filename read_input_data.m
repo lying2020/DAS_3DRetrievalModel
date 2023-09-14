@@ -56,7 +56,7 @@ path_layer_data_folder = [geological_data_path.path_geological_model, filesep, g
 disp(['func_name: ', func_name, '. ', 'path_layer_data_folder: ', path_layer_data_folder]);
 filename_list_layers = getfilenamelistfromfolder(path_layer_data_folder, '');
 
-gridFlag = true; gridType = 'linear'; gridStepSize = [4, 20]; gridRetractionDist = [10, 10]; fittingType = 'nonlinear'; layerType = 'layer';
+gridFlag = true; gridType = 'linear'; gridStepSize = [10, 10]; gridRetractionDist = [10, 10]; fittingType = 'nonlinear'; layerType = 'layer';
 layerModelParam = struct('gridFlag', gridFlag, 'gridType', gridType, 'gridStepSize', gridStepSize, 'gridRetractionDist', gridRetractionDist, ...
                                                   'fittingType', fittingType, 'layerType', layerType, 'pathSave', output_data_path);
 [baseCoord, layerCoeffModel, layerGridModel] = getlayermodel(filename_list_layers, baseCoord, layerModelParam);
