@@ -34,9 +34,9 @@ else
     geological_model = importdata(geological_model_file_path);
 end
 
-layerGridModel = load_mat_data('layergriddata1000.mat');
-layerCoeffModel = load_mat_data('layerModel1000.mat');
-velocityModel =  load_mat_data('VelModnew.mat');
+% layerGridModel = load_mat_data('layergriddata1000.mat');
+% layerCoeffModel = load_mat_data('layerModel1000.mat');
+% velocityModel =  load_mat_data('VelModnew.mat');
 
 layerGridModel = geological_model.layerGridModel;
 layerCoeffModel = geological_model.layerCoeffModel;
