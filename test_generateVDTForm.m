@@ -10,10 +10,13 @@ format long % short %
 func_name = mfilename;
 disp(['func_name: ', func_name]);
 
+% test_generateVDTForm
 % %% %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %% import data model
-% read_geological_model_xinjiang_2020
-% pause(2)
+% read_geological_model_xinjiang_2020;
+read_geological_model_2023_T('_T106');
+read_geological_model_2023_T('_T131');
+pause(2)
 % geological_model_name = 'geological_model_xinjiang_2020_XJ';
 
 % % well_name = '_T106';  %  well_name = '_T131';  % 
@@ -92,7 +95,7 @@ VDTForm = generateVDTForm(layerCoeffModel, layerGridModel, velocityModel, underg
 
 RMVDT_file_name   = [output_result_data_path, filesep, 'VDTForm_', output_retrieval_model_filename, '.mat'];
 disp(['func_name: ', func_name, '. ', 'RMVDT_file_name: ', RMVDT_file_name]);
-save(RMVDT_form_name,'VDTForm');
+save(RMVDT_file_name,'VDTForm');
 
 diary off;
 
