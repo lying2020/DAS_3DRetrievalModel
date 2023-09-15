@@ -34,9 +34,9 @@ coeff(1: aaLen) = aa;
 % -----------------------------------------------------------------------------------------------------
 % the parameter expression for the given line
 % syms t
-% x0= sp(1) + v0(1)* t;
-% y0= sp(2) + v0(2)* t;
-% z0 = sp(3) + v0(3)*t;
+% x0 = sp(1) + v0(1)* t;
+% y0 = sp(2) + v0(2)* t;
+% z0 = sp(3) + v0(3)* t;
 % % solve symbolically the intersection point equation
 % pt = double(solve( gridsfunc(x0, y0) - z0 == 0, 'Real', true))
 %

@@ -9,12 +9,12 @@
 % 2020-10-29: Modify the description and comments
 % this code is used to obtain the equivalent velocity between the different layers
 %% -----------------------------------------------------------------------------------------------------
-function [velocityModel, velocityCount, xMat, yMat, zMat, velocityMat]= getvelocitymodel(filenameList, baseCoord, coeffModel, layerGridModel, pathSave)  %  , type)
+function [velocityModel, velocityCount, xMat, yMat, zMat, velocityMat]= getvelocitymodel(filenameList, baseCoord, layerCoeffModel, layerGridModel, pathSave)  %  , type)
 % -----------------------------------------------------------------------------------------------------
 % INPUT: 
 % filenameList: 1*1 cell, a list of filenames for the velocity file
 %
-% coeffModel: numLayer* 1 cell. each cell contains (m -1)* (n -1) cell,
+% layerCoeffModel: numLayer* 1 cell. each cell contains (m -1)* (n -1) cell,
 % and each cell contains a 1* numCoeff matrix.
 %
 % layerGridModel: numLayer* numDim cell. The discret point set of the given surface,
@@ -40,10 +40,10 @@ function [velocityModel, velocityCount, xMat, yMat, zMat, velocityMat]= getveloc
 % if nargin < 5, type = 'velocity';   end
 if nargin < 4
     if nargin < 2
-        [layerGridModel, coeffModel, baseCoord] = getlayermodel;
+        [layerGridModel, layerCoeffModel, baseCoord] = getlayermodel;
     else
         filenameList = getfilenamelist('layer');
-        [layerGridModel, coeffModel, baseCoord] = getlayermodel(filenameList, baseCoord);
+        [layerGridModel, layerCoeffModel, baseCoord] = getlayermodel(filenameList, baseCoord);
     end
 end
 % if nargin < 2, baseCoord =zeros(1, 3);   end
@@ -96,7 +96,7 @@ velocityMat = velocityMat(2:end-1, 2:end-1, :);
 % velocity unit: m/s, each element represents a velocity value for each position.
 % [xLen, yLen, zLen] = size(zMat);
 %% -----------------------------------------------------------------------------------------------------
-numLayer = length(coeffModel);
+numLayer = length(layerCoeffModel);
 %
 % velocityData: (numLayer + 1)* 1 cell, each cell contains many data points.
 % velocityData is used to store velocity value between the different layers.
@@ -119,7 +119,7 @@ for ir = 1: xLen
         xy = [xMat(ir, ic), yMat(ir, ic)];
         xyArray = repmat(xy, numLayer, 1);
         % zArray: numLayer*1 matrix, z value for the same horizontal position and different layers
-        zArray = layerz(coeffModel, layerGridModel, xyArray, idxLayer);
+        zArray = layerz(layerCoeffModel, layerGridModel, xyArray, idxLayer);
         zArrayMat = get_z_array_mat(zArray, numLayer);
         for idepth = 1: zLen
             %% -----------------------------------------------------------------------------------------------------

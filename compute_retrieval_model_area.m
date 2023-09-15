@@ -36,6 +36,7 @@ end
 
 retrieval_model_area(3, 2) = min(abs(undergroundCoordsSet(1, 3) - undergroundCoordsSet(end, 3)) - 100, retrieval_model_area(3, 2));
 
+retrieval_model_area = mod(retrieval_model_area, 10);
 
 
 

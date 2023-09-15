@@ -9,11 +9,11 @@
 % 2020-10-14: Modify the description and comments
 % this code is used to calculate where the line segment intersects each layer               
 %% -----------------------------------------------------------------------------------------------------
-function  [intersectionSet, idxLayer, pointSet, coeffSet]  = layerintersects(coeffModel, layerGridModel, startpoint, endpoint)
+function  [intersectionSet, idxLayer, pointSet, coeffSet]  = layerintersects(layerCoeffModel, layerGridModel, startpoint, endpoint)
 % -----------------------------------------------------------------------------------------------------
 % calculate the intersection points of a given surface and a given line
 % INPUT:  
-% coeffModel: nomLayer* 1 cell. each cell contains (m -1)* (n -1) cell, and
+% layerCoeffModel: nomLayer* 1 cell. each cell contains (m -1)* (n -1) cell, and
 % each cell contains a 1* numCoeff matrix. 
 %
 % layerGridModel: numLayer* numDim cell. The discret point set of the given surface,
@@ -34,7 +34,7 @@ function  [intersectionSet, idxLayer, pointSet, coeffSet]  = layerintersects(coe
 %% -----------------------------------------------------------------------------------------------------
 % the layer is continuous data point 
 if isa(layerGridModel{1}, 'function_handle')
-    [intersectionSet, idxLayer]  = layerintersection_surf(layerGridModel, startpoint, endpoint);
+    % [intersectionSet, idxLayer]  = layerintersection_surf(layerGridModel, startpoint, endpoint);
     pointSet = [];    coeffSet = [];
     return;
 end
@@ -52,12 +52,12 @@ for iLayer = 1:numLayer
     [p4, rc] = layergrids(layerGridModel{iLayer, 1}, layerGridModel{iLayer, 2}, layerGridModel{iLayer, 3}, startpoint, endpoint);
     
     %% the fitting polynomial coefficients set of the corresponding layer.
-    coeffMat = coeffModel{iLayer, 1};
+    coeffMat = layerCoeffModel{iLayer, 1};
     % -----------------------------------------------------------------------------------------------------
     for ipoint = 1: length(p4)
         pts = p4{ipoint, 1}; %% pts: 4*3 matrix, quadrangle vertex coordinates.
         coeff = coeffMat{rc(ipoint, 1), rc(ipoint, 2)};
-        %%  Find the intersection of a line segment and a small quadrangle(�ı���).
+        %%  Find the intersection of a line segment and a small quadrangle().
         intersection  = solveintersection(coeff, pts, startpoint, endpoint);
         % -----------------------------------------------------------------------------------------------------
         if isempty(intersection),  continue;   end
@@ -69,19 +69,21 @@ for iLayer = 1:numLayer
         intersectionSet( np1 : (np1 + lp - 1), :) = intersection; 
         idxLayer( np1 : (np1 + lp - 1), 1) = iLayer* ones(lp, 1);
         np1 = np1 + lp;
-        %         intersection = [intersection; partIntersection];
-        %         idxLayer = [idxLayer; iLayer* ones(lp1, 1)];
-        
+
     end %  for ipoint = 1: length(p4)
     %
 end % for iLayer = 1:numLayer
+
+if isempty(intersectionSet)
+    return;
+end
 
 %% If the endpoints are at the layer, they are removed.   
 flag1 = find( rms(intersectionSet - startpoint, 2) < 1e-5, 1, 'first');
 flag2 = find( rms(intersectionSet - endpoint, 2) < 1e-5, 1, 'first');
 intersectionSet([flag1 flag2], :) = [];
 idxLayer([flag1 flag2]) = [];
-end   % function layerintersects(coeffModel, layerGridModel, startpoint, endpoint)
+end   % function layerintersects(layerCoeffModel, layerGridModel, startpoint, endpoint)
 
 
 

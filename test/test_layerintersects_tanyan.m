@@ -4,7 +4,7 @@
 %
 %
 % close all;
-clear
+% clear
 %clear points intersection
 %%  -----------------------------------------------------------
 %  DEBUG ! ! !
@@ -12,20 +12,24 @@ dbstop if error;
 format long
 addpath(genpath('../../../include'));
 %
-[fileName, pathName] = uigetfile({'*.*'; '*.txt'; '*.mat'}, ' Select the TXT-file ',  'MultiSelect', 'on');
+func_name = mfilename;
+disp(['func_name: ', func_name]);
+type = 'layer';
+if exist('filenameList_layer', 'var')
+    disp(['func_name: ', func_name, '. ', 'Variable filenameList_layer exists']);
+else
+    disp(['func_name: ', func_name, '. ', 'Variable filenameList_layer does not exist, now importdata ... ']);
+     filenameList_layer = getfilenamelist(type);
+end
+
 % 
 tic 
-if  isa(fileName, 'numeric'), return;  end
-%
-filenameList = fullfile(pathName, fileName);
-%
-if isa(filenameList, 'char')
-    tmp{1, 1} = filenameList;
-    filenameList = tmp;
-end
-num = length(filenameList);
+num = length(filenameList_layer);
 type = 'layer';
 layerCoeffModel = cell(num, 1);
+
+wellCoordSet = importdata('wellData.mat');
+baseCoord = [14620550.3 4650200.4 1514.78];
 %% --------------------------------------------
 sp =  [14621234 4650653 2000; 14619460 4650140 -110;   14619580 4650100 2030; 14619460,4650100,-2110; 14619460 4650140 -2110; 14619430 4650140 -2000; 14620022 4650108 1200; 14619240 4650620 -800];  %
 ep =   [14619869 4649742 -2990; 14619070 4649700 -2300; 14619000 4649720 -7250; 14619100,4649720,-2340; 14619170 4649700 -2300; 14618920 4649740 -2300];
@@ -33,7 +37,7 @@ n = 3;
 startpoint = sp(n, :);
 endpoint = ep(n, :);
 inter = 10;
-se = [startpoint; endpoint] - startpoint;
+se = [startpoint; endpoint] - baseCoord;
 % filenameList is a cell array
 
 ax1 = axes(figure);  hold(ax1, 'on');
@@ -41,9 +45,9 @@ scatter3(ax1, se(:, 1), se(:, 2), se(:, 3), 50, 'filled');
 plot3(ax1, se(:, 1), se(:, 2), se(:, 3), 'b-', 'linewidth', 4.5);
 %
 for iFile = 1:num
-    layerdata{iFile} = readtxtdata(filenameList{iFile}, type);
+    layerdata{iFile} = readtxtdata(filenameList_layer{iFile}, type);
 end
-    baseCoord =  startpoint;
+%     baseCoord =  startpoint;
 %layerGridModel = grid_tanyan(layerdata,baseCoord,inter,150,300);
 layerGridModel = grid_tanyan(layerdata,baseCoord,inter,20,20); % new data
 for iFile = 1:num   
@@ -56,13 +60,21 @@ end
 endpoint = endpoint - startpoint;
 startpoint = [0 0 0];
 [layerCoeffModel, layerCoeffModel_zdomain] = fitting_tanyan(layerGridModel);
+
+gridFlag = true; gridType = 'linear'; gridStepSize = [10, 10]; gridRetractionDist = [10, 10]; fittingType = 'cubic'; layerType = 'layer';
+layerModelParam = struct('gridFlag', gridFlag, 'gridType', gridType, 'gridStepSize', gridStepSize, 'gridRetractionDist', gridRetractionDist, ...
+                                                  'fittingType', fittingType, 'layerType', layerType, 'pathSave', []);
+[baseCoord, layerCoeffModelLY, layerGridModelLY] = getlayermodel(filenameList_layer, baseCoord, layerModelParam);
+
 %%  ----------------------------------
 % # test 1
 for k =1:100
     for s = 1:10
         ep = endpoint - [20*k 10*k -1000*s];
         % ep = endpoint - [96 48 -2000]; iLayer = 8;  这里直线从拟合多项式之间的缝隙中穿过了。
-        [intersection, idxLayer, points]  = layerintersects_tanyan(layerCoeffModel,layerCoeffModel_zdomain,layerGridModel, startpoint, ep);
+        [intersection, idxLayer, points]  = layerintersects_tanyan(layerCoeffModel, layerGridModel, startpoint, ep);
+        [intersection0, idxLayer0, points0]  = layerintersects(layerCoeffModelLY, layerGridModelLY, startpoint, ep);
+
         markintersection{k,s} = intersection;
         markidxLayer{k,s} = idxLayer;
     end

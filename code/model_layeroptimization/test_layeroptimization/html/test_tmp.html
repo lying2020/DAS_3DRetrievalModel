@@ -84,7 +84,7 @@ baseCoord = startpoint; <span class="comment">% [14621234 4650653 2000];</span>
 se = [startpoint; endpoint] - baseCoord;
 <span class="comment">%</span>
 typeFitting = <span class="string">'nonlinear'</span>;
-[baseCoord, coeffModel, layerGridModel, ax1] = test_first(baseCoord, typeFitting);
+[baseCoord, layerCoeffModel, layerGridModel, ax1] = test_first(baseCoord, typeFitting);
 num = size(layerGridModel, 1);
 <span class="comment">%</span>
 </pre><img vspace="5" hspace="5" src="test_tmp_01.png" alt=""> <h2 id="4">--------------------------------------------</h2><p>ax1 = axes(figure);</p><pre class="codeinput">hold(ax1, <span class="string">'on'</span>);
@@ -92,7 +92,7 @@ scatter3(ax1, se(:, 1), se(:, 2), se(:, 3), 50, <span class="string">'filled'</s
 plot3(ax1, se(:, 1), se(:, 2), se(:, 3), <span class="string">'b-'</span>, <span class="string">'linewidth'</span>, 1.5);
 <span class="comment">%</span>
 tic
-[intersection1, idxLayer, pointSet, coeffSet]  = layerintersects(coeffModel, layerGridModel, se(1, :), se(2, :));
+[intersection1, idxLayer, pointSet, coeffSet]  = layerintersects(layerCoeffModel, layerGridModel, se(1, :), se(2, :));
 
 <span class="comment">% ax1 = axes(figure); surf(ax1, xMat, yMat, ones(189, 65))</span>
 <span class="comment">% hold(ax1, 'on'); sourceplot3D(ax1 , layerGridModel(1, :));</span>
@@ -141,7 +141,7 @@ baseCoord = startpoint; % [14621234 4650653 2000];
 se = [startpoint; endpoint] - baseCoord;
 %
 typeFitting = 'nonlinear';  
-[baseCoord, coeffModel, layerGridModel, ax1] = test_first(baseCoord, typeFitting);
+[baseCoord, layerCoeffModel, layerGridModel, ax1] = test_first(baseCoord, typeFitting);
 num = size(layerGridModel, 1);
 %
 %% REPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASH
@@ -151,7 +151,7 @@ scatter3(ax1, se(:, 1), se(:, 2), se(:, 3), 50, 'filled');
 plot3(ax1, se(:, 1), se(:, 2), se(:, 3), 'b-', 'linewidth', 1.5);
 %
 tic
-[intersection1, idxLayer, pointSet, coeffSet]  = layerintersects(coeffModel, layerGridModel, se(1, :), se(2, :));
+[intersection1, idxLayer, pointSet, coeffSet]  = layerintersects(layerCoeffModel, layerGridModel, se(1, :), se(2, :));
 
 % ax1 = axes(figure); surf(ax1, xMat, yMat, ones(189, 65))
 % hold(ax1, 'on'); sourceplot3D(ax1 , layerGridModel(1, :));

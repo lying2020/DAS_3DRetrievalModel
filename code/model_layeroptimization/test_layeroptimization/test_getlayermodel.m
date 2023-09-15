@@ -26,9 +26,9 @@ addpath(genpath('../../../include'));
 %  filename_base = getfilenamelist('basecoord', 'off'); 
 % baseCoord = readsavedata(filename_base);  
 
-wellCoordSet = importdata('wellModel4.mat');
+wellCoordSet = importdata('wellData.mat');
 baseCoord = [14620550.3 4650200.4 1514.78];
-wellCoordSet = wellCoordSet - [10.5, baseCoord];
+% wellCoordSet = wellCoordSet - [10.5, baseCoord];
 %% sensor coordinate ...
 % [undergroundCoord, overgroundCoord, Posi, Pz] = getsensorcoord(wellCoordSet, sensorposition);
 % sensorCoordSet = [overgroundCoord; undergroundCoord];
@@ -40,9 +40,22 @@ wellCoordSet = wellCoordSet - [10.5, baseCoord];
 %% layer model
 % type = 'layer';
 type = 'fault';
-filenameList_layer = getfilenamelist(type);
+func_name = mfilename;
+disp(['func_name: ', func_name]);
+
+if exist('filenameList_layer', 'var')
+    disp(['func_name: ', func_name, '. ', 'Variable filenameList_layer exists']);
+else
+    disp(['func_name: ', func_name, '. ', 'Variable filenameList_layer does not exist, now importdata ... ']);
+    filenameList_layer = getfilenamelist(type);
+end
+
 tic
-[baseCoord, coeffModel, layerGridModel] = getlayermodel(filenameList_layer, baseCoord);
+gridFlag = true; gridType = 'linear'; gridStepSize = [10, 10]; gridRetractionDist = [10, 10]; fittingType = 'nonlinear'; layerType = 'layer';
+layerModelParam = struct('gridFlag', gridFlag, 'gridType', gridType, 'gridStepSize', gridStepSize, 'gridRetractionDist', gridRetractionDist, ...
+                                                  'fittingType', fittingType, 'layerType', layerType, 'pathSave', []);
+[baseCoord, layerCoeffModel, layerGridModel] = getlayermodel(filenameList_layer, baseCoord, layerModelParam);
+
 t_layermodel = toc
 % 
 % -----------------------------------------------------------------------------------------------------

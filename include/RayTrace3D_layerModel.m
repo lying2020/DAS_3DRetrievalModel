@@ -21,7 +21,7 @@ maxrefractionpoint = 40;
 if (sourceCoord(3) == sensorCoord(3))
     sourceCoord(3) = sourceCoord(3) + 1e-6;
 end
-[intersecp, idxLayer] = layerintersects_tanyan(layerCoeffModel, layerGridModel, sourceCoord, sensorCoord);
+[intersecp, idxLayer] = layerintersects(layerCoeffModel, layerGridModel, sourceCoord, sensorCoord);
 initialguess = intersecp;
 intervalXY = layerGridModel{1,1}(2,2) - layerGridModel{1,1}(1,1);
 

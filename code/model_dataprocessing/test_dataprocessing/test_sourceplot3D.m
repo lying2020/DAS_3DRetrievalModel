@@ -45,7 +45,7 @@ baseCoord = [14620550.3 4650200.4 1514.78];
 type = 'layer';
 filenameList_layer = getfilenamelist(type);
 % tic
-[baseCoord, coeffModel, layerGridModel] = getlayermodel(filenameList_layer, baseCoord);
+[baseCoord, layerCoeffModel, layerGridModel] = getlayermodel(filenameList_layer, baseCoord);
 % t_layermodel = toc
 
 %% 

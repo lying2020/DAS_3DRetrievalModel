@@ -19,7 +19,7 @@ fittingType = 'cubic';
 flag = 'v3';
 % filenameList = getfilenamelist(layerType);
 % num = length(filenameList);
-% [baseCoord, coeffModel, layerGridModel] = getlayermodel(filenameList, baseCoord, fittingType, layerType);
+% [baseCoord, layerCoeffModel, layerGridModel] = getlayermodel(filenameList, baseCoord, fittingType, layerType);
 
 %% -----------------------------------------------------------------------------------------------------
 sp =  [14621234 4650653 2000; 14619460 4650140 -110;   14619580 4650100 -2130; 14619460,4650100,-2110; 14619460 4650140 -2110; 14619430 4650140 -2000; 14620022 4650108 1200; 14619240 4650620 -800];  %
@@ -34,7 +34,7 @@ se = [startpoint; endpoint];
 % %
 
 velocityModel=[4.5, 3.5, 4.2, 5.1, 4.8, 4.4, 5.4, 6, 4.4, 4.1, 3.8, 3.9, 4.9, 5.2, 4.8]';
-[realCoordSet, totalTime, initialCoordSet, velocity] = computeraytrace_curve(coeffModel, layerGridModel,  velocityModel,  startpoint,  endpoint, flag);
+[realCoordSet, totalTime, initialCoordSet, velocity] = computeraytrace_curve(layerCoeffModel, layerGridModel,  velocityModel,  startpoint,  endpoint, flag);
 
 % plotrefraction(realCoordSet, initialCoordSet, ax1);
 [~, initialTime] = getratiotime(velocity, initialCoordSet)
@@ -72,7 +72,7 @@ end
 % layerGridModel6= @(x,y,z) -x^2*y^2/5000-4-z;
 % layerGridModel = {layerGridModel1, layerGridModel2, layerGridModel3, layerGridModel4, layerGridModel5, layerGridModel6};
 %% -------------------------------------------------------------
-[realCoordSet, totalTime, initialCoordSet, velocity] = computeraytrace_curve(coeffModel, layerGridModel,  velocityModel,  sensorCoord,  sourceCoord)
+[realCoordSet, totalTime, initialCoordSet, velocity] = computeraytrace_curve(layerCoeffModel, layerGridModel,  velocityModel,  sensorCoord,  sourceCoord)
 %
 numDim = length(sensorCoord);
 st = sortrows( [ sensorCoord; initialCoordSet; sourceCoord ],  -numDim);

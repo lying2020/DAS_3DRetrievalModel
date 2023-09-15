@@ -16,8 +16,8 @@ layerType = 'layer';   %  'fault';      %
 filenameList = getfilenamelist(layerType);
 num = length(filenameList);
 % fittingType = 'nonlinear';
-[coeffModel, layerGridModel] = deal(cell(num, 3));
-% [baseCoord, coeffModel, layerGridModel] = getlayermodel(filenameList, baseCoord, fittingType, type);
+[layerCoeffModel, layerGridModel] = deal(cell(num, 3));
+% [baseCoord, layerCoeffModel, layerGridModel] = getlayermodel(filenameList, baseCoord, fittingType, type);
 layerTmp = cell(num, 1);
 for iFile = 1:num
     %% layerTmp is a n*5 matrix.

@@ -22,7 +22,7 @@ endpoint = ep(n, :);
 se = [startpoint; endpoint] - baseCoord;
 %
 typeFitting = 'nonlinear';  
-[baseCoord, coeffModel, layerGridModel] = test_first(baseCoord, typeFitting);
+[baseCoord, layerCoeffModel, layerGridModel] = test_first(baseCoord, typeFitting);
 %
 %% --------------------------------------------
 % ax1 = axes(figure);     hold(ax1, 'on');
