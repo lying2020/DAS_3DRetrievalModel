@@ -14,12 +14,12 @@ y(i,:) = miny:10:maxy-10;
 [m(i)] = size(x(i,:),2);
 n(i) = size(y(i,:),2);
 end
-% Z = @(X,Y) norm([X Y layerz_tanyan(layerCoeffModel(ilayer),layerGridModel(ilayer,:),[X Y],1)] - Source)/VelMod(1) + ...
-%     norm([X Y layerz_tanyan(layerCoeffModel(ilayer),layerGridModel(ilayer,:),[X Y],1)] - Detector)/VelMod(2);
+% Z = @(X,Y) norm([X Y layerz(layerCoeffModel(ilayer),layerGridModel(ilayer,:),[X Y],1)] - Source)/VelMod(1) + ...
+%     norm([X Y layerz(layerCoeffModel(ilayer),layerGridModel(ilayer,:),[X Y],1)] - Detector)/VelMod(2);
 if num == 1
     for i  = 1:m(1)
         for j = 1:n(1)
-            P = [Source;[x(i) y(j) layerz_tanyan(layerCoeffModel(ilayer(1)),layerGridModel(ilayer(1),:),[x(i) y(j)],1)];Detector]';
+            P = [Source;[x(i) y(j) layerz(layerCoeffModel(ilayer(1)),layerGridModel(ilayer(1),:),[x(i) y(j)],1)];Detector]';
             ZZ(j,i) = trivaltime(VelMod,P);
         end
     end
@@ -35,8 +35,8 @@ for j = 1:n(1)
     for ii = 1:m(2)
         for jj = 1:n(2)
 %ZZ(i,j) = Z(XX(i,j),YY(i,j));
-P = [Source;[x(i) y(j) layerz_tanyan(layerCoeffModel(ilayer(1)),layerGridModel(ilayer(1),:),[x(i) y(j)],1)];
-    [x(ii) y(jj) layerz_tanyan(layerCoeffModel(ilayer(2)),layerGridModel(ilayer(2),:),[x(ii) y(jj)],1)]; Detector]';
+P = [Source;[x(i) y(j) layerz(layerCoeffModel(ilayer(1)),layerGridModel(ilayer(1),:),[x(i) y(j)],1)];
+    [x(ii) y(jj) layerz(layerCoeffModel(ilayer(2)),layerGridModel(ilayer(2),:),[x(ii) y(jj)],1)]; Detector]';
 ZZ(i,j,ii,jj) = trivaltime(VelMod,P);
         end
     end

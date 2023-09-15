@@ -21,9 +21,9 @@ maxrefractionpoint = 40;
 if (sourceCoord(3) == sensorCoord(3))
     sourceCoord(3) = sourceCoord(3) + 1e-6;
 end
-[intersecp,idxLayer]=layerintersects_tanyan(layerCoeffModel,layerGridModel,sourceCoord,sensorCoord);
+[intersecp, idxLayer] = layerintersects_tanyan(layerCoeffModel, layerGridModel, sourceCoord, sensorCoord);
 initialguess = intersecp;
-inter = layerGridModel{1,1}(2,2) - layerGridModel{1,1}(1,1);
+intervalXY = layerGridModel{1,1}(2,2) - layerGridModel{1,1}(1,1);
 
 
 %% 
@@ -52,15 +52,15 @@ if k <= 2
 
 else
     deleteX0 = [];
-    if norm(X0(1:3,k) - X0(1:3,k-1)) < inter/10
+    if norm(X0(1:3,k) - X0(1:3,k-1)) < intervalXY/10
         deleteX0(end+1) = k-1;
     end
-    if norm(X0(1:3,2) - X0(1:3,1)) < inter/10
+    if norm(X0(1:3,2) - X0(1:3,1)) < intervalXY/10
         deleteX0(end+1) = 2;
     end
     for iX0 = k-1:-1:3
         if X0(4,iX0) == X0(4,iX0-1)
-            if norm(X0(1:3,iX0) - X0(1:3,iX0-1)) < inter
+            if norm(X0(1:3,iX0) - X0(1:3,iX0-1)) < intervalXY
                 deleteX0(end+1) = iX0;
             end
         end
@@ -77,7 +77,7 @@ for iX0 = 1:size(X0',1)-1
     xyArray(1:m,1) = p(1,1);
     xyArray(1:m,2) = p(1,2);
     idx = (1:m)';
-    z = [layerz_tanyan(layerCoeffModel,layerGridModel,xyArray,idx);p(1,3)];
+    z = [layerz(layerCoeffModel,layerGridModel,xyArray,idx);p(1,3)];
     z = sortrows(z,1);
     [row,~] = find(z == p(1,3));
     initialguessVel(iX0) = velocityModel(row(1));
@@ -103,7 +103,7 @@ for j=1:iteratorstep
         iteraX=X0(1:3,[ii-1,ii,ii+1]);
         iteraVelMod=initialguessVel([ii-1,ii]);
         X0(1:3,ii) = calculateSingleIntersection_layerModel_temp(iteraX,iteraVelMod,layerCoeffModel(X0(4,ii)),layerGridModel(X0(4,ii),:));
-        errorz = layerz_tanyan(layerCoeffModel(X0(4,ii)),layerGridModel(X0(4,ii),:),X0(1:2,ii)',1) - X0(3,ii);
+        errorz = layerz(layerCoeffModel(X0(4,ii)),layerGridModel(X0(4,ii),:),X0(1:2,ii)',1) - X0(3,ii);
         if norm(errorz) > 1
 %             warning('z coordinate error wrong');
         end
@@ -114,15 +114,15 @@ for j=1:iteratorstep
         break;
     end
     deleteX0 = [];
-    if norm(X0(1:3,k) - X0(1:3,k-1)) < inter/100
+    if norm(X0(1:3,k) - X0(1:3,k-1)) < intervalXY/100
         deleteX0(end+1) = k-1;
     end
-    if norm(X0(1:3,2) - X0(1:3,1)) < inter/100
+    if norm(X0(1:3,2) - X0(1:3,1)) < intervalXY/100
         deleteX0(end+1) = 2;
     end
     for iX0 = k-1:-1:3
         if X0(4,iX0) == X0(4,iX0-1)
-            if norm(X0(1:3,iX0) - X0(1:3,iX0-1)) < inter
+            if norm(X0(1:3,iX0) - X0(1:3,iX0-1)) < intervalXY
                 deleteX0(end+1) = iX0;
             end
         end
@@ -137,7 +137,7 @@ for j=1:iteratorstep
         xyArray(1:m,1) = p(1,1);
         xyArray(1:m,2) = p(1,2);
         idx = (1:m)';
-        z = [layerz_tanyan(layerCoeffModel,layerGridModel,xyArray,idx);p(1,3)];
+        z = [layerz(layerCoeffModel,layerGridModel,xyArray,idx);p(1,3)];
         z = sortrows(z,1);
         [row,~] = find(z == p(1,3));
         initialguessVel(iX0) = velocityModel(row(1));

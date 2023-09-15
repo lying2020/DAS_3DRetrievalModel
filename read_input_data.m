@@ -63,6 +63,7 @@ layerModelParam = struct('gridFlag', gridFlag, 'gridType', gridType, 'gridStepSi
 
 savedata(baseCoord, output_data_path, 'baseCoord', '.txt');
 % geological_model.baseCoord = baseCoord;
+geological_model.layerModelParam = layerModelParam;
 geological_model.layerGridModel = layerGridModel;
 geological_model.layerCoeffModel = layerCoeffModel;
 
@@ -83,6 +84,7 @@ faultModelParam = struct('gridFlag', gridFlag, 'gridType', gridType, 'gridStepSi
 
 % savedata(baseCoord, output_data_path, ['baseCoord'], '.txt');
 % geological_model.baseCoord = baseCoord;
+geological_model.faultModelParam = faultModelParam;
 geological_model.faultModel = faultModel;
 geological_model.faultCoeffModel = faultCoeffModel;
 

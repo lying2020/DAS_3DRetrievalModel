@@ -13,7 +13,7 @@ function  [intersectionSet, idxLayer, pointSet, coeffSet]  = layerintersects(coe
 % -----------------------------------------------------------------------------------------------------
 % calculate the intersection points of a given surface and a given line
 % INPUT:  
-%  coeffModel: nomLayer* 1 cell. each cell contains (m -1)* (n -1) cell, and
+% coeffModel: nomLayer* 1 cell. each cell contains (m -1)* (n -1) cell, and
 % each cell contains a 1* numCoeff matrix. 
 %
 % layerGridModel: numLayer* numDim cell. The discret point set of the given surface,
@@ -30,7 +30,7 @@ function  [intersectionSet, idxLayer, pointSet, coeffSet]  = layerintersects(coe
 % idxLayer: The index corresponding to the layer where the intersection is located
 % pointsSet: num * 1 cell, each cell includes 4* numDim matrix 
 % that represents the vertices of the small quadriateral
-% coeffSet: num* 1cell, each cell contains 1* numCoeff coefficient matrix.   
+% coeffSet: num* 1 cell, each cell contains 1* numCoeff coefficient matrix.   
 %% -----------------------------------------------------------------------------------------------------
 % the layer is continuous data point 
 if isa(layerGridModel{1}, 'function_handle')

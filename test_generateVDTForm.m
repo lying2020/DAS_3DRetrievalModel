@@ -12,13 +12,13 @@ disp(['func_name: ', func_name]);
 
 % %% %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %% import data model
-read_geological_model_xinjiang_2020
-pause(2)
-geological_model_name = 'geological_model_xinjiang_2020_XJ';
+% read_geological_model_xinjiang_2020
+% pause(2)
+% geological_model_name = 'geological_model_xinjiang_2020_XJ';
 
 % % well_name = '_T106';  %  well_name = '_T131';  % 
 % % read_geological_model_2023_T(well_name)
-% geological_model_name = 'geological_model_2023_T106';
+geological_model_name = 'geological_model_2023_T106';
 % geological_model_name = 'geological_model_2023_T131';
 
 %%
@@ -62,12 +62,16 @@ bottom_sensor_coordinate = undergroundCoordsSet(end, :);
 sensors_num = size(undergroundCoordsSet,1);
 disp(['func_name: ', func_name, '. ', 'sensors_num: ', num2str(sensors_num), 'bottom_sensor_coordinate: ', num2str(bottom_sensor_coordinate)]);
 
-retrieval_model_area = [-2800, 3100; -2800, 3100 ; -600, 1000];
+retrieval_model_area = [-3000, 3000; -3000, 3000 ; -500, 1500];
+disp(['func_name: ', func_name, '. ', 'default area. retrieval_model_area: x = ', num2str(retrieval_model_area(1, :)), ...
+                            ', y = ', num2str(retrieval_model_area(2, :)), ', z = ', num2str(retrieval_model_area(3, :))]);
+
+retrieval_model_area =compute_retrieval_model_area(layerGridModel, undergroundCoordsSet, retrieval_model_area);
+disp(['func_name: ', func_name, '. ', 'updated area. retrieval_model_area: x = ', num2str(retrieval_model_area(1, :)), ...
+                            ', y = ', num2str(retrieval_model_area(2, :)), ', z = ', num2str(retrieval_model_area(3, :))]);
 
 % retrieval_model_grid_size:  [delta_x; delta_y; delta_z]; % 3 * 1
 retrieval_model_grid_size = [10; 10; 10];
-disp(['func_name: ', func_name, '. ', 'retrieval_model_area: x = ', num2str(retrieval_model_area(1, :)), ...
-                            ', y = ', num2str(retrieval_model_area(2, :)), ', z = ', num2str(retrieval_model_area(3, :))]);
 
 x_range = ['_x_', num2str(retrieval_model_area(1,1)), '_', num2str(retrieval_model_area(1,2)), '_', num2str(retrieval_model_grid_size(1))];
 y_range = ['_y_', num2str(retrieval_model_area(2,1)), '_', num2str(retrieval_model_area(2,2)), '_', num2str(retrieval_model_grid_size(2))];
