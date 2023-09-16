@@ -19,11 +19,11 @@ disp(['func_name: ', func_name]);
 % read_geological_model_2023_T('_T131');
 % pause(2)
 
-geological_model_name = 'geological_model_xinjiang_2020_XJ';
+% geological_model_name = 'geological_model_xinjiang_2020_XJ';
 
 % read_geological_model_2023_T('_T106')
 % read_geological_model_2023_T('_T131')
-% geological_model_name = 'geological_model_2023_T106';
+geological_model_name = 'geological_model_2023_T106';
 % geological_model_name = 'geological_model_2023_T131';
 
 %%
@@ -67,11 +67,11 @@ bottom_sensor_coordinate = undergroundCoordsSet(end, :);
 sensors_num = size(undergroundCoordsSet,1);
 disp(['func_name: ', func_name, '. ', 'sensors_num: ', num2str(sensors_num), 'bottom_sensor_coordinate: ', num2str(bottom_sensor_coordinate)]);
 
-retrieval_model_area = [-3000, 3000; -3000, 3000 ; -500, 1500];
-disp(['func_name: ', func_name, '. ', 'default area. retrieval_model_area: x = ', num2str(retrieval_model_area(1, :)), ...
-                            ', y = ', num2str(retrieval_model_area(2, :)), ', z = ', num2str(retrieval_model_area(3, :))]);
+retrieval_model_default_area = [-3000, 3000; -3000, 3000 ; -500, 1500];
+disp(['func_name: ', func_name, '. ', 'default area. retrieval_model_area: x = ', num2str(retrieval_model_default_area(1, :)), ...
+                            ', y = ', num2str(retrieval_model_default_area(2, :)), ', z = ', num2str(retrieval_model_default_area(3, :))]);
 
-retrieval_model_area =compute_retrieval_model_area(layerGridModel, undergroundCoordsSet, retrieval_model_area);
+retrieval_model_area =compute_retrieval_model_area(layerGridModel, undergroundCoordsSet, retrieval_model_default_area);
 disp(['func_name: ', func_name, '. ', 'updated area. retrieval_model_area: x = ', num2str(retrieval_model_area(1, :)), ...
                             ', y = ', num2str(retrieval_model_area(2, :)), ', z = ', num2str(retrieval_model_area(3, :))]);
 
