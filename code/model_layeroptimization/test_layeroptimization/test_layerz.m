@@ -59,8 +59,8 @@ for iFile = 1:num
         %         surf(ax2, xMat1, yMat1, zMat1, zMat1.*zMat1);
         shading(ax2, 'interp');
         scatter3(ax2,  xy0(1), xy0(2), z0, 100, 'filled');
-%         interpolation(points, 1, 0.1, 'natural', ax2);
-        interpolation([xMat1(:), yMat1(:), zMat1(:)], 1, 0.1, 'natural', ax2);
+%         pointsinterpolation(points, 1, 0.1, 'natural', ax2);
+        pointsinterpolation([xMat1(:), yMat1(:), zMat1(:)], 1, 0.1, 'natural', ax2);
         disp(' all is ok !');
     end
     

@@ -2,13 +2,24 @@
 
 
 
-ep = [-600,-390,-8280];
-
+% ep = [-600,-390,-6280];
+% ep = [-600,-390,-4280];
+% ep = [-660,-420,-7280];
+ep = [420,120,-7280];
 [intersection, idxLayer, points]  = layerintersects_tanyan(layerCoeffModel, layerGridModel, startpoint, ep);
-[intersection0, idxLayer0, points0]  = layerintersects(layerCoeffModelLY, layerGridModelLY, startpoint, ep);
-
+intersection
+[intersection0, idxLayer0, points0]  = computelayerintersectscoords(layerCoeffModelLY, layerGridModelLY, startpoint, ep);
 
 intersection
-
+% [-163.126302272166,-106.032096476908,-1707.38863044867]
+% [-275.288831961742,-178.937740775132,-2881.35644119957]
+% [-373.440174350347,-242.736113327726,-3908.67382486697]
+% [-400.300000000745,-260.195000000484,-4189.80666667447]
 intersection0
+% [-163.126302272366,-106.032096477038,-1707.38863045076]
+% [-275.288831958578,-178.937740773076,-2881.35644116645]
+% [-373.440174355341,-242.736113330972,-3908.67382491924]
+
+% -0.594073754789556  -0.386147940613211  -4.237726117498831
+
 

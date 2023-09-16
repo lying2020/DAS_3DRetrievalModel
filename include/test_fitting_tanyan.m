@@ -29,15 +29,15 @@ end
 % filenameList is a cell array
 num = length(filenameList);
 type = 'layer';
-layerdata = cell(num, 1);
+layerdatatransform = cell(num, 1);
 inter = 10;
 
 for iFile = 1:num
-    layerdata{iFile} = readlayerdata(filenameList{iFile});
+    layerdatatransform{iFile} = readlayerdata(filenameList{iFile});
 end
 
-%layerGridModel = grid_tanyan(layerdata,baseCoord,inter,150,300);
- layerGridModel = grid_tanyan(layerdata,baseCoord,inter,20,20); % new data
+%layerGridModel = grid_tanyan(layerdatatransform,baseCoord,inter,150,300);
+ layerGridModel = grid_tanyan(layerdatatransform,baseCoord,inter,20,20); % new data
 [layerCoeffModel, ~] = fitting_tanyan(layerGridModel);
 
 fileprename = "layerModel/";

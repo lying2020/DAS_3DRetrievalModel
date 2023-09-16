@@ -36,7 +36,7 @@ plot3(ax1, se(:, 1), se(:, 2), se(:, 3), 'b-', 'linewidth', 1.5);
 for iFile = 1:num
     [xMat, yMat, zMat] = layerGridModel{iFile, 1:3};
 %%
-        p4 =  layergrids(xMat, yMat, zMat, se(1, :), se(2, :));
+        p4 =  computelayerintersectsgrids(xMat, yMat, zMat, se(1, :), se(2, :));
 %     p4 = points4(x, y, z, se(1, :), se(2, :));
 %  ---------------------------------------------------------------------------------
     for iP4 = 1:length(p4)
@@ -57,7 +57,7 @@ end
 
 tic
 %
-[intersection1, idxLayer, pointSet, coeffSet]  = layerintersects(layerCoeffModel, layerGridModel, se(1, :), se(2, :));
+[intersection1, idxLayer, pointSet, coeffSet]  = computelayerintersectscoords(layerCoeffModel, layerGridModel, se(1, :), se(2, :));
 %
     for ips = 1:length(pointSet)
         tmp = pointSet{ips, 1};

@@ -3,7 +3,7 @@
 %
 %
 %
-% close all;
+close all;
 % clear
 %clear points intersection
 %%  -----------------------------------------------------------
@@ -14,19 +14,8 @@ addpath(genpath('../../../include'));
 %
 func_name = mfilename;
 disp(['func_name: ', func_name]);
-type = 'layer';
-if exist('filenameList_layer', 'var')
-    disp(['func_name: ', func_name, '. ', 'Variable filenameList_layer exists']);
-else
-    disp(['func_name: ', func_name, '. ', 'Variable filenameList_layer does not exist, now importdata ... ']);
-     filenameList_layer = getfilenamelist(type);
-end
 
-% 
-tic 
-num = length(filenameList_layer);
-type = 'layer';
-layerCoeffModel = cell(num, 1);
+
 
 wellCoordSet = importdata('wellData.mat');
 baseCoord = [14620550.3 4650200.4 1514.78];
@@ -36,20 +25,18 @@ ep =   [14619869 4649742 -2990; 14619070 4649700 -2300; 14619000 4649720 -7250; 
 n = 3;
 startpoint = sp(n, :);
 endpoint = ep(n, :);
-inter = 10;
-se = [startpoint; endpoint] - baseCoord;
+seCoords = [startpoint; endpoint] - baseCoord;
 % filenameList is a cell array
 
-ax1 = axes(figure);  hold(ax1, 'on');
-scatter3(ax1, se(:, 1), se(:, 2), se(:, 3), 50, 'filled');
-plot3(ax1, se(:, 1), se(:, 2), se(:, 3), 'b-', 'linewidth', 4.5);
-%
-for iFile = 1:num
-    layerdata{iFile} = readtxtdata(filenameList_layer{iFile}, type);
+if  ~exist('layerGridModel', 'var')
+     [layerGridModel, layerCoeffModel, layerCoeffModel_zdomain, layerCoeffModelLY, layerGridModelLY] = test_get_layerMat(baseCoord);
+
 end
-%     baseCoord =  startpoint;
-%layerGridModel = grid_tanyan(layerdata,baseCoord,inter,150,300);
-layerGridModel = grid_tanyan(layerdata,baseCoord,inter,20,20); % new data
+
+ax1 = axes(figure);  hold(ax1, 'on');
+scatter3(ax1, seCoords(:, 1), seCoords(:, 2), seCoords(:, 3), 50, 'filled');
+plot3(ax1, seCoords(:, 1), seCoords(:, 2), seCoords(:, 3), 'b-', 'linewidth', 4.5);
+
 for iFile = 1:num   
     x = layerGridModel{iFile,1};
     y = layerGridModel{iFile,2};
@@ -59,60 +46,89 @@ for iFile = 1:num
 end
 endpoint = endpoint - startpoint;
 startpoint = [0 0 0];
-[layerCoeffModel, layerCoeffModel_zdomain] = fitting_tanyan(layerGridModel);
+
+%%  ----------------------------------
+% 
+tic
+% # test 1
+for k = [-500: 2:500]
+    for s = 1:10
+%         disp(['k: ', num2str(k), '  s: ', num2str(s)]);
+        ep = endpoint - [5*k, 2*k, -1000*s];
+        % ep = endpoint - [96 48 -2000]; iLayer = 8;  这里直线从拟合多项式之间的缝隙中穿过了。
+        [intersection, idxLayer, points]  = layerintersects_tanyan(layerCoeffModel, layerGridModel, startpoint, ep);
+        [intersection0, idxLayer0, points0]  = computelayerintersectscoords(layerCoeffModelLY, layerGridModelLY, startpoint, ep);
+        if size(intersection, 1) ~= size(intersection0, 1)
+%             continue;
+            disp(['k: ', num2str(k), '  s: ', num2str(s)]);
+            disp('intersectionTY: '); disp(intersection);
+            disp('intersectionLY: '); disp(intersection0);
+
+            ax11 = axes(figure);  hold(ax11, 'on');
+            for iFile = 1:num
+                x = layerGridModel{iFile,1};
+                y = layerGridModel{iFile,2};
+                z = layerGridModel{iFile,3};
+                layersurf(ax11, x, y, z);
+                % shading(ax1, 'faceted');
+            end
+            if ~isempty(intersection)
+                 scatter3(ax11, intersection(:, 1), intersection(:, 2), intersection(:, 3), 40, 'blue', 'filled');
+            end
+            if ~isempty(intersection0)
+                 scatter3(ax11, intersection0(:, 1), intersection0(:, 2), intersection0(:, 3), 40, 'red', 'filled');
+            end
+
+            sep = [startpoint; ep];
+            scatter3(ax11, sep(:, 1), sep(:, 2), sep(:, 3), 40, 'filled');
+            plot3(ax11, sep(:, 1), sep(:, 2), sep(:, 3), 'b-', 'linewidth', 1.5);
+            xlabel(ax1, 'x /m');   ylabel(ax1, 'y /m');  zlabel(ax1, 'z /m');
+
+            continue;
+        end
+
+        intersects_diff = norm(intersection - intersection0);
+        if (intersects_diff) > 1.0
+%             continue;
+            disp(['k: ', num2str(k), '  s: ', num2str(s), ', intersects_diff: ', num2str(intersects_diff)]);
+            disp('intersectionTY: '); disp(intersection);
+            disp('intersectionLY: '); disp(intersection0);
+
+        end
+
+    end
+end
+
+toc
+
+function [layerGridModelTY, layerCoeffModelTY, layerCoeffModel_zdomainTY, layerCoeffModelLY, layerGridModelLY] = test_get_layerMat(baseCoord, filenameList_layer)
+
+type = 'layer';
+if exist('filenameList_layer', 'var')
+    disp(['func_name: ', func_name, '. ', 'Variable filenameList_layer exists']);
+else
+    disp(['func_name: ', func_name, '. ', 'Variable filenameList_layer does not exist, now importdata ... ']);
+     filenameList_layer = getfilenamelist(type);
+end
+
+num = length(filenameList_layer);
+layerdata = cell(num, 1);
+type = 'layer';
+inter = 10;
+%
+for iFile = 1:num
+    layerdata{iFile} = readtxtdata(filenameList_layer{iFile}, type);
+end
+%     baseCoord =  startpoint;
+%layerGridModel = grid_tanyan(layerdatatransform,baseCoord,inter,150,300);
+layerGridModelTY = grid_tanyan(layerdata,baseCoord,inter,20,20); % new data
+[layerCoeffModelTY, layerCoeffModel_zdomainTY] = fitting_tanyan(layerGridModelTY);
 
 gridFlag = true; gridType = 'linear'; gridStepSize = [10, 10]; gridRetractionDist = [10, 10]; fittingType = 'cubic'; layerType = 'layer';
 layerModelParam = struct('gridFlag', gridFlag, 'gridType', gridType, 'gridStepSize', gridStepSize, 'gridRetractionDist', gridRetractionDist, ...
                                                   'fittingType', fittingType, 'layerType', layerType, 'pathSave', []);
 [baseCoord, layerCoeffModelLY, layerGridModelLY] = getlayermodel(filenameList_layer, baseCoord, layerModelParam);
 
-%%  ----------------------------------
-% # test 1
-for k =1:100
-    for s = 1:10
-        ep = endpoint - [20*k 10*k -1000*s];
-        % ep = endpoint - [96 48 -2000]; iLayer = 8;  这里直线从拟合多项式之间的缝隙中穿过了。
-        [intersection, idxLayer, points]  = layerintersects_tanyan(layerCoeffModel, layerGridModel, startpoint, ep);
-        [intersection0, idxLayer0, points0]  = layerintersects(layerCoeffModelLY, layerGridModelLY, startpoint, ep);
 
-        markintersection{k,s} = intersection;
-        markidxLayer{k,s} = idxLayer;
-    end
 end
-if ~isempty(intersection)
-    scatter3(ax1, intersection(:, 1), intersection(:, 2), intersection(:, 3), 100, 'filled');
-end
-xlabel(ax1, 'x /m');   ylabel(ax1, 'y /m');  zlabel(ax1, 'z /m');
 
-%% -------------------------------------------------------------------------------------
-% # test 2
-ax1 = axes(figure);  hold(ax1, 'on');
-for iP4 = 1:length(points)
-    tmp = points{iP4};
-%     interpolation(tmp, 1, 0.1, 'linear', ax1);
-    plot3(ax1, [tmp(:, 1); tmp(1, 1)], [tmp(:, 2); tmp(1, 2)], [tmp(:, 3); tmp(1, 3)], 'r-', 'linewidth', 1.1);
-    patch(ax1, tmp(:, 1), tmp(:, 2), tmp(:, 3), abs(tmp(:, 3))/norm(tmp(:, 3)));
-    scatter3(ax1, tmp(:, 1), tmp(:, 2), tmp(:, 3), 20, 'MarkerFaceColor', [0 0 0]);
-    % 测试四点是否在直线不同侧
-    for jTmp = 1: size(tmp, 1)
-        st = [startpoint; tmp(jTmp, :)];
-        plot3(ax1, st(:, 1), st(:, 2), st(:, 3), 'b-');
-    end
-    %          tmp_p4{iP4} = test_tmp(tmp, startpoint, endpoint);
-    
-    %         patch(ax1, tmp(:, 1), tmp(:, 2), tmp(:, 3), [0 0.1 0.9],'EdgeColor','interp','Marker','o','MarkerFaceColor','flat');
-    %         colorbar(ax1);
-    %      iP4
-end
-scatter3(ax1, se(:, 1), se(:, 2), se(:, 3), 50, 'filled');
-plot3(ax1, se(:, 1), se(:, 2), se(:, 3), 'b-', 'linewidth', 2.5);
-if ~isempty(intersection)
-    scatter3(ax1, intersection(:, 1), intersection(:, 2), intersection(:, 3), 20, 'filled');
-end
-xlabel(ax1, 'x /m');   ylabel(ax1, 'y /m');  zlabel(ax1, 'z /m');
-
-
-
-
-
-toc

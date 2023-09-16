@@ -14,6 +14,7 @@ warning off;
 
 func_name = mfilename;
 
+tic
 %% %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 if exist('input_data_path', 'var')
     disp(['func_name: ', func_name, '. ', 'Variable input_data_path exists']);
@@ -71,6 +72,9 @@ geological_model.input_geological_model_path = input_geological_model_path;
 savedata(geological_model, [current_data_path, filesep], [geological_model_path, well_name], '.mat');
 
 diary off;
+
+time_2023 = toc
+
 
 end
 

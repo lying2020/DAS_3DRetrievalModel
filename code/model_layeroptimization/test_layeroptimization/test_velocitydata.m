@@ -18,7 +18,7 @@ tic
 velocityTmp = readtxtdata(filenameList, type);
 % velocityTmp = readlayerdata(filenameList);
 %% xMat, yMat is a m* n matrix. zMat, velocity is m*n*k matrix.  
-% [xMat, yMat, zMat, velocityMat] = layerdata(velocityTmp, baseCoord, type);
+% [xMat, yMat, zMat, velocityMat] = layerdatatransform(velocityTmp, baseCoord, type);
 [xMat, yMat, zMat, velocityMat] = velocitydata(velocityTmp, baseCoord);     % for velocity model
  t_velocity1 = toc
 % disp('GOOD JOB !!!');

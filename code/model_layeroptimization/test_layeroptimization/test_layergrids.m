@@ -35,7 +35,7 @@ plot3(ax1, se(:, 1), se(:, 2), se(:, 3), 'b-', 'linewidth', 1.5);
 for iFile = 1:num
      [xMat, yMat, zMat] = layerGridModel{iFile, 1:3};
 %%
-    p4 =  layergrids(xMat, yMat, zMat, se(1, :), se(2, :));
+    p4 =  computelayerintersectsgrids(xMat, yMat, zMat, se(1, :), se(2, :));
 %     p4 = points4(x, y, z, startpoint, endpoint);
 %% -----------------------------------
     for iP4 = 1:length(p4)
@@ -65,7 +65,7 @@ xlabel(ax1, 'x /m');   ylabel(ax1, 'y /m');  zlabel(ax1, 'z /m');
 
 % 
 % type = 'velocity';
-% [x, y, z, v, xTimes, yTimes] = layerdata(velocityData, type);
+% [x, y, z, v, xTimes, yTimes] = layerdatatransform(velocityData, type);
 % disp('GOOD JOB !!!');
 % 
 % deltaX = max(velocityData(:, 4:6)) - min(velocityData(:, 4:6));
@@ -76,7 +76,7 @@ function p4 = test4(tmp, sp, ep)
 x = [tmp(1, 1) tmp(2, 1); tmp(4, 1), tmp(3, 1)];
 y = [tmp(1, 2) tmp(2, 2); tmp(4, 2), tmp(3, 2)];
 z = [tmp(1, 3) tmp(2, 3); tmp(4, 3), tmp(3, 3)];
-p4 = layergrids(x, y, z, sp, ep);
+p4 = computelayerintersectsgrids(x, y, z, sp, ep);
 % 
 f5 = figure;
 ax5 = axes(f5);  hold(ax5, 'on');

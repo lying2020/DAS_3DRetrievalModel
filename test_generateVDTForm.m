@@ -13,12 +13,12 @@ disp(['func_name: ', func_name]);
 % %% %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %% import data model
 % read_geological_model_xinjiang_2020
-% pause(2)
-% geological_model_name = 'geological_model_xinjiang_2020_XJ';
+% % pause(2)
+geological_model_name = 'geological_model_xinjiang_2020_XJ';
 
-% % well_name = '_T106';  %  well_name = '_T131';  % 
-% % read_geological_model_2023_T(well_name)
-geological_model_name = 'geological_model_2023_T106';
+% read_geological_model_2023_T('_T106')
+% read_geological_model_2023_T('_T131')
+% geological_model_name = 'geological_model_2023_T106';
 % geological_model_name = 'geological_model_2023_T131';
 
 %%

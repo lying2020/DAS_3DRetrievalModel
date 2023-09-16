@@ -53,7 +53,7 @@ if nargin < 2; baseCoord = [0 0 0];   end
 if isempty(baseCoord), baseCoord = [0 0 0];  end
 % -----------------------------------------------------------------------------------------------------
 if ~contains('velocityModel', type)
-    [xMat, yMat, zMat] = layerdata(txtData, baseCoord, type);
+    [xMat, yMat, zMat] = layerdatatransform(txtData, baseCoord, type);
     [velocityMat, xTimes, yTimes] = deal([]);
     return;
 end

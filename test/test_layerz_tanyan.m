@@ -28,16 +28,16 @@ end
 % filenameList is a cell array
 num = length(filenameList);
 
-layerdata = cell(num, 1);
+layerdatatransform = cell(num, 1);
 inter = 10;
 baseCoord =  [14621234 4650653 2000];
 % ax1 = axes(figure);  hold(ax1, 'on');
 % ax2 = axes(figure);  hold(ax2, 'on');
 for iFile = 1:num
-    layerdata{iFile} = readlayerdata(filenameList{iFile});
+    layerdatatransform{iFile} = readlayerdata(filenameList{iFile});
 end
 
-layerGridModel = grid_tanyan(layerdata,baseCoord,inter,100,250);
+layerGridModel = grid_tanyan(layerdatatransform,baseCoord,inter,100,250);
 [layerCoeffModel, layerCoeffModel_zdomain] = fitting_tanyan(layerGridModel);
 
 for iFile = 1:num

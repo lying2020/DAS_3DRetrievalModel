@@ -23,7 +23,7 @@ for iFile = 1:num
     %% layerTmp is a n*5 matrix.
     layerTmp{iFile, 1} = readtxtdata(filenameList{iFile}, layerType);
     %% xMat is a m* n matrix.
-    [xMat, yMat, zMat] = layerdata(layerTmp{iFile, 1}, baseCoord, layerType);
+    [xMat, yMat, zMat] = layerdatatransform(layerTmp{iFile, 1}, baseCoord, layerType);
     layerGridModel(iFile, 1:3)= {xMat, yMat, zMat};
 end
 %

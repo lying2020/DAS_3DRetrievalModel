@@ -60,7 +60,7 @@ if step == 0
     return
 end
 acstep = acstep + norm(step);
-X1(3) = layerz(layerCoeffModel,layerGridModel,X1([1,2])',1);
+X1(3) = computelayerz(layerCoeffModel,layerGridModel,X1([1,2])',1);
 if smallt > Ft(X1)
     smallt = Ft(X1);
     smallX = X1;
@@ -107,7 +107,7 @@ for j=1:Maxnumiter
             return
         end
         acstep = acstep + norm(step);
-        X2(3) = layerz(layerCoeffModel,layerGridModel,X2([1,2])',1);
+        X2(3) = computelayerz(layerCoeffModel,layerGridModel,X2([1,2])',1);
         if smallt > Ft(X2)
             smallt = Ft(X2);
             smallX = X2;
@@ -140,7 +140,7 @@ for j=1:Maxnumiter
             return
         end
         acstep = acstep + norm(step);
-        X2(3) = layerz(layerCoeffModel,layerGridModel,X2([1,2])',1);
+        X2(3) = computelayerz(layerCoeffModel,layerGridModel,X2([1,2])',1);
         if smallt > Ft(X2)
             smallt = Ft(X2);
             smallX = X2;

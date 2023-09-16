@@ -32,13 +32,13 @@ countinstop = 10;
 countin = 0;
 for j=1:iteratorstep
     X00=X0;
-    %  
+    %  calculateSingleIntersection_layerCoeffModel_temp
     k=size(X0,2);
     for ii=k-1:-1:2
         iteraX=X0(1:3,[ii-1,ii,ii+1]);
         iteraVelMod=initialguessVel([ii-1,ii]);
-        X0(1:3,ii) = calculateSingleIntersection_layerModel_temp(iteraX,iteraVelMod,layerCoeffModel(X0(4,ii)),layerGridModel(X0(4,ii),:));
-        errorz = layerz(layerCoeffModel(X0(4,ii)),layerGridModel(X0(4,ii),:),X0(1:2,ii)',1) - X0(3,ii);
+        X0(1:3,ii) = calculateSingleIntersection_layerCoeffModel_temp(iteraX,iteraVelMod,layerCoeffModel(X0(4,ii)),layerGridModel(X0(4,ii),:));
+        errorz = computelayerz(layerCoeffModel(X0(4,ii)),layerGridModel(X0(4,ii),:),X0(1:2,ii)',1) - X0(3,ii);
         if norm(errorz) > 1e-1
 %             warning('z coordinate error wrong');
         end
@@ -73,7 +73,7 @@ for j=1:iteratorstep
         xyArray(1:m,1) = p(1,1);
         xyArray(1:m,2) = p(1,2);
         idx = (1:m)';
-        z = [layerz(layerCoeffModel,layerGridModel,xyArray,idx);p(1,3)];
+        z = [computelayerz(layerCoeffModel,layerGridModel,xyArray,idx);p(1,3)];
         z = sortrows(z,1);
         [row,~] = find(z == p(1,3));
         initialguessVel(iX0) = VelMod(row(1));

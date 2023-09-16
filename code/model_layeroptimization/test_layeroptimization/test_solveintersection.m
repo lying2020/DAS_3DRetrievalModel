@@ -34,7 +34,7 @@ plot3(ax1, se(:, 1), se(:, 2), se(:, 3), 'b-', 'linewidth', 1.5);
 for iFile = 1:num
     [xMat, yMat, zMat] = layerGridModel{iFile, 1:3};
     %  ----------------------------------
-     [p4, rc] = layergrids(xMat, yMat, zMat, startpoint, endpoint);
+     [p4, rc] = computelayerintersectsgrids(xMat, yMat, zMat, startpoint, endpoint);
     for iP4 = 1:length(p4)
         tmp = p4{iP4, 1};
          pts = p4{ipoint, 1}; % pts: 4*3 matrix, quadrangle vertex coordinates.

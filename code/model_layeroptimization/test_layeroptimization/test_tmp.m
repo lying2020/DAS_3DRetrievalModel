@@ -29,7 +29,7 @@ scatter3(ax1, se(:, 1), se(:, 2), se(:, 3), 50, 'filled');
 plot3(ax1, se(:, 1), se(:, 2), se(:, 3), 'b-', 'linewidth', 1.5);
 %
 tic
-[intersection1, idxLayer, pointSet, coeffSet]  = layerintersects(layerCoeffModel, layerGridModel, se(1, :), se(2, :));
+[intersection1, idxLayer, pointSet, coeffSet]  = computelayerintersectscoords(layerCoeffModel, layerGridModel, se(1, :), se(2, :));
 
 % ax1 = axes(figure); surf(ax1, xMat, yMat, ones(189, 65))
 % hold(ax1, 'on'); sourceplot3D(ax1 , layerGridModel(1, :));

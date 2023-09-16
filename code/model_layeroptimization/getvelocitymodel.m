@@ -75,7 +75,7 @@ end
 layerTmp = readtxtdata(filenameList, type);
 % layerTmp = readlayerdata(filenameList{1, 1});
 %
-[xMat, yMat, zMat, velocityMat] = layerdata(layerTmp, baseCoord, type);
+[xMat, yMat, zMat, velocityMat] = layerdatatransform(layerTmp, baseCoord, type);
 % [xMat, yMat, zMat, velocityMat] = velocitydata(txtData, baseCoord);     % for velocity model
 %% There may be a problem with the outermost data interpolation
 xMat = xMat(2:end-1, 2:end-1);
@@ -119,7 +119,7 @@ for ir = 1: xLen
         xy = [xMat(ir, ic), yMat(ir, ic)];
         xyArray = repmat(xy, numLayer, 1);
         % zArray: numLayer*1 matrix, z value for the same horizontal position and different layers
-        zArray = layerz(layerCoeffModel, layerGridModel, xyArray, idxLayer);
+        zArray = computelayerz(layerCoeffModel, layerGridModel, xyArray, idxLayer);
         zArrayMat = get_z_array_mat(zArray, numLayer);
         for idepth = 1: zLen
             %% -----------------------------------------------------------------------------------------------------

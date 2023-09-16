@@ -21,7 +21,7 @@ maxrefractionpoint = 40;
 if (sourceCoord(3) == sensorCoord(3))
     sourceCoord(3) = sourceCoord(3) + 1e-6;
 end
-[intersecp, idxLayer] = layerintersects(layerCoeffModel, layerGridModel, sourceCoord, sensorCoord);
+[intersecp, idxLayer] = computelayerintersectscoords(layerCoeffModel, layerGridModel, sourceCoord, sensorCoord);
 initialguess = intersecp;
 intervalXY = layerGridModel{1,1}(2,2) - layerGridModel{1,1}(1,1);
 
@@ -46,7 +46,7 @@ end
 
 %%
 initialguess= initialguess';
-X0=[initialguess;0 idxLayer' 0] ;
+X0=[initialguess; 0 idxLayer 0] ;
 k = size(X0,2);
 if k <= 2
 
@@ -77,10 +77,10 @@ for iX0 = 1:size(X0',1)-1
     xyArray(1:m,1) = p(1,1);
     xyArray(1:m,2) = p(1,2);
     idx = (1:m)';
-    z = [layerz(layerCoeffModel,layerGridModel,xyArray,idx);p(1,3)];
+    z = [computelayerz(layerCoeffModel,layerGridModel,xyArray,idx);p(1,3)];
     z = sortrows(z,1);
     [row,~] = find(z == p(1,3));
-    initialguessVel(iX0) = velocityModel(row(1));
+    initialguessVel(iX0) = velocityModel(row(1), 1);
 end
 
 %%
@@ -102,8 +102,8 @@ for j=1:iteratorstep
     for ii=k-1:-1:2
         iteraX=X0(1:3,[ii-1,ii,ii+1]);
         iteraVelMod=initialguessVel([ii-1,ii]);
-        X0(1:3,ii) = calculateSingleIntersection_layerModel_temp(iteraX,iteraVelMod,layerCoeffModel(X0(4,ii)),layerGridModel(X0(4,ii),:));
-        errorz = layerz(layerCoeffModel(X0(4,ii)),layerGridModel(X0(4,ii),:),X0(1:2,ii)',1) - X0(3,ii);
+        X0(1:3,ii) = calculateSingleIntersection_layerCoeffModel_temp(iteraX,iteraVelMod,layerCoeffModel(X0(4,ii)),layerGridModel(X0(4,ii),:));
+        errorz = computelayerz(layerCoeffModel(X0(4,ii)),layerGridModel(X0(4,ii),:),X0(1:2,ii)',1) - X0(3,ii);
         if norm(errorz) > 1
 %             warning('z coordinate error wrong');
         end
@@ -137,10 +137,10 @@ for j=1:iteratorstep
         xyArray(1:m,1) = p(1,1);
         xyArray(1:m,2) = p(1,2);
         idx = (1:m)';
-        z = [layerz(layerCoeffModel,layerGridModel,xyArray,idx);p(1,3)];
+        z = [computelayerz(layerCoeffModel,layerGridModel,xyArray,idx);p(1,3)];
         z = sortrows(z,1);
         [row,~] = find(z == p(1,3));
-        initialguessVel(iX0) = velocityModel(row(1));
+        initialguessVel(iX0) = velocityModel(row(1), 1);
     end
     nump(countma) = size(X0,2);
     markX0(1:4,1:nump(countma),countma) = X0(1:4,:);
@@ -169,4 +169,4 @@ if size(Position,2) ~= size(initialguessVel,2)+1
     r = 0;
 end
 end
-    
+

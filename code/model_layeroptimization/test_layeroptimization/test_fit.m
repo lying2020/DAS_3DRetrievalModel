@@ -27,7 +27,7 @@ ax1 = axes(figure);  hold(ax1, 'on');
 for iFile = 1:num
     % layerTmp is a n*5 matrix. 
     layerTmp= readtxtdata(filenameList{iFile}, type);
-    [xMat, yMat, zMat] = layerdata(layerTmp, baseCoord, type);
+    [xMat, yMat, zMat] = layerdatatransform(layerTmp, baseCoord, type);
     % 
     layerGridModel(iFile, 1:3)= {xMat, yMat, zMat};
     meanZ(iFile, 1) = mean(mean(zMat));

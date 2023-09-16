@@ -8,7 +8,7 @@ num = [numOver numUnder];
 xyArray(1:numLayer,1) = inversionLocation(1,1);
 xyArray(1:numLayer,2) = inversionLocation(1,2);
 idx = (1:numLayer)';
-z = [layerz(layerCoeffModel, layerGridModel,xyArray,idx);inversionLocation(1,3)];
+z = [computelayerz(layerCoeffModel, layerGridModel,xyArray,idx);inversionLocation(1,3)];
 z = sortrows(z,1);
 [row,~] = find(z == inversionLocation(1,3));
 DSensor = [];
@@ -19,16 +19,16 @@ for iou = 2:2
     idSensor{iou} = 1:numSensor;
     for iSensor = 1:numSensor
         if row == 1
-            if  Sensor(iSensor,3) < layerz(layerCoeffModel(row),layerGridModel(row),Sensor(iSensor,1:2),1)+tol
+            if  Sensor(iSensor,3) < computelayerz(layerCoeffModel(row),layerGridModel(row),Sensor(iSensor,1:2),1)+tol
                 DSensor(end+1) = iSensor;
             end
         elseif row == numLayer+1 || row == numLayer
-            %         if Sensor(iSensor,3) > layerz(layerCoeffModel(row-1),layerGridModel(row-1),Sensor(iSensor,1:2),1)-tol
+            %         if Sensor(iSensor,3) > computelayerz(layerCoeffModel(row-1),layerGridModel(row-1),Sensor(iSensor,1:2),1)-tol
             %             DSensor(end+1) = iSensor;
             %         end
         else
-            if  Sensor(iSensor,3) < layerz(layerCoeffModel(row),layerGridModel(row),Sensor(iSensor,1:2),1)+100 ...
-                    && Sensor(iSensor,3) > layerz(layerCoeffModel(row-1),layerGridModel(row-1),Sensor(iSensor,1:2),1)-100
+            if  Sensor(iSensor,3) < computelayerz(layerCoeffModel(row),layerGridModel(row),Sensor(iSensor,1:2),1)+100 ...
+                    && Sensor(iSensor,3) > computelayerz(layerCoeffModel(row-1),layerGridModel(row-1),Sensor(iSensor,1:2),1)-100
                 DSensor(end+1) = iSensor;
             end
         end

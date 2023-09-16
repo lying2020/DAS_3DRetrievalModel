@@ -55,7 +55,7 @@ for iFile = 1:num
     plot(ax2, xMat(:), zMat(:), ':', 'linewidth', 1.1);
     plot(ax3, yMat(:), zMat(:), ':', 'linewidth', 1.1);
     %
-    seq = findgrids(xMat, yMat, startpoint, endpoint);
+    seq = findlayerintersectsgridsseq(xMat, yMat, startpoint, endpoint);
     
     %
 end
