@@ -53,7 +53,7 @@ disp(['func_name: ', func_name, '. ', 'input_geological_model_path: ', input_geo
 disp(['func_name: ', func_name, '. ', 'output_result_data_path: ', output_result_data_path]);
 disp(['func_name: ', func_name, '. ', 'current_data_path: ', current_data_path]);
 
-add_default_folder_path();
+% add_default_folder_path();
 
 layerGridModel = geological_model.layerGridModel;
 layerCoeffModel = geological_model.layerCoeffModel;
@@ -75,7 +75,6 @@ retrieval_model_area =compute_retrieval_model_area(layerGridModel, undergroundCo
 disp(['func_name: ', func_name, '. ', 'updated area. retrieval_model_area: x = ', num2str(retrieval_model_area(1, :)), ...
                             ', y = ', num2str(retrieval_model_area(2, :)), ', z = ', num2str(retrieval_model_area(3, :))]);
 
-% retrieval_model_grid_size:  [delta_x; delta_y; delta_z]; % 3 * 1
 retrieval_model_grid_size = [10; 10; 10];
 
 x_range = ['_x_', num2str(retrieval_model_area(1,1)), '_', num2str(retrieval_model_area(1,2)), '_', num2str(retrieval_model_grid_size(1))];
