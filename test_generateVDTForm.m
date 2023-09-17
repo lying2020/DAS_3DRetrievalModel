@@ -14,16 +14,13 @@ disp(['func_name: ', func_name]);
 % %% %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %% import data model
 
-% read_geological_model_xinjiang_2020;
-% read_geological_model_2023_T('_T106');
-% read_geological_model_2023_T('_T131');
-% pause(2)
-
-% geological_model_name = 'geological_model_xinjiang_2020_XJ';
+read_geological_model_xinjiang_2020;
+geological_model_name = 'geological_model_xinjiang_2020_XJ';
 
 % read_geological_model_2023_T('_T106')
+% geological_model_name = 'geological_model_2023_T106';
+
 % read_geological_model_2023_T('_T131')
-geological_model_name = 'geological_model_2023_T106';
 % geological_model_name = 'geological_model_2023_T131';
 
 %%
@@ -53,7 +50,7 @@ disp(['func_name: ', func_name, '. ', 'input_geological_model_path: ', input_geo
 disp(['func_name: ', func_name, '. ', 'output_result_data_path: ', output_result_data_path]);
 disp(['func_name: ', func_name, '. ', 'current_data_path: ', current_data_path]);
 
-% add_default_folder_path();
+add_default_folder_path();
 
 layerGridModel = geological_model.layerGridModel;
 layerCoeffModel = geological_model.layerCoeffModel;

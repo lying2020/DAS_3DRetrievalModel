@@ -27,18 +27,19 @@ if numi > 0
             sourceLocation = zeros(1,3);
             sourceLocation(1:3) = tempfaultPositions(ifault,ipool,:);
             [equalVelocity, ~,equalTime] = computeequalvelocity(layerCoeffModel, layerGridModel, velocityModel, sensorPositions, sourceLocation);
-            tempVDTForm(ifault,ipool,:,:) = [equalVelocity';equalTime']';
+            tempVDTForm(ifault, ipool, :, :) = [equalVelocity'; equalTime']';
+            disp(['numpool: ', num2str(numpool), 'ipool: ', num2str(ipool), ', numi: ', num2str(numi), ', ifault: ', num2str(ifault)]);
         end
     end
     VDTForm = zeros(numfault,nums,2);
     for ipool = 1:numpool
-        VDTForm((1:numi)+numi*(ipool-1),:,:) = tempVDTForm(1:numi,ipool,:,:);
+        VDTForm((1:numi)+numi*(ipool-1), :, :) = tempVDTForm(1:numi, ipool, :, :);
     end
 end
-for ifault = (numi*numpool+1):numfault
-    sourceLocation = faultPositions(ifault,:);
-    [equalVelocity, ~,equalTime] = computeequalvelocity(layerGridModel, layerCoeffModel, velocityModel, sensorPositions, sourceLocation);
-    VDTForm(ifault,:,:) = [equalVelocity';equalTime']';
+for ifault = (numi*numpool+1) : numfault
+    sourceLocation = faultPositions(ifault, :);
+    [equalVelocity, ~, equalTime] = computeequalvelocity(layerGridModel, layerCoeffModel, velocityModel, sensorPositions, sourceLocation);
+    VDTForm(ifault, :, :) = [equalVelocity'; equalTime']';
 end
 closematlabpool;
 
