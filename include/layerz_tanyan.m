@@ -37,17 +37,10 @@ for i = 1: num
     inter = xMat(1,2) - xMat(1,1);
     id = floor((xyArray(i, 2) - yMat(1,1))/inter+1);
     jd = floor((xyArray(i, 1) - xMat(1,1))/inter+1);
-    [maxi,maxj] = size(xMat);
-    if id > maxi
-        id = maxi;
-    elseif id <= 0
-        id = 1;
-    end
-    if jd > maxj
-        jd = maxj;
-    elseif jd <= 0
-        jd = 1;
-    end
+    [maxi,maxj] = size(coeffMat);
+    id = max(1, min(maxi, id));
+    jd = max(1, min(maxj, jd));
+
 %     disp(['id: ', num2str(id), ', jd: ', num2str(jd), ', size: ', num2str(size(coeffMat))]);
     coeff = coeffMat{id,jd};
     % Linear | Quadric | Cubic function fitted at mesh point
