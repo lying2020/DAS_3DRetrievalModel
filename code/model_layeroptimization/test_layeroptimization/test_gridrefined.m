@@ -17,7 +17,7 @@ layerModel = importdata('layerModel6.mat');
 
 % points= [0 0 0; 4 4 4; 0 3.2 4; 8 0 0 ];
 points = [1, 0, 0; 0, 1, 0; 0, 0, 1; 1, 1, 1; 0.5, 0.5, 1; 0.5, 0.5, 0];
-%  [X, Y, Z] = interpolation(points, 1, 0.01, 'cubic', axes(figure));
+%  [X, Y, Z] = pointsinterpolation(points, 1, 0.01, 'cubic', axes(figure));
  
  [xMat, yMat, zMat] = faultModel{1, :};
 [xMat0, yMat0, zMat0]  = gridrefined(xMat, yMat, zMat, [50 2], 'linear');
@@ -28,7 +28,7 @@ ax1 = axes(figure);  hold(ax1, 'on');
   plot3(ax1, xMat0(:), yMat0(:), zMat0(:), 'r.');
   
 %   points = [xMat0(:), yMat0(:), zMat0(:)];
-%     [X, Y, Z] = interpolation(points, 10, 10, 'cubic', axes(figure));
+%     [X, Y, Z] = pointsinterpolation(points, 10, 10, 'cubic', axes(figure));
     
 % F = scatteredInterpolant(xMat, yMat, zMat);	
 % %%

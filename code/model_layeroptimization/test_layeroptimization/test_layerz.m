@@ -22,7 +22,7 @@ endpoint = ep(n, :);
 se = [startpoint; endpoint] - baseCoord;
 %
 fittingType = 'nonlinear';  
-[baseCoord, coeffModel, layerGridModel, ax1] = test_first(baseCoord, fittingType);
+[baseCoord, layerCoeffModel, layerGridModel, ax1] = test_first(baseCoord, fittingType);
 num = size(layerGridModel, 1);
 %
 %% --------------------------------------------
@@ -33,7 +33,7 @@ plot3(ax1, se(:, 1), se(:, 2), se(:, 3), 'b-', 'linewidth', 1.5);
 %% ---------------------------------------------------------------------------
 for iFile = 1:num
     [xMat, yMat, zMat] = layerGridModel{iFile, 1:3};
-    coeffMat = coeffModel{iFile, 1};
+    coeffMat = layerCoeffModel{iFile, 1};
     xx = [xMat(10, 10), xMat(10, 10) - 2.6, xMat(12, 11) ];
     yy = [yMat(15, 13), yMat(15, 13) - 6.3,  yMat(18, 14) - 2.1];
     for i = 1:length(xx)
@@ -59,8 +59,8 @@ for iFile = 1:num
         %         surf(ax2, xMat1, yMat1, zMat1, zMat1.*zMat1);
         shading(ax2, 'interp');
         scatter3(ax2,  xy0(1), xy0(2), z0, 100, 'filled');
-%         interpolation(points, 1, 0.1, 'natural', ax2);
-        interpolation([xMat1(:), yMat1(:), zMat1(:)], 1, 0.1, 'natural', ax2);
+%         pointsinterpolation(points, 1, 0.1, 'natural', ax2);
+        pointsinterpolation([xMat1(:), yMat1(:), zMat1(:)], 1, 0.1, 'natural', ax2);
         disp(' all is ok !');
     end
     

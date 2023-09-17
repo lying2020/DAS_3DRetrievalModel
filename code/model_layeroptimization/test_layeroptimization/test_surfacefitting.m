@@ -25,7 +25,7 @@ for i = 1 : 100
     zfit(i) = Zn(xfit(i) * 10, yfit(i) * 10);
 end
 % func = @(var,x) var(1)*x(:,1).^2 + var(2)*x(:,2).^2 + var(3)*x(:,1).*x(:,2) + var(4)*x(:,1) + var(5)*x(:,2) + var(6);
-[coeff, func, resnorm] = surfacefitting(xfit, yfit, zfit, 'quad');
+[coeff, func, resnorm] = layersurfacefitting(xfit, yfit, zfit, 'quad');
 Zfit = coeff(1) * X.^2 + coeff(2) * Y.^2 + coeff(3) * X.*Y + coeff(4) * X + coeff(5) * Y + coeff(6);
 ya = func(coeff, xfit, yfit);
 surf(x, y, Zn);

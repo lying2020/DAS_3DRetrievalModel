@@ -41,7 +41,7 @@ for ir = 2:xLen
     for ic = 2:yLen
         rArray =  ir-1 : ir+2; % ir : ir+1;
         cArray = ic-1 : ic+2; % ic : ic+1;
-        [coeff, ~, resnorm] = surfacefitting(xMat(rArray, cArray) , yMat(rArray, cArray), zMat(rArray, cArray), fittingType);
+        [coeff, ~, resnorm] = layersurfacefitting(xMat(rArray, cArray) , yMat(rArray, cArray), zMat(rArray, cArray), fittingType);
         coeffMat{ir-1, ic-1} = coeff;
         resnormMat(ir-1, ic-1) = resnorm;
        %% --  test ---------------------------------------------------------------------------------------------------

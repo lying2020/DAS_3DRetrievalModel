@@ -27,7 +27,7 @@ hold(ax1, 'on');
 coeff = zeros(1, 10);
 for ips = 1:length(pointSet)
     tmp = pointSet{ips, 1};
-    %     interpolation(tmp, 1, 0.1, 'linear', ax1);
+    %     pointsinterpolation(tmp, 1, 0.1, 'linear', ax1);
 %     plot3(ax1, [tmp(:, 1); tmp(1, 1)], [tmp(:, 2); tmp(1, 2)], [tmp(:, 3); tmp(1, 3)], 'r-', 'linewidth', 1.1);
 %     patch(ax1, tmp(:, 1), tmp(:, 2), tmp(:, 3), abs(tmp(:, 3))/norm(tmp(:, 3)));
     %     patch(ax1, tmp(:, 1), tmp(:, 2), tmp(:, 3),  [0 0.1 0.9],'EdgeColor','interp','Marker','o','MarkerFaceColor','flat');

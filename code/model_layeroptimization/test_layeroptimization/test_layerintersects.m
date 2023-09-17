@@ -24,40 +24,40 @@ se = [startpoint; endpoint] - baseCoord;
 %
 % fittingType = 'nonlinear';
 fittingType = 'cubic';
-[baseCoord, coeffModel, layerGridModel, ax1] = test_first(baseCoord, fittingType);
+% [baseCoord, layerCoeffModel, layerGridModel, ax1] = test_first(baseCoord, fittingType);
 num = size(layerGridModel, 1);
 %
 %% --------------------------------------------
-% ax1 = axes(figure);  
+ax1 = axes(figure); 
 hold(ax1, 'on');
 scatter3(ax1, se(:, 1), se(:, 2), se(:, 3), 50, 'filled');
 plot3(ax1, se(:, 1), se(:, 2), se(:, 3), 'b-', 'linewidth', 1.5);
 %% ---------------------------------------------------------------------------
 for iFile = 1:num
-%     [xMat, yMat, zMat] = layerGridModel{iFile, 1:3};
+    [xMat, yMat, zMat] = layerGridModel{iFile, 1:3};
 %%
-%         p4 =  layergrids(xMat, yMat, zMat, se(1, :), se(2, :));
-% %     p4 = points4(x, y, z, se(1, :), se(2, :));
+        p4 =  computelayerintersectsgrids(xMat, yMat, zMat, se(1, :), se(2, :));
+%     p4 = points4(x, y, z, se(1, :), se(2, :));
 %  ---------------------------------------------------------------------------------
-%     for iP4 = 1:length(p4)
-%         tmp = p4{iP4, 1};
-%         plot3(ax1, [tmp(:, 1); tmp(1, 1)], [tmp(:, 2); tmp(1, 2)], [tmp(:, 3); tmp(1, 3)], 'r-', 'linewidth', 1.5);
-%         patch(ax1, tmp(:, 1), tmp(:, 2), tmp(:, 3), abs(tmp(:, 3))/norm(tmp(:, 3)));
-%         scatter3(ax1, tmp(:, 1), tmp(:, 2), tmp(:, 3), 20, 'MarkerFaceColor', [0 0 0]);
-%         % 测试四点是否在直线不同侧
-%         for jTmp = 1: size(tmp, 1)
-%             st = [se(1, :); tmp(jTmp, :)];             
-%             plot3(ax1, st(:, 1), st(:, 2), st(:, 3), 'b-');
-%         end      
-%     end   
-    %
+    for iP4 = 1:length(p4)
+        tmp = p4{iP4, 1};
+        plot3(ax1, [tmp(:, 1); tmp(1, 1)], [tmp(:, 2); tmp(1, 2)], [tmp(:, 3); tmp(1, 3)], 'r-', 'linewidth', 1.5);
+        patch(ax1, tmp(:, 1), tmp(:, 2), tmp(:, 3), abs(tmp(:, 3))/norm(tmp(:, 3)));
+        scatter3(ax1, tmp(:, 1), tmp(:, 2), tmp(:, 3), 20, 'MarkerFaceColor', [0 0 0]);
+        % 测试四点是否在直线不同侧
+        for jTmp = 1: size(tmp, 1)
+            st = [se(1, :); tmp(jTmp, :)];             
+            plot3(ax1, st(:, 1), st(:, 2), st(:, 3), 'b-');
+        end      
+    end   
+    
 end
 %%  ------------------------------------------------------------------------------------
 % # test 1
 
 tic
 %
-[intersection1, idxLayer, pointSet, coeffSet]  = layerintersects(coeffModel, layerGridModel, se(1, :), se(2, :));
+[intersection1, idxLayer, pointSet, coeffSet]  = computelayerintersectscoords(layerCoeffModel, layerGridModel, se(1, :), se(2, :));
 %
     for ips = 1:length(pointSet)
         tmp = pointSet{ips, 1};
@@ -71,10 +71,16 @@ tic
         end
     end
     
+[intersection2, idxLayer2] = layerintersects_tanyan(layerCoeffModel, layerGridModel, se(1, :), se(2, :));
+if ~isempty(intersection2)
+    scatter3(ax1, intersection2(:, 1), intersection2(:, 2), intersection2(:, 3), 'g', 100, 'filled');
+end
+
 if ~isempty(intersection1)
     scatter3(ax1, intersection1(:, 1), intersection1(:, 2), intersection1(:, 3), 100, 'filled');
 end
 xlabel(ax1, 'x /m');   ylabel(ax1, 'y /m');  zlabel(ax1, 'z /m');
+
 %
 %
 %% -------------------------------------------------------------------------------------

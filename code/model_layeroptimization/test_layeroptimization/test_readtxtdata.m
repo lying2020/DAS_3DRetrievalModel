@@ -19,7 +19,7 @@ ax2 = axes(figure(3));  hold(ax2, 'on');
 for iFile = 1:num
     layerTmp = readtxtdata(filenameList{iFile}, type);
 %     layerTmp = readlayerdata(filenameList{iFile});
-    [xMat, yMat, zMat] = layerdata(layerTmp, baseCoord);
+    [xMat, yMat, zMat] = layerdatatransform(layerTmp, baseCoord);
     layersurf(ax2, xMat, yMat, zMat);
 end
 

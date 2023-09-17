@@ -10,7 +10,7 @@
 % this code is used to convert the discrete data into grid point data
 % and select a reference original point ... ...
 %% -----------------------------------------------------------------------------------------------------
-function [xMat, yMat, zMat, velocityMat, xTimes, yTimes] = layerdata(txtData, baseCoord, type)
+function [xMat, yMat, zMat, velocityMat, xTimes, yTimes] = layerdatatransform(txtData, baseCoord, type)
 %% -----------------------------------------------------------------------------------------------------
 %  transform discrete point data into grid point data
 % INPUT:

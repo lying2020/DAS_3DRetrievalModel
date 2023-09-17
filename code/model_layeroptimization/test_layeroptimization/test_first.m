@@ -9,9 +9,9 @@
 % 2020-10-29: Modify the description and comments
 % 
  %% -----------------------------------------------------------------------------------------------------
-function [baseCoord, coeffModel, layerGridModel, ax1] = test_first(baseCoord, fittingType, type)
+function [baseCoord, layerCoeffModel, layerGridModel, ax1] = test_first(baseCoord, fittingType, type)
 % layerGridModel: num* 3 cell, each row contains xMat, yMat, zMat grid point data.
-% coeffModel: num* 1 cell, each row contains (m-1)*(n-1) cell, 
+% layerCoeffModel: num* 1 cell, each row contains (m-1)*(n-1) cell, 
 % each cell contains 1*10 coeff matrix.
 %% -----------------------------------------------------------------------------------------------------
 %  DEBUG ! ! !
@@ -27,7 +27,7 @@ filenameList = getfilenamelist(type);
 % filenameList is a cell array
 num = length(filenameList);
 % layerGridModel = cell(num, 3);
-[baseCoord, coeffModel, layerGridModel] = getlayermodel(filenameList, baseCoord, fittingType, type);
+[baseCoord, layerCoeffModel, layerGridModel] = getlayermodel(filenameList, baseCoord, fittingType, type);
 
 ax1 = axes(figure);  hold(ax1, 'on');
 for iFile = 1:num

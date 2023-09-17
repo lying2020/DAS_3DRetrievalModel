@@ -24,7 +24,7 @@ d = [0.0578
 
 zMat = [2.3, 3.4; 1.4, 2.33];
 [coeff1, func1, resnorm1, xMat, yMat] = cubicsurfacefit(zMat, 1, 'linear');
-[coeff2, func2, resnorm2] = surfacefitting(xMat, yMat, zMat, 'linear');
+[coeff2, func2, resnorm2] = layersurfacefitting(xMat, yMat, zMat, 'linear');
 
 coeff1
 func1

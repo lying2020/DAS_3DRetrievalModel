@@ -9,45 +9,46 @@
 % this code is used to  find the vertex coordinates of the rectangle 
 % where the line coincides with the grid point rectangle region
 %% -----------------------------------------------------------------------------------------------------
-function seq = findgrids(xMat, yMat, sp, ep)
+function seq = findlayerintersectsgridsseq(xMat, yMat, startpoint, endpoint)
 % -----------------------------------------------------------------------------------------------------
-% 找到直线与网格点矩形区域重合的矩形顶点坐标
+% 找到直线与网格点矩形区域重合的网格顶点坐标
 % INTPUT: 
 % X, Y: n *m, x, y coordinates of the grid point.  (网格点上的x, y坐标)
-% sp, ep: 1* 2， endpoint of a line. 直线的两个端点
+% startpoint, endpoint: 1* 2， endpoint of a line. 直线的两个端点
 % OUTPUT: 
-% s: the index sequence of the target grid coordinates
+% [rArray, cArray]: 1*num, the row / col index sequence of the target grid coordinates
 %% -----------------------------------------------------------------------------------------------------
 [numRow, numCol] = size(xMat);
-v0 = repmat(ep - sp, numRow, 1);
+v0 = repmat(endpoint - startpoint, numRow, 1);
 sol = zeros(numRow-1, numCol -1);
-x1 = xMat - sp(1);   y1 = yMat - sp(2);
+xMat1 = xMat - startpoint(1);   yMat1 = yMat - startpoint(2);
 % -----------------------------------------------------------------------------------------------------
 %  计算实现与网格点上的每个点的叉乘的值。
 for i = 1: numCol - 1
-    v1 = [x1(:, i), y1(:, i)];
-    v2 = [x1(:, i + 1), y1(:, i + 1)];
+    vec1 = [xMat1(:, i), yMat1(:, i)];
+    vec2 = [xMat1(:, i + 1), yMat1(:, i + 1)];
     %  c1  = crossproduct(v0, v1);
     %  c2 = crossproduct(v0, v2);
     % % sol = x1*y2 - x2*y1;
-    c1 = v0(:, 1).* v1(:, 2) - v0(:, 2).* v1(:, 1);
-    c2 = v0(:, 1).* v2(:, 2) - v0(:, 2).* v2(:, 1);
+    crossp1 = v0(:, 1).* vec1(:, 2) - v0(:, 2).* vec1(:, 1);
+    crossp2 = v0(:, 1).* vec2(:, 2) - v0(:, 2).* vec2(:, 1);
     %
-    tmp = [ c1(1:end-1, :), c1(2:end, :), c2(1:end-1, :),  c2(2:end, :) ];
+    griddatacrossproducts = [crossp1(1:end-1, :), crossp1(2:end, :), crossp2(1:end-1, :),  crossp2(2:end, :) ];
+    condition1 = any(griddatacrossproducts >= 0, 2);
+    condition2 = any(griddatacrossproducts <= 0, 2);
     % Determine if the line crosses the rectangle
-    sol(:, i) = all([any(tmp >= 0, 2), any(tmp <= 0, 2)], 2);
+    sol(:, i) = all([condition1, condition2], 2);
 end
-[r, c] = find(sol);
-% Find the position of the subscript in the lower left corner of the overlapping rectangle
-seq = numRow* (c - 1) + r;
+[rArray, cArray] = find(sol);
+seq = numRow * (cArray - 1) + rArray;
 %% -----------------------------------------------------------------------------------------------------
-
+% Find the position of the subscript in the lower left corner of the overlapping rectangle
 % f1 = figure;
 % ax1 = axes(f1);
 % hold(ax1, 'on');
 %  plot(ax1, xMat(:), yMat(:), 'c:', 'linewidth', 1);
 %  scatter(ax1, xMat(:), yMat(:), 40);
-% se = [ep; sp];
+% se = [endpoint; startpoint];
 % % seq =1 ;
 % scatter(ax1, se(:, 1), se(:, 2), 40, 'filled');
 % plot(ax1, se(:, 1), se(:, 2), 'r', 'linewidth', 2);

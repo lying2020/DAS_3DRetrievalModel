@@ -34,9 +34,9 @@ coeff(1: aaLen) = aa;
 % -----------------------------------------------------------------------------------------------------
 % the parameter expression for the given line
 % syms t
-% x0= sp(1) + v0(1)* t;
-% y0= sp(2) + v0(2)* t;
-% z0 = sp(3) + v0(3)*t;
+% x0 = sp(1) + v0(1)* t;
+% y0 = sp(2) + v0(2)* t;
+% z0 = sp(3) + v0(3)* t;
 % % solve symbolically the intersection point equation
 % pt = double(solve( gridsfunc(x0, y0) - z0 == 0, 'Real', true))
 %
@@ -61,24 +61,37 @@ pt(pt<0) =[];
 % -----------------------------------------------------------------------------------------------------
 % ÌÞ³ýÖØ¸´×ø±êÐÐ
 points = unique(points, 'rows');
-% count = 0;
-X = points(:, 1);
-Y = points(:, 2);
-Z = points(:, 3);
-%
+
 % intersection = zeros(length(pt), 3);
 intersection = [];
-%
+
+% % count = 0;
+% X = points(:, 1);
+% Y = points(:, 2);
+% Z = points(:, 3);
+% %
+% for it=1:length(pt)
+%     tmp = sp + (ep - sp)* pt(it);
+%     % Determine if the intersection is within the rectangular region
+%     flagX = (tmp(1) >= min(X)) && (tmp(1) <= max(X));
+%     flagY = (tmp(2) >= min(Y)) && (tmp(2) <= max(Y));
+%     flagZ = (tmp(3) >= min(Z)) && (tmp(3) <= max(Z));
+%     if flagX && flagY && flagZ
+%         intersection = [intersection; tmp];
+%     end
+% end
+
+tolerance = [3.0, 3.0, 5.0];
+minCoord = min(points) - tolerance;
+maxCoord = max(points) + tolerance; 
 for it=1:length(pt)
     tmp = sp + (ep - sp)* pt(it);
     % Determine if the intersection is within the rectangular region
-    flagX = (tmp(1) >= min(X)) && (tmp(1) <= max(X));
-    flagY = (tmp(2) >= min(Y)) && (tmp(2) <= max(Y));
-    flagZ = (tmp(3) >= min(Z)) && (tmp(3) <= max(Z));
-    if flagX && flagY && flagZ
+    if all(tmp < maxCoord) && all( tmp > minCoord)
         intersection = [intersection; tmp];
     end
-end 
+end
+
 % If you have multiple points, you go to an average.   
 intersection = mean(intersection, 1);
 end

@@ -9,7 +9,7 @@
 % 2020-10-29: Modify the description and comments
 % this code is used to obtain the z coordinates of the corresponding layer
 %% -----------------------------------------------------------------------------------------------------
-function zArray = layerz(layerCoeffModel, layerGridModel, xyArray, idxLayer)
+function zArray = computelayerz(layerCoeffModel, layerGridModel, xyArray, idxLayer)
 % -----------------------------------------------------------------------------------------------------
 %  INPUT: 
 % layerCoeffModel: nomLayer* 1 cell. each cell contains (m -1)* (n -1) cell, and

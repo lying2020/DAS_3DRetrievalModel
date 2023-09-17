@@ -120,7 +120,7 @@ for iFile = 1:num
     layerdata{iFile} = readtxtdata(filenameList_layer{iFile}, type);
 end
 %     baseCoord =  startpoint;
-%layerGridModel = grid_tanyan(layerdata, baseCoord, inter, 150, 300);
+% layerGridModel = grid_tanyan(layerdata,baseCoord,inter,150,300);
 layerGridModelTY = grid_tanyan(layerdata,baseCoord,inter,20,20); % new data
 [layerCoeffModelTY, layerCoeffModel_zdomainTY] = fitting_tanyan(layerGridModelTY);
 

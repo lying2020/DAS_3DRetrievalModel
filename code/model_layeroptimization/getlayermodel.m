@@ -94,7 +94,7 @@ for iFile = 1 : numLayer
     end
     layer_cnt = layer_cnt + 1;
     %% xMat is a m* n matrix.
-    [xMat, yMat, zMat] = layerdata(layerTmp, baseCoord, layerType);
+    [xMat, yMat, zMat] = layerdatatransform(layerTmp, baseCoord, layerType);
     if isempty(xMat)
         disp(['func_name: ', func_name, '. ', 'isempty(xMat) == true.']);
         continue;
