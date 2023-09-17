@@ -102,7 +102,7 @@ for j=1:iteratorstep
     for ii=k-1:-1:2
         iteraX=X0(1:3,[ii-1,ii,ii+1]);
         iteraVelMod=initialguessVel([ii-1,ii]);
-        X0(1:3,ii) = calculateSingleIntersection_layerModel_temp(iteraX,iteraVelMod,layerCoeffModel(X0(4,ii)),layerGridModel(X0(4,ii),:));
+        X0(1:3,ii) = calculateSingleIntersection_layerCoeffModel_temp(iteraX,iteraVelMod,layerCoeffModel(X0(4,ii)),layerGridModel(X0(4,ii),:));
         errorz = layerz_tanyan(layerCoeffModel(X0(4,ii)),layerGridModel(X0(4,ii),:),X0(1:2,ii)',1) - X0(3,ii);
         if norm(errorz) > 1
 %             warning('z coordinate error wrong');
