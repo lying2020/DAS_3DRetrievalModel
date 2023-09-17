@@ -73,7 +73,7 @@ retrieval_model_area =compute_retrieval_model_area(layerGridModel, undergroundCo
 disp(['func_name: ', func_name, '. ', 'updated area. retrieval_model_area: x = ', num2str(retrieval_model_area(1, :)), ...
                             ', y = ', num2str(retrieval_model_area(2, :)), ', z = ', num2str(retrieval_model_area(3, :))]);
 
-retrieval_model_grid_size = [10; 10; 10];
+retrieval_model_grid_size = [20; 20; 15];
 
 x_range = ['_x_', num2str(retrieval_model_area(1,1)), '_', num2str(retrieval_model_area(1,2)), '_', num2str(retrieval_model_grid_size(1))];
 y_range = ['_y_', num2str(retrieval_model_area(2,1)), '_', num2str(retrieval_model_area(2,2)), '_', num2str(retrieval_model_grid_size(2))];
