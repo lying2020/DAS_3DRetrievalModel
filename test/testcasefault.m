@@ -5,11 +5,14 @@ addpath ../layer_new_tanyan/layerModel
 addpath ./arrivaltimedata/
 
 %% Data initial?
-layergriddata = importdata('layergriddata6000.mat');
-layerModel = importdata('layerModel6000.mat');
-VelMod = importdata('VelModnew.mat');
-layerModelCombine(:,1:3) = layergriddata(:,:);
-layerModelCombine(:,4) = layerModel(:);
+layerGridModel = importdata('layergriddata6000.mat');
+layerCoeffModel = importdata('layerModel6000.mat');
+% layerGridModel = load_mat_data('layergriddata1000.mat');
+% layerCoeffModel = load_mat_data('layerModel1000.mat');
+
+VelMod = importdata('VelModnew.mat'); 
+layerModelCombine(:,1:3) = layerGridModel(:,:);
+layerModelCombine(:,4) = layerCoeffModel(:);
 undergroundCoord = importdata('undergroundCoord6000.mat');
 sensordo = undergroundCoord(end,:);
 sensorPositions = undergroundCoord(1:1:size(undergroundCoord,1),:);
@@ -77,7 +80,7 @@ xcorrArray2 = cell(numtest,1);
 timeLag2 = cell(numtest,1);
 for itest = 1:numtest
     sourcePosition = testsourcePositions(itest,:);
-    arrivalTime{itest} = gettraveltime(layerModelCombine, VelMod, sensorPositions(sensorid{itest},:), sourcePosition);
+    arrivalTime{itest} = gettraveltime(layerCoeffModel, layerGridModel, VelMod, sensorPositions(sensorid{itest},:), sourcePosition);
     result{itest} = arrivalTimeRetrieval(arrivalTime{itest},sensorid{itest},optional);
     arrivalTimeturb1{itest} = disturbtime(arrivalTime{itest},optional.timeturbcoef);
     resultturb1{itest} = arrivalTimeRetrieval(arrivalTimeturb1{itest},sensorid{itest},optional);

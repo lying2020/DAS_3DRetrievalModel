@@ -55,7 +55,7 @@ for isource = 1:numsource
     %  -------------------------------------------------------------------------------------------------------------------------------------------------------------------
     sourcePosition = allsourcePositions(isource, :);% + [testArray(i), testArray(j),  -testArray(k)];
     tmpSensor = sensorPositions;
-    tmparrivalTime = gettraveltime(layerModelCombine,  VelMod, tmpSensor,   sourcePosition);
+    tmparrivalTime = gettraveltime(layerCoeffModel, layerGridModel,  VelMod, tmpSensor,   sourcePosition);
     [retrievalLocation] = sourceRetrieval(VDTForm,sourceLocationDomain,tmparrivalTime,optional);
     result = retrievalLocation(:,1:4) + [sensordo 0];
     distance{isource} =  result' - [sourcePosition 0]';
