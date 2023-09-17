@@ -10,6 +10,7 @@ format long % short %
 %
 % clear
 warning off;
+tic
 
 func_name = mfilename;
 
@@ -72,3 +73,4 @@ diary off;
 
 
 
+time_2020 = toc

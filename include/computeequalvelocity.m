@@ -43,7 +43,7 @@ for iSensor = 1 : numSensor
     % 计算第iSensor个检波器接收到的地震波与震源之间的折射点的坐标
     % refractionPoints = computeraytrace(relatedLayerModel,  relatedVelocityModel, sensorPositions(iSensor, :), sourceLocationCoord);
     % refractionPoints: the refraction point between the source and the iSensor th sensor
-    
+
     %%% 新射线反演算法的接口 %%%%
     %     relatedLayerModel([1,end])=[];
     %     relatedLayerFun = cell(length(relatedVelocityModel)-1, 1);

@@ -30,6 +30,9 @@ end
 function addpath_recursive(folder)
     % 添加当前文件夹到路径
     addpath(genpath(folder));
+    if (contains(folder, '.git'))
+        return;
+    end
     disp(['addpath folder: ', folder]);
     % 获取文件夹中的所有子文件夹
     subfolders = dir(fullfile(folder, '*'));
