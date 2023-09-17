@@ -80,7 +80,7 @@ for iFile = 1 : num
     layerdata{iFile} = readtxtdata(filename_list_layers{iFile}, type);
 end
 %     baseCoord =  startpoint;
-%layerGridModel = grid_tanyan(layerdatatransform,baseCoord,inter,150,300);
+%layerGridModel = grid_tanyan(layerdata,baseCoord,inter,150,300);
 layerGridModelTY = grid_tanyan(layerdata, baseCoord, inter, 20, 20); % new data
 [layerCoeffModelTY, layerCoeffModel_zdomainTY] = fitting_tanyan(layerGridModelTY);
 geological_model.layerGridModelTY = layerGridModelTY;
