@@ -34,6 +34,7 @@ if exist('geological_model', 'var')
 else
     disp(['func_name: ', func_name, '. ', 'Variable geological_model does not exist, now importdata ... ']);
     geological_model = importdata(geological_model_mat_file_path);
+    add_default_folder_path();
 end
 
 
@@ -50,13 +51,16 @@ disp(['func_name: ', func_name, '. ', 'input_geological_model_path: ', input_geo
 disp(['func_name: ', func_name, '. ', 'output_result_data_path: ', output_result_data_path]);
 disp(['func_name: ', func_name, '. ', 'current_data_path: ', current_data_path]);
 
-add_default_folder_path();
 
-layerGridModel = geological_model.layerGridModel;
-% layerCoeffModel = geological_model.layerCoeffModel;
-% velocityModel = geological_model.velocityModel;
-layerCoeffModel = geological_model.layerCoeffModelTY;
-velocityModel = geological_model.velocityModelTY;
+% layerGridModel = geological_model.layerGridModel;
+% % layerCoeffModel = geological_model.layerCoeffModel;
+% % velocityModel = geological_model.velocityModel;
+% layerCoeffModel = geological_model.layerCoeffModelTY;
+% velocityModel = geological_model.velocityModelTY;
+
+layerGridModel = load_mat_data('layergriddata1000.mat');
+layerCoeffModel = load_mat_data('layerModel1000.mat');
+velocityModel =  load_mat_data('VelModnew.mat');
 
 sensorsCoord = geological_model.sensorData;
 undergroundCoordsSet = sensorsCoord((sensorsCoord(:, 3) < 0), :);
