@@ -9,7 +9,7 @@
 % 2020-10-29: Modify the description and comments
 % this code is used to transform the data points into different models
 %% -----------------------------------------------------------------------------------------------------
-function  [baseCoord, layerCoeffModel, layerGridModel] = getlayermodel(filenameList, baseCoord, layerModelParam)
+function  [baseCoord, layerCoeffModel, layerGridModel, layerCoeffModelTY, layerCoeffModel_zdomainTY] = getlayermodel(filenameList, baseCoord, layerModelParam)
 % -----------------------------------------------------------------------------------------------------
 % INPUT: 
 % filenameList: num*1 cell, a list of filenames for the layer file
@@ -132,6 +132,8 @@ if( 0 == layer_cnt), return; end
 [~, idxZ] = sort(meanZ(1 : layer_cnt), 'descend');
 layerGridModel = layerGridModel(idxZ, :);
 layerCoeffModel = layerCoeffModel(idxZ, :);
+
+ [layerCoeffModelTY, layerCoeffModel_zdomainTY] = fitting_tanyan(layerGridModel);
 %
 %
 %
