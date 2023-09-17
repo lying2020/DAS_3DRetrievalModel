@@ -74,7 +74,9 @@ for iLayer = 1 : numLayer % 3  %
         intersectionSet( np1 : (np1 + lp - 1), :) = intersection; 
         idxLayer( np1 : (np1 + lp - 1), 1) = iLayer* ones(lp, 1);
         np1 = np1 + lp;
-
+        %         intersection = [intersection; partIntersection];
+        %         idxLayer = [idxLayer; iLayer* ones(lp1, 1)];
+        
     end %  for ipoint = 1: length(p4)
     %
 end % for iLayer = 1:numLayer
