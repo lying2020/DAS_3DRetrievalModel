@@ -36,7 +36,6 @@ else
     geological_model = importdata(geological_model_mat_file_path);
 end
 
-
 %% ###################################################################
 output_result_data_path = geological_model.output_result_data_path;
 diary_file_name = [output_result_data_path, filesep, 'LOG_INFO_', showtimenow(0), '.txt'];
@@ -52,9 +51,13 @@ disp(['func_name: ', func_name, '. ', 'current_data_path: ', current_data_path])
 
 add_default_folder_path();
 
-layerGridModel = geological_model.layerGridModel;
-layerCoeffModel = geological_model.layerCoeffModel;
-velocityModel = geological_model.velocityModel;
+% layerGridModel = geological_model.layerGridModel;
+% layerCoeffModel = geological_model.layerCoeffModel;
+% velocityModel = geological_model.velocityModel;
+
+layerGridModel = geological_model.layerGridModelTY;
+layerCoeffModel = geological_model.layerCoeffModelTY;
+velocityModel = geological_model.velocityModelTY;
 
 sensorsCoord = geological_model.sensorData;
 undergroundCoordsSet = sensorsCoord((sensorsCoord(:, 3) < 0), :);
