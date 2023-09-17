@@ -14,7 +14,7 @@ disp(['func_name: ', func_name]);
 % %% %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %% import data model
 
-read_geological_model_xinjiang_2020;
+% read_geological_model_xinjiang_2020;
 geological_model_name = 'geological_model_xinjiang_2020_XJ';
 
 % read_geological_model_2023_T('_T106')
