@@ -1,6 +1,6 @@
 
 
-function geological_model = read_input_data(geological_data_path, output_data_path)
+function geological_model = read_input_dataTY(geological_data_path, output_data_path)
 
 %% input:
 % geological_data_path.path_geological_model = input_geological_model_path;
@@ -58,23 +58,34 @@ filename_list_layers = getfilenamelistfromfolder(path_layer_data_folder, '');
 
 gridFlag = true;  gridType = 'linear';  gridStepSize = [10, 10];  gridRetractionDist = [10, 10];   fittingType = 'cubic';  layerType = 'layer';
 % gridFlag = true;  gridType = 'linear';  gridStepSize = [10, 10];  gridRetractionDist = [10, 10];   fittingType = 'nonlinear';  layerType = 'layer';
-layerModelParam = struct('gridFlag', gridFlag, 'gridType', gridType, 'gridStepSize', gridStepSize, 'gridRetractionDist', gridRetractionDist, ...
-                                                  'fittingType', fittingType, 'layerType', layerType, 'pathSave', output_data_path);
-[baseCoord, layerCoeffModel, layerGridModel, layerCoeffModelTY, layerCoeffModel_zdomainTY] = getlayermodel(filename_list_layers, baseCoord, layerModelParam);
-
-savedata(baseCoord, output_data_path, 'baseCoord', '.txt');
-% geological_model.baseCoord = baseCoord;
-geological_model.layerModelParam = layerModelParam;
-geological_model.layerGridModel = layerGridModel;
-geological_model.layerCoeffModel = layerCoeffModel;
-% ** TANYAN layerGridModel  ***************************************************************************
-geological_model.layerCoeffModelTY = layerCoeffModelTY;
-geological_model.layerCoeffModel_zdomainTY = layerCoeffModel_zdomainTY;
-
+% layerModelParam = struct('gridFlag', gridFlag, 'gridType', gridType, 'gridStepSize', gridStepSize, 'gridRetractionDist', gridRetractionDist, ...
+%                                                   'fittingType', fittingType, 'layerType', layerType, 'pathSave', output_data_path);
+% [baseCoord, layerCoeffModel, layerGridModel] = getlayermodel(filename_list_layers, baseCoord, layerModelParam);
+% 
+% savedata(baseCoord, output_data_path, 'baseCoord', '.txt');
+% % geological_model.baseCoord = baseCoord;
+% geological_model.layerModelParam = layerModelParam;
+% geological_model.layerGridModel = layerGridModel;
+% geological_model.layerCoeffModel = layerCoeffModel;
 
 time_layers = showtimenow;
 disp(['func_name: ', func_name, '. ', 'time_layers: ', time_layers]);
 
+%% ** TANYAN layerGridModel  ***************************************************************************
+num =  length(filename_list_layers);
+layerdata = cell(num, 1);
+type = 'layer';
+inter = 10;
+for iFile = 1 : num
+    layerdata{iFile} = readtxtdata(filename_list_layers{iFile}, type);
+end
+%     baseCoord =  startpoint;
+%layerGridModel = grid_tanyan(layerdatatransform,baseCoord,inter,150,300);
+layerGridModelTY = grid_tanyan(layerdata, baseCoord, inter, 20, 20); % new data
+[layerCoeffModelTY, layerCoeffModel_zdomainTY] = fitting_tanyan(layerGridModelTY);
+geological_model.layerGridModelTY = layerGridModelTY;
+geological_model.layerCoeffModelTY = layerCoeffModelTY;
+geological_model.layerCoeffModel_zdomainTY = layerCoeffModel_zdomainTY;
 
 % axs= axes(figure);
 % sourceplot3D(axs, layerGridModel, wellData(:, [1, 2, 3])) ; % , sensorCoord);

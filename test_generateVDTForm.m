@@ -51,11 +51,9 @@ disp(['func_name: ', func_name, '. ', 'current_data_path: ', current_data_path])
 
 add_default_folder_path();
 
-% layerGridModel = geological_model.layerGridModel;
+layerGridModel = geological_model.layerGridModel;
 % layerCoeffModel = geological_model.layerCoeffModel;
 % velocityModel = geological_model.velocityModel;
-
-layerGridModel = geological_model.layerGridModelTY;
 layerCoeffModel = geological_model.layerCoeffModelTY;
 velocityModel = geological_model.velocityModelTY;
 
