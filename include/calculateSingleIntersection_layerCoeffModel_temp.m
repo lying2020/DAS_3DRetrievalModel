@@ -10,6 +10,8 @@ xMat = layerGridModel{1, 1};
 yMat = layerGridModel{1, 2};
 minx = xMat(1, 1);
 miny = yMat(1, 1);
+
+
 inter = 10; % xMat(2, 1) - xMat(1, 1);
 coeffCellMat = layerCoeffModel{1, 1};
 % coeff = coeffCellMat{id, jd}; : 1 *  numCoeff matrix.

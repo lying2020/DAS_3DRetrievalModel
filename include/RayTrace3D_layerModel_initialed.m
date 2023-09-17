@@ -32,7 +32,7 @@ countinstop = 10;
 countin = 0;
 for j=1:iteratorstep
     X00=X0;
-    %  calculateSingleIntersection_layerCoeffModel_temp
+    %
     k=size(X0,2);
     for ii=k-1:-1:2
         iteraX=X0(1:3,[ii-1,ii,ii+1]);

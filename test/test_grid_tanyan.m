@@ -30,21 +30,21 @@ end
 % filenameList is a cell array
 num = length(filenameList);
 type = 'layer';
-layerdatatransform = cell(num, 1);
+layerdata = cell(num, 1);
 inter = 10;
 
 ax1 = axes(figure);  hold(ax1, 'on');
 %ax2 = axes(figure);  hold(ax2, 'on');
 for iFile = 1:num
-    layerdatatransform{iFile} = readlayerdata(filenameList{iFile});
+    layerdata{iFile} = readlayerdata(filenameList{iFile});
 end
-layergriddata = grid_tanyan(layerdatatransform,baseCoord,inter,150,300); % olddata
-% layergriddata = grid_tanyan(layerdatatransform,baseCoord,inter,20,20); % new data
+layergriddata = grid_tanyan(layerdata,baseCoord,inter,150,300); % olddata
+% layergriddata = grid_tanyan(layerdata,baseCoord,inter,20,20); % new data
 
   for iFile = 1:num
      figure(iFile);
 %       layerGridModel{iFile} = layerGridModel{iFile} - [baseCoord, 0, 0];
-%      [x, y, z] = layerdatatransform(layerGridModel{iFile});
+%      [x, y, z] = layerdata(layerGridModel{iFile});
     x = layergriddata{iFile,1};
     y = layergriddata{iFile,2};
     z = layergriddata{iFile,3};

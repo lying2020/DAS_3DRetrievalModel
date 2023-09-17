@@ -33,8 +33,8 @@ for ix = 1: 4 % numx
 % parfor ix = 1:numx
     tmpVDTForm_X = cell(numy, numz);
     X_time_start = str2num(showtimenow(0));
-    for iy = 1:numy
-%     parfor iy = 1:numy
+     for iy = 1:numy
+    % parfor iy = 1:numy
         for iz = 1:numz
              tic
              sourceLocationCoord = coordBegin + retrieval_model_grid_size' .* [ix-1, iy-1, iz-1];
