@@ -74,6 +74,7 @@ disp(['func_name: ', func_name, '. ', 'time_layers: ', time_layers]);
 %% ** TANYAN layerGridModel  ***************************************************************************
 num =  length(filename_list_layers);
 layerdata = cell(num, 1);
+type = 'layer';
 for iFile = 1 : num
     layerdata{iFile} = readtxtdata(filename_list_layers{iFile}, type);
 end
