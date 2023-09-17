@@ -64,7 +64,7 @@ undergroundCoordsSet = sensorsCoord((sensorsCoord(:, 3) < 0), :);
 % The relative coordinate origin point of sensor position is the well top
 bottom_sensor_coordinate = undergroundCoordsSet(end, :);
 sensors_num = size(undergroundCoordsSet,1);
-disp(['func_name: ', func_name, '. ', 'sensors_num: ', num2str(sensors_num), 'bottom_sensor_coordinate: ', num2str(bottom_sensor_coordinate)]);
+disp(['func_name: ', func_name, '. ', 'sensors_num: ', num2str(sensors_num), ', bottom_sensor_coordinate: ', num2str(bottom_sensor_coordinate)]);
 
 retrieval_model_default_area = [-3000, 3000; -3000, 3000 ; -500, 1500];
 disp(['func_name: ', func_name, '. ', 'default area. retrieval_model_area: x = ', num2str(retrieval_model_default_area(1, :)), ...
