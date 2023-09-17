@@ -36,6 +36,7 @@ else
     geological_model = importdata(geological_model_mat_file_path);
 end
 
+
 %% ###################################################################
 output_result_data_path = geological_model.output_result_data_path;
 diary_file_name = [output_result_data_path, filesep, 'LOG_INFO_', showtimenow(0), '.txt'];
