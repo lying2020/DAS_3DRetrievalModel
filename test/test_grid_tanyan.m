@@ -43,8 +43,7 @@ layergriddata = grid_tanyan(layerdata,baseCoord,inter,150,300); % olddata
 
   for iFile = 1:num
      figure(iFile);
-%       layerGridModel{iFile} = layerGridModel{iFile} - [baseCoord, 0, 0];
-%      [x, y, z] = layerdata(layerGridModel{iFile});
+
     x = layergriddata{iFile,1};
     y = layergriddata{iFile,2};
     z = layergriddata{iFile,3};

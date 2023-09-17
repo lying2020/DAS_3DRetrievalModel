@@ -9,7 +9,7 @@
 % 2020-10-14: Modify the description and comments
 % this code is used to  interpolate and refine the discrete points 
 %% -----------------------------------------------------------------------------------------------------
-function  [X, Y, Z] = interpolation(points, interval, stepSize, type, ax1)
+function  [X, Y, Z] = pointsinterpolation(points, interval, stepSize, type, ax1)
 % -----------------------------------------------------------------------------------------------------
 % INPUT: 
 % points: n * 3, 离散点，如果是四个离散点，则三次插值成曲面。如果大于四个，需要抽稀后进行插值

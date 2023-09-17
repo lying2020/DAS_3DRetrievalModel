@@ -16,7 +16,7 @@ baseCoord = [14620550.3 4650200.4 1514.78];
 type = 'layer';
 filenameList_layer = getfilenamelist(type);
 tic
-[baseCoord, coeffModel, layerGridModel] = getlayermodel(filenameList_layer, baseCoord);
+[baseCoord, layerCoeffModel, layerGridModel] = getlayermodel(filenameList_layer, baseCoord);
 t_layermodel = toc   
 % %
 % -----------------------------------------------------------------------------------------------------
@@ -28,7 +28,7 @@ ax1= axes(figure);
 type = 'velocity';
  filenameList_v = getfilenamelist(type, 'off');
 tic
-[velocityModel, velocityCount, xMat, yMat, zMat, velocityMat]= getvelocitymodel(filenameList_v, baseCoord, coeffModel, layerGridModel);
+[velocityModel, velocityCount, xMat, yMat, zMat, velocityMat]= getvelocitymodel(filenameList_v, baseCoord, layerCoeffModel, layerGridModel);
 t_velocity3 = toc
 %% 
 [xLen, yLen, zLen] = size(zMat);

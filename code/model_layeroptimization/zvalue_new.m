@@ -9,7 +9,7 @@
 % 2020-10-29: Modify the description and comments
 % this code is used to obtain the z0 value after fixing x0 and y0 on the discrete surface
 %% -----------------------------------------------------------------------------------------------------
-function [z0, rc] = zvalue(coeffMat, xMat, yMat, xy0, intervalM)
+function [z0, rc] = zvalue_new(coeffMat, xMat, yMat, xy0, intervalM)
 % -----------------------------------------------------------------------------------------------------
 %  INPUT:
 % coeffMat: (m -1)*(n -1) cell matrix. the fitting polynomial coefficients set of the corresponding layer.
@@ -22,19 +22,23 @@ function [z0, rc] = zvalue(coeffMat, xMat, yMat, xy0, intervalM)
 % disp(['func_name: ', func_name]);
 
 %% -----------------------------------------------------------------------------------------------------
-
-[rLen, cLen] = size(xMat);
-xxArray = xMat(:, floor(cLen / 2));    yyArray = yMat(floor(rLen / 2), :);
+%
+% [rLen, cLen] = size(xMat);
+% xxArray = xMat(:, floor(cLen / 2));    yyArray = yMat(floor(rLen / 2), :);
 % xxArray = xMat(:, 2);    yyArray = yMat(2, :);
 x0 = xy0(1);  y0 = xy0(2);
 
-% if nargin < 5
-%     intervalM = [10, 10];
-%     %% find the average interval of x, y
-% %     intervalM = [mean(diff(xxArray)), mean(diff(yyArray))];
-% end
+if nargin < 5
+    intervalM = [10, 10];
+    %% find the average interval of x, y
+%     intervalM = [mean(diff(xxArray)), mean(diff(yyArray))];
+end
 % intervalX = intervalM(1);  intervalY = intervalM(end);
-rc = find_xy0_grid_index(xxArray, yyArray, xy0);
+r  = ceil((x0 - xMat(1, 1)) / intervalM(1));
+c = ceil((y0 - yMat(1, 1)) / intervalM(end));
+
+rc = [r, c];
+% rc = find_xy0_grid_index(xxArray, yyArray, xy0);
 
 
 %% -----------------------------------------------------------------------------------------------------
@@ -116,17 +120,25 @@ for i = 1: size(rc, 1)
     coeff0 = coeffMat{rc(i, 1), rc(i, 2)};
     coeffLen = length(coeff0);
     coeff(1: coeffLen) = coeff0;
-    
-%     % function: cubicsurfacefit
-%     % gridsfunc = @(x, y) coeff(1)*x.*x.*x + coeff(2)*x.*x.*y + coeff(3)*x.*y.*y + coeff(4)*y.*y.*y + ...
-%     %             coeff(5)*x.^2 + coeff(6)*y.^2 + coeff(7)*x.*y + coeff(8)*x + coeff(9)*y + coeff(10)*1;
+    if 4 == coeffLen
+         z0(i) = coeff(4)*x0.*y0 + coeff(3)*x0 + coeff(2)*y0 + coeff(1)*1;
+    elseif 6 == coeffLen
+         z0(i) = coeff(6)*x0.*x0 + coeff(5)*y0.*y0 + coeff(4)*x0.*y0 + coeff(3)*x0 + coeff(2)*y0 + coeff(1)*1;
+    else
+         z0(i) = coeff(10)*x0.*x0.*x0 + coeff(9)*x0.*x0.*y0 + coeff(8)*x.*y0.*y0 + coeff(7)*y0.*y0.*y0 + ...
+                    coeff(6)*x0.*x0 + coeff(5)*y0.*y0 + coeff(4)*x0.*y0 + coeff(3)*x0 + coeff(2)*y0 + coeff(1)*1;
+    end
 
     % % function: layerdatafitting
     % Linear | Quadric | Cubic function fitted at mesh point
-    gridsfunc = @(x, y) coeff(10)*x.*x.*x + coeff(9)*x.*x.*y + coeff(8)*x.*y.*y + coeff(7)*y.*y.*y + ...
-                coeff(6)*x.^2 + coeff(5)*y.^2 + coeff(4)*x.*y + coeff(3)*x + coeff(2)*y + coeff(1)*1;
-
-    z0(i) = gridsfunc(x0, y0);
+%     gridsfunc = @(x, y) coeff(10)*x.*x.*x + coeff(9)*x.*x.*y + coeff(8)*x.*y.*y + coeff(7)*y.*y.*y + ...
+%                 coeff(6)*x.^2 + coeff(5)*y.^2 + coeff(4)*x.*y + coeff(3)*x + coeff(2)*y + coeff(1)*1;
+% 
+%     % function: cubicsurfacefit
+%     % gridsfunc = @(x, y) coeff(1)*x.*x.*x + coeff(2)*x.*x.*y + coeff(3)*x.*y.*y + coeff(4)*y.*y.*y + ...
+%     %             coeff(5)*x.^2 + coeff(6)*y.^2 + coeff(7)*x.*y + coeff(8)*x + coeff(9)*y + coeff(10)*1;
+% 
+%     z0(i) = gridsfunc(x0, y0);
 end
 %
 %

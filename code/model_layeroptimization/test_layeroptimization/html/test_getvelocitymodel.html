@@ -84,7 +84,7 @@ baseCoord = [14620550.3 4650200.4 1514.78];
 type = <span class="string">'layer'</span>;
 filenameList_layer = getfilenamelist(type);
 tic
-[baseCoord, coeffModel, layerGridModel] = getlayermodel(filenameList_layer, baseCoord);
+[baseCoord, layerCoeffModel, layerGridModel] = getlayermodel(filenameList_layer, baseCoord);
 t_layermodel = toc
 <span class="comment">% %</span>
 <span class="comment">% -----------------------------------------------------------------------------------------------------</span>
@@ -96,14 +96,14 @@ ax1= axes(figure);
 type = <span class="string">'velocity'</span>;
  filenameList_v = getfilenamelist(type, <span class="string">'off'</span>);
 tic
-[velocityModel, velocityCount]= getvelocitymodel(filenameList_v, baseCoord, coeffModel, layerGridModel);
+[velocityModel, velocityCount]= getvelocitymodel(filenameList_v, baseCoord, layerCoeffModel, layerGridModel);
 t_velocity3 = toc
 
 <span class="comment">%  tic</span>
 <span class="comment">% layerTmp is a n*7 matrix.</span>
 layerTmp = readtxtdata(filenameList_v, type);
 <span class="comment">% layerTmp = readlayerdata(filenameList{1, 1});</span>
-[xMat, yMat, zMat, velocityMat] = layerdata(layerTmp, baseCoord, type);
+[xMat, yMat, zMat, velocityMat] = layerdatatransform(layerTmp, baseCoord, type);
 <span class="comment">% [xMat, yMat, zMat, velocityMat] = velocitydata(txtData, baseCoord);     % for velocity model</span>
 <span class="comment">%  t_velocity1 = toc</span>
 [xLen, yLen, zLen] = size(zMat);
@@ -133,10 +133,10 @@ t_velocity3 =
 </pre><pre class="codeoutput error">&#20301;&#32622; 2 &#22788;&#30340;&#32034;&#24341;&#36229;&#20986;&#25968;&#32452;&#36793;&#30028;&#12290;
 &#20986;&#38169; velocitydata (line 63)
 xyzMax = max(txtData(:, 1:3));
-&#20986;&#38169; layerdata (line 76)
+&#20986;&#38169; layerdatatransform (line 76)
 [xMat, yMat, zMat, velocityMat, xTimes, yTimes] = velocitydata(txtData, baseCoord);
 &#20986;&#38169; test_getvelocitymodel (line 38)
-[xMat, yMat, zMat, velocityMat] = layerdata(layerTmp, baseCoord, type);</pre><p class="footer"><br><a href="https://www.mathworks.com/products/matlab/">Published with MATLAB&reg; R2019a</a><br></p></div><!--
+[xMat, yMat, zMat, velocityMat] = layerdatatransform(layerTmp, baseCoord, type);</pre><p class="footer"><br><a href="https://www.mathworks.com/products/matlab/">Published with MATLAB&reg; R2019a</a><br></p></div><!--
 ##### SOURCE BEGIN #####
 %
 %
@@ -156,7 +156,7 @@ baseCoord = [14620550.3 4650200.4 1514.78];
 type = 'layer';
 filenameList_layer = getfilenamelist(type);
 tic
-[baseCoord, coeffModel, layerGridModel] = getlayermodel(filenameList_layer, baseCoord);
+[baseCoord, layerCoeffModel, layerGridModel] = getlayermodel(filenameList_layer, baseCoord);
 t_layermodel = toc   
 % %
 % REPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASH-
@@ -168,14 +168,14 @@ ax1= axes(figure);
 type = 'velocity';
  filenameList_v = getfilenamelist(type, 'off');
 tic
-[velocityModel, velocityCount]= getvelocitymodel(filenameList_v, baseCoord, coeffModel, layerGridModel);
+[velocityModel, velocityCount]= getvelocitymodel(filenameList_v, baseCoord, layerCoeffModel, layerGridModel);
 t_velocity3 = toc
 
 %  tic
 % layerTmp is a n*7 matrix.
 layerTmp = readtxtdata(filenameList_v, type);
 % layerTmp = readlayerdata(filenameList{1, 1});
-[xMat, yMat, zMat, velocityMat] = layerdata(layerTmp, baseCoord, type);
+[xMat, yMat, zMat, velocityMat] = layerdatatransform(layerTmp, baseCoord, type);
 % [xMat, yMat, zMat, velocityMat] = velocitydata(txtData, baseCoord);     % for velocity model
 %  t_velocity1 = toc
 [xLen, yLen, zLen] = size(zMat);

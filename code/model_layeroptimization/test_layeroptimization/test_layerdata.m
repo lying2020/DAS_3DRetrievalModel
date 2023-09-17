@@ -16,14 +16,14 @@ layerType = 'layer';   %  'fault';      %
 filenameList = getfilenamelist(layerType);
 num = length(filenameList);
 % fittingType = 'nonlinear';
-[coeffModel, layerGridModel] = deal(cell(num, 3));
-% [baseCoord, coeffModel, layerGridModel] = getlayermodel(filenameList, baseCoord, fittingType, type);
+[layerCoeffModel, layerGridModel] = deal(cell(num, 3));
+% [baseCoord, layerCoeffModel, layerGridModel] = getlayermodel(filenameList, baseCoord, fittingType, type);
 layerTmp = cell(num, 1);
 for iFile = 1:num
     %% layerTmp is a n*5 matrix.
     layerTmp{iFile, 1} = readtxtdata(filenameList{iFile}, layerType);
     %% xMat is a m* n matrix.
-    [xMat, yMat, zMat] = layerdata(layerTmp{iFile, 1}, baseCoord, layerType);
+    [xMat, yMat, zMat] = layerdatatransform(layerTmp{iFile, 1}, baseCoord, layerType);
     layerGridModel(iFile, 1:3)= {xMat, yMat, zMat};
 end
 %

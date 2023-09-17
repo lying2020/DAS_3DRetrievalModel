@@ -11,7 +11,7 @@
 % we have to think about how quickly we can reuse code if we're only going to do quadric or linear surface fitting.
 % and, what can we do when we only give 9 points instead of 16 points for xMat ...
 %% -----------------------------------------------------------------------------------------------------
-function [coeff, func, resnorm] = surfacefitting(xMat, yMat, zMat, fittingType)
+function [coeff, func, resnorm] = layersurfacefitting(xMat, yMat, zMat, fittingType)
 % -----------------------------------------------------------------------------------------------------
 % 我们要考虑到，如果我们只打算进行二次曲面拟合或者线性曲面拟合的时候，怎么快速的重复利用代码。
 % 或者我们只给9个点，而不是16个点的时候，又可以怎么去处理。

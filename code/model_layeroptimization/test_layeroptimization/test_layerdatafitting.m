@@ -13,7 +13,7 @@ addpath(genpath('../../../include'));
 baseCoord = [14620550.3 4650200.4 1514.78];
 % 
 fittingType = 'nonlinear';  
-[baseCoord, coeffModel, layerGridModel] = test_first(baseCoord, fittingType);
+[baseCoord, layerCoeffModel, layerGridModel] = test_first(baseCoord, fittingType);
 num = size(layerGridModel, 1);
 %
 ax1 = axes(figure);  hold(ax1, 'on');
