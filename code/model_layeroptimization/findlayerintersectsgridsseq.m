@@ -56,7 +56,7 @@ seq = numRow * (cArray - 1) + rArray;
 % scatter(ax1, xMat(seq + 1), yMat(seq + 1), 20, 'filled');
 % scatter(ax1, xMat(seq + numRow), yMat(seq + numRow), 20, 'filled');
 % scatter(ax1, xMat(seq + numRow + 1), yMat(seq + numRow + 1), 20, 'filled');
-% disp('all is ok !');
+% displaytimelog('all is ok !');
 % close(f1);
 %  if isfield(f1, 'h'), close(hr); end
 % 

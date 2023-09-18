@@ -19,8 +19,8 @@ function nowtime = showtimenow(flag)
 % output:  'yyyy-mm-dd'    'yyyymmdd'    'yyyy_mm_dd'     'yyyymmddhhmmss'
 % 
 % OUTPUT: 
-% nowtime =  showtimenow(1)          showtimenow(2)        showtimenow(3)
-% nowtime =    '2020-09-04'                  '20200904'               '2020_09_04'
+% nowtime =    showtimenow(1)          showtimenow(2)        showtimenow(3)
+% nowtime =    '2020-09-04'              '20200904'            '2020_09_04'
 %
 % nowtime =     showtimenow            showtimenow(4)  
 % nowtime = '20200706084240'       '20200904115504'
@@ -40,7 +40,7 @@ if nargin >0
         case 2
             nowtime =  [year month day]; %  '20200710'
         case 3
-            nowtime = [year, '_', month, '_', day]; % '2020_07_22'
+            nowtime = [year, '.', month, '.', day, ' ', hms(1:2), ':', hms(3:4), ':', hms(5:6)]; % '2020_07_22_123314'
         case 4
             nowtime = datestr(now, 31);
         otherwise

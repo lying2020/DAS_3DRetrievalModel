@@ -35,7 +35,7 @@ function [realCoordSet, travelTime, initialCoordSet, velocity] = computeraytrace
     % info{1} = ['   sensorCoord =[ ', num2str(sensorCoord), ' ];   sourceCoord = [ ', num2str(sourceCoord), ' ];'];
     % info{2} = ['   relatedLayerModel = [ ', num2str( relatedLayerModel' ), ' ]; '];
     % info{3} = ['   relatedVelocityModel = [ ', num2str(relatedVelocityModel' ), ' ]; '];
-    % for i = 1: length(info),   disp(info{i});  end
+    % for i = 1: length(info),   displaytimelog(info{i});  end
     %%
     % the number of layer
     numLayer = length(relatedLayerModel);

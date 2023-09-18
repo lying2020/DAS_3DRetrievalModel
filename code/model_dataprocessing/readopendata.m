@@ -29,7 +29,7 @@ function  varargout = readopendata(DasFormat, pathLoadDas, postfixName)
 % time: 1*nmeasure matrix, nmeasure measures(sampling data)
 % filenameList: List of filenames under the path pathLoadDas
 %% -----------------------------------------------------------------------------------------------------
-% disp('Select the open file path ...');
+% displaytimelog('Select the open file path ...');
 if nargin < 2
     defaultDir = pwd;
     dirName = uigetdir(defaultDir, '选择文件打开路径');

@@ -57,7 +57,7 @@ for iFile = 1:num
     for i =1:3
         plot3(xyArray(i,1),xyArray(i,2),zArray(i),'b.','markersize',10);hold on
     end
-        disp(' all is ok !');
+        displaytimelog(' all is ok !');
         
     
 end

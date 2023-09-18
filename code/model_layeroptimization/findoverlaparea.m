@@ -28,7 +28,7 @@ assert(~isequal(startpoint, endpoint), 'startpoint and endpoint must not be equa
 xRange = find_overlap_range(xMat(:, floor(cLen / 2))', [startpoint(1), endpoint(1)]);
 yRange = find_overlap_range(yMat(floor(rLen / 2), :), [startpoint(2), endpoint(2)]);
 
-% disp(['startpoint: ', num2str(startpoint), ', endpoint: ', num2str(endpoint)]);
+% displaytimelog(['startpoint: ', num2str(startpoint), ', endpoint: ', num2str(endpoint)]);
 % ax1 = axes(figure);
 % layersurf(ax1, xMat, yMat, zMat);
 % se = [startpoint; endpoint];

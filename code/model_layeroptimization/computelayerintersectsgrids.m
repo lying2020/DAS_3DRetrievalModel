@@ -31,7 +31,7 @@ assert(~isequal(startpoint, endpoint), 'startpoint and endpoint must not be equa
 % scatter3(ax1, seCoords(:, 1), seCoords(:, 2), seCoords(:, 3), 50, 'red', 'filled');
 %  layersurf(ax1, xMat, yMat, zMat);
 %  plot3(ax1, seCoords(:, 1), seCoords(:, 2), seCoords(:, 3), 'b:', 'linewidth', 1.5);
-% disp(['startpoint: ', num2str(startpoint), ', endpoint: ', num2str(endpoint)]);
+% displaytimelog(['startpoint: ', num2str(startpoint), ', endpoint: ', num2str(endpoint)]);
 % 
 
 zRange = [min(zMat(:)), max(zMat(:))];
@@ -42,7 +42,7 @@ zRange = [min(zMat(:)), max(zMat(:))];
 % scatter3(ax1, seCoords(:, 1), seCoords(:, 2), seCoords(:, 3), 50, 'filled');
 % layersurf(ax1, xMat, yMat, zMat);
 % plot3(ax1, seCoords(:, 1), seCoords(:, 2), seCoords(:, 3), 'k-', 'linewidth', 4.5);
-% disp(['startpoint: ', num2str(startpoint), ', endpoint: ', num2str(endpoint)]);
+% displaytimelog(['startpoint: ', num2str(startpoint), ', endpoint: ', num2str(endpoint)]);
 
  
 % [xMat, yMat, zMat] = findoverlaparea0(xMat, yMat, zMat, startpoint, endpoint);

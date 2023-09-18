@@ -92,7 +92,7 @@ sensorArray = 1:5;
 % 
 % %tt = toc;    
 % %  info = ['# the cost of reading all data is: ', num2str(tt), ' s.' ]; 
-% %  disp(info); 
+% %  displaytimelog(info); 
 % % delete(gcp('nocreate')) % stop parallel computing
 % % profile viewer
 % 

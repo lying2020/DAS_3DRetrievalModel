@@ -13,7 +13,7 @@ format long
 addpath(genpath('../../../include'));
 %
 func_name = mfilename;
-disp(['func_name: ', func_name]);
+displaytimelog(['func: ', func_name]);
 
 
 
@@ -53,16 +53,16 @@ tic
 % # test 1
 for k = [-500: 2:500]
     for s = 1:10
-%         disp(['k: ', num2str(k), '  s: ', num2str(s)]);
+%         displaytimelog(['k: ', num2str(k), '  s: ', num2str(s)]);
         ep = endpoint - [5*k, 2*k, -1000*s];
         % ep = endpoint - [96 48 -2000]; iLayer = 8;  这里直线从拟合多项式之间的缝隙中穿过了。
         [intersection, idxLayer, points]  = layerintersects_tanyan(layerCoeffModel, layerGridModel, startpoint, ep);
         [intersection0, idxLayer0, points0]  = computelayerintersectscoords(layerCoeffModelLY, layerGridModelLY, startpoint, ep);
         if size(intersection, 1) ~= size(intersection0, 1)
 %             continue;
-            disp(['k: ', num2str(k), '  s: ', num2str(s)]);
-            disp('intersectionTY: '); disp(intersection);
-            disp('intersectionLY: '); disp(intersection0);
+            displaytimelog(['k: ', num2str(k), '  s: ', num2str(s)]);
+            displaytimelog('intersectionTY: '); displaytimelog(intersection);
+            displaytimelog('intersectionLY: '); displaytimelog(intersection0);
 
             ax11 = axes(figure);  hold(ax11, 'on');
             for iFile = 1:num
@@ -90,9 +90,9 @@ for k = [-500: 2:500]
         intersects_diff = norm(intersection - intersection0);
         if (intersects_diff) > 1.0
 %             continue;
-            disp(['k: ', num2str(k), '  s: ', num2str(s), ', intersects_diff: ', num2str(intersects_diff)]);
-            disp('intersectionTY: '); disp(intersection);
-            disp('intersectionLY: '); disp(intersection0);
+            displaytimelog(['k: ', num2str(k), '  s: ', num2str(s), ', intersects_diff: ', num2str(intersects_diff)]);
+            displaytimelog('intersectionTY: '); displaytimelog(intersection);
+            displaytimelog('intersectionLY: '); displaytimelog(intersection0);
 
         end
 
@@ -105,9 +105,9 @@ function [layerGridModelTY, layerCoeffModelTY, layerCoeffModel_zdomainTY, layerC
 
 type = 'layer';
 if exist('filenameList_layer', 'var')
-    disp(['func_name: ', func_name, '. ', 'Variable filenameList_layer exists']);
+    displaytimelog(['func: ', func_name, '. ', 'Variable filenameList_layer exists']);
 else
-    disp(['func_name: ', func_name, '. ', 'Variable filenameList_layer does not exist, now importdata ... ']);
+    displaytimelog(['func: ', func_name, '. ', 'Variable filenameList_layer does not exist, now importdata ... ']);
      filenameList_layer = getfilenamelist(type);
 end
 

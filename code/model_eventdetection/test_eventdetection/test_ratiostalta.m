@@ -11,7 +11,7 @@ format short
 addpath(genpath('../../../include'));
 %% -----------------------------------------------------------------------------------------------------
 % test function AIC
-disp('testing function ratiostalta ... ');
+displaytimelog('testing function ratiostalta ... ');
 %
 % filename = getfilenamelist;
 % filename = {'..\..\testdata\strainMat61.mat'};

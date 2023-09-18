@@ -91,7 +91,7 @@ for i = 1:col
         if ~ isnumeric( meanTimeArrival(1, itw))
             info = ['sum(m) = ', int2str(sum(validSensor(:, i))), ', i = ', int2str(i), ...
                 ', mean(idx0( idx0 > 1)) = ', num2str(mean(idx0( idx0 > 1)))];
-            disp(info);
+            displaytimelog(info);
             error(' meanTimeArrival is not a number !');
         end
     end
@@ -110,7 +110,7 @@ if nargin > 6,  save([ pathSave, 'ratioMat',int2str(lenPosition)] , 'ratioMat');
 if nargout > 5
     timeflag = toc;
     info = ['# the cost of  sta-lta ratio is: ', num2str(timeflag), ' s.' ];
-    disp(info);
+    displaytimelog(info);
 end
 
 if nargout > 4

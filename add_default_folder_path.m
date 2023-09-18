@@ -2,6 +2,10 @@
 
 %  %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 function [input_data_path, output_data_path, current_data_path] = add_default_folder_path()
+
+func_name = mfilename;
+displaytimelog(['func: ', func_name]);
+
 fullpath_name = mfilename('fullpath');
 [addpath_name, ~]=fileparts(fullpath_name);
 
@@ -14,15 +18,15 @@ addpath_recursive(current_data_path);
 addpath_recursive(input_data_path);
 
 addpath_arrivaltimedata = [input_data_path, 'arrivaltimedata'];
-disp(['addpath_arrivaltimedata: ', addpath_arrivaltimedata]);
+displaytimelog(['func: ', func_name, '. ', 'addpath_arrivaltimedata: ', addpath_arrivaltimedata]);
 addpath(genpath(addpath_arrivaltimedata));
 
 addpath_layerModel = [input_data_path, 'layerModel'];
-disp(['addpath_layerModel: ', addpath_layerModel]);
+displaytimelog(['func: ', func_name, '. ', 'addpath_layerModel: ', addpath_layerModel]);
 addpath(genpath(addpath_layerModel));
 
 addpath_include = [addpath_name, filesep, 'include'];
-disp(['addpath_include: ', addpath_include]);
+displaytimelog(['func: ', func_name, '. ', 'addpath_include: ', addpath_include]);
 addpath(genpath(addpath_include));
 
 end
@@ -33,7 +37,7 @@ function addpath_recursive(folder)
     if (contains(folder, '.git'))
         return;
     end
-    disp(['addpath folder: ', folder]);
+    displaytimelog(['addpath folder: ', folder]);
     % 获取文件夹中的所有子文件夹
     subfolders = dir(fullfile(folder, '*'));
 

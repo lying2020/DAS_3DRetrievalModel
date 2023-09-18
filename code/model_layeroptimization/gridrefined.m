@@ -26,7 +26,7 @@ function [xMat2, yMat2, zMat2] = gridrefined(xMat, yMat, zMat, stepSize, gridTyp
 dbstop if error;
 
 func_name = mfilename;
-disp(['func_name: ', func_name]);
+displaytimelog(['func: ', func_name]);
 %% -----------------------------------------------------------------------------------------------------
 if nargin < 6, retraction_distance = [10, 10]; end
 if nargin < 4,   stepSize = [20 20];    end
@@ -45,13 +45,13 @@ if any(strcmp(scatter_method, gridType))
     %%  Interpolate the rows
     % row and column.
     [nrow_xMat, ncol_xMat] = size(xMat);
-    disp(['func_name: ', func_name, '. ', 'size(xMat): ', num2str(size(xMat))]);
+    displaytimelog(['func: ', func_name, '. ', 'size(xMat): ', num2str(size(xMat))]);
     % 1st row, 1st column, and the end row, ascending order.
     xSeq0 = xMat(:, 1);
     x_interp_num = 1+ ceil(abs(xSeq0(2: nrow_xMat) - xSeq0(1: nrow_xMat-1))/stepSize(1));
     % m-2 overlap points.
     x_total_points_num = sum(x_interp_num) - (nrow_xMat-2);
-    disp(['func_name: ', func_name, '. ', ', stepSize(1): ', num2str(stepSize(1)), ', x_interp_num: ', num2str(sum(x_interp_num)), ', x_total_points_num: ', num2str(x_total_points_num)]);
+    displaytimelog(['func: ', func_name, '. ', ', stepSize(1): ', num2str(stepSize(1)), ', x_interp_num: ', num2str(sum(x_interp_num)), ', x_total_points_num: ', num2str(x_total_points_num)]);
     [xMat1, yMat1] = deal(zeros(x_total_points_num, ncol_xMat) );
     [xArray1, yArray1] = deal(zeros(x_total_points_num, 1));
     %
@@ -68,13 +68,13 @@ if any(strcmp(scatter_method, gridType))
     end
  
     [nrow_yMat1, ncol_yMat1] = size(yMat1);
-    disp(['func_name: ', func_name, '. ', 'size(yMat1): ', num2str(size(yMat1))]);
+    displaytimelog(['func: ', func_name, '. ', 'size(yMat1): ', num2str(size(yMat1))]);
     %% Interpolate the columns
     ySeq00 = yMat(1, :);
     y_interp_num  = 1+ ceil(abs(ySeq00(2: ncol_xMat) - ySeq00(1:ncol_xMat-1))/stepSize(2));
     y_total_points_num = sum(y_interp_num) - (ncol_yMat1 - 2);
     % n-2 overlap points.
-    disp(['func_name: ', func_name, '. ', ', stepSize(2): ', num2str(stepSize(2)), ', y_interp_num: ', num2str(sum(y_interp_num)), ', y_total_points_num: ', num2str(y_total_points_num)]);
+    displaytimelog(['func: ', func_name, '. ', ', stepSize(2): ', num2str(stepSize(2)), ', y_interp_num: ', num2str(sum(y_interp_num)), ', y_total_points_num: ', num2str(y_total_points_num)]);
     [xMat2, yMat2] = deal(zeros(nrow_yMat1, y_total_points_num));
     [xArray2, yArray2] = deal(zeros(1, y_total_points_num));
     %
@@ -90,7 +90,7 @@ if any(strcmp(scatter_method, gridType))
         xMat2(irow, :) = unique(xArray2, 'stable');   yMat2(irow, :) = unique(yArray2, 'stable');
     end
     [m2, n2] = size(xMat2);
-    disp(['func_name: ', func_name, '. ', 'size(xMat2): ', num2str(size(xMat2))]);
+    displaytimelog(['func: ', func_name, '. ', 'size(xMat2): ', num2str(size(xMat2))]);
     Func = scatteredInterpolant(xMat(:), yMat(:), zMat(:), gridType);
     vq = Func(xMat2(:), yMat2(:));
     zMat2 = reshape(vq, m2, n2);

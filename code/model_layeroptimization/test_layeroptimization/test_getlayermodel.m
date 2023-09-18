@@ -41,12 +41,12 @@ baseCoord = [14620550.3 4650200.4 1514.78];
 % type = 'layer';
 type = 'fault';
 func_name = mfilename;
-disp(['func_name: ', func_name]);
+displaytimelog(['func: ', func_name]);
 
 if exist('filenameList_layer', 'var')
-    disp(['func_name: ', func_name, '. ', 'Variable filenameList_layer exists']);
+    displaytimelog(['func: ', func_name, '. ', 'Variable filenameList_layer exists']);
 else
-    disp(['func_name: ', func_name, '. ', 'Variable filenameList_layer does not exist, now importdata ... ']);
+    displaytimelog(['func: ', func_name, '. ', 'Variable filenameList_layer does not exist, now importdata ... ']);
     filenameList_layer = getfilenamelist(type);
 end
 

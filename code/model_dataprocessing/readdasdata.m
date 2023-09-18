@@ -96,19 +96,19 @@ if flag0,  [ varargout{1}, varargout{2}, varargout{3}] = deal([]); return;  end
 if temp(1) ~= DasFormat.sensor
     SENSOR = temp(1);        
     warning('function readdasdata: the default value for total number of sensors is wrong !');
-    %     disp(['DasFormat.sensor  = ', num2str(DasFormat.sensor), ', SENSOR = ', num2str(SENSOR)]);
+    %     displaytimelog(['DasFormat.sensor  = ', num2str(DasFormat.sensor), ', SENSOR = ', num2str(SENSOR)]);
 end
 %
 % -----------------------------------------------------------------------------------------------------
 if temp(2) ~= DasFormat.measure
     MEASURE = temp(2);
     warning('function readdasdata: the default value for the sample rate is wrong !');
-    %     disp(['DasFormat.measure  = ', num2str(DasFormat.measure), ', MEASURE = ', num2str(MEASURE)]);
+    %     displaytimelog(['DasFormat.measure  = ', num2str(DasFormat.measure), ', MEASURE = ', num2str(MEASURE)]);
 end
 %
 % -----------------------------------------------------------------------------------------------------
 if (SENSOR_NUMBER - 1)*SENSOR_INTERVAL + SENSOR_BEGIN > SENSOR
-    %     disp('(SENSOR_NUMBER-1)*SENSOR_INTERVAL + SENSOR_BEGIN > SENSOR !');
+    %     displaytimelog('(SENSOR_NUMBER-1)*SENSOR_INTERVAL + SENSOR_BEGIN > SENSOR !');
     warning('function readdasdata: sensor index is out of range, Reset to default value of DasFormat !');
     SENSOR_NUMBER = SENSOR;
     SENSOR_BEGIN = 1;          SENSOR_INTERVAL = 1;
@@ -116,7 +116,7 @@ end
 % 
 % -----------------------------------------------------------------------------------------------------
 if MEASURE_INTERVAL + MEASURE_BEGIN > MEASURE
-    %     disp('MEASURE_INTERVAL + MEASURE_BEGIN > MEASURE !');
+    %     displaytimelog('MEASURE_INTERVAL + MEASURE_BEGIN > MEASURE !');
     warning('function readdasdata: measure index is out of range, Reset to default value of DasFormat !');
     MEASURE_BEGIN = 1;       MEASURE_INTERVAL = 1;
 end
@@ -215,7 +215,7 @@ flag = toc;
 if nargout > 3
     varargout{1, 4} = flag;
     info = ['# the cost of reading ', int2str(nSensor), ' strain das data is: ', num2str(flag), ' s.' ];
-    disp(info);
+    displaytimelog(info);
 end
 
 end

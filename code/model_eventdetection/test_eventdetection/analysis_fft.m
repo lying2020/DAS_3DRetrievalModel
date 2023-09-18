@@ -70,7 +70,7 @@ strainFilterMat = filteringfunc(strainMat, time);
 
 tt2 = toc;
 info = ['# the cost of  correlation graph of time-strain data before and after denoising is: ', num2str(tt2), ' s.' ];
-disp(info);
+displaytimelog(info);
 
 
 

@@ -17,7 +17,7 @@ format long % short %
 %
 % clear
 func_name = mfilename;
-disp(['func_name: ', func_name]);
+displaytimelog(['func: ', func_name]);
 %% --------------------------------------------------------------------------
 
 numLayer = size(layerGridModel, 1);

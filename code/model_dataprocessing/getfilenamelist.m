@@ -30,10 +30,10 @@ if any(contains(typeArray, fileType)),  typeArray = {fileType; '*.*'};  end
 [fileName, pathName] = uigetfile(typeArray, [' Select target file -- ', fileType, ' type data. '],  'MultiSelect', isMulti);
 %
 % if isequal(fileName, 0)
-%     disp('User selected Cancel');
+%     displaytimelog('User selected Cancel');
 %     return;
 % else
-%     disp(['User selected: ', fullfile(pathName, fileName)]);
+%     displaytimelog(['User selected: ', fullfile(pathName, fileName)]);
 % end
 %
 if  isa(fileName, 'numeric'), filenameList = cell(0); return;  end

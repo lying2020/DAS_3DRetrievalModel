@@ -36,7 +36,7 @@ if isempty(readFilename)
     return;
 end
 if ~isfile(readFilename)
-    disp(['The file does not exist.', ', readFilename: ', readFilename]);
+    displaytimelog(['The file does not exist.', ', readFilename: ', readFilename]);
     return;
 end
 
@@ -90,7 +90,7 @@ else
     txtData = tmp1;
 end
 % -----------------------------------------------------------------------------------------------------
-%     disp('GOOD JOB !!!');
+%     displaytimelog('GOOD JOB !!!');
 %
 % if fclose(fidRead) == 0
 %     msgbox('文件关闭成功！');

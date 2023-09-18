@@ -34,7 +34,7 @@ function  [baseCoord, layerCoeffModel, layerGridModel, layerCoeffModelTY, layerC
 dbstop if error;
 
 func_name = mfilename;
-disp(['func_name: ', func_name]);
+displaytimelog(['func: ', func_name]);
 %% some default parameters.
 gridFlag = false;
 gridType = 'linear';
@@ -79,24 +79,24 @@ if nargin < 2 || isempty(baseCoord)
     end
 end
 %% -----------------------------------------------------------------------------------------------------
-disp(['func_name: ', func_name, '. ', 'baseCoord: ', num2str(baseCoord) ]);
-disp(['func_name: ', func_name, '. ', 'layerModelParam: ' ]);
-disp(layerModelParam);
+displaytimelog(['func: ', func_name, '. ', 'baseCoord: ', num2str(baseCoord) ]);
+displaytimelog(['func: ', func_name, '. ', 'layerModelParam: ' ]);
+displaytimelog(layerModelParam);
 
 layer_cnt = 0;
 for iFile = 1 : numLayer
     %% layerTmp is a n*5 matrix.
-    disp(['func_name: ', func_name, '. ', 'numLayer: ', num2str(numLayer), ', layer_cnt: ', num2str(layer_cnt), ', iFile: ', num2str(iFile), ', filename: ', filenameList{iFile} ]);
+    displaytimelog(['func: ', func_name, '. ', 'numLayer: ', num2str(numLayer), ', layer_cnt: ', num2str(layer_cnt), ', iFile: ', num2str(iFile), ', filename: ', filenameList{iFile} ]);
     layerTmp = readtxtdata(filenameList{iFile}, layerType);
     if isempty(layerTmp)
-        disp(['func_name: ', func_name, '. ', 'isempty(layerTmp) == true.']);
+        displaytimelog(['func: ', func_name, '. ', 'isempty(layerTmp) == true.']);
         continue;
     end
     layer_cnt = layer_cnt + 1;
     %% xMat is a m* n matrix.
     [xMat, yMat, zMat] = layerdatatransform(layerTmp, baseCoord, layerType);
     if isempty(xMat)
-        disp(['func_name: ', func_name, '. ', 'isempty(xMat) == true.']);
+        displaytimelog(['func: ', func_name, '. ', 'isempty(xMat) == true.']);
         continue;
     end
     %% Record the average of the z coordinates
@@ -124,7 +124,7 @@ for iFile = 1 : numLayer
     %
 end
 
-disp(['func_name: ', func_name, '. ', 'layer_cnt: ', num2str(layer_cnt), ', layerType: ', layerType]);
+displaytimelog(['func: ', func_name, '. ', 'layer_cnt: ', num2str(layer_cnt), ', layerType: ', layerType]);
 if( 0 == layer_cnt), return; end
 
 % -----------------------------------------------------------------------------------------------------
@@ -141,9 +141,9 @@ layerCoeffModel = layerCoeffModel(idxZ, :);
 if ~isempty(pathSave)
     if isfolder(pathSave)
         pathlayerGridModel = [layerType, 'GridModel_', num2str(numLayer)];
-        disp(['func_name: ', func_name, '. ', 'pathlayerGridModel: ' , pathlayerGridModel]);
+        displaytimelog(['func: ', func_name, '. ', 'pathlayerGridModel: ' , pathlayerGridModel]);
         pathlayerCoeffModel = [layerType, 'CoeffModel_', num2str(numLayer)];
-        disp(['func_name: ', func_name, '. ', 'pathlayerCoeffModel: ' , pathlayerCoeffModel]);
+        displaytimelog(['func: ', func_name, '. ', 'pathlayerCoeffModel: ' , pathlayerCoeffModel]);
         savedata(layerGridModel, pathSave, pathlayerGridModel, '.mat');
         savedata(layerCoeffModel, pathSave, pathlayerCoeffModel, '.mat');
     end

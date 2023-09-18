@@ -76,7 +76,7 @@ legend('timeLag', 'mean timeLag');
 if nargout > 2
     timeFlag = toc;
     info = ['# the cost of  filtering analysis of different strain data is: ', num2str(timeFlag), ' s.' ];
-    disp(info);
+    displaytimelog(info);
 end
 
 

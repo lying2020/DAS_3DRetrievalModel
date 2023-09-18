@@ -61,7 +61,7 @@ for iFile = 1:num
         scatter3(ax2,  xy0(1), xy0(2), z0, 100, 'filled');
 %         pointsinterpolation(points, 1, 0.1, 'natural', ax2);
         pointsinterpolation([xMat1(:), yMat1(:), zMat1(:)], 1, 0.1, 'natural', ax2);
-        disp(' all is ok !');
+        displaytimelog(' all is ok !');
     end
     
 end

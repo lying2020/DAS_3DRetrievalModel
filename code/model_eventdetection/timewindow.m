@@ -69,7 +69,7 @@ meanTime = meanTime + lenExtFor;
 %
 % meanTime = repmat(mean(meanTime), lenPosition, 1);
 if ~isempty(meanTime)
-    %     disp(['meanTime = ', int2str(meanTime)]);
+    %     displaytimelog(['meanTime = ', int2str(meanTime)]);
     %     timeWindow = zeros(lenPosition, length(meanTime));
     timeWindow = zeros(size(meanTime));
     for j = 1:size(meanTime, 2)
@@ -100,7 +100,7 @@ tfg = toc;
 timeFlag = tfg + timeFlag;
 if nargout > 4
     info = ['# the cost of time_window function is: ', num2str(timeFlag), ' s.' ];
-    disp(info);
+    displaytimelog(info);
 end
 
 end  % function  time_window

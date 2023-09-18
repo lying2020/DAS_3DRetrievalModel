@@ -19,7 +19,7 @@ function [z0, rc] = zvalue_new(coeffMat, xMat, yMat, xy0, intervalM)
 % OUTPUT:
 % z0: z coordinate of a point with fixed x, y on a stratigraphic interface.
 % func_name = mfilename;
-% disp(['func_name: ', func_name]);
+% displaytimelog(['func: ', func_name]);
 
 %% -----------------------------------------------------------------------------------------------------
 %
@@ -85,7 +85,7 @@ rc = [r, c];
 % % !!! function should never enter this logic
 % if isempty(rowArray) || isempty(colArray)
 %     z0 = 0;  rc = 0;
-%     disp("ERROR FUNCTION -- zvalue, rowArray and colArray could not be empty !!!");
+%     displaytimelog("ERROR FUNCTION -- zvalue, rowArray and colArray could not be empty !!!");
 %     return;
 % end
 

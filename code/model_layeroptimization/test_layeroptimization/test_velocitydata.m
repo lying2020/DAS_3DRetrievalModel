@@ -21,7 +21,7 @@ velocityTmp = readtxtdata(filenameList, type);
 % [xMat, yMat, zMat, velocityMat] = layerdatatransform(velocityTmp, baseCoord, type);
 [xMat, yMat, zMat, velocityMat] = velocitydata(velocityTmp, baseCoord);     % for velocity model
  t_velocity1 = toc
-% disp('GOOD JOB !!!');
+% displaytimelog('GOOD JOB !!!');
 %% 
 deltaX = max(velocityTmp(:, 4:6)) - min(velocityTmp(:, 4:6))
 deltaV = 304800 / min(velocityTmp(:, 7)) - 304800 / max(velocityTmp(:, 7))

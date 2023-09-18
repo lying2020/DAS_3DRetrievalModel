@@ -11,7 +11,7 @@ format short
 addpath(genpath('../../../include'));
 %% -----------------------------------------------------------------------------------------------------
 % test function AIC
-disp('testing function AIC ... ');
+displaytimelog('testing function AIC ... ');
 %
 % filename = getfilenamelist;
 filename = {'..\..\testdata\strainMat17.mat'};
@@ -45,7 +45,7 @@ timeTw0 = time(tw0);
 timeTw2 = time(tw2);
 % 
 %% -----------------------------------------------------------------------------------------------------
-% disp('filtering seismic data ... ');
+% displaytimelog('filtering seismic data ... ');
  [strainMat, timeLag] = filteringfunc(strainMat, time);
  ax2 = axes(figure);
  plot3D(ax2, strainMat, position, time);

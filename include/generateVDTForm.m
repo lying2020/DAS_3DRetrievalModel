@@ -10,10 +10,10 @@ function VDTForm = generateVDTForm(layerCoeffModel, layerGridModel, velocityMode
 %% output 
 % VDTForm       numx*numy*numz *numSensors*2
 func_name = mfilename;
-disp(['func_name: ', func_name]);
+displaytimelog(['func: ', func_name]);
 
 mkdir(output_retrieval_model_filename);
-disp(['func_name: ', func_name, '. ' 'output_retrieval_model_filename: ' output_retrieval_model_filename]);
+displaytimelog(['func: ', func_name, '. ' 'output_retrieval_model_filename: ' output_retrieval_model_filename]);
 
 num_xyz = floor(abs(retrieval_relative_model_domain(:, 2) - retrieval_relative_model_domain(:, 1)) ./ retrieval_model_grid_size) + 1;
 
@@ -21,11 +21,11 @@ coordBegin = retrieval_relative_model_domain(1:3,1)';
 % VDTForm = zeros(numx, numy, numz, nums, 2);
 numSensors = size(undergroundCoordsSet, 1);
 nCores = feature('numcores');
-disp(['func_name: ', func_name, '. ' 'nCores: ', num2str(nCores), ', numSensors: ', num2str(numSensors), ', coordBegin: ', num2str(coordBegin)]);
+displaytimelog(['func: ', func_name, '. ' 'nCores: ', num2str(nCores), ', numSensors: ', num2str(numSensors), ', coordBegin: ', num2str(coordBegin)]);
 startmatlabpool(nCores,10000);
 % pplayerCoeffModel = parallel.pool.Constant(layerCoeffModel);
 % mpiprofile on;
-disp(['func_name: ', func_name, '. ' 'nCores: ', num2str(nCores), ', [num_xyz] = [', num2str(num_xyz'), '] ']);
+displaytimelog(['func: ', func_name, '. ' 'nCores: ', num2str(nCores), ', [num_xyz] = [', num2str(num_xyz'), '] ']);
 numx = num_xyz(1); numy = num_xyz(2);  numz = num_xyz(3);
 
 tempVDTForm = cell(numx, numy, numz);
@@ -44,12 +44,12 @@ parfor ix = 1:numx
              tmpVDTForm_X{iy, iz} = tmp;
              % tempVDTForm{ix, iy, iz} = [equalVelocity'; equalDistance'; equalTime']';
              disp_toc = toc;
-             disp(['func_name: ', func_name, '. ' ' [ix, iy, iz] =  [', num2str(ix), ', ', num2str(iy), ', ', num2str(iz), '], cost time: ', num2str(disp_toc)]);
+             displaytimelog(['func: ', func_name, '. ' ' [ix, iy, iz] =  [', num2str(ix), ', ', num2str(iy), ', ', num2str(iz), '], cost time: ', num2str(disp_toc)]);
         end
     end
     X_time_end = str2num(showtimenow(0));
     filename = ['vdt_x_', num2str(ix), 'time_cost_', num2str(X_time_end - X_time_start)];
-    disp(['func_name: ', func_name, '. ' ' filename: ', filename, '. X_time: ', num2str(X_time_start), ' -- ', num2str(X_time_end)]);
+    displaytimelog(['func: ', func_name, '. ' ' filename: ', filename, '. X_time: ', num2str(X_time_start), ' -- ', num2str(X_time_end)]);
     savedata(tmpVDTForm_X, output_retrieval_model_filename, filename, '.mat');
 
 end

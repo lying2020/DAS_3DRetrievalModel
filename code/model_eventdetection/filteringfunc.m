@@ -124,7 +124,7 @@ if nargout > 3
     % -----------------------------------------------------------------------------------------------------
     flag = toc;
     %     info = ['# the cost of  strain filtering is: ', num2str(flag), ' s.' ];
-    %     disp(info);
+    %     displaytimelog(info);
 end
 
 

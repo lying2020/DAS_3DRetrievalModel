@@ -11,32 +11,32 @@ function geological_model = read_input_data(geological_data_path, output_data_pa
 % output_data_path: result to save path
 
 func_name = mfilename;
-disp(['func_name: ', func_name]);
+displaytimelog(['func: ', func_name]);
 
 %% 
 geological_model = [];
 
 time_start = showtimenow;
-disp(['func_name: ', func_name, '. ', 'time_start: ' time_start]);
+displaytimelog(['func: ', func_name, '. ', 'time_start: ' time_start]);
 
 % ** baseCoord / sensorData / wellData / ***************************************************************************
 % baseCoord = [14620550.3,4650200.4,1514.78];
 path_baseCoord_data = [geological_data_path.path_geological_model, filesep, geological_data_path.path_baseCoord_data];
 baseCoord = importdata(path_baseCoord_data);
-disp(['func_name: ', func_name, '. ', 'baseCoord size: ', num2str(size(baseCoord)), ', baseCoord: ', num2str(baseCoord)]);
+displaytimelog(['func: ', func_name, '. ', 'baseCoord size: ', num2str(size(baseCoord)), ', baseCoord: ', num2str(baseCoord)]);
 savedata(baseCoord, output_data_path, 'baseCoord', '.mat');
 geological_model.baseCoord = baseCoord;
 
 path_sensor_coords_data = [geological_data_path.path_geological_model, filesep, geological_data_path.path_sensor_data];
 sensorData = importdata(path_sensor_coords_data);
 % [welllength, sensorscoords] = compute_sensor_coord_with_well_data(sensorData - baseCoord);
-disp(['func_name: ', func_name, '. ', 'sensorData size: ', num2str(size(sensorData))]);
+displaytimelog(['func: ', func_name, '. ', 'sensorData size: ', num2str(size(sensorData))]);
 savedata(sensorData, output_data_path, 'sensorData', '.mat');
 geological_model.sensorData = sensorData;
 
 path_well_data = [geological_data_path.path_geological_model, filesep, geological_data_path.path_well_data];
 wellData = importdata(path_well_data);
-disp(['func_name: ', func_name, '. ', 'wellData size: ', num2str(size(wellData))]);
+displaytimelog(['func: ', func_name, '. ', 'wellData size: ', num2str(size(wellData))]);
 savedata(wellData, output_data_path, 'wellData', '.mat');
 geological_model.wellData = wellData;
 
@@ -44,8 +44,8 @@ coords_idx = [1 2 3];
 % baseCoord = wellData(1, coords_idx);
 baseCoord_top = wellData(1, coords_idx);
 baseCoord_bottom = wellData(end, coords_idx);
-disp(['func_name: ', func_name, '. ', 'baseCoord_top: ', num2str(baseCoord_top)]);
-disp(['func_name: ', func_name, '. ', 'baseCoord_bottom: ', num2str(baseCoord_bottom)]);
+displaytimelog(['func: ', func_name, '. ', 'baseCoord_top: ', num2str(baseCoord_top)]);
+displaytimelog(['func: ', func_name, '. ', 'baseCoord_bottom: ', num2str(baseCoord_bottom)]);
 savedata(baseCoord_top, output_data_path, 'baseCoord_top', '.mat');
 savedata(baseCoord_bottom, output_data_path, 'baseCoord_bottom', '.mat');
 geological_model.baseCoord_top = baseCoord_top;
@@ -53,7 +53,7 @@ geological_model.baseCoord_bottom = baseCoord_bottom;
 
 %% ** layerGridModel ***************************************************************************
 path_layer_data_folder = [geological_data_path.path_geological_model, filesep, geological_data_path.path_layer_data_folder];
-disp(['func_name: ', func_name, '. ', 'path_layer_data_folder: ', path_layer_data_folder]);
+displaytimelog(['func: ', func_name, '. ', 'path_layer_data_folder: ', path_layer_data_folder]);
 filename_list_layers = getfilenamelistfromfolder(path_layer_data_folder, '');
 
 gridFlag = true;  gridType = 'linear';  gridStepSize = [10, 10];  gridRetractionDist = [10, 10];   fittingType = 'cubic';  layerType = 'layer';
@@ -73,7 +73,7 @@ geological_model.layerCoeffModel_zdomainTY = layerCoeffModel_zdomainTY;
 
 
 time_layers = showtimenow;
-disp(['func_name: ', func_name, '. ', 'time_layers: ', time_layers]);
+displaytimelog(['func: ', func_name, '. ', 'time_layers: ', time_layers]);
 
 
 % axs= axes(figure);
@@ -81,7 +81,7 @@ disp(['func_name: ', func_name, '. ', 'time_layers: ', time_layers]);
 % % if strcmp(type, 'fault'),    colormap(axs, 'jet');    end
 %% **  faultModel ***************************************************************************
 path_faults_data_folder = [geological_data_path.path_geological_model, filesep, geological_data_path.path_faults_data_folder];
-disp(['func_name: ', func_name, '. ', 'path_faults_data_folder: ', path_faults_data_folder]);
+displaytimelog(['func: ', func_name, '. ', 'path_faults_data_folder: ', path_faults_data_folder]);
 filename_list_faults = getfilenamelistfromfolder(path_faults_data_folder, '');
 gridFlag = true; gridType = 'linear'; gridStepSize = [10, 10]; gridRetractionDist = [10, 10]; fittingType = 'linear'; layerType = 'fault';
 faultModelParam = struct('gridFlag', gridFlag, 'gridType', gridType, 'gridStepSize', gridStepSize, 'gridRetractionDist', gridRetractionDist, ...
@@ -95,11 +95,11 @@ geological_model.faultModel = faultModel;
 geological_model.faultCoeffModel = faultCoeffModel;
 
 time_faults = showtimenow;
-disp(['func_name: ', func_name, '. ', 'time_faults: ', time_faults]);
+displaytimelog(['func: ', func_name, '. ', 'time_faults: ', time_faults]);
 
 %% ** velocityData ***************************************************************************
 path_velocity_data = [geological_data_path.path_geological_model, filesep, geological_data_path.path_velocity_data];
-disp(['func_name: ', func_name, '. ', 'path_velocity_data: ', path_velocity_data]);
+displaytimelog(['func: ', func_name, '. ', 'path_velocity_data: ', path_velocity_data]);
 txtData = readtxtdata(path_velocity_data, 'velocity');
 velocityData = txtData;
 
@@ -140,7 +140,7 @@ geological_model.velocityModelTY = velocityModel(:, 1);
 %% 
 
 time_velocity = showtimenow;
-disp(['func_name: ', func_name, '. ', 'time_velocity: ', time_velocity]);
+displaytimelog(['func: ', func_name, '. ', 'time_velocity: ', time_velocity]);
 %% input data path: geological model data path
 
 

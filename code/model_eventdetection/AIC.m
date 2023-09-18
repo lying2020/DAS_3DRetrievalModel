@@ -68,7 +68,7 @@ aicMat = [aicMat, aic3];
 % if nargout > 2
 %     timeFlag = toc;
 %     info = ['# the cost of AIC is: ', num2str(timeFlag), ' s.' ];
-%     disp(info);
+%     displaytimelog(info);
 % end
 
 end     %  function [idx, aic, timeFlag] = AIC(partStrain)

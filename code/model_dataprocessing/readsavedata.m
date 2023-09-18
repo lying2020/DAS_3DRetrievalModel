@@ -64,7 +64,7 @@ end
 % if nargout > 1
 %     flag = toc;
 %     info = ['# the cost of reading result data is: ', num2str(flag), ' s.' ];
-%     disp(info);
+%     displaytimelog(info);
 % end
 
 

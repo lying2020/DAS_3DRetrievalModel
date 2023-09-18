@@ -41,7 +41,7 @@ for i = 1: num
     id = max(1, min(maxi, id));
     jd = max(1, min(maxj, jd));
 
-%     disp(['id: ', num2str(id), ', jd: ', num2str(jd), ', size: ', num2str(size(coeffMat))]);
+%     displaytimelog(['id: ', num2str(id), ', jd: ', num2str(jd), ', size: ', num2str(size(coeffMat))]);
     coeff = coeffMat{id,jd};
     % Linear | Quadric | Cubic function fitted at mesh point
     % % function: layerdatafitting

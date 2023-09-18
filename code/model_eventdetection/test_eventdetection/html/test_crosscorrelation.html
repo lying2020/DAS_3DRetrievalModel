@@ -78,13 +78,13 @@ addpath(genpath(<span class="string">'../../../include'</span>));
 arr2 = [3 4 5 6 7 1 2];
 [xcorrArray1, timeLag1, fig1] = crosscorrelation(arr1, arr2);
 </pre><pre class="codeoutput"># the cost of  cross correlation is: 0.10485 s.
-</pre><img vspace="5" hspace="5" src="test_crosscorrelation_01.png" alt=""> <pre>We can see the maximum correlation coefficient and the delay</pre><pre class="codeinput">disp([<span class="string">'maxCoor1 = '</span>, num2str(max(xcorrArray1)), <span class="string">', timeLag1 = '</span>, num2str(timeLag1)]);
+</pre><img vspace="5" hspace="5" src="test_crosscorrelation_01.png" alt=""> <pre>We can see the maximum correlation coefficient and the delay</pre><pre class="codeinput">displaytimelog([<span class="string">'maxCoor1 = '</span>, num2str(max(xcorrArray1)), <span class="string">', timeLag1 = '</span>, num2str(timeLag1)]);
 </pre><pre class="codeoutput">maxCoor1 = 0.96429, timeLag1 = 2
 </pre><h2 id="5"># test 2</h2><pre class="codeinput">x1 = [0,0,1,2,3,7,9,8,0,0];
 x2 = [1,2,3,7,9,8,0,0,0,0];
 [xcorrArray2, timeLag2, fig2] = crosscorrelation(x1, x2);
 </pre><pre class="codeoutput"># the cost of  cross correlation is: 0.08891 s.
-</pre><img vspace="5" hspace="5" src="test_crosscorrelation_02.png" alt=""> <p>the maximum correlation coefficient and the delay</p><pre class="codeinput">disp([<span class="string">'maxCoor2 = '</span>, num2str(max(xcorrArray2)), <span class="string">', timeLag1 = '</span>, num2str(timeLag2)]);
+</pre><img vspace="5" hspace="5" src="test_crosscorrelation_02.png" alt=""> <p>the maximum correlation coefficient and the delay</p><pre class="codeinput">displaytimelog([<span class="string">'maxCoor2 = '</span>, num2str(max(xcorrArray2)), <span class="string">', timeLag1 = '</span>, num2str(timeLag2)]);
 
 xcorrTime = (1 : length(xcorrArray2)) - length(x1) - 1;
 </pre><pre class="codeoutput">maxCoor2 = 1, timeLag1 = 2
@@ -141,7 +141,7 @@ arr2 = [3 4 5 6 7 1 2];
 
 %%
 %  We can see the maximum correlation coefficient and the delay
-disp(['maxCoor1 = ', num2str(max(xcorrArray1)), ', timeLag1 = ', num2str(timeLag1)]);
+displaytimelog(['maxCoor1 = ', num2str(max(xcorrArray1)), ', timeLag1 = ', num2str(timeLag1)]);
 
 %% # test 2
 x1 = [0,0,1,2,3,7,9,8,0,0];
@@ -150,7 +150,7 @@ x2 = [1,2,3,7,9,8,0,0,0,0];
 
 %%
 % the maximum correlation coefficient and the delay
-disp(['maxCoor2 = ', num2str(max(xcorrArray2)), ', timeLag1 = ', num2str(timeLag2)]);
+displaytimelog(['maxCoor2 = ', num2str(max(xcorrArray2)), ', timeLag1 = ', num2str(timeLag2)]);
 
 xcorrTime = (1 : length(xcorrArray2)) - length(x1) - 1;
 

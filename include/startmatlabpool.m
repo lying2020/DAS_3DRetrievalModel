@@ -43,7 +43,7 @@ if isstart==1
         end
     end
 else
-    disp('matlabpool has started');
+    displaytimelog('matlabpool has started');
     closematlabpool;
     if nargin ==1 
         startmatlabpool(size);

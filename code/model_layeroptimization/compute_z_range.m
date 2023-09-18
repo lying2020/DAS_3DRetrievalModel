@@ -6,7 +6,7 @@ startpoint = [0, 0, 0];
 endpoint = [4, 5, 10];
 
 zPoints = compute_z_range0(zRange, startpoint, endpoint);
-disp(zPoints);
+displaytimelog(zPoints);
 
 
 function [zMinPoint, zMaxPoint] = compute_z_range0(zRange, startpoint, endpoint)

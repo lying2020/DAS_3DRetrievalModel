@@ -141,7 +141,7 @@ for ir = 1: xLen
                 velocityCount(tmp, i) = velocityCount(tmp, i) + 1;
             end
             %             if (velocityCount(2, 1) - velocityCount(1, 2))
-            %                 disp(['error is here: ',  num2str(ir), ', ', num2str(ic)]);
+            %                 displaytimelog(['error is here: ',  num2str(ir), ', ', num2str(ic)]);
             %                 pause(10);
             %             end
         end  % idepth = 1: zLen

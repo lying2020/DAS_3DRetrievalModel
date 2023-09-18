@@ -17,13 +17,13 @@ func_name = mfilename;
 tic
 %% %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 if exist('input_data_path', 'var')
-    disp(['func_name: ', func_name, '. ', 'Variable input_data_path exists']);
+    displaytimelog(['func: ', func_name, '. ', 'Variable input_data_path exists']);
 else
-    disp(['func_name: ', func_name, '. ', 'Variable input_data_path does not exist, now importdata ... ']);
+    displaytimelog(['func: ', func_name, '. ', 'Variable input_data_path does not exist, now importdata ... ']);
     [input_data_path, output_data_path, current_data_path] = add_default_folder_path();
 end
 
-disp(['func_name: ', func_name]);
+displaytimelog(['func: ', func_name]);
 
 if nargin < 1
     well_name = '_T106';  %  well_name = '_T131';  % 
@@ -31,7 +31,7 @@ end
 % %% *****************************************************************************
 geological_model_path = 'geological_model_2023';
 input_geological_model_path = [input_data_path, geological_model_path, well_name];
-disp(['input_geological_model_path: ', input_geological_model_path]);
+displaytimelog(['input_geological_model_path: ', input_geological_model_path]);
 geological_data_path.path_geological_model = input_geological_model_path;
 geological_data_path.path_layer_data_folder = ['layers_data', well_name];
 geological_data_path.path_faults_data_folder = ['faults_data', well_name];
@@ -53,13 +53,13 @@ diary_file_name = [output_mat_data_path, filesep, 'LOG_INFO_', geological_model_
 diary(diary_file_name);
 diary on;
 
-disp(['func_name: ', func_name, '. ', 'input_geological_model_path: ', input_geological_model_path]);
-disp(['func_name: ', func_name, '. ', 'output_mat_data_path: ', output_mat_data_path]);
-disp(['func_name: ', func_name, '. ', 'geological_data_path: ']);
-disp(geological_data_path);
+displaytimelog(['func: ', func_name, '. ', 'input_geological_model_path: ', input_geological_model_path]);
+displaytimelog(['func: ', func_name, '. ', 'output_mat_data_path: ', output_mat_data_path]);
+displaytimelog(['func: ', func_name, '. ', 'geological_data_path: ']);
+displaytimelog(geological_data_path);
 %% output result data path. 3D retrieval model path
 output_result_data_path = [output_data_path, filesep, geological_model_path, well_name, '_retrieval_result_data'];
-disp(['func_name: ', func_name, '. ', 'output_result_data_path: ', output_result_data_path]);
+displaytimelog(['func: ', func_name, '. ', 'output_result_data_path: ', output_result_data_path]);
 mkdir(output_result_data_path);
 
 % results data

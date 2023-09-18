@@ -105,7 +105,7 @@ legend('timeLag', 'mean timeLag');
 %
 flag1 = toc;
 info = ['# the cost of  correlation analysis of different strain data is: ', num2str(flag1), ' s.' ];
-disp(info);
+displaytimelog(info);
 
 end
 

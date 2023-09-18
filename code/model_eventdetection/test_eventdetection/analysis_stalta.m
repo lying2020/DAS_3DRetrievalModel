@@ -91,7 +91,7 @@ end
 
 tt2 = toc;
 info = ['# the cost of sta-lta analysis is: ', num2str(tt2), ' s.' ];
-disp(info);
+displaytimelog(info);
 end
 
 % function [idx, value]= AIC(strainWindow)

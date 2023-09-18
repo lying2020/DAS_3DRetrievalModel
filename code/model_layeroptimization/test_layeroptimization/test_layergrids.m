@@ -66,7 +66,7 @@ xlabel(ax1, 'x /m');   ylabel(ax1, 'y /m');  zlabel(ax1, 'z /m');
 % 
 % type = 'velocity';
 % [x, y, z, v, xTimes, yTimes] = layerdatatransform(velocityData, type);
-% disp('GOOD JOB !!!');
+% displaytimelog('GOOD JOB !!!');
 % 
 % deltaX = max(velocityData(:, 4:6)) - min(velocityData(:, 4:6));
 % deltaV = 304800 / min(velocityData(:, 7)) - 304800 / max(velocityData(:, 7));

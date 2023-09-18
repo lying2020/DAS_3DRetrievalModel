@@ -165,7 +165,7 @@ zlabel(ax1, 'strain');
 
 tfg = toc;
 % info = ['# the cost of plot 3D graph of strain-position-time with func ',  picType, ' is: ', num2str(tfg), ' s.' ];
-% disp(info);
+% displaytimelog(info);
 
 end
 

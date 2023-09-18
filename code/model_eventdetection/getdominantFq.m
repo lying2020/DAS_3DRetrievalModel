@@ -100,7 +100,7 @@ end
 %
 % tt2 = toc;
 % info = ['# the cost of  strain fft denoise is: ', num2str(tt2), ' s.' ];
-% disp(info);
+% displaytimelog(info);
 %
 %    subplot(sp, 1, 4)
 %     xcorrArray = cross_correlation(strain, strainDenoising);

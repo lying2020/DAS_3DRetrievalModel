@@ -18,7 +18,7 @@ arr2 = [3 4 5 6 7 1 2];
 
 %%
 %  We can see the maximum correlation coefficient and the delay
-disp(['maxCoor1 = ', num2str(max(xcorrArray1)), ', timeLag1 = ', num2str(timeLag1)]);
+displaytimelog(['maxCoor1 = ', num2str(max(xcorrArray1)), ', timeLag1 = ', num2str(timeLag1)]);
 
 %% # test 2
 x1 = [0,0,1,2,3,7,9,8,0,0];
@@ -27,7 +27,7 @@ x2 = [1,2,3,7,9,8,0,0,0,0];
 
 %%
 % the maximum correlation coefficient and the delay
-disp(['maxCoor2 = ', num2str(max(xcorrArray2)), ', timeLag1 = ', num2str(timeLag2)]);
+displaytimelog(['maxCoor2 = ', num2str(max(xcorrArray2)), ', timeLag1 = ', num2str(timeLag2)]);
 
 xcorrTime = (1 : length(xcorrArray2)) - length(x1) - 1;
 

@@ -89,13 +89,13 @@ end
 if temp(1) ~= DasVar.sensor
     SENSOR = temp(1);
       warning('function readcsvdata: the default value for total number of sensors is wrong !');
-%     disp(['DasVar.sensor  = ', num2str(DasVar.sensor), ', SENSOR = ', num2str(SENSOR)]);
+%     displaytimelog(['DasVar.sensor  = ', num2str(DasVar.sensor), ', SENSOR = ', num2str(SENSOR)]);
 end
 
 if temp(2) ~= DasVar.measure
     MEASURE = temp(2);
       warning('function readcsvdata: the default value for the sample rate is wrong !');
-%     disp(['DasVar.measure  = ', num2str(DasVar.measure), ', MEASURE = ', num2str(MEASURE)]);
+%     displaytimelog(['DasVar.measure  = ', num2str(DasVar.measure), ', MEASURE = ', num2str(MEASURE)]);
 end
 %
 %% -----------------------------------------------------------------------------------------------------
@@ -103,7 +103,7 @@ end
 % read position of sensor we need,  is equal to the number of target sensor
 % --------------------------------------------------------------------------
 if (SENSOR_NUMBER-1)*SENSOR_INTERVAL + SENSOR_BEGIN > SENSOR
-    disp('  Sensor index out of range, Reset to default value of DasVar ! ! !');
+    displaytimelog('  Sensor index out of range, Reset to default value of DasVar ! ! !');
     SENSOR_NUMBER = SENSOR;
     SENSOR_BEGIN = 1;    SENSOR_INTERVAL = 1;
 end
@@ -143,7 +143,7 @@ varargout{1, 3} = time;
 %  info_time = 'time';    save([pathSaveDas, info_time] , 'time');
 % tt = toc;
 % info = ['# the cost of reading all time-point is: ', num2str(tt), ' s.' ];
-% disp(info);
+% displaytimelog(info);
 %% -----------------------------------------------------------------------------------------------------
 % read strain-data of lst(1:124)*.csv files, and save into strain
 strainMat = zeros(nSensor,  nLength* nMeasure);
@@ -165,7 +165,7 @@ for jLength =1:nLength
     strainMat(1:nSensor, (1 + (jLength - 1)* nMeasure):(jLength* nMeasure)) = temp(nSensorArray, nMeasureArray);
     %     % Count the time cost on each read
     %         tt1 = toc;    info1 = ['# the cost of reading the ',int2str(jLength) ,'th strain data file is: ' ,num2str( tt1), ' s;' ];
-    %         disp(info1);
+    %         displaytimelog(info1);
 end
 % if ishghandle(hr1), close(hr1);  end
 varargout{1, 1} = strainMat;
@@ -175,7 +175,7 @@ if nargout > 3
     flag = toc;
     varargout{1, 4} = flag;
     info = ['# the cost of reading ', int2str(nSensor), ' strain csv data is: ', num2str(flag), ' s.' ];
-    disp(info);
+    displaytimelog(info);
 end
 
 end

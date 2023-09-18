@@ -32,7 +32,7 @@ pathSaveDas = 'seismic20200805';
 mkdir(pathSaveDas);
 delete([pathSaveDas, filesep, '*.bin']);
 % pathLoadDas = 'das';
-% disp('reading seismic data ... ');
+% displaytimelog('reading seismic data ... ');
 % [strainMat, position, time, timeFlag(1)] = readopendata(DasVar ,pathLoadDas, '*.csv');
 % ss = strainMat ;
 savebindata(strainMat, pathSaveDas);
@@ -46,7 +46,7 @@ strArray = {'plot3',   'surf' , 'mesh',  'waterfall'};
 % end
 % # the cost of reading 300 strain csv data is: 305.3761 s.
 [lenPosition, lenTime] = size(strainMat);
-% disp('filtering seismic data ... ');
+% displaytimelog('filtering seismic data ... ');
 %  [strainFilterMat, timeFlag(8)] = filteringfunc(strainMat, position, time);
 
 % timeTemp = (time - time(1)) / 1000;
@@ -64,7 +64,7 @@ lenSta = 20; lenLta = 400;
 stalta = @staltaloop1;
 % [ratioMat, realIdx, tfg] = ratiostalta(strainMat, lenSta, lenLta, funcstalta, threshold);
 %
-% disp('geting the time window ... ');
+% displaytimelog('geting the time window ... ');
 
 % [window, ratioMat, timeFlag(14)] = timewindow( strainFilterMat(npositionArray, ntimeArray), lenSta, lenLta, stalta, threshold);
 sampling = floor(DasVar.measure / DasVar.measureInterval);
@@ -96,7 +96,7 @@ posi = posi3D(position);
 % [position1, source1, window1,  strainMat1, time1,  flag] =  readbindata(pathReadDas); %, storageFormat);
  % %% --------------------------------------------------------------
 %% test function AIC
-% % disp('testing function AIC ... ');
+% % displaytimelog('testing function AIC ... ');
 % meanTime = [8949 102379];
 % nm =2;
 % start = max(1, meanTime(nm) -lenLta + 1);
@@ -121,7 +121,7 @@ posi = posi3D(position);
 
 %tt = toc;
 %  info = ['# the cost of reading all data is: ', num2str(tt), ' s.' ];
-%  disp(info);
+%  displaytimelog(info);
 % delete(gcp('nocreate')) % stop parallel computing
 % ax2 = axes(uifigure); 
 % plot3D(ax2, strainMat, position, time, window);

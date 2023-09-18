@@ -46,7 +46,7 @@ function [xMat, yMat, zMat, velocityMat, xTimes, yTimes] = layerdatatransform(tx
 %  DEBUG ! ! !
 dbstop if error;
 func_name = mfilename;
-disp(['func_name: ', func_name]);
+displaytimelog(['func: ', func_name]);
 %% -----------------------------------------------------------------------------------------------------
 % some default parameters.
 if nargin < 3;  type = 'layer';  end
@@ -54,7 +54,7 @@ if nargin < 2; baseCoord = [0 0 0];   end
 if isempty(baseCoord), baseCoord = [0 0 0];  end
 % if txtData is empty or txtData(1, 4) is decimals ... 
 if (isempty(txtData) || rem(txtData(1, 4), 1))
-    disp(['func_name: ', func_name, 'ERROR FORMAT ']);
+    displaytimelog(['func: ', func_name, 'ERROR FORMAT ']);
     [xMat, yMat, zMat, velocityMat, xTimes, yTimes] = deal([]); 
     return; 
 end 

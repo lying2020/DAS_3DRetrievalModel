@@ -34,7 +34,7 @@ fp.wp = 20.0;  fp.ws = 40;
 % -----------------------------------------------------------------------------------------------------
 % passband ripple, and stopband attenuation.
 fp.rp = 1;    fp.rs = 30;
-disp('filtering seismic data ... ');
+displaytimelog('filtering seismic data ... ');
 % ftype = 'low' | 'high' | 'band'£»
 %
 ftype = ' '; % default low or band pass filter.
@@ -48,8 +48,8 @@ numArray = 2:9;   %  ceil(lenPosition/10);
 
 for num = numArray
     strain0 = strainMat(num, :);
-     disp([' ------------------------------------------------------------------']);
-    disp(['  # ', num2str(num), ' filtering seismic data ... ']);
+     displaytimelog([' ------------------------------------------------------------------']);
+    displaytimelog(['  # ', num2str(num), ' filtering seismic data ... ']);
     [strain1, timelag(num), maxCorr] = filteringfunc(strain0, time, fp, ftype);
     %
     [val0, idx0] = max(strain0);      [val1, idx1] = max(strain1);
@@ -58,7 +58,7 @@ for num = numArray
     fprintf('   signal         maxvalue          location            std \n');
     fprintf(' original     %2.8f         %5d      %2.8f \n', val0,  idx0, std0);
     fprintf(' filtered     %2.8f          %5d      %2.8f \n', val1,  idx1, std1);
-%     disp([' ------------------------------------------------------------------']);
+%     displaytimelog([' ------------------------------------------------------------------']);
     fprintf('  norm2:  %2.8f;   time-lag: %5d;   maxcorr: %2.8f \n', ssnorm, timelag(num), maxCorr);
     figure;
     subplot(311);

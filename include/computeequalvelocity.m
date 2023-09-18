@@ -24,7 +24,7 @@ function [equalVelocity, equalDistance, equalDeltaTime, refractionPointSets, num
 
 if nargin > 5
     if any (abs(sourceLocationCoord) > abs(usefulRange) )
-        disp(['the initial guess position the ', num2str(iEvents), ' th seismic event: ', num2str( inversionLocation)]);
+        displaytimelog(['the initial guess position the ', num2str(iEvents), ' th seismic event: ', num2str( inversionLocation)]);
         warn('The  source location is outside the specified useful range !');
     end
 end

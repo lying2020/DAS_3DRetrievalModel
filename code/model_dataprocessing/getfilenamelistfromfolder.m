@@ -12,10 +12,10 @@ for i = 1:numel(files)
 end
 
 % if isequal(fileName, 0)
-%     disp('User selected Cancel');
+%     displaytimelog('User selected Cancel');
 %     return;
 % else
-%     disp(['User selected: ', fullfile(pathName, fileName)]);
+%     displaytimelog(['User selected: ', fullfile(pathName, fileName)]);
 % end
 % 
 if isa(filenameList, 'char')
