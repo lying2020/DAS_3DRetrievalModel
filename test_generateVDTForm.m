@@ -42,7 +42,7 @@ end
 
 %% ###################################################################
 output_result_data_path = geological_model.output_result_data_path;
-diary_file_name = [output_result_data_path, filesep, 'LOG_INFO_', showtimenow(0), '.txt'];
+diary_file_name = [output_result_data_path, filesep, 'LOG_INFO_', geological_model_name, '_', showtimenow(0), '.txt'];
 diary(diary_file_name);
 diary on;
 
