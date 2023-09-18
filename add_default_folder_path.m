@@ -4,7 +4,7 @@
 function [input_data_path, output_data_path, current_data_path] = add_default_folder_path()
 
 func_name = mfilename;
-displaytimelog(['func: ', func_name]);
+disp(['func: ', func_name]);
 
 fullpath_name = mfilename('fullpath');
 [addpath_name, ~]=fileparts(fullpath_name);
@@ -37,7 +37,7 @@ function addpath_recursive(folder)
     if (contains(folder, '.git'))
         return;
     end
-    displaytimelog(['addpath folder: ', folder]);
+    disp(['addpath folder: ', folder]);
     % 获取文件夹中的所有子文件夹
     subfolders = dir(fullfile(folder, '*'));
 

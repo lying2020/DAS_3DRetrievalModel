@@ -14,6 +14,11 @@
 %% -----------------------------------------------------------------------------------------------------
 function displaytimelog(show_log)
 
-    disp([showtimenow(3), ' ', show_log]);
+    if  isa(show_log, 'char')
+        disp([showtimenow(3), ' ', show_log]);
+    else
+        disp(['showtimenow', showtimenow(3)]);
+        disp(show_log);
+    end
 
 end

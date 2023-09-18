@@ -17,9 +17,9 @@ func_name = mfilename;
 tic
 %% %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 if exist('input_data_path', 'var')
-    displaytimelog(['func: ', func_name, '. ', 'Variable input_data_path exists']);
+    disp(['func: ', func_name, '. ', 'Variable input_data_path exists']);
 else
-    displaytimelog(['func: ', func_name, '. ', 'Variable input_data_path does not exist, now importdata ... ']);
+    disp(['func: ', func_name, '. ', 'Variable input_data_path does not exist, now importdata ... ']);
     [input_data_path, output_data_path, current_data_path] = add_default_folder_path();
 end
 
