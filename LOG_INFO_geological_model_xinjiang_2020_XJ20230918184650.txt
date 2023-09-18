@@ -142,3 +142,468 @@ showtimenow2023.09.18 18:46:51
 2023.09.18 18:56:57 func: getlayermodel. pathlayerGridModel: /M/DAS_SOFTWARE/DAS_RETRIEVAL_MODEL_1.0.0/src/../output_data//geological_model_xinjiang_2020_XJ_retrieval_result_data/mat_datalayerGridModel
 2023.09.18 18:56:57 func: getlayermodel. pathlayerCoeffModel: /M/DAS_SOFTWARE/DAS_RETRIEVAL_MODEL_1.0.0/src/../output_data//geological_model_xinjiang_2020_XJ_retrieval_result_data/mat_datalayerCoeffModel
 2023.09.18 18:59:27 func: getlayermodel. pathlayerCoeffModelTY: /M/DAS_SOFTWARE/DAS_RETRIEVAL_MODEL_1.0.0/src/../output_data//geological_model_xinjiang_2020_XJ_retrieval_result_data/mat_datalayerCoeffModelTY
+2023.09.18 19:02:00 func: getlayermodel. pathlayerCoeffModel_zdomainTY: /M/DAS_SOFTWARE/DAS_RETRIEVAL_MODEL_1.0.0/src/../output_data//geological_model_xinjiang_2020_XJ_retrieval_result_data/mat_datalayerCoeffModel_zdomainTY
+2023.09.18 19:04:36 func: read_input_data. time_layers: 20230918190436
+2023.09.18 19:04:36 func: read_input_data. path_faults_data_folder: /M/DAS_SOFTWARE/DAS_RETRIEVAL_MODEL_1.0.0/src/../input_data/geological_model_xinjiang_2020/complexmodel_faults
+2023.09.18 19:04:36 func: getlayermodel
+2023.09.18 19:04:36 func: getlayermodel. baseCoord: 14620550.3          4650200.4            1514.78
+2023.09.18 19:04:36 func: getlayermodel. layerModelParam: 
+showtimenow2023.09.18 19:04:36
+              gridFlag: 1
+              gridType: 'linear'
+          gridStepSize: [10 10]
+    gridRetractionDist: [10 10]
+           fittingType: 'linear'
+             layerType: 'fault'
+              pathSave: '/M/DAS_SOFTWARE/DAS_RETRIEVAL_MODEL_1.0.0/src/../output_data//geological_model_xinjiang_2020_XJ_retrieval_result_data/mat_data'
+
+2023.09.18 19:04:36 func: getlayermodel. numLayer: 33, layer_cnt: 0, iFile: 1, filename: /M/DAS_SOFTWARE/DAS_RETRIEVAL_MODEL_1.0.0/input_data/geological_model_xinjiang_2020/complexmodel_faults/.
+2023.09.18 19:04:36 The file does not exist., readFilename: /M/DAS_SOFTWARE/DAS_RETRIEVAL_MODEL_1.0.0/input_data/geological_model_xinjiang_2020/complexmodel_faults/.
+2023.09.18 19:04:36 func: getlayermodel. isempty(layerTmp) == true.
+2023.09.18 19:04:36 func: getlayermodel. numLayer: 33, layer_cnt: 0, iFile: 2, filename: /M/DAS_SOFTWARE/DAS_RETRIEVAL_MODEL_1.0.0/input_data/geological_model_xinjiang_2020/complexmodel_faults/..
+2023.09.18 19:04:36 The file does not exist., readFilename: /M/DAS_SOFTWARE/DAS_RETRIEVAL_MODEL_1.0.0/input_data/geological_model_xinjiang_2020/complexmodel_faults/..
+2023.09.18 19:04:36 func: getlayermodel. isempty(layerTmp) == true.
+2023.09.18 19:04:36 func: getlayermodel. numLayer: 33, layer_cnt: 0, iFile: 3, filename: /M/DAS_SOFTWARE/DAS_RETRIEVAL_MODEL_1.0.0/input_data/geological_model_xinjiang_2020/complexmodel_faults/Fault 10
+2023.09.18 19:04:36 func: layerdatatransform
+2023.09.18 19:04:36 func: gridrefined
+2023.09.18 19:04:36 func: gridrefined. size(xMat): 14   8
+2023.09.18 19:04:36 func: gridrefined. , stepSize(1): 10, x_interp_num: 99, x_total_points_num: 87
+2023.09.18 19:04:36 func: gridrefined. size(yMat1): 87   8
+2023.09.18 19:04:36 func: gridrefined. , stepSize(2): 10, y_interp_num: 14, y_total_points_num: 8
+2023.09.18 19:04:36 func: gridrefined. size(xMat2): 87   8
+2023.09.18 19:04:36 func: gridrefined
+2023.09.18 19:04:36 func: gridrefined. size(xMat): 87   8
+2023.09.18 19:04:36 func: gridrefined. , stepSize(1): 20, x_interp_num: 172, x_total_points_num: 87
+2023.09.18 19:04:36 func: gridrefined. size(yMat1): 87   8
+2023.09.18 19:04:36 func: gridrefined. , stepSize(2): 20, y_interp_num: 14, y_total_points_num: 8
+2023.09.18 19:04:36 func: gridrefined. size(xMat2): 87   8
+2023.09.18 19:04:36 func: getlayermodel. numLayer: 33, layer_cnt: 1, iFile: 4, filename: /M/DAS_SOFTWARE/DAS_RETRIEVAL_MODEL_1.0.0/input_data/geological_model_xinjiang_2020/complexmodel_faults/Fault 104
+2023.09.18 19:04:36 func: layerdatatransform
+2023.09.18 19:04:36 func: gridrefined
+2023.09.18 19:04:36 func: gridrefined. size(xMat): 5  8
+2023.09.18 19:04:36 func: gridrefined. , stepSize(1): 10, x_interp_num: 44, x_total_points_num: 41
+2023.09.18 19:04:36 func: gridrefined. size(yMat1): 41   8
+2023.09.18 19:04:36 func: gridrefined. , stepSize(2): 10, y_interp_num: 28, y_total_points_num: 22
+2023.09.18 19:04:36 func: gridrefined. size(xMat2): 41  22
+2023.09.18 19:04:36 func: gridrefined
+2023.09.18 19:04:36 func: gridrefined. size(xMat): 41  22
+2023.09.18 19:04:36 func: gridrefined. , stepSize(1): 20, x_interp_num: 80, x_total_points_num: 41
+2023.09.18 19:04:36 func: gridrefined. size(yMat1): 41  22
+2023.09.18 19:04:36 func: gridrefined. , stepSize(2): 20, y_interp_num: 42, y_total_points_num: 22
+2023.09.18 19:04:36 func: gridrefined. size(xMat2): 41  22
+2023.09.18 19:04:36 func: getlayermodel. numLayer: 33, layer_cnt: 2, iFile: 5, filename: /M/DAS_SOFTWARE/DAS_RETRIEVAL_MODEL_1.0.0/input_data/geological_model_xinjiang_2020/complexmodel_faults/Fault 109
+2023.09.18 19:04:36 func: layerdatatransform
+2023.09.18 19:04:36 func: gridrefined
+2023.09.18 19:04:36 func: gridrefined. size(xMat): 9  8
+2023.09.18 19:04:36 func: gridrefined. , stepSize(1): 10, x_interp_num: 99, x_total_points_num: 92
+2023.09.18 19:04:36 func: gridrefined. size(yMat1): 92   8
+2023.09.18 19:04:36 func: gridrefined. , stepSize(2): 10, y_interp_num: 21, y_total_points_num: 15
+2023.09.18 19:04:36 func: gridrefined. size(xMat2): 92  15
+2023.09.18 19:04:36 func: gridrefined
+2023.09.18 19:04:36 func: gridrefined. size(xMat): 92  15
+2023.09.18 19:04:36 func: gridrefined. , stepSize(1): 20, x_interp_num: 182, x_total_points_num: 92
+2023.09.18 19:04:36 func: gridrefined. size(yMat1): 92  15
+2023.09.18 19:04:36 func: gridrefined. , stepSize(2): 20, y_interp_num: 28, y_total_points_num: 15
+2023.09.18 19:04:36 func: gridrefined. size(xMat2): 92  15
+2023.09.18 19:04:36 func: getlayermodel. numLayer: 33, layer_cnt: 3, iFile: 6, filename: /M/DAS_SOFTWARE/DAS_RETRIEVAL_MODEL_1.0.0/input_data/geological_model_xinjiang_2020/complexmodel_faults/Fault 11
+2023.09.18 19:04:36 func: layerdatatransform
+2023.09.18 19:04:36 func: gridrefined
+2023.09.18 19:04:36 func: gridrefined. size(xMat): 15   8
+2023.09.18 19:04:36 func: gridrefined. , stepSize(1): 10, x_interp_num: 101, x_total_points_num: 88
+2023.09.18 19:04:36 func: gridrefined. size(yMat1): 88   8
+2023.09.18 19:04:36 func: gridrefined. , stepSize(2): 10, y_interp_num: 28, y_total_points_num: 22
+2023.09.18 19:04:36 func: gridrefined. size(xMat2): 88  22
+2023.09.18 19:04:36 func: gridrefined
+2023.09.18 19:04:36 func: gridrefined. size(xMat): 88  22
+2023.09.18 19:04:36 func: gridrefined. , stepSize(1): 20, x_interp_num: 174, x_total_points_num: 88
+2023.09.18 19:04:36 func: gridrefined. size(yMat1): 88  22
+2023.09.18 19:04:36 func: gridrefined. , stepSize(2): 20, y_interp_num: 42, y_total_points_num: 22
+2023.09.18 19:04:36 func: gridrefined. size(xMat2): 88  22
+2023.09.18 19:04:36 func: getlayermodel. numLayer: 33, layer_cnt: 4, iFile: 7, filename: /M/DAS_SOFTWARE/DAS_RETRIEVAL_MODEL_1.0.0/input_data/geological_model_xinjiang_2020/complexmodel_faults/Fault 113
+2023.09.18 19:04:36 func: layerdatatransform
+2023.09.18 19:04:36 func: gridrefined
+2023.09.18 19:04:36 func: gridrefined. size(xMat): 15   8
+2023.09.18 19:04:36 func: gridrefined. , stepSize(1): 10, x_interp_num: 138, x_total_points_num: 125
+2023.09.18 19:04:36 func: gridrefined. size(yMat1): 125    8
+2023.09.18 19:04:36 func: gridrefined. , stepSize(2): 10, y_interp_num: 28, y_total_points_num: 22
+2023.09.18 19:04:36 func: gridrefined. size(xMat2): 125   22
+2023.09.18 19:04:36 func: gridrefined
+2023.09.18 19:04:36 func: gridrefined. size(xMat): 125   22
+2023.09.18 19:04:36 func: gridrefined. , stepSize(1): 20, x_interp_num: 248, x_total_points_num: 125
+2023.09.18 19:04:36 func: gridrefined. size(yMat1): 125   22
+2023.09.18 19:04:36 func: gridrefined. , stepSize(2): 20, y_interp_num: 42, y_total_points_num: 22
+2023.09.18 19:04:36 func: gridrefined. size(xMat2): 125   22
+2023.09.18 19:04:36 func: getlayermodel. numLayer: 33, layer_cnt: 5, iFile: 8, filename: /M/DAS_SOFTWARE/DAS_RETRIEVAL_MODEL_1.0.0/input_data/geological_model_xinjiang_2020/complexmodel_faults/Fault 115
+2023.09.18 19:04:36 func: layerdatatransform
+2023.09.18 19:04:36 func: gridrefined
+2023.09.18 19:04:36 func: gridrefined. size(xMat): 7  8
+2023.09.18 19:04:36 func: gridrefined. , stepSize(1): 10, x_interp_num: 71, x_total_points_num: 66
+2023.09.18 19:04:36 func: gridrefined. size(yMat1): 66   8
+2023.09.18 19:04:36 func: gridrefined. , stepSize(2): 10, y_interp_num: 28, y_total_points_num: 22
+2023.09.18 19:04:36 func: gridrefined. size(xMat2): 66  22
+2023.09.18 19:04:36 func: gridrefined
+2023.09.18 19:04:36 func: gridrefined. size(xMat): 66  22
+2023.09.18 19:04:36 func: gridrefined. , stepSize(1): 20, x_interp_num: 130, x_total_points_num: 66
+2023.09.18 19:04:36 func: gridrefined. size(yMat1): 66  22
+2023.09.18 19:04:36 func: gridrefined. , stepSize(2): 20, y_interp_num: 42, y_total_points_num: 22
+2023.09.18 19:04:36 func: gridrefined. size(xMat2): 66  22
+2023.09.18 19:04:36 func: getlayermodel. numLayer: 33, layer_cnt: 6, iFile: 9, filename: /M/DAS_SOFTWARE/DAS_RETRIEVAL_MODEL_1.0.0/input_data/geological_model_xinjiang_2020/complexmodel_faults/Fault 116
+2023.09.18 19:04:36 func: layerdatatransform
+2023.09.18 19:04:36 func: gridrefined
+2023.09.18 19:04:36 func: gridrefined. size(xMat): 12   8
+2023.09.18 19:04:36 func: gridrefined. , stepSize(1): 10, x_interp_num: 111, x_total_points_num: 101
+2023.09.18 19:04:36 func: gridrefined. size(yMat1): 101    8
+2023.09.18 19:04:36 func: gridrefined. , stepSize(2): 10, y_interp_num: 28, y_total_points_num: 22
+2023.09.18 19:04:36 func: gridrefined. size(xMat2): 101   22
+2023.09.18 19:04:36 func: gridrefined
+2023.09.18 19:04:36 func: gridrefined. size(xMat): 101   22
+2023.09.18 19:04:36 func: gridrefined. , stepSize(1): 20, x_interp_num: 200, x_total_points_num: 101
+2023.09.18 19:04:36 func: gridrefined. size(yMat1): 101   22
+2023.09.18 19:04:36 func: gridrefined. , stepSize(2): 20, y_interp_num: 42, y_total_points_num: 22
+2023.09.18 19:04:36 func: gridrefined. size(xMat2): 101   22
+2023.09.18 19:04:36 func: getlayermodel. numLayer: 33, layer_cnt: 7, iFile: 10, filename: /M/DAS_SOFTWARE/DAS_RETRIEVAL_MODEL_1.0.0/input_data/geological_model_xinjiang_2020/complexmodel_faults/Fault 12
+2023.09.18 19:04:36 func: layerdatatransform
+2023.09.18 19:04:36 func: gridrefined
+2023.09.18 19:04:36 func: gridrefined. size(xMat): 12   8
+2023.09.18 19:04:36 func: gridrefined. , stepSize(1): 10, x_interp_num: 110, x_total_points_num: 100
+2023.09.18 19:04:36 func: gridrefined. size(yMat1): 100    8
+2023.09.18 19:04:36 func: gridrefined. , stepSize(2): 10, y_interp_num: 28, y_total_points_num: 22
+2023.09.18 19:04:36 func: gridrefined. size(xMat2): 100   22
+2023.09.18 19:04:36 func: gridrefined
+2023.09.18 19:04:36 func: gridrefined. size(xMat): 100   22
+2023.09.18 19:04:36 func: gridrefined. , stepSize(1): 20, x_interp_num: 198, x_total_points_num: 100
+2023.09.18 19:04:36 func: gridrefined. size(yMat1): 100   22
+2023.09.18 19:04:36 func: gridrefined. , stepSize(2): 20, y_interp_num: 42, y_total_points_num: 22
+2023.09.18 19:04:36 func: gridrefined. size(xMat2): 100   22
+2023.09.18 19:04:36 func: getlayermodel. numLayer: 33, layer_cnt: 8, iFile: 11, filename: /M/DAS_SOFTWARE/DAS_RETRIEVAL_MODEL_1.0.0/input_data/geological_model_xinjiang_2020/complexmodel_faults/Fault 120
+2023.09.18 19:04:36 func: layerdatatransform
+2023.09.18 19:04:36 func: gridrefined
+2023.09.18 19:04:36 func: gridrefined. size(xMat): 8  8
+2023.09.18 19:04:36 func: gridrefined. , stepSize(1): 10, x_interp_num: 62, x_total_points_num: 56
+2023.09.18 19:04:36 func: gridrefined. size(yMat1): 56   8
+2023.09.18 19:04:36 func: gridrefined. , stepSize(2): 10, y_interp_num: 16, y_total_points_num: 10
+2023.09.18 19:04:36 func: gridrefined. size(xMat2): 56  10
+2023.09.18 19:04:36 func: gridrefined
+2023.09.18 19:04:36 func: gridrefined. size(xMat): 56  10
+2023.09.18 19:04:36 func: gridrefined. , stepSize(1): 20, x_interp_num: 110, x_total_points_num: 56
+2023.09.18 19:04:36 func: gridrefined. size(yMat1): 56  10
+2023.09.18 19:04:36 func: gridrefined. , stepSize(2): 20, y_interp_num: 18, y_total_points_num: 10
+2023.09.18 19:04:36 func: gridrefined. size(xMat2): 56  10
+2023.09.18 19:04:36 func: getlayermodel. numLayer: 33, layer_cnt: 9, iFile: 12, filename: /M/DAS_SOFTWARE/DAS_RETRIEVAL_MODEL_1.0.0/input_data/geological_model_xinjiang_2020/complexmodel_faults/Fault 123
+2023.09.18 19:04:36 func: layerdatatransform
+2023.09.18 19:04:36 func: gridrefined
+2023.09.18 19:04:36 func: gridrefined. size(xMat): 7  8
+2023.09.18 19:04:36 func: gridrefined. , stepSize(1): 10, x_interp_num: 44, x_total_points_num: 39
+2023.09.18 19:04:36 func: gridrefined. size(yMat1): 39   8
+2023.09.18 19:04:36 func: gridrefined. , stepSize(2): 10, y_interp_num: 21, y_total_points_num: 15
+2023.09.18 19:04:36 func: gridrefined. size(xMat2): 39  15
+2023.09.18 19:04:36 func: gridrefined
+2023.09.18 19:04:36 func: gridrefined. size(xMat): 39  15
+2023.09.18 19:04:36 func: gridrefined. , stepSize(1): 20, x_interp_num: 76, x_total_points_num: 39
+2023.09.18 19:04:36 func: gridrefined. size(yMat1): 39  15
+2023.09.18 19:04:36 func: gridrefined. , stepSize(2): 20, y_interp_num: 28, y_total_points_num: 15
+2023.09.18 19:04:36 func: gridrefined. size(xMat2): 39  15
+2023.09.18 19:04:36 func: getlayermodel. numLayer: 33, layer_cnt: 10, iFile: 13, filename: /M/DAS_SOFTWARE/DAS_RETRIEVAL_MODEL_1.0.0/input_data/geological_model_xinjiang_2020/complexmodel_faults/Fault 124
+2023.09.18 19:04:36 func: layerdatatransform
+2023.09.18 19:04:36 func: gridrefined
+2023.09.18 19:04:36 func: gridrefined. size(xMat): 6  8
+2023.09.18 19:04:36 func: gridrefined. , stepSize(1): 10, x_interp_num: 47, x_total_points_num: 43
+2023.09.18 19:04:36 func: gridrefined. size(yMat1): 43   8
+2023.09.18 19:04:36 func: gridrefined. , stepSize(2): 10, y_interp_num: 28, y_total_points_num: 22
+2023.09.18 19:04:36 func: gridrefined. size(xMat2): 43  22
+2023.09.18 19:04:36 func: gridrefined
+2023.09.18 19:04:36 func: gridrefined. size(xMat): 43  22
+2023.09.18 19:04:36 func: gridrefined. , stepSize(1): 20, x_interp_num: 84, x_total_points_num: 43
+2023.09.18 19:04:36 func: gridrefined. size(yMat1): 43  22
+2023.09.18 19:04:36 func: gridrefined. , stepSize(2): 20, y_interp_num: 42, y_total_points_num: 22
+2023.09.18 19:04:36 func: gridrefined. size(xMat2): 43  22
+2023.09.18 19:04:36 func: getlayermodel. numLayer: 33, layer_cnt: 11, iFile: 14, filename: /M/DAS_SOFTWARE/DAS_RETRIEVAL_MODEL_1.0.0/input_data/geological_model_xinjiang_2020/complexmodel_faults/Fault 131
+2023.09.18 19:04:36 func: layerdatatransform
+2023.09.18 19:04:36 func: gridrefined
+2023.09.18 19:04:36 func: gridrefined. size(xMat): 5  8
+2023.09.18 19:04:36 func: gridrefined. , stepSize(1): 10, x_interp_num: 31, x_total_points_num: 28
+2023.09.18 19:04:36 func: gridrefined. size(yMat1): 28   8
+2023.09.18 19:04:36 func: gridrefined. , stepSize(2): 10, y_interp_num: 14, y_total_points_num: 8
+2023.09.18 19:04:36 func: gridrefined. size(xMat2): 28   8
+2023.09.18 19:04:36 func: gridrefined
+2023.09.18 19:04:36 func: gridrefined. size(xMat): 28   8
+2023.09.18 19:04:36 func: gridrefined. , stepSize(1): 20, x_interp_num: 54, x_total_points_num: 28
+2023.09.18 19:04:36 func: gridrefined. size(yMat1): 28   8
+2023.09.18 19:04:36 func: gridrefined. , stepSize(2): 20, y_interp_num: 14, y_total_points_num: 8
+2023.09.18 19:04:37 func: gridrefined. size(xMat2): 28   8
+2023.09.18 19:04:37 func: getlayermodel. numLayer: 33, layer_cnt: 12, iFile: 15, filename: /M/DAS_SOFTWARE/DAS_RETRIEVAL_MODEL_1.0.0/input_data/geological_model_xinjiang_2020/complexmodel_faults/Fault 133
+2023.09.18 19:04:37 func: layerdatatransform
+2023.09.18 19:04:37 func: gridrefined
+2023.09.18 19:04:37 func: gridrefined. size(xMat): 3  8
+2023.09.18 19:04:37 func: gridrefined. , stepSize(1): 10, x_interp_num: 23, x_total_points_num: 22
+2023.09.18 19:04:37 func: gridrefined. size(yMat1): 22   8
+2023.09.18 19:04:37 func: gridrefined. , stepSize(2): 10, y_interp_num: 21, y_total_points_num: 15
+2023.09.18 19:04:37 func: gridrefined. size(xMat2): 22  15
+2023.09.18 19:04:37 func: gridrefined
+2023.09.18 19:04:37 func: gridrefined. size(xMat): 22  15
+2023.09.18 19:04:37 func: gridrefined. , stepSize(1): 20, x_interp_num: 42, x_total_points_num: 22
+2023.09.18 19:04:37 func: gridrefined. size(yMat1): 22  15
+2023.09.18 19:04:37 func: gridrefined. , stepSize(2): 20, y_interp_num: 28, y_total_points_num: 15
+2023.09.18 19:04:37 func: gridrefined. size(xMat2): 22  15
+2023.09.18 19:04:37 func: getlayermodel. numLayer: 33, layer_cnt: 13, iFile: 16, filename: /M/DAS_SOFTWARE/DAS_RETRIEVAL_MODEL_1.0.0/input_data/geological_model_xinjiang_2020/complexmodel_faults/Fault 135
+2023.09.18 19:04:37 func: layerdatatransform
+2023.09.18 19:04:37 func: gridrefined
+2023.09.18 19:04:37 func: gridrefined. size(xMat): 5  8
+2023.09.18 19:04:37 func: gridrefined. , stepSize(1): 10, x_interp_num: 24, x_total_points_num: 21
+2023.09.18 19:04:37 func: gridrefined. size(yMat1): 21   8
+2023.09.18 19:04:37 func: gridrefined. , stepSize(2): 10, y_interp_num: 21, y_total_points_num: 15
+2023.09.18 19:04:37 func: gridrefined. size(xMat2): 21  15
+2023.09.18 19:04:37 func: gridrefined
+2023.09.18 19:04:37 func: gridrefined. size(xMat): 21  15
+2023.09.18 19:04:37 func: gridrefined. , stepSize(1): 20, x_interp_num: 40, x_total_points_num: 21
+2023.09.18 19:04:37 func: gridrefined. size(yMat1): 21  15
+2023.09.18 19:04:37 func: gridrefined. , stepSize(2): 20, y_interp_num: 28, y_total_points_num: 15
+2023.09.18 19:04:37 func: gridrefined. size(xMat2): 21  15
+2023.09.18 19:04:37 func: getlayermodel. numLayer: 33, layer_cnt: 14, iFile: 17, filename: /M/DAS_SOFTWARE/DAS_RETRIEVAL_MODEL_1.0.0/input_data/geological_model_xinjiang_2020/complexmodel_faults/Fault 137
+2023.09.18 19:04:37 func: layerdatatransform
+2023.09.18 19:04:37 func: gridrefined
+2023.09.18 19:04:37 func: gridrefined. size(xMat): 2  8
+2023.09.18 19:04:37 func: gridrefined. , stepSize(1): 10, x_interp_num: 11, x_total_points_num: 11
+2023.09.18 19:04:37 func: gridrefined. size(yMat1): 11   8
+2023.09.18 19:04:37 func: gridrefined. , stepSize(2): 10, y_interp_num: 21, y_total_points_num: 15
+2023.09.18 19:04:37 func: gridrefined. size(xMat2): 11  15
+2023.09.18 19:04:37 func: gridrefined
+2023.09.18 19:04:37 func: gridrefined. size(xMat): 11  15
+2023.09.18 19:04:37 func: gridrefined. , stepSize(1): 20, x_interp_num: 20, x_total_points_num: 11
+2023.09.18 19:04:37 func: gridrefined. size(yMat1): 11  15
+2023.09.18 19:04:37 func: gridrefined. , stepSize(2): 20, y_interp_num: 28, y_total_points_num: 15
+2023.09.18 19:04:37 func: gridrefined. size(xMat2): 11  15
+2023.09.18 19:04:37 func: getlayermodel. numLayer: 33, layer_cnt: 15, iFile: 18, filename: /M/DAS_SOFTWARE/DAS_RETRIEVAL_MODEL_1.0.0/input_data/geological_model_xinjiang_2020/complexmodel_faults/Fault 141
+2023.09.18 19:04:37 func: layerdatatransform
+2023.09.18 19:04:37 func: gridrefined
+2023.09.18 19:04:37 func: gridrefined. size(xMat): 14   8
+2023.09.18 19:04:37 func: gridrefined. , stepSize(1): 10, x_interp_num: 112, x_total_points_num: 100
+2023.09.18 19:04:37 func: gridrefined. size(yMat1): 100    8
+2023.09.18 19:04:37 func: gridrefined. , stepSize(2): 10, y_interp_num: 28, y_total_points_num: 22
+2023.09.18 19:04:37 func: gridrefined. size(xMat2): 100   22
+2023.09.18 19:04:37 func: gridrefined
+2023.09.18 19:04:37 func: gridrefined. size(xMat): 100   22
+2023.09.18 19:04:37 func: gridrefined. , stepSize(1): 20, x_interp_num: 198, x_total_points_num: 100
+2023.09.18 19:04:37 func: gridrefined. size(yMat1): 100   22
+2023.09.18 19:04:37 func: gridrefined. , stepSize(2): 20, y_interp_num: 42, y_total_points_num: 22
+2023.09.18 19:04:37 func: gridrefined. size(xMat2): 100   22
+2023.09.18 19:04:37 func: getlayermodel. numLayer: 33, layer_cnt: 16, iFile: 19, filename: /M/DAS_SOFTWARE/DAS_RETRIEVAL_MODEL_1.0.0/input_data/geological_model_xinjiang_2020/complexmodel_faults/Fault 15
+2023.09.18 19:04:37 func: layerdatatransform
+2023.09.18 19:04:37 func: gridrefined
+2023.09.18 19:04:37 func: gridrefined. size(xMat): 13   8
+2023.09.18 19:04:37 func: gridrefined. , stepSize(1): 10, x_interp_num: 73, x_total_points_num: 62
+2023.09.18 19:04:37 func: gridrefined. size(yMat1): 62   8
+2023.09.18 19:04:37 func: gridrefined. , stepSize(2): 10, y_interp_num: 28, y_total_points_num: 22
+2023.09.18 19:04:37 func: gridrefined. size(xMat2): 62  22
+2023.09.18 19:04:37 func: gridrefined
+2023.09.18 19:04:37 func: gridrefined. size(xMat): 62  22
+2023.09.18 19:04:37 func: gridrefined. , stepSize(1): 20, x_interp_num: 122, x_total_points_num: 62
+2023.09.18 19:04:37 func: gridrefined. size(yMat1): 62  22
+2023.09.18 19:04:37 func: gridrefined. , stepSize(2): 20, y_interp_num: 42, y_total_points_num: 22
+2023.09.18 19:04:37 func: gridrefined. size(xMat2): 62  22
+2023.09.18 19:04:37 func: getlayermodel. numLayer: 33, layer_cnt: 17, iFile: 20, filename: /M/DAS_SOFTWARE/DAS_RETRIEVAL_MODEL_1.0.0/input_data/geological_model_xinjiang_2020/complexmodel_faults/Fault 159
+2023.09.18 19:04:37 func: layerdatatransform
+2023.09.18 19:04:37 func: gridrefined
+2023.09.18 19:04:37 func: gridrefined. size(xMat): 43   8
+2023.09.18 19:04:37 func: gridrefined. , stepSize(1): 10, x_interp_num: 427, x_total_points_num: 386
+2023.09.18 19:04:37 func: gridrefined. size(yMat1): 386    8
+2023.09.18 19:04:37 func: gridrefined. , stepSize(2): 10, y_interp_num: 21, y_total_points_num: 15
+2023.09.18 19:04:37 func: gridrefined. size(xMat2): 386   15
+2023.09.18 19:04:37 func: gridrefined
+2023.09.18 19:04:37 func: gridrefined. size(xMat): 386   15
+2023.09.18 19:04:37 func: gridrefined. , stepSize(1): 20, x_interp_num: 770, x_total_points_num: 386
+2023.09.18 19:04:37 func: gridrefined. size(yMat1): 386   15
+2023.09.18 19:04:37 func: gridrefined. , stepSize(2): 20, y_interp_num: 28, y_total_points_num: 15
+2023.09.18 19:04:37 func: gridrefined. size(xMat2): 386   15
+2023.09.18 19:04:37 func: getlayermodel. numLayer: 33, layer_cnt: 18, iFile: 21, filename: /M/DAS_SOFTWARE/DAS_RETRIEVAL_MODEL_1.0.0/input_data/geological_model_xinjiang_2020/complexmodel_faults/Fault 16
+2023.09.18 19:04:37 func: layerdatatransform
+2023.09.18 19:04:37 func: gridrefined
+2023.09.18 19:04:37 func: gridrefined. size(xMat): 13   8
+2023.09.18 19:04:37 func: gridrefined. , stepSize(1): 10, x_interp_num: 75, x_total_points_num: 64
+2023.09.18 19:04:37 func: gridrefined. size(yMat1): 64   8
+2023.09.18 19:04:37 func: gridrefined. , stepSize(2): 10, y_interp_num: 28, y_total_points_num: 22
+2023.09.18 19:04:37 func: gridrefined. size(xMat2): 64  22
+2023.09.18 19:04:37 func: gridrefined
+2023.09.18 19:04:37 func: gridrefined. size(xMat): 64  22
+2023.09.18 19:04:37 func: gridrefined. , stepSize(1): 20, x_interp_num: 126, x_total_points_num: 64
+2023.09.18 19:04:37 func: gridrefined. size(yMat1): 64  22
+2023.09.18 19:04:37 func: gridrefined. , stepSize(2): 20, y_interp_num: 42, y_total_points_num: 22
+2023.09.18 19:04:37 func: gridrefined. size(xMat2): 64  22
+2023.09.18 19:04:37 func: getlayermodel. numLayer: 33, layer_cnt: 19, iFile: 22, filename: /M/DAS_SOFTWARE/DAS_RETRIEVAL_MODEL_1.0.0/input_data/geological_model_xinjiang_2020/complexmodel_faults/Fault 160
+2023.09.18 19:04:37 func: layerdatatransform
+2023.09.18 19:04:37 func: gridrefined
+2023.09.18 19:04:37 func: gridrefined. size(xMat): 18   8
+2023.09.18 19:04:37 func: gridrefined. , stepSize(1): 10, x_interp_num: 194, x_total_points_num: 178
+2023.09.18 19:04:37 func: gridrefined. size(yMat1): 178    8
+2023.09.18 19:04:37 func: gridrefined. , stepSize(2): 10, y_interp_num: 28, y_total_points_num: 22
+2023.09.18 19:04:37 func: gridrefined. size(xMat2): 178   22
+2023.09.18 19:04:37 func: gridrefined
+2023.09.18 19:04:37 func: gridrefined. size(xMat): 178   22
+2023.09.18 19:04:37 func: gridrefined. , stepSize(1): 20, x_interp_num: 354, x_total_points_num: 178
+2023.09.18 19:04:37 func: gridrefined. size(yMat1): 178   22
+2023.09.18 19:04:37 func: gridrefined. , stepSize(2): 20, y_interp_num: 42, y_total_points_num: 22
+2023.09.18 19:04:37 func: gridrefined. size(xMat2): 178   22
+2023.09.18 19:04:37 func: getlayermodel. numLayer: 33, layer_cnt: 20, iFile: 23, filename: /M/DAS_SOFTWARE/DAS_RETRIEVAL_MODEL_1.0.0/input_data/geological_model_xinjiang_2020/complexmodel_faults/Fault 161
+2023.09.18 19:04:37 func: layerdatatransform
+2023.09.18 19:04:37 func: gridrefined
+2023.09.18 19:04:37 func: gridrefined. size(xMat): 14   8
+2023.09.18 19:04:37 func: gridrefined. , stepSize(1): 10, x_interp_num: 156, x_total_points_num: 144
+2023.09.18 19:04:37 func: gridrefined. size(yMat1): 144    8
+2023.09.18 19:04:37 func: gridrefined. , stepSize(2): 10, y_interp_num: 28, y_total_points_num: 22
+2023.09.18 19:04:37 func: gridrefined. size(xMat2): 144   22
+2023.09.18 19:04:37 func: gridrefined
+2023.09.18 19:04:37 func: gridrefined. size(xMat): 144   22
+2023.09.18 19:04:37 func: gridrefined. , stepSize(1): 20, x_interp_num: 286, x_total_points_num: 144
+2023.09.18 19:04:37 func: gridrefined. size(yMat1): 144   22
+2023.09.18 19:04:37 func: gridrefined. , stepSize(2): 20, y_interp_num: 42, y_total_points_num: 22
+2023.09.18 19:04:37 func: gridrefined. size(xMat2): 144   22
+2023.09.18 19:04:37 func: getlayermodel. numLayer: 33, layer_cnt: 21, iFile: 24, filename: /M/DAS_SOFTWARE/DAS_RETRIEVAL_MODEL_1.0.0/input_data/geological_model_xinjiang_2020/complexmodel_faults/Fault 2
+2023.09.18 19:04:37 func: layerdatatransform
+2023.09.18 19:04:37 func: gridrefined
+2023.09.18 19:04:37 func: gridrefined. size(xMat): 19   8
+2023.09.18 19:04:37 func: gridrefined. , stepSize(1): 10, x_interp_num: 184, x_total_points_num: 167
+2023.09.18 19:04:37 func: gridrefined. size(yMat1): 167    8
+2023.09.18 19:04:37 func: gridrefined. , stepSize(2): 10, y_interp_num: 21, y_total_points_num: 15
+2023.09.18 19:04:37 func: gridrefined. size(xMat2): 167   15
+2023.09.18 19:04:37 func: gridrefined
+2023.09.18 19:04:37 func: gridrefined. size(xMat): 167   15
+2023.09.18 19:04:37 func: gridrefined. , stepSize(1): 20, x_interp_num: 332, x_total_points_num: 167
+2023.09.18 19:04:37 func: gridrefined. size(yMat1): 167   15
+2023.09.18 19:04:37 func: gridrefined. , stepSize(2): 20, y_interp_num: 28, y_total_points_num: 15
+2023.09.18 19:04:37 func: gridrefined. size(xMat2): 167   15
+2023.09.18 19:04:37 func: getlayermodel. numLayer: 33, layer_cnt: 22, iFile: 25, filename: /M/DAS_SOFTWARE/DAS_RETRIEVAL_MODEL_1.0.0/input_data/geological_model_xinjiang_2020/complexmodel_faults/Fault 29
+2023.09.18 19:04:37 func: layerdatatransform
+2023.09.18 19:04:37 func: gridrefined
+2023.09.18 19:04:37 func: gridrefined. size(xMat): 8  8
+2023.09.18 19:04:37 func: gridrefined. , stepSize(1): 10, x_interp_num: 76, x_total_points_num: 70
+2023.09.18 19:04:37 func: gridrefined. size(yMat1): 70   8
+2023.09.18 19:04:37 func: gridrefined. , stepSize(2): 10, y_interp_num: 42, y_total_points_num: 36
+2023.09.18 19:04:37 func: gridrefined. size(xMat2): 70  36
+2023.09.18 19:04:37 func: gridrefined
+2023.09.18 19:04:37 func: gridrefined. size(xMat): 70  36
+2023.09.18 19:04:37 func: gridrefined. , stepSize(1): 20, x_interp_num: 138, x_total_points_num: 70
+2023.09.18 19:04:37 func: gridrefined. size(yMat1): 70  36
+2023.09.18 19:04:37 func: gridrefined. , stepSize(2): 20, y_interp_num: 70, y_total_points_num: 36
+2023.09.18 19:04:37 func: gridrefined. size(xMat2): 70  36
+2023.09.18 19:04:38 func: getlayermodel. numLayer: 33, layer_cnt: 23, iFile: 26, filename: /M/DAS_SOFTWARE/DAS_RETRIEVAL_MODEL_1.0.0/input_data/geological_model_xinjiang_2020/complexmodel_faults/Fault 5
+2023.09.18 19:04:38 func: layerdatatransform
+2023.09.18 19:04:38 func: gridrefined
+2023.09.18 19:04:38 func: gridrefined. size(xMat): 18   8
+2023.09.18 19:04:38 func: gridrefined. , stepSize(1): 10, x_interp_num: 167, x_total_points_num: 151
+2023.09.18 19:04:38 func: gridrefined. size(yMat1): 151    8
+2023.09.18 19:04:38 func: gridrefined. , stepSize(2): 10, y_interp_num: 28, y_total_points_num: 22
+2023.09.18 19:04:38 func: gridrefined. size(xMat2): 151   22
+2023.09.18 19:04:38 func: gridrefined
+2023.09.18 19:04:38 func: gridrefined. size(xMat): 151   22
+2023.09.18 19:04:38 func: gridrefined. , stepSize(1): 20, x_interp_num: 300, x_total_points_num: 151
+2023.09.18 19:04:38 func: gridrefined. size(yMat1): 151   22
+2023.09.18 19:04:38 func: gridrefined. , stepSize(2): 20, y_interp_num: 42, y_total_points_num: 22
+2023.09.18 19:04:38 func: gridrefined. size(xMat2): 151   22
+2023.09.18 19:04:38 func: getlayermodel. numLayer: 33, layer_cnt: 24, iFile: 27, filename: /M/DAS_SOFTWARE/DAS_RETRIEVAL_MODEL_1.0.0/input_data/geological_model_xinjiang_2020/complexmodel_faults/Fault 52
+2023.09.18 19:04:38 func: layerdatatransform
+2023.09.18 19:04:38 func: gridrefined
+2023.09.18 19:04:38 func: gridrefined. size(xMat): 2  8
+2023.09.18 19:04:38 func: gridrefined. , stepSize(1): 10, x_interp_num: 11, x_total_points_num: 11
+2023.09.18 19:04:38 func: gridrefined. size(yMat1): 11   8
+2023.09.18 19:04:38 func: gridrefined. , stepSize(2): 10, y_interp_num: 14, y_total_points_num: 8
+2023.09.18 19:04:38 func: gridrefined. size(xMat2): 11   8
+2023.09.18 19:04:38 func: gridrefined
+2023.09.18 19:04:38 func: gridrefined. size(xMat): 11   8
+2023.09.18 19:04:38 func: gridrefined. , stepSize(1): 20, x_interp_num: 20, x_total_points_num: 11
+2023.09.18 19:04:38 func: gridrefined. size(yMat1): 11   8
+2023.09.18 19:04:38 func: gridrefined. , stepSize(2): 20, y_interp_num: 14, y_total_points_num: 8
+2023.09.18 19:04:38 func: gridrefined. size(xMat2): 11   8
+2023.09.18 19:04:38 func: getlayermodel. numLayer: 33, layer_cnt: 25, iFile: 28, filename: /M/DAS_SOFTWARE/DAS_RETRIEVAL_MODEL_1.0.0/input_data/geological_model_xinjiang_2020/complexmodel_faults/Fault 61
+2023.09.18 19:04:38 func: layerdatatransform
+2023.09.18 19:04:38 func: gridrefined
+2023.09.18 19:04:38 func: gridrefined. size(xMat): 2  8
+2023.09.18 19:04:38 func: gridrefined. , stepSize(1): 10, x_interp_num: 6, x_total_points_num: 6
+2023.09.18 19:04:38 func: gridrefined. size(yMat1): 6  8
+2023.09.18 19:04:38 func: gridrefined. , stepSize(2): 10, y_interp_num: 21, y_total_points_num: 15
+2023.09.18 19:04:38 func: gridrefined. size(xMat2): 6  15
+2023.09.18 19:04:38 func: gridrefined
+2023.09.18 19:04:38 func: gridrefined. size(xMat): 6  15
+2023.09.18 19:04:38 func: gridrefined. , stepSize(1): 20, x_interp_num: 10, x_total_points_num: 6
+2023.09.18 19:04:38 func: gridrefined. size(yMat1): 6  15
+2023.09.18 19:04:38 func: gridrefined. , stepSize(2): 20, y_interp_num: 28, y_total_points_num: 15
+2023.09.18 19:04:38 func: gridrefined. size(xMat2): 6  15
+2023.09.18 19:04:38 func: getlayermodel. numLayer: 33, layer_cnt: 26, iFile: 29, filename: /M/DAS_SOFTWARE/DAS_RETRIEVAL_MODEL_1.0.0/input_data/geological_model_xinjiang_2020/complexmodel_faults/Fault 65
+2023.09.18 19:04:38 func: layerdatatransform
+2023.09.18 19:04:38 func: gridrefined
+2023.09.18 19:04:38 func: gridrefined. size(xMat): 5  8
+2023.09.18 19:04:38 func: gridrefined. , stepSize(1): 10, x_interp_num: 18, x_total_points_num: 15
+2023.09.18 19:04:38 func: gridrefined. size(yMat1): 15   8
+2023.09.18 19:04:38 func: gridrefined. , stepSize(2): 10, y_interp_num: 28, y_total_points_num: 22
+2023.09.18 19:04:38 func: gridrefined. size(xMat2): 15  22
+2023.09.18 19:04:38 func: gridrefined
+2023.09.18 19:04:38 func: gridrefined. size(xMat): 15  22
+2023.09.18 19:04:38 func: gridrefined. , stepSize(1): 20, x_interp_num: 28, x_total_points_num: 15
+2023.09.18 19:04:38 func: gridrefined. size(yMat1): 15  22
+2023.09.18 19:04:38 func: gridrefined. , stepSize(2): 20, y_interp_num: 42, y_total_points_num: 22
+2023.09.18 19:04:38 func: gridrefined. size(xMat2): 15  22
+2023.09.18 19:04:38 func: getlayermodel. numLayer: 33, layer_cnt: 27, iFile: 30, filename: /M/DAS_SOFTWARE/DAS_RETRIEVAL_MODEL_1.0.0/input_data/geological_model_xinjiang_2020/complexmodel_faults/Fault 83
+2023.09.18 19:04:38 func: layerdatatransform
+2023.09.18 19:04:38 func: gridrefined
+2023.09.18 19:04:38 func: gridrefined. size(xMat): 2  8
+2023.09.18 19:04:38 func: gridrefined. , stepSize(1): 10, x_interp_num: 4, x_total_points_num: 4
+2023.09.18 19:04:38 func: gridrefined. size(yMat1): 4  8
+2023.09.18 19:04:38 func: gridrefined. , stepSize(2): 10, y_interp_num: 21, y_total_points_num: 15
+2023.09.18 19:04:38 func: gridrefined. size(xMat2): 4  15
+2023.09.18 19:04:38 func: gridrefined
+2023.09.18 19:04:38 func: gridrefined. size(xMat): 4  15
+2023.09.18 19:04:38 func: gridrefined. , stepSize(1): 20, x_interp_num: 6, x_total_points_num: 4
+2023.09.18 19:04:38 func: gridrefined. size(yMat1): 4  15
+2023.09.18 19:04:38 func: gridrefined. , stepSize(2): 20, y_interp_num: 28, y_total_points_num: 15
+2023.09.18 19:04:38 func: gridrefined. size(xMat2): 4  15
+2023.09.18 19:04:38 func: getlayermodel. numLayer: 33, layer_cnt: 28, iFile: 31, filename: /M/DAS_SOFTWARE/DAS_RETRIEVAL_MODEL_1.0.0/input_data/geological_model_xinjiang_2020/complexmodel_faults/Fault 9
+2023.09.18 19:04:38 func: layerdatatransform
+2023.09.18 19:04:38 func: gridrefined
+2023.09.18 19:04:38 func: gridrefined. size(xMat): 8  8
+2023.09.18 19:04:38 func: gridrefined. , stepSize(1): 10, x_interp_num: 82, x_total_points_num: 76
+2023.09.18 19:04:38 func: gridrefined. size(yMat1): 76   8
+2023.09.18 19:04:38 func: gridrefined. , stepSize(2): 10, y_interp_num: 21, y_total_points_num: 15
+2023.09.18 19:04:38 func: gridrefined. size(xMat2): 76  15
+2023.09.18 19:04:38 func: gridrefined
+2023.09.18 19:04:38 func: gridrefined. size(xMat): 76  15
+2023.09.18 19:04:38 func: gridrefined. , stepSize(1): 20, x_interp_num: 150, x_total_points_num: 76
+2023.09.18 19:04:38 func: gridrefined. size(yMat1): 76  15
+2023.09.18 19:04:38 func: gridrefined. , stepSize(2): 20, y_interp_num: 28, y_total_points_num: 15
+2023.09.18 19:04:38 func: gridrefined. size(xMat2): 76  15
+2023.09.18 19:04:38 func: getlayermodel. numLayer: 33, layer_cnt: 29, iFile: 32, filename: /M/DAS_SOFTWARE/DAS_RETRIEVAL_MODEL_1.0.0/input_data/geological_model_xinjiang_2020/complexmodel_faults/Fault 93
+2023.09.18 19:04:38 func: layerdatatransform
+2023.09.18 19:04:38 func: gridrefined
+2023.09.18 19:04:38 func: gridrefined. size(xMat): 2  8
+2023.09.18 19:04:38 func: gridrefined. , stepSize(1): 10, x_interp_num: 5, x_total_points_num: 5
+2023.09.18 19:04:38 func: gridrefined. size(yMat1): 5  8
+2023.09.18 19:04:38 func: gridrefined. , stepSize(2): 10, y_interp_num: 21, y_total_points_num: 15
+2023.09.18 19:04:38 func: gridrefined. size(xMat2): 5  15
+2023.09.18 19:04:38 func: gridrefined
+2023.09.18 19:04:38 func: gridrefined. size(xMat): 5  15
+2023.09.18 19:04:38 func: gridrefined. , stepSize(1): 20, x_interp_num: 8, x_total_points_num: 5
+2023.09.18 19:04:38 func: gridrefined. size(yMat1): 5  15
+2023.09.18 19:04:38 func: gridrefined. , stepSize(2): 20, y_interp_num: 28, y_total_points_num: 15
+2023.09.18 19:04:38 func: gridrefined. size(xMat2): 5  15
+2023.09.18 19:04:38 func: getlayermodel. numLayer: 33, layer_cnt: 30, iFile: 33, filename: /M/DAS_SOFTWARE/DAS_RETRIEVAL_MODEL_1.0.0/input_data/geological_model_xinjiang_2020/complexmodel_faults/Fault 96
+2023.09.18 19:04:38 func: layerdatatransform
+2023.09.18 19:04:38 func: gridrefined
+2023.09.18 19:04:38 func: gridrefined. size(xMat): 6  8
+2023.09.18 19:04:38 func: gridrefined. , stepSize(1): 10, x_interp_num: 50, x_total_points_num: 46
+2023.09.18 19:04:38 func: gridrefined. size(yMat1): 46   8
+2023.09.18 19:04:38 func: gridrefined. , stepSize(2): 10, y_interp_num: 28, y_total_points_num: 22
+2023.09.18 19:04:38 func: gridrefined. size(xMat2): 46  22
+2023.09.18 19:04:38 func: gridrefined
+2023.09.18 19:04:38 func: gridrefined. size(xMat): 46  22
+2023.09.18 19:04:38 func: gridrefined. , stepSize(1): 20, x_interp_num: 90, x_total_points_num: 46
+2023.09.18 19:04:38 func: gridrefined. size(yMat1): 46  22
+2023.09.18 19:04:38 func: gridrefined. , stepSize(2): 20, y_interp_num: 42, y_total_points_num: 22
+2023.09.18 19:04:38 func: gridrefined. size(xMat2): 46  22
+2023.09.18 19:04:38 func: getlayermodel. layer_cnt: 31, layerType: fault
+2023.09.18 19:04:38 func: getlayermodel. pathlayerModelParam: /M/DAS_SOFTWARE/DAS_RETRIEVAL_MODEL_1.0.0/src/../output_data//geological_model_xinjiang_2020_XJ_retrieval_result_data/mat_datafaultModelParam
+2023.09.18 19:04:38 func: getlayermodel. pathlayerGridModel: /M/DAS_SOFTWARE/DAS_RETRIEVAL_MODEL_1.0.0/src/../output_data//geological_model_xinjiang_2020_XJ_retrieval_result_data/mat_datafaultGridModel
+2023.09.18 19:04:38 func: getlayermodel. pathlayerCoeffModel: /M/DAS_SOFTWARE/DAS_RETRIEVAL_MODEL_1.0.0/src/../output_data//geological_model_xinjiang_2020_XJ_retrieval_result_data/mat_datafaultCoeffModel
+2023.09.18 19:04:40 func: getlayermodel. pathlayerCoeffModelTY: /M/DAS_SOFTWARE/DAS_RETRIEVAL_MODEL_1.0.0/src/../output_data//geological_model_xinjiang_2020_XJ_retrieval_result_data/mat_datafaultCoeffModelTY
+2023.09.18 19:04:41 func: getlayermodel. pathlayerCoeffModel_zdomainTY: /M/DAS_SOFTWARE/DAS_RETRIEVAL_MODEL_1.0.0/src/../output_data//geological_model_xinjiang_2020_XJ_retrieval_result_data/mat_datafaultCoeffModel_zdomainTY
+2023.09.18 19:04:42 func: read_input_data. time_faults: 20230918190442
+2023.09.18 19:04:42 func: read_input_data. path_velocity_data: /M/DAS_SOFTWARE/DAS_RETRIEVAL_MODEL_1.0.0/src/../input_data/geological_model_xinjiang_2020/velocityModel
+2023.09.18 19:04:47 func: layerdatatransform
+2023.09.18 19:12:36 func: read_input_data. time_velocity: 20230918191236

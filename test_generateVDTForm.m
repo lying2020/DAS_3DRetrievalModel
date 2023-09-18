@@ -8,7 +8,6 @@ format long % short %
 %
 % clear
 func_name = mfilename;
-displaytimelog(['func: ', func_name]);
 
 add_default_folder_path();
 
@@ -46,6 +45,8 @@ diary_file_name = [output_result_data_path, filesep, 'LOG_INFO_', geological_mod
 diary(diary_file_name);
 diary on;
 
+displaytimelog(['func: ', func_name]);
+
 displaytimelog(['func: ', func_name, '. ', 'current_data_path: ', current_data_path]);
 displaytimelog(['func: ', func_name, '. ', 'geological_model_mat_file_path: ', geological_model_mat_file_path]);
 
@@ -57,11 +58,11 @@ displaytimelog(['func: ', func_name, '. ', 'input_geological_model_path: ', inpu
 output_mat_data_path = geological_model.output_mat_data_path;
 displaytimelog(['func: ', func_name, '. ', 'output_mat_data_path: ', output_mat_data_path]);
 
-% layerGridModel  = importdata([output_mat_data_path, file, 'layerGridModel.mat']);
-% layerCoeffModel = importdata([output_mat_data_path, file, 'layerCoeffModel.mat']);
-% velocityModel   = importdata([output_mat_data_path, file, 'velocityModel.mat']);
-% layerCoeffModel = importdata([output_mat_data_path, file, 'layerCoeffModelTY.mat']);
-% velocityModel   = importdata([output_mat_data_path, file, 'velocityModelTY.mat']);
+% layerGridModel  = importdata([output_mat_data_path, filesep, 'layerGridModel.mat']);
+% layerCoeffModel = importdata([output_mat_data_path, filesep, 'layerCoeffModel.mat']);
+% velocityModel   = importdata([output_mat_data_path, filesep, 'velocityModel.mat']);
+% layerCoeffModel = importdata([output_mat_data_path, filesep, 'layerCoeffModelTY.mat']);
+% velocityModel   = importdata([output_mat_data_path, filesep, 'velocityModelTY.mat']);
 
 layerGridModel = load_mat_data('layergriddata1000.mat');
 layerCoeffModel = load_mat_data('layerModel1000.mat');
@@ -69,10 +70,10 @@ velocityModel =  load_mat_data('VelModnew.mat');
 
 
 
-baseCoord = importdata([output_mat_data_path, file, 'baseCoord.mat']);
+baseCoord = importdata([output_mat_data_path, filesep, 'baseCoord.mat']);
 
 % sensorsCoord = geological_model.sensorData;
-sensorsCoord = importdata([output_mat_data_path, file, 'sensorData.mat']);
+sensorsCoord = importdata([output_mat_data_path, filesep, 'sensorData.mat']);
 
 undergroundCoordsSet = sensorsCoord((sensorsCoord(:, 3) < 0), :);
 % bottom_sensor_coordinate:  [-3.05915354378521,-45.6872047241777,-4050.73588976378];
