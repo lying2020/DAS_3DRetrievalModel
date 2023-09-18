@@ -138,3 +138,7 @@ showtimenow2023.09.18 18:46:51
 2023.09.18 18:50:15 func: gridrefined. , stepSize(2): 10, y_interp_num: 1254, y_total_points_num: 628
 2023.09.18 18:50:16 func: gridrefined. size(xMat2): 616  628
 2023.09.18 18:50:32 func: getlayermodel. layer_cnt: 12, layerType: layer
+2023.09.18 18:56:57 func: getlayermodel. pathlayerModelParam: /M/DAS_SOFTWARE/DAS_RETRIEVAL_MODEL_1.0.0/src/../output_data//geological_model_xinjiang_2020_XJ_retrieval_result_data/mat_datalayerModelParam
+2023.09.18 18:56:57 func: getlayermodel. pathlayerGridModel: /M/DAS_SOFTWARE/DAS_RETRIEVAL_MODEL_1.0.0/src/../output_data//geological_model_xinjiang_2020_XJ_retrieval_result_data/mat_datalayerGridModel
+2023.09.18 18:56:57 func: getlayermodel. pathlayerCoeffModel: /M/DAS_SOFTWARE/DAS_RETRIEVAL_MODEL_1.0.0/src/../output_data//geological_model_xinjiang_2020_XJ_retrieval_result_data/mat_datalayerCoeffModel
+2023.09.18 18:59:27 func: getlayermodel. pathlayerCoeffModelTY: /M/DAS_SOFTWARE/DAS_RETRIEVAL_MODEL_1.0.0/src/../output_data//geological_model_xinjiang_2020_XJ_retrieval_result_data/mat_datalayerCoeffModelTY

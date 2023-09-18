@@ -29,10 +29,11 @@ displaytimelog(['func: ', func_name, '. ' 'nCores: ', num2str(nCores), ', [num_x
 numx = num_xyz(1); numy = num_xyz(2);  numz = num_xyz(3);
 
 tempVDTForm = cell(numx, numy, numz);
-for ix = 1:numx
+for ix = 11:numx
 % parfor ix = 1:numx
     tmpVDTForm_X = cell(numy, numz);
     X_time_start = str2num(showtimenow(0));
+    displaytimelog(['func: ', func_name, '. ', 'numx: ', num2str(numx), ', ix: ', ix, '. X_time_start: ', X_time_start]);
     %  for iy = 1:numy
     parfor iy = 1:numy
         for iz = 1:numz
@@ -49,7 +50,7 @@ for ix = 1:numx
     end
     X_time_end = str2num(showtimenow(0));
     filename = ['vdt_x_', num2str(ix), '_time_cost_', num2str(X_time_end - X_time_start)];
-    displaytimelog(['func: ', func_name, '. ', 'numx: ', num2str(numx), ' filename: ', filename, '. X_time: ', num2str(X_time_start), ' -- ', num2str(X_time_end)]);
+    displaytimelog(['func: ', func_name, '. ', 'numx: ', num2str(numx), ', filename: ', filename, '. X_time: ', num2str(X_time_start), ' -- ', num2str(X_time_end)]);
     savedata(tmpVDTForm_X, output_retrieval_model_filename, filename, '.mat');
 
 end
