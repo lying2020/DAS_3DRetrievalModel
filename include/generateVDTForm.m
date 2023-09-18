@@ -1,6 +1,6 @@
 
 function VDTForm = generateVDTForm(layerCoeffModel, layerGridModel, velocityModel, undergroundCoordsSet,  ...
-                                                      retrieval_relative_model_domain, retrieval_model_grid_size, output_retrieval_model_filename)
+                                    retrieval_relative_model_domain, retrieval_model_grid_size, output_retrieval_model_filename)
 %%
 %% input 
 % layerGridModel
@@ -48,8 +48,8 @@ for ix = 1:numx
         end
     end
     X_time_end = str2num(showtimenow(0));
-    filename = ['vdt_x_', num2str(ix), 'time_cost_', num2str(X_time_end - X_time_start)];
-    displaytimelog(['func: ', func_name, '. ' ' filename: ', filename, '. X_time: ', num2str(X_time_start), ' -- ', num2str(X_time_end)]);
+    filename = ['vdt_x_', num2str(ix), '_time_cost_', num2str(X_time_end - X_time_start)];
+    displaytimelog(['func: ', func_name, '. ', 'numx: ', num2str(numx), ' filename: ', filename, '. X_time: ', num2str(X_time_start), ' -- ', num2str(X_time_end)]);
     savedata(tmpVDTForm_X, output_retrieval_model_filename, filename, '.mat');
 
 end

@@ -17,9 +17,9 @@ func_name = mfilename;
 
 %% %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 if exist('input_data_path', 'var')
-    displaytimelog(['func: ', func_name, '. ', 'Variable input_data_path exists']);
+    disp(['func: ', func_name, '. ', 'Variable input_data_path exists']);
 else
-    displaytimelog(['func: ', func_name, '. ', 'Variable input_data_path does not exist, now importdata ... ']);
+    disp(['func: ', func_name, '. ', 'Variable input_data_path does not exist, now importdata ... ']);
     [input_data_path, output_data_path, current_data_path] = add_default_folder_path();
 end
 
@@ -43,7 +43,7 @@ geological_data_path.path_sensor_data = 'sensorCoord217.csv';
 
 %% ********************************************************************************************************************
 % creat a log file.
-diary_file_name = [current_data_path, filesep, 'LOG_INFO_', geological_model_path, well_name, showtimenow(0), '.txt'];
+diary_file_name = [current_data_path, filesep, geological_model_path, well_name, '_LOG_INFO_', showtimenow(0), '.txt'];
 diary(diary_file_name);
 diary on;
 

@@ -51,7 +51,7 @@ if any(strcmp(scatter_method, gridType))
     x_interp_num = 1+ ceil(abs(xSeq0(2: nrow_xMat) - xSeq0(1: nrow_xMat-1))/stepSize(1));
     % m-2 overlap points.
     x_total_points_num = sum(x_interp_num) - (nrow_xMat-2);
-    displaytimelog(['func: ', func_name, '. ', ', stepSize(1): ', num2str(stepSize(1)), ', x_interp_num: ', num2str(sum(x_interp_num)), ', x_total_points_num: ', num2str(x_total_points_num)]);
+    displaytimelog(['func: ', func_name, '. ', 'stepSize(1): ', num2str(stepSize(1)), ', x_interp_num: ', num2str(sum(x_interp_num)), ', x_total_points_num: ', num2str(x_total_points_num)]);
     [xMat1, yMat1] = deal(zeros(x_total_points_num, ncol_xMat) );
     [xArray1, yArray1] = deal(zeros(x_total_points_num, 1));
     %
@@ -74,7 +74,7 @@ if any(strcmp(scatter_method, gridType))
     y_interp_num  = 1+ ceil(abs(ySeq00(2: ncol_xMat) - ySeq00(1:ncol_xMat-1))/stepSize(2));
     y_total_points_num = sum(y_interp_num) - (ncol_yMat1 - 2);
     % n-2 overlap points.
-    displaytimelog(['func: ', func_name, '. ', ', stepSize(2): ', num2str(stepSize(2)), ', y_interp_num: ', num2str(sum(y_interp_num)), ', y_total_points_num: ', num2str(y_total_points_num)]);
+    displaytimelog(['func: ', func_name, '. ', 'stepSize(2): ', num2str(stepSize(2)), ', y_interp_num: ', num2str(sum(y_interp_num)), ', y_total_points_num: ', num2str(y_total_points_num)]);
     [xMat2, yMat2] = deal(zeros(nrow_yMat1, y_total_points_num));
     [xArray2, yArray2] = deal(zeros(1, y_total_points_num));
     %
