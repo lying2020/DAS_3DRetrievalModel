@@ -57,17 +57,23 @@ displaytimelog(['func: ', func_name, '. ', 'input_geological_model_path: ', inpu
 output_mat_data_path = geological_model.output_mat_data_path;
 displaytimelog(['func: ', func_name, '. ', 'output_mat_data_path: ', output_mat_data_path]);
 
-% layerGridModel = importdata([output_mat_data_path, file, 'layerGridModel.mat']);
+% layerGridModel  = importdata([output_mat_data_path, file, 'layerGridModel.mat']);
 % layerCoeffModel = importdata([output_mat_data_path, file, 'layerCoeffModel.mat']);
-% velocityModel = importdata([output_mat_data_path, file, 'velocityModel.mat']);
+% velocityModel   = importdata([output_mat_data_path, file, 'velocityModel.mat']);
 % layerCoeffModel = importdata([output_mat_data_path, file, 'layerCoeffModelTY.mat']);
-% velocityModel = importdata([output_mat_data_path, file, 'velocityModelTY.mat']);
+% velocityModel   = importdata([output_mat_data_path, file, 'velocityModelTY.mat']);
 
 layerGridModel = load_mat_data('layergriddata1000.mat');
 layerCoeffModel = load_mat_data('layerModel1000.mat');
 velocityModel =  load_mat_data('VelModnew.mat');
 
-sensorsCoord = geological_model.sensorData;
+
+
+baseCoord = importdata([output_mat_data_path, file, 'baseCoord.mat']);
+
+% sensorsCoord = geological_model.sensorData;
+sensorsCoord = importdata([output_mat_data_path, file, 'sensorData.mat']);
+
 undergroundCoordsSet = sensorsCoord((sensorsCoord(:, 3) < 0), :);
 % bottom_sensor_coordinate:  [-3.05915354378521,-45.6872047241777,-4050.73588976378];
 % The relative coordinate origin point of sensor position is the well top
