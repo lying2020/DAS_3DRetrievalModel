@@ -9,7 +9,7 @@
 % 2020-10-29: Modify the description and comments
 % this code is used to obtain the equivalent velocity between the different layers
 %% -----------------------------------------------------------------------------------------------------
-function [velocityModel, velocityCount, xMat, yMat, zMat, velocityMat]= getvelocitymodel(filenameList, baseCoord, layerCoeffModel, layerGridModel, pathSave)  %  , type)
+function [velocityModel, velocityCount, velocityModelTY, xMat, yMat, zMat, velocityMat]= getvelocitymodel(filenameList, baseCoord, layerCoeffModel, layerGridModel, pathSave)  %  , type)
 % -----------------------------------------------------------------------------------------------------
 % INPUT: 
 % filenameList: 1*1 cell, a list of filenames for the velocity file
@@ -154,14 +154,22 @@ velocityModel = velocityModel./ velocityCount;
 %
 %
 if (velocityModel(1, 1) < 0.001),  velocityModel(1, 1) = velocityModel(2, 1);   end
+
+velocityModelTY = velocityModel(:, 1);
+
 %% save velocityModel into folder geologicaldata.
 if nargin > 4
     currentpath = mfilename('fullpath');
     [pathname] = fileparts(currentpath);
-    pathname = [pathname, filesep, '..', filesep, '..', filesep, 'geologicaldata'];
+    % pathname = [pathname, filesep, '..', filesep, '..', filesep, 'geologicaldata'];
     if isfolder(pathSave), pathname = pathSave;  end
-    savedata(velocityModel, pathname, ['velocityModel_', num2str(numLayer+1)], '.mat');
-    savedata(velocityCount, pathname, ['velocityCount_', num2str(numLayer+1)], '.mat');
+    % savedata(velocityModel, pathname, ['velocityModel_', num2str(numLayer+1)], '.mat');
+    % savedata(velocityCount, pathname, ['velocityCount_', num2str(numLayer+1)], '.mat');
+    savedata(velocityModelTY, pathname, 'velocityModelTY', '.mat');
+    savedata(velocityModel, pathname, 'velocityModel', '.mat');
+    savedata(velocityCount, pathname, 'velocityCount', '.mat');
+
+    savedata(velocityModelTY, pathname, ['velocityModelTY', num2str(numLayer+1)], '.csv');
     savedata(velocityModel, pathname, ['velocityModel', num2str(numLayer+1)], '.csv');
     savedata(velocityCount, pathname, ['velocityCount', num2str(numLayer+1)], '.csv');
 end

@@ -31,6 +31,7 @@ current_data_path = addpath_name;
 displaytimelog(['func: ', func_name, '. ', 'current_data_path: ', current_data_path]);
 geological_model_mat_file_path = [current_data_path, filesep, geological_model_name, '.mat'];
 displaytimelog(['func: ', func_name, '. ', 'geological_model_mat_file_path: ', geological_model_mat_file_path]);
+
 if exist('geological_model', 'var')
     displaytimelog(['func: ', func_name, '. ', 'Variable geological_model exists']);
 else
@@ -45,19 +46,22 @@ diary_file_name = [output_result_data_path, filesep, 'LOG_INFO_', showtimenow(0)
 diary(diary_file_name);
 diary on;
 
+displaytimelog(['func: ', func_name, '. ', 'current_data_path: ', current_data_path]);
 displaytimelog(['func: ', func_name, '. ', 'geological_model_mat_file_path: ', geological_model_mat_file_path]);
+
+displaytimelog(['func: ', func_name, '. ', 'output_result_data_path: ', output_result_data_path]);
 
 input_geological_model_path = geological_model.input_geological_model_path;
 displaytimelog(['func: ', func_name, '. ', 'input_geological_model_path: ', input_geological_model_path]);
-displaytimelog(['func: ', func_name, '. ', 'output_result_data_path: ', output_result_data_path]);
-displaytimelog(['func: ', func_name, '. ', 'current_data_path: ', current_data_path]);
 
+output_mat_data_path = geological_model.output_mat_data_path;
+displaytimelog(['func: ', func_name, '. ', 'output_mat_data_path: ', output_mat_data_path]);
 
-% layerGridModel = geological_model.layerGridModel;
-% % layerCoeffModel = geological_model.layerCoeffModel;
-% % velocityModel = geological_model.velocityModel;
-% layerCoeffModel = geological_model.layerCoeffModelTY;
-% velocityModel = geological_model.velocityModelTY;
+% layerGridModel = importdata([output_mat_data_path, file, 'layerGridModel.mat']);
+% layerCoeffModel = importdata([output_mat_data_path, file, 'layerCoeffModel.mat']);
+% velocityModel = importdata([output_mat_data_path, file, 'velocityModel.mat']);
+% layerCoeffModel = importdata([output_mat_data_path, file, 'layerCoeffModelTY.mat']);
+% velocityModel = importdata([output_mat_data_path, file, 'velocityModelTY.mat']);
 
 layerGridModel = load_mat_data('layergriddata1000.mat');
 layerCoeffModel = load_mat_data('layerModel1000.mat');

@@ -62,7 +62,7 @@ if nargin > 2
     [pathname] = fileparts(currentpath);
     pathname = [pathname, filesep, '..', filesep, '..', filesep, 'geologicaldata'];
     if isfolder(pathSave), pathname = pathSave;  end
-    savedata(wellModel, pathname, ['wellModel_4'], '.csv');
+    savedata(wellModel, pathname, ['wellModel'], '.csv');
     savedata(baseCoord, pathname, ['baseCoord_', basetype], '.txt');
     % addpath(genpath(pathname));
 end

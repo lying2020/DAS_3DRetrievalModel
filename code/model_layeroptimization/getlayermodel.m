@@ -140,12 +140,28 @@ layerCoeffModel = layerCoeffModel(idxZ, :);
 %% save velocityModel into folder geologicaldata.
 if ~isempty(pathSave)
     if isfolder(pathSave)
-        pathlayerGridModel = [layerType, 'GridModel_', num2str(numLayer)];
-        displaytimelog(['func: ', func_name, '. ', 'pathlayerGridModel: ' , pathlayerGridModel]);
-        pathlayerCoeffModel = [layerType, 'CoeffModel_', num2str(numLayer)];
-        displaytimelog(['func: ', func_name, '. ', 'pathlayerCoeffModel: ' , pathlayerCoeffModel]);
+        pathlayerModelParam = [layerType, 'ModelParam'];
+        displaytimelog(['func: ', func_name, '. ', 'pathlayerModelParam: ', pathSave, pathlayerModelParam]);
+        savedata(layerModelParam, pathSave, pathlayerModelParam, '.mat');
+
+        % pathlayerGridModel = [layerType, 'GridModel_', num2str(numLayer)];
+        pathlayerGridModel = [layerType, 'GridModel'];
+        displaytimelog(['func: ', func_name, '. ', 'pathlayerGridModel: ', pathSave, pathlayerGridModel]);
         savedata(layerGridModel, pathSave, pathlayerGridModel, '.mat');
+
+        % pathlayerCoeffModel = [layerType, 'CoeffModel_', num2str(numLayer)];
+        pathlayerCoeffModel = [layerType, 'CoeffModel'];
+        displaytimelog(['func: ', func_name, '. ', 'pathlayerCoeffModel: ' , pathSave, pathlayerCoeffModel]);
         savedata(layerCoeffModel, pathSave, pathlayerCoeffModel, '.mat');
+
+        pathlayerCoeffModelTY = [layerType, 'CoeffModelTY'];
+        displaytimelog(['func: ', func_name, '. ', 'pathlayerCoeffModelTY: ', pathSave, pathlayerCoeffModelTY]);
+        savedata(layerCoeffModelTY, pathSave, pathlayerCoeffModelTY, '.mat');
+
+        pathlayerCoeffModel_zdomainTY = [layerType, 'CoeffModel_zdomainTY'];
+        displaytimelog(['func: ', func_name, '. ', 'pathlayerCoeffModel_zdomainTY: ', pathSave, pathlayerCoeffModel_zdomainTY]);
+        savedata(layerCoeffModel_zdomainTY, pathSave, pathlayerCoeffModel_zdomainTY, '.mat');
+
     end
 end
 
