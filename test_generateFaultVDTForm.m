@@ -9,6 +9,9 @@ layerGridModel = load_mat_data('layergriddata1000.mat');
 layerCoeffModel = load_mat_data('layerModel1000.mat');
 velocityModel =  load_mat_data('VelModnew.mat');
 
+numLayer = size(layerGridModel, 1);
+layerRangeModel = cell(numLayer, 1);
+
 minx = layerGridModel{2,1}(1,1);
 miny = layerGridModel{2,2}(1,1);
 
@@ -20,7 +23,7 @@ nums = size(sensorPositions,1);
 faultfilename = "faultCoordSet96881";
 faultPositions = importdata("faultPositions/" + faultfilename + ".mat");
 
-faultVDTForm = generateFaultVDTForm(layerCoeffModel, layerGridModel, velocityModel, sensorPositions, faultPositions);
+faultVDTForm = generateFaultVDTForm(layerCoeffModel, layerGridModel, velocityModel, layerRangeModel, sensorPositions, faultPositions);
 
 
 filenamepre = "arrivaltimedata/";

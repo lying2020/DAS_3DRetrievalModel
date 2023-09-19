@@ -53,7 +53,7 @@ for iFile = 1:num
     yy = [y(15, 13), y(15, 13) - 6.3,  y(18, 14) - 2.1];
     idxLayer = [1 1 1];
     xyArray = [xx;yy]';
-    zArray = layerz_tanyan(layerCoeffModel,layerGridModel,xyArray,idxLayer);
+    zArray = layerz_tanyan(layerCoeffModel,layerGridModel,layerRangeModel,xyArray,idxLayer);
     for i =1:3
         plot3(xyArray(i,1),xyArray(i,2),zArray(i),'b.','markersize',10);hold on
     end

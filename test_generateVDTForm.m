@@ -16,10 +16,10 @@ add_default_folder_path();
 %% import data model
 
 % read_geological_model_xinjiang_2020;
-geological_model_name = 'geological_model_xinjiang_2020_XJ';
+% geological_model_name = 'geological_model_xinjiang_2020_XJ';
 
 % read_geological_model_2023_T('_T106')
-% geological_model_name = 'geological_model_2023_T106';
+geological_model_name = 'geological_model_2023_T106';
 
 % read_geological_model_2023_T('_T131')
 % geological_model_name = 'geological_model_2023_T131';
@@ -58,19 +58,44 @@ displaytimelog(['func: ', func_name, '. ', 'input_geological_model_path: ', inpu
 output_mat_data_path = geological_model.output_mat_data_path;
 displaytimelog(['func: ', func_name, '. ', 'output_mat_data_path: ', output_mat_data_path]);
 
-% layerGridModel  = importdata([output_mat_data_path, filesep, 'layerGridModel.mat']);
+
+displaytimelog(['func: ', func_name, '. ', 'importdata layerGridModel ... ']);
+layerGridModel  = importdata([output_mat_data_path, filesep, 'layerGridModel.mat']);
+
+% displaytimelog(['func: ', func_name, '. ', 'importdata layerCoeffModel ... ']);
 % layerCoeffModel = importdata([output_mat_data_path, filesep, 'layerCoeffModel.mat']);
+% displaytimelog(['func: ', func_name, '. ', 'importdata velocityModel ... ']);
 % velocityModel   = importdata([output_mat_data_path, filesep, 'velocityModel.mat']);
+
+
 % layerCoeffModel = importdata([output_mat_data_path, filesep, 'layerCoeffModelTY.mat']);
 % velocityModel   = importdata([output_mat_data_path, filesep, 'velocityModelTY.mat']);
 
-layerGridModel = load_mat_data('layergriddata1000.mat');
-layerCoeffModel = load_mat_data('layerModel1000.mat');
-velocityModel =  load_mat_data('VelModnew.mat');
 
+% displaytimelog(['func: ', func_name, '. ', 'importdata layergriddata1000 / layerModel1000 / VelModnew ... ']);
+% layerGridModel = load_mat_data('layergriddata1000.mat');
+% layerCoeffModel = load_mat_data('layerModel1000.mat');
+% velocityModel =  load_mat_data('VelModnew.mat');
+%
+%
 
+% numLayer = size(layerGridModel, 1);
+% layerRangeModel = cell(numLayer, 1);
+% for i_layer = 1 : numLayer
+%     xMat = layerGridModel{i_layer, 1};
+%     yMat = layerGridModel{i_layer, 2};
+%     zMat = layerGridModel{i_layer, 3};
+%     layerRangeModel{i_layer} = [min(xMat(:)), max(xMat(:)), abs(xMat(2, 1) - xMat(1, 1)); ...
+%                                 min(yMat(:)), max(yMat(:)), abs(yMat(1, 2) - yMat(1, 1)); ...
+%                                 min(zMat(:)), max(zMat(:)), 1];
+
+% end
+% savedata(layerRangeModel, output_mat_data_path, 'layerRangeModel', '.mat');
+
+layerRangeModel = importdata([output_mat_data_path, filesep, 'layerRangeModel.mat']);
 
 baseCoord = importdata([output_mat_data_path, filesep, 'baseCoord.mat']);
+displaytimelog(['func: ', func_name, '. ', 'baseCoord: ', num2str(baseCoord)]);
 
 % sensorsCoord = geological_model.sensorData;
 sensorsCoord = importdata([output_mat_data_path, filesep, 'sensorData.mat']);
@@ -82,7 +107,7 @@ bottom_sensor_coordinate = undergroundCoordsSet(end, :);
 sensors_num = size(undergroundCoordsSet,1);
 displaytimelog(['func: ', func_name, '. ', 'sensors_num: ', num2str(sensors_num), ', bottom_sensor_coordinate: ', num2str(bottom_sensor_coordinate)]);
 
-retrieval_model_default_area = [-3000, 3000; -3000, 3000 ; -500, 1500];
+retrieval_model_default_area = [-3000, 3000; -3000, 3000 ; -2500, -200];
 displaytimelog(['func: ', func_name, '. ', 'default area. retrieval_model_area: x = ', num2str(retrieval_model_default_area(1, :)), ...
                             ', y = ', num2str(retrieval_model_default_area(2, :)), ', z = ', num2str(retrieval_model_default_area(3, :))]);
 
@@ -106,7 +131,7 @@ save(RMDomain_file_name, 'retrieval_model_area');
 retrieval_model_relative_domain = [bottom_sensor_coordinate ; bottom_sensor_coordinate]' + retrieval_model_area;
 retrieval_model_relative_domain_with_grid_size = [retrieval_model_relative_domain,  retrieval_model_grid_size];
 
-VDTForm = generateVDTForm(layerCoeffModel, layerGridModel, velocityModel, undergroundCoordsSet, ...
+VDTForm = generateVDTForm(layerCoeffModel, layerGridModel, layerRangeModel, velocityModel, undergroundCoordsSet, ...
                                      retrieval_model_relative_domain, retrieval_model_grid_size, [output_result_data_path, filesep, output_retrieval_model_filename]);
 
 RMVDT_file_name   = [output_result_data_path, filesep, 'VDTForm_', output_retrieval_model_filename, '.mat'];

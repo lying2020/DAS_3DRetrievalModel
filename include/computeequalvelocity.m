@@ -1,6 +1,6 @@
 
 % function [equalVelocity, equalDistance, equalDeltaTime]= computeequalvelocity(layerCoeffModel, layerGridModel, velocityModel, sensorPositions,  sourceLocationCoord, usefulRange)
-function [equalVelocity, equalDistance, equalDeltaTime, refractionPointSets, numrefractionPointSets,Vel] = computeequalvelocity(layerCoeffModel, layerGridModel, velocityModel, sensorPositions,  sourceLocationCoord, usefulRange)
+function [equalVelocity, equalDistance, equalDeltaTime, refractionPointSets, numrefractionPointSets,Vel] = computeequalvelocity(layerCoeffModel, layerGridModel, layerRangeModel, velocityModel, sensorPositions,  sourceLocationCoord, usefulRange)
 % 
 % INPUT:
 %  layerGridModel: numLayer* 3  cell
@@ -52,7 +52,7 @@ for iSensor = 1 : numSensor
     %         relatedLayerFun{i} = layer;
     %     end
     %     refractionPoints = computeraytrace_curve_shubo(relatedLayerFun,  relatedVelocityModel,   sensorPositions(iSensor, :),  sourceLocationCoord);
-    [Position, markX0, initialguessVel, errort, trivalt] = RayTrace3D_layerModel(layerCoeffModel, layerGridModel, velocityModel, sensorPositions(iSensor,:),sourceLocationCoord);
+    [Position, markX0, initialguessVel, errort, trivalt] = RayTrace3D_layerModel(layerCoeffModel, layerGridModel, layerRangeModel, velocityModel, sensorPositions(iSensor,:),sourceLocationCoord);
     %%%%%%%%%%%%%%%%%%%%%
 
     % 计算地震波与在每层地层所用的时间与总旅时的比值

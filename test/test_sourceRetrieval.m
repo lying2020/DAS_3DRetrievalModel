@@ -5,20 +5,22 @@ addpath ../layer_new_tanyan/layerModel
 addpath ./arrivaltimedata/
 
 %% Data initial?
-% load layergriddataold;
+% load layerGridModelold;
 % load layerModelold;
-layergriddata = importdata('layergriddata1000.mat');
+layerGridModel = importdata('layergriddata1000.mat');
 layerModel = importdata('layerModel1000.mat');
+numLayer = size(layerModel, 1);
+layerRangeModel = cell(numLayer, 1);
 % layerModel_zdomain = importdata('layerModel_zdomainnew.mat');
 VelMod = importdata('VelModnew.mat');
 baseCoordin = importdata('baseCoordin.mat');
 sourceLocationDomain = importdata('Domain_200,200,-200-900m_10m_139sensors.mat');
 VDTForm = importdata('VDTForm_200,200,-200-900m_10m_139sensors.mat');
-layerModelCombine(:,1:3) = layergriddata(:,:);
+layerModelCombine(:,1:3) = layerGridModel(:,:);
 layerModelCombine(:,4) = layerModel(:);
 % layerModelCombine(:,5) = layerModel_zdomain(:);
-minx = layergriddata{2,1}(1,1);
-miny = layergriddata{2,2}(1,1);
+minx = layerGridModel{2,1}(1,1);
+miny = layerGridModel{2,2}(1,1);
 overgroundCoord = importdata('overgroundCoordnew.mat');
 undergroundCoord = importdata('undergroundCoordnew.mat');
 sensordo = undergroundCoord(end,:);
@@ -55,7 +57,7 @@ for isource = 1:numsource
     %  -------------------------------------------------------------------------------------------------------------------------------------------------------------------
     sourcePosition = allsourcePositions(isource, :);% + [testArray(i), testArray(j),  -testArray(k)];
     tmpSensor = sensorPositions;
-    tmparrivalTime = gettraveltime(layerCoeffModel, layerGridModel,  VelMod, tmpSensor,   sourcePosition);
+    tmparrivalTime = gettraveltime(layerCoeffModel, layerGridModel, layerRangeModel, VelMod, tmpSensor,   sourcePosition);
     [retrievalLocation] = sourceRetrieval(VDTForm,sourceLocationDomain,tmparrivalTime,optional);
     result = retrievalLocation(:,1:4) + [sensordo 0];
     distance{isource} =  result' - [sourcePosition 0]';

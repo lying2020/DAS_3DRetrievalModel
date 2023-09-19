@@ -9,7 +9,7 @@
 % 2020-10-29: Modify the description and comments
 % this code is used to obtain the z coordinates of the corresponding layer
 %% -----------------------------------------------------------------------------------------------------
-function zArray = computelayerz(layerCoeffModel, layerGridModel, xyArray, idxLayer)
+function zArray = computelayerz(layerCoeffModel, layerGridModel, layerRangeModel, xyArray, idxLayer)
 % -----------------------------------------------------------------------------------------------------
 %  INPUT: 
 % layerCoeffModel: nomLayer* 1 cell. each cell contains (m -1)* (n -1) cell, and
@@ -28,19 +28,57 @@ num = length(idxLayer);
 zArray = zeros(num, 1);
 if isempty(layerGridModel), return;  end
 % -----------------------------------------------------------------------------------------------------
-if isa(layerGridModel{1}, 'function_handle')
-    for i = 1: num
-        layer = layerGridModel{ idxLayer(i) };
-        zArray(i, 1) = layer(xyArray(i, 1), xyArray(i, 2), 0);
-    end
-    return;
-end
+% if isa(layerGridModel{1}, 'function_handle')
+%     for i = 1: num
+%         layer = layerGridModel{ idxLayer(i) };
+%         zArray(i, 1) = layer(xyArray(i, 1), xyArray(i, 2), 0);
+%     end
+%     return;
+% end
 %
 % -----------------------------------------------------------------------------------------------------
+% for i = 1: num
+    % coeffMat = layerCoeffModel{idxLayer(i), 1};
+    % zArray(i, 1) = zvalue(coeffMat, layerGridModel{idxLayer(i), 1}, layerGridModel{idxLayer(i), 2}, layerRangeModel{idxLayer(i)}, xyArray(i, :));
+% end
+
+
+% zArray(i, 1) = zvalue_new(layerCoeffModel{idxLayer(i), 1}, layerGridModel{idxLayer(i), 1}, layerGridModel{idxLayer(i), 2}, layerRangeModel{idxLayer(i)}, xyArray(i, :));
+
+
+%% -------------------------------------------------------------------------------------------------
+
 for i = 1: num
     coeffMat = layerCoeffModel{idxLayer(i), 1};
-    zArray(i, 1) = zvalue(coeffMat, layerGridModel{idxLayer(i), 1}, layerGridModel{idxLayer(i), 2}, xyArray(i, :));
+    layerRange = layerRangeModel{idxLayer(i), 1};
+    ir = ceil((x0 - layerRange(1, 1)) / layerRange(1, 3));
+    ic = ceil((y0 - layerRange(2, 1)) / layerRange(2, 3));
+    coeff0 = coeffMat{ir, ic};
+    coeffLen = length(coeff0);
+    coeff = zeros(1, 10);
+    coeff(1: coeffLen) = coeff0;
+    if 4 == coeffLen
+        zArray(i, 1) = coeff(4)*x0.*y0 + coeff(3)*x0 + coeff(2)*y0 + coeff(1)*1;
+    elseif 6 == coeffLen
+        zArray(i, 1) = coeff(6)*x0.*x0 + coeff(5)*y0.*y0 + coeff(4)*x0.*y0 + coeff(3)*x0 + coeff(2)*y0 + coeff(1)*1;
+    else
+        zArray(i, 1) = coeff(10)*x0.*x0.*x0 + coeff(9)*x0.*x0.*y0 + coeff(8)*x.*y0.*y0 + coeff(7)*y0.*y0.*y0 + ...
+                       coeff(6)*x0.*x0 + coeff(5)*y0.*y0 + coeff(4)*x0.*y0 + coeff(3)*x0 + coeff(2)*y0 + coeff(1)*1;
+    end
+
 end
+
+
+
+
+
+
+
+
+
+
+
+
 
 end
 % 

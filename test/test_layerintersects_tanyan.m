@@ -29,7 +29,7 @@ seCoords = [startpoint; endpoint] - baseCoord;
 % filenameList is a cell array
 
 if  ~exist('layerGridModel', 'var')
-     [layerGridModel, layerCoeffModel, layerCoeffModel_zdomain, layerCoeffModelLY, layerGridModelLY] = test_get_layerMat(baseCoord);
+     [layerGridModel, layerCoeffModel, layerRangeModel, layerCoeffModel_zdomain, layerCoeffModelLY, layerGridModelLY] = test_get_layerMat(baseCoord);
 
 end
 
@@ -56,8 +56,8 @@ for k = [-500: 2:500]
 %         displaytimelog(['k: ', num2str(k), '  s: ', num2str(s)]);
         ep = endpoint - [5*k, 2*k, -1000*s];
         % ep = endpoint - [96 48 -2000]; iLayer = 8;  这里直线从拟合多项式之间的缝隙中穿过了。
-        [intersection, idxLayer, points]  = layerintersects_tanyan(layerCoeffModel, layerGridModel, startpoint, ep);
-        [intersection0, idxLayer0, points0]  = computelayerintersectscoords(layerCoeffModelLY, layerGridModelLY, startpoint, ep);
+        [intersection, idxLayer, points]  = layerintersects_tanyan(layerCoeffModel, layerGridModel, layerRangeModel, startpoint, ep);
+        [intersection0, idxLayer0, points0]  = computelayerintersectscoords(layerCoeffModelLY, layerGridModelLY, layerRangeModel, startpoint, ep);
         if size(intersection, 1) ~= size(intersection0, 1)
 %             continue;
             displaytimelog(['k: ', num2str(k), '  s: ', num2str(s)]);
@@ -101,7 +101,7 @@ end
 
 toc
 
-function [layerGridModelTY, layerCoeffModelTY, layerCoeffModel_zdomainTY, layerCoeffModelLY, layerGridModelLY] = test_get_layerMat(baseCoord, filenameList_layer)
+function [layerGridModelTY, layerCoeffModelTY, layerRangeModel, layerCoeffModel_zdomainTY, layerCoeffModelLY, layerGridModelLY] = test_get_layerMat(baseCoord, filenameList_layer)
 
 type = 'layer';
 if exist('filenameList_layer', 'var')
@@ -127,7 +127,7 @@ layerGridModelTY = grid_tanyan(layerdata,baseCoord,inter,20,20); % new data
 gridFlag = true; gridType = 'linear'; gridStepSize = [10, 10]; gridRetractionDist = [10, 10]; fittingType = 'cubic'; layerType = 'layer';
 layerModelParam = struct('gridFlag', gridFlag, 'gridType', gridType, 'gridStepSize', gridStepSize, 'gridRetractionDist', gridRetractionDist, ...
                                                   'fittingType', fittingType, 'layerType', layerType, 'pathSave', []);
-[baseCoord, layerCoeffModelLY, layerGridModelLY] = getlayermodel(filenameList_layer, baseCoord, layerModelParam);
+[baseCoord, layerCoeffModelLY, layerGridModelLY, layerRangeModel] = getlayermodel(filenameList_layer, baseCoord, layerModelParam);
 
 
 end

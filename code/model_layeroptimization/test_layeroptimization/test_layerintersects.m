@@ -24,7 +24,7 @@ se = [startpoint; endpoint] - baseCoord;
 %
 % fittingType = 'nonlinear';
 fittingType = 'cubic';
-% [baseCoord, layerCoeffModel, layerGridModel, ax1] = test_first(baseCoord, fittingType);
+[baseCoord, layerCoeffModel, layerGridModel, layerRangeModel, ax1] = test_first(baseCoord, fittingType);
 num = size(layerGridModel, 1);
 %
 %% --------------------------------------------
@@ -57,7 +57,7 @@ end
 
 tic
 %
-[intersection1, idxLayer, pointSet, coeffSet]  = computelayerintersectscoords(layerCoeffModel, layerGridModel, se(1, :), se(2, :));
+[intersection1, idxLayer, pointSet, coeffSet]  = computelayerintersectscoords(layerCoeffModel, layerGridModel, layerRangeModel, se(1, :), se(2, :));
 %
     for ips = 1:length(pointSet)
         tmp = pointSet{ips, 1};
@@ -71,7 +71,7 @@ tic
         end
     end
     
-[intersection2, idxLayer2] = layerintersects_tanyan(layerCoeffModel, layerGridModel, se(1, :), se(2, :));
+[intersection2, idxLayer2] = layerintersects_tanyan(layerCoeffModel, layerGridModel, layerRangeModel, se(1, :), se(2, :));
 if ~isempty(intersection2)
     scatter3(ax1, intersection2(:, 1), intersection2(:, 2), intersection2(:, 3), 'g', 100, 'filled');
 end

@@ -9,7 +9,7 @@
 % 2020-10-14: Modify the description and comments
 % this code is used to calculate where the line segment intersects each layer               
 %% -----------------------------------------------------------------------------------------------------
-function  [intersectionSet, idxLayer, pointSet, coeffSet]  = computelayerintersectscoords(layerCoeffModel, layerGridModel, startpoint, endpoint)
+function  [intersectionSet, idxLayer, pointSet, coeffSet]  = computelayerintersectscoords(layerCoeffModel, layerGridModel, layerRangeModel, startpoint, endpoint)
 % -----------------------------------------------------------------------------------------------------
 % calculate the intersection points of a given surface and a given line
 % INPUT:  
@@ -35,7 +35,7 @@ function  [intersectionSet, idxLayer, pointSet, coeffSet]  = computelayerinterse
 %% -----------------------------------------------------------------------------------------------------
 % the layer is continuous data point 
 if isa(layerGridModel{1}, 'function_handle')
-    % [intersectionSet, idxLayer]  = layerintersection_surf(layerGridModel, startpoint, endpoint);
+    % [intersectionSet, idxLayer]  = layerintersection_surf(layerGridModel, layerRangeModel, startpoint, endpoint);
     pointSet = [];    coeffSet = [];
     return;
 end
@@ -90,7 +90,9 @@ flag1 = find( rms(intersectionSet - startpoint, 2) < 1e-5, 1, 'first');
 flag2 = find( rms(intersectionSet - endpoint, 2) < 1e-5, 1, 'first');
 intersectionSet([flag1 flag2], :) = [];
 idxLayer([flag1 flag2]) = [];
-end   % function computelayerintersectscoords(layerCoeffModel, layerGridModel, startpoint, endpoint)
+
+
+end   % function computelayerintersectscoords(layerCoeffModel, layerGridModel, layerRangeModel, startpoint, endpoint)
 
 
 

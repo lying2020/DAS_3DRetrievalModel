@@ -1,5 +1,5 @@
 
-function deltaTime = gettraveltime(layerCoeffModel, layerGridModel, VelMod, sensorPositions,  sourcePosition)
+function deltaTime = gettraveltime(layerCoeffModel, layerGridModel, layerRangeModel, VelMod, sensorPositions,  sourcePosition)
 %% 获取震源到检波器的旅时， deltaTime,
 %INPUT:
 %   layerCoeffModel: 1*NumLayer  matrix 水平地层信息， 每列储存一个交界面的位置
@@ -26,7 +26,7 @@ for jsensor=1: numSensor
     %     end
     %     [~, totalTime, ~, ~] = computeraytrace_curve_shubo(relatedLayerFun,  relatedVelocityModel,   sensorPositions(j, :),  sourcePosition);
     [Position, markX0, initialguessVel, errort,trivalt] = ...
-        RayTrace3D_layerModel(layerCoeffModel, layerGridModel, VelMod,sensorPositions(jsensor,:),sourcePosition);
+        RayTrace3D_layerModel(layerCoeffModel, layerGridModel, layerRangeModel, VelMod,sensorPositions(jsensor,:),sourcePosition);
     totalTime = trivaltime(initialguessVel,Position);
     %%%%%%%%%%%%%%%%%%%
     deltaTime(jsensor) = totalTime;

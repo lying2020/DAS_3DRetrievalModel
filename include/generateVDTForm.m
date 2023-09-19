@@ -1,8 +1,8 @@
 
-function VDTForm = generateVDTForm(layerCoeffModel, layerGridModel, velocityModel, undergroundCoordsSet,  ...
+function VDTForm = generateVDTForm(layerCoeffModel, layerGridModel, layerRangeModel, velocityModel, undergroundCoordsSet,  ...
                                     retrieval_relative_model_domain, retrieval_model_grid_size, output_retrieval_model_filename)
 %%
-%% input 
+%% input
 % layerGridModel
 % velocityModel     1* (numlayer-1)
 % undergroundCoordsSet     numsensor * numDim
@@ -29,17 +29,17 @@ displaytimelog(['func: ', func_name, '. ' 'nCores: ', num2str(nCores), ', [num_x
 numx = num_xyz(1); numy = num_xyz(2);  numz = num_xyz(3);
 
 tempVDTForm = cell(numx, numy, numz);
-for ix = 11:numx
+for ix = 15:numx
 % parfor ix = 1:numx
     tmpVDTForm_X = cell(numy, numz);
     X_time_start = str2num(showtimenow(0));
-    displaytimelog(['func: ', func_name, '. ', 'numx: ', num2str(numx), ', ix: ', ix, '. X_time_start: ', X_time_start]);
+    displaytimelog(['func: ', func_name, '. ', 'numx: ', num2str(numx), ', ix: ', num2str(ix), '. X_time_start: ', X_time_start]);
     %  for iy = 1:numy
     parfor iy = 1:numy
         for iz = 1:numz
              tic
              sourceLocationCoord = coordBegin + retrieval_model_grid_size' .* [ix-1, iy-1, iz-1];
-             [equalVelocity, ~, equalTime] = computeequalvelocity(layerCoeffModel, layerGridModel, velocityModel, undergroundCoordsSet, sourceLocationCoord);
+             [equalVelocity, ~, equalTime] = computeequalvelocity(layerCoeffModel, layerGridModel, layerRangeModel, velocityModel, undergroundCoordsSet, sourceLocationCoord);
              tmp =  [equalVelocity'; equalTime']';
              tempVDTForm{ix, iy, iz} = tmp;
              tmpVDTForm_X{iy, iz} = tmp;

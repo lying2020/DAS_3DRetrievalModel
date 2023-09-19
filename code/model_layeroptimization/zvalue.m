@@ -9,12 +9,13 @@
 % 2020-10-29: Modify the description and comments
 % this code is used to obtain the z0 value after fixing x0 and y0 on the discrete surface
 %% -----------------------------------------------------------------------------------------------------
-function [z0, rc] = zvalue(coeffMat, xMat, yMat, xy0, intervalM)
+function [z0, rc] = zvalue(coeffMat, xMat, yMat, layerRange, xy0)
 % -----------------------------------------------------------------------------------------------------
 %  INPUT:
 % coeffMat: (m -1)*(n -1) cell matrix. the fitting polynomial coefficients set of the corresponding layer.
 % each cell contains 1* numCoeff array fitting polynomial coefficients for each grid point.
 % xMat, yMat: m* n matrix, grid point data of x, y-direction.
+% layerRange: 3 * 3, [x_min, x_max, interX; y_min, y_max, interY, z_min, z_max, 1];
 % xy0: 1*2 array. the x, y coordinates of a point on a stratigraphic interface.
 % OUTPUT:
 % z0: z coordinate of a point with fixed x, y on a stratigraphic interface.
@@ -28,12 +29,7 @@ xxArray = xMat(:, floor(cLen / 2));    yyArray = yMat(floor(rLen / 2), :);
 % xxArray = xMat(:, 2);    yyArray = yMat(2, :);
 x0 = xy0(1);  y0 = xy0(2);
 
-% if nargin < 5
-%     intervalM = [10, 10];
-%     %% find the average interval of x, y
-% %     intervalM = [mean(diff(xxArray)), mean(diff(yyArray))];
-% end
-% intervalX = intervalM(1);  intervalY = intervalM(end);
+% intervalX = layerRange(1, 3);  intervalY = layerRange(2, 3);
 rc = find_xy0_grid_index(xxArray, yyArray, xy0);
 
 

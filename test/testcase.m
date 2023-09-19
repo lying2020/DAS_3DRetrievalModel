@@ -6,6 +6,8 @@ addpath ./arrivaltimedata/
 
 %% Data initial?
 layerGridModel = importdata('layergriddata1000.mat');
+numLayer = size(layerGridModel, 1);
+layerRangeModel = cell(numLayer, 1);
 layerCoeffModel = importdata('layerModel1000.mat');
 VelMod = importdata('VelModnew.mat');
 
@@ -76,7 +78,7 @@ xcorrArray2 = cell(numtest,1);
 timeLag2 = cell(numtest,1);
 for itest = 1:numtest
     sourcePosition = testsourcePositions(itest,:);
-    arrivalTime{itest} = gettraveltime(layerCoeffModel, layerGridModel, VelMod, sensorPositions(sensorid{itest},:), sourcePosition);
+    arrivalTime{itest} = gettraveltime(layerCoeffModel, layerGridModel, layerRangeModel, VelMod, sensorPositions(sensorid{itest},:), sourcePosition);
     result{itest} = arrivalTimeRetrieval(arrivalTime{itest},sensorid{itest},VDTForm,sourceLocationDomain,optional);
     arrivalTimeturb1{itest} = disturbtime(arrivalTime{itest},optional.timeturbcoef);
     resultturb1{itest} = arrivalTimeRetrieval(arrivalTimeturb1{itest},sensorid{itest},VDTForm,sourceLocationDomain,optional);
@@ -106,7 +108,7 @@ for isource = 1:numsource
     numres = min(numresult,numrefract);
     for ires = 1:numres
         sourcePosition = result{isource}(ires,1:3);
-        resultarrivalTime{isource}(ires,:) = gettraveltime(layerCoeffModel, layerGridModel, VelMod, sensorPositions(sensorid{isource}-78,:), sourcePosition);
+        resultarrivalTime{isource}(ires,:) = gettraveltime(layerCoeffModel, layerGridModel, layerRangeModel, VelMod, sensorPositions(sensorid{isource}-78,:), sourcePosition);
         [xcorrArray{isource,ires}, timeLag{isource,ires}] = crosscorrelation(arrivalTime{isource}, resultarrivalTime{isource}(ires,:));
     end
 end
@@ -131,7 +133,7 @@ timeLag2 = cell(numtest,1);
 sensorid = sensorid2;
 parfor itest = 1:numtest
     sourcePosition = testsourcePositions(itest,:);
-    arrivalTime{itest} = gettraveltime(layerCoeffModel, layerGridModel, VelMod, sensorPositions(sensorid,:), sourcePosition);
+    arrivalTime{itest} = gettraveltime(layerCoeffModel, layerGridModel, layerRangeModel, VelMod, sensorPositions(sensorid,:), sourcePosition);
     result{itest} = arrivalTimeRetrieval(arrivalTime{itest},sensorid,VDTForm,sourceLocationDomain,optional);
     arrivalTimeturb1{itest} = disturbtime(arrivalTime{itest},optional.timeturbcoef);
     resultturb1{itest} = arrivalTimeRetrieval(arrivalTimeturb1{itest},sensorid,VDTForm,sourceLocationDomain,optional);
@@ -146,7 +148,7 @@ clear testsourcePositions arrivalTime arrivalTimeturb1 arrivalTimeturb2 result r
 % tempsensor = sensorPositions(109,:);
 % sourcePosition = [471.637318614727,56.4648981531604,-3898.50159181775];
 % dist = sourcePosition - tempsensor;
-% arrivalTime1(5,:) = gettraveltime(layerCoeffModel, layerGridModel, VelMod, sensorPositions(sensorid,:), sourcePosition);
+% arrivalTime1(5,:) = gettraveltime(layerCoeffModel, layerGridModel, layerRangeModel, VelMod, sensorPositions(sensorid,:), sourcePosition);
 % [result] = arrivalTimeRetrieval(arrivalTime1(5,:),sensorid,VDTForm,sourceLocationDomain,optional);
 % figure(1); hold on;
 % plot3(sensorPositions(sensorid,1),sensorPositions(sensorid,2),sensorPositions(sensorid,3),'o','MarkerSize',3,'Color','b');hold on;
@@ -154,7 +156,7 @@ clear testsourcePositions arrivalTime arrivalTimeturb1 arrivalTimeturb2 result r
 % plot3(sourcePosition(1,1),sourcePosition(1,2),sourcePosition(1,3),'*','MarkerSize',10)
 % legend({'sensorPositions','result','sourcePosition'});
 % sourcePosition = tempsensor + dist *1/5;
-% arrivalTime1(1,:) = gettraveltime(layerCoeffModel, layerGridModel, VelMod, sensorPositions(sensorid,:), sourcePosition);
+% arrivalTime1(1,:) = gettraveltime(layerCoeffModel, layerGridModel, layerRangeModel, VelMod, sensorPositions(sensorid,:), sourcePosition);
 % [result] = arrivalTimeRetrieval(arrivalTime1(1,:),sensorid,VDTForm,sourceLocationDomain,optional);
 % figure(2)
 % plot3(sensorPositions(sensorid,1),sensorPositions(sensorid,2),sensorPositions(sensorid,3),'o','MarkerSize',3,'Color','b');hold on;
@@ -162,9 +164,9 @@ clear testsourcePositions arrivalTime arrivalTimeturb1 arrivalTimeturb2 result r
 % plot3(sourcePosition(1,1),sourcePosition(1,2),sourcePosition(1,3),'*','MarkerSize',10);
 % legend({'sensorPositions','result','sourcePosition'});
 % sourcePosition = tempsensor + dist *2/5;
-% arrivalTime1(2,:) = gettraveltime(layerCoeffModel, layerGridModel, VelMod, sensorPositions(sensorid,:), sourcePosition);
+% arrivalTime1(2,:) = gettraveltime(layerCoeffModel, layerGridModel, layerRangeModel, VelMod, sensorPositions(sensorid,:), sourcePosition);
 % sourcePosition = tempsensor + dist .*3/5;
-% arrivalTime1(3,:) = gettraveltime(layerCoeffModel, layerGridModel, VelMod, sensorPositions(sensorid,:), sourcePosition);
+% arrivalTime1(3,:) = gettraveltime(layerCoeffModel, layerGridModel, layerRangeModel, VelMod, sensorPositions(sensorid,:), sourcePosition);
 % [result] = arrivalTimeRetrieval(arrivalTime1(3,:),sensorid,VDTForm,sourceLocationDomain,optional);
 % figure(3)
 % plot3(sensorPositions(sensorid,1),sensorPositions(sensorid,2),sensorPositions(sensorid,3),'o','MarkerSize',3,'Color','b');hold on;
@@ -172,14 +174,14 @@ clear testsourcePositions arrivalTime arrivalTimeturb1 arrivalTimeturb2 result r
 % plot3(sourcePosition(1,1),sourcePosition(1,2),sourcePosition(1,3),'*','MarkerSize',10);
 % legend({'sensorPositions','result','sourcePosition'});
 % sourcePosition = tempsensor + dist .*4/5;
-% arrivalTime1(4,:) = gettraveltime(layerCoeffModel, layerGridModel, VelMod, sensorPositions(sensorid,:), sourcePosition);
+% arrivalTime1(4,:) = gettraveltime(layerCoeffModel, layerGridModel, layerRangeModel, VelMod, sensorPositions(sensorid,:), sourcePosition);
 % 
 % %% testcase2
 % sensorid = (81:1:121) - 78;
 % tempsensor = sensorPositions(109,:);
 % sourcePosition = [471.637318614727,56.4648981531604,-3898.50159181775];
 % dist = sourcePosition - tempsensor;
-% arrivalTime(5,:) = gettraveltime(layerCoeffModel, layerGridModel, VelMod, sensorPositions(sensorid,:), sourcePosition);
+% arrivalTime(5,:) = gettraveltime(layerCoeffModel, layerGridModel, layerRangeModel, VelMod, sensorPositions(sensorid,:), sourcePosition);
 % [result] = arrivalTimeRetrieval(arrivalTime(5,:),sensorid,VDTForm,sourceLocationDomain,optional);
 % figure(4); hold on;
 % plot3(sensorPositions(sensorid,1),sensorPositions(sensorid,2),sensorPositions(sensorid,3),'o','MarkerSize',3,'Color','b');hold on;
@@ -187,7 +189,7 @@ clear testsourcePositions arrivalTime arrivalTimeturb1 arrivalTimeturb2 result r
 % plot3(sourcePosition(1,1),sourcePosition(1,2),sourcePosition(1,3),'*','MarkerSize',10)
 % legend({'sensorPositions','result','sourcePosition'});
 % sourcePosition = tempsensor + dist *1/5;
-% arrivalTime(1,:) = gettraveltime(layerCoeffModel, layerGridModel, VelMod, sensorPositions(sensorid,:), sourcePosition);
+% arrivalTime(1,:) = gettraveltime(layerCoeffModel, layerGridModel, layerRangeModel, VelMod, sensorPositions(sensorid,:), sourcePosition);
 % [result] = arrivalTimeRetrieval(arrivalTime(1,:),sensorid,VDTForm,sourceLocationDomain,optional);
 % figure(5)
 % plot3(sensorPositions(sensorid,1),sensorPositions(sensorid,2),sensorPositions(sensorid,3),'o','MarkerSize',3,'Color','b');hold on;
@@ -195,9 +197,9 @@ clear testsourcePositions arrivalTime arrivalTimeturb1 arrivalTimeturb2 result r
 % plot3(sourcePosition(1,1),sourcePosition(1,2),sourcePosition(1,3),'*','MarkerSize',10);
 % legend({'sensorPositions','result','sourcePosition'});
 % sourcePosition = tempsensor + dist *2/5;
-% arrivalTime(2,:) = gettraveltime(layerCoeffModel, layerGridModel, VelMod, sensorPositions(sensorid,:), sourcePosition);
+% arrivalTime(2,:) = gettraveltime(layerCoeffModel, layerGridModel, layerRangeModel, VelMod, sensorPositions(sensorid,:), sourcePosition);
 % sourcePosition = tempsensor + dist .*3/5;
-% arrivalTime(3,:) = gettraveltime(layerCoeffModel, layerGridModel, VelMod, sensorPositions(sensorid,:), sourcePosition);
+% arrivalTime(3,:) = gettraveltime(layerCoeffModel, layerGridModel, layerRangeModel, VelMod, sensorPositions(sensorid,:), sourcePosition);
 % [result] = arrivalTimeRetrieval(arrivalTime(3,:),sensorid,VDTForm,sourceLocationDomain,optional);
 % figure(6)
 % plot3(sensorPositions(sensorid,1),sensorPositions(sensorid,2),sensorPositions(sensorid,3),'o','MarkerSize',3,'Color','b');hold on;
@@ -205,7 +207,7 @@ clear testsourcePositions arrivalTime arrivalTimeturb1 arrivalTimeturb2 result r
 % plot3(sourcePosition(1,1),sourcePosition(1,2),sourcePosition(1,3),'*','MarkerSize',10);
 % legend({'sensorPositions','result','sourcePosition'});
 % sourcePosition = tempsensor + dist .*4/5;
-% arrivalTime(4,:) = gettraveltime(layerCoeffModel, layerGridModel, VelMod, sensorPositions(sensorid,:), sourcePosition);
+% arrivalTime(4,:) = gettraveltime(layerCoeffModel, layerGridModel, layerRangeModel, VelMod, sensorPositions(sensorid,:), sourcePosition);
 % 
 % 
 % %% testcase3
@@ -213,7 +215,7 @@ clear testsourcePositions arrivalTime arrivalTimeturb1 arrivalTimeturb2 result r
 % optional.retrievaldomain = "fault";
 % optional.numoutput = 30;
 % sourcePosition = (faultPositions(580,:) + faultPositions(581,:))/2;
-% arrivalTime2(1,:) = gettraveltime(layerCoeffModel, layerGridModel, VelMod, sensorPositions(sensorid,:), sourcePosition);
+% arrivalTime2(1,:) = gettraveltime(layerCoeffModel, layerGridModel, layerRangeModel, VelMod, sensorPositions(sensorid,:), sourcePosition);
 % [result] = arrivalTimeRetrieval(arrivalTime2(1,:),sensorid,faultVDTForm,faultPositions,optional);
 % figure(7); hold on;
 % plot3(sensorPositions(sensorid,1),sensorPositions(sensorid,2),sensorPositions(sensorid,3),'o','MarkerSize',3,'Color','b');hold on;
@@ -234,7 +236,7 @@ clear testsourcePositions arrivalTime arrivalTimeturb1 arrivalTimeturb2 result r
 % % optional.retrievaldomain = "fault";
 % % optional.numoutput = 10;
 % % sourcePosition = faultPositions(950,:);
-% % arrivalTime2(2,:) = gettraveltime(layerCoeffModel, layerGridModel, VelMod, sensorPositions(sensorid,:), sourcePosition);
+% % arrivalTime2(2,:) = gettraveltime(layerCoeffModel, layerGridModel, layerRangeModel, VelMod, sensorPositions(sensorid,:), sourcePosition);
 % % [result] = arrivalTimeRetrieval(arrivalTime2(2,:),sensorid,faultVDTForm,faultPositions,optional);
 % % figure(8); hold on;
 % % plot3(sensorPositions(sensorid,1),sensorPositions(sensorid,2),sensorPositions(sensorid,3),'o','MarkerSize',3,'Color','b');hold on;

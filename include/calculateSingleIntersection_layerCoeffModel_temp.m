@@ -1,6 +1,6 @@
-function Position = calculateSingleIntersection_layerCoeffModel_temp(initialX, Vel, layerCoeffModel, layerGridModel)
+function Position = calculateSingleIntersection_layerCoeffModel_temp(initialX, Vel, layerCoeffModel, layerGridModel, layerRangeModel)
 % the number of refraction points is one
-%  
+%
 F = cell(2, 1);
 DF = cell(4, 1);
 X1 = initialX(:, 1);
@@ -61,5 +61,5 @@ DF{4} = @(X) (1 + dzdy(X) * dzdy(X)+ (X(3) - X1(3)) * (dzdydy(X)))/(V1 * norm(X 
 
 %%  
 % X0 = initialX(:, 2);
-Position = Broydensolver(layerCoeffModel, layerGridModel, Ftime, F, DF, initialX, 1e-7, 10);
+Position = Broydensolver(layerCoeffModel, layerGridModel, layerRangeModel, Ftime, F, DF, initialX, 1e-7, 10);
 end

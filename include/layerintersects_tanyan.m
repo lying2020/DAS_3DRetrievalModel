@@ -7,7 +7,7 @@
 % log:
 % 2020-10-14: Modify the description and comments
 % this code is used to calculate where the line intersects each layer
-function  [intersection, idxLayer, point]  = layerintersects_tanyan(layerCoeffModel,layerGridModel, startpoint, endpoint)
+function  [intersection, idxLayer, point]  = layerintersects_tanyan(layerCoeffModel,layerGridModel, layerRangeModel, startpoint, endpoint)
 %% INTRODUCTION
 % calculate the intersection points of a given surface and a given line
 %% INPUT

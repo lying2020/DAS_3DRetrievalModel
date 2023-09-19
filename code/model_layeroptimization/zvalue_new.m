@@ -9,7 +9,7 @@
 % 2020-10-29: Modify the description and comments
 % this code is used to obtain the z0 value after fixing x0 and y0 on the discrete surface
 %% -----------------------------------------------------------------------------------------------------
-function [z0, rc] = zvalue_new(coeffMat, xMat, yMat, xy0, intervalM)
+function [z0, rc] = zvalue_new(coeffMat, xMat, yMat, layerRange, xy0)
 % -----------------------------------------------------------------------------------------------------
 %  INPUT:
 % coeffMat: (m -1)*(n -1) cell matrix. the fitting polynomial coefficients set of the corresponding layer.
@@ -27,15 +27,10 @@ function [z0, rc] = zvalue_new(coeffMat, xMat, yMat, xy0, intervalM)
 % xxArray = xMat(:, floor(cLen / 2));    yyArray = yMat(floor(rLen / 2), :);
 % xxArray = xMat(:, 2);    yyArray = yMat(2, :);
 x0 = xy0(1);  y0 = xy0(2);
-
-if nargin < 5
-    intervalM = [10, 10];
-    %% find the average interval of x, y
-%     intervalM = [mean(diff(xxArray)), mean(diff(yyArray))];
-end
-% intervalX = intervalM(1);  intervalY = intervalM(end);
-r  = ceil((x0 - xMat(1, 1)) / intervalM(1));
-c = ceil((y0 - yMat(1, 1)) / intervalM(end));
+intervalX = layerRange(1, 3); 
+intervalY = layerRange(2, 3);
+r  = ceil((x0 - xMat(1, 1)) / intervalX);
+c = ceil((y0 - yMat(1, 1)) / intervalY);
 
 rc = [r, c];
 % rc = find_xy0_grid_index(xxArray, yyArray, xy0);

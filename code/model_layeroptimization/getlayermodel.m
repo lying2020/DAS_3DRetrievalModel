@@ -9,9 +9,9 @@
 % 2020-10-29: Modify the description and comments
 % this code is used to transform the data points into different models
 %% -----------------------------------------------------------------------------------------------------
-function  [baseCoord, layerCoeffModel, layerGridModel, layerCoeffModelTY, layerCoeffModel_zdomainTY] = getlayermodel(filenameList, baseCoord, layerModelParam)
+function  [baseCoord, layerCoeffModel, layerGridModel, layerRangeModel, layerCoeffModelTY, layerCoeffModel_zdomainTY] = getlayermodel(filenameList, baseCoord, layerModelParam)
 % -----------------------------------------------------------------------------------------------------
-% INPUT: 
+% INPUT:
 % filenameList: num*1 cell, a list of filenames for the layer file
 % baseCoord: 1*3 array, base coordinate, selected original point.
 % layerModelParam: gridFlag | gridType | fittingType | layerType | pathSave
@@ -28,6 +28,9 @@ function  [baseCoord, layerCoeffModel, layerGridModel, layerCoeffModelTY, layerC
 %
 % layerCoeffModel: num* 1 cell, each row contains (m-1)*(n-1) small cell,
 % and each small cell contains 1*numCoeff coeff matrix.
+% 
+% layerRangeModel: num * 6, num layers * [x_min, x_max, y_min, y_max, z_min, z_max]
+
 %% -----------------------------------------------------------------------------------------------------
 %
 %  DEBUG ! ! !
@@ -65,6 +68,7 @@ numLayer = length(filenameList);
 % type = 'layer';
 layerGridModel = cell(numLayer, 3);
 layerCoeffModel = cell(numLayer, 1);
+layerRangeModel = cell(numLayer, 1);
 meanZ = zeros(numLayer, 1);
 %
 if nargin < 2 || isempty(baseCoord)
@@ -107,9 +111,11 @@ for iFile = 1 : numLayer
     zMat = zMat(2:end-1, 2:end-1);
 
     %% If you need further grid refinement
-    if gridFlag, [xMat, yMat, zMat] = gridrefined(xMat, yMat, zMat,  gridStepSize, gridType, gridRetractionDist); end
+    if gridFlag
+        [xMat, yMat, zMat] = gridrefined(xMat, yMat, zMat,  gridStepSize, gridType, gridRetractionDist);
+    end
     %     % [xMat, yMat, zMat] = gridrefined(xMat, yMat, zMat, 5, 'natural');
-    
+
     %% if layerType == 'fault', we nead linear interpolation
     if contains('faultModel', layerType)
         [xMat, yMat, zMat] = gridrefined(xMat, yMat, zMat);
@@ -122,6 +128,16 @@ for iFile = 1 : numLayer
     %
     layerCoeffModel{layer_cnt, 1} = coeffMat;
     %
+    tmpM = [min(xMat(:)), max(xMat(:)), abs(xMat(2, 1) - xMat(1, 1)); ...
+            min(yMat(:)), max(yMat(:)), abs(yMat(1, 2) - yMat(1, 1)); ...
+            min(zMat(:)), max(zMat(:)), 1];
+
+    layerRangeModel{layer_cnt, 1} = tmpM;
+    displaytimelog(['func: ', func_name, '. ', 'layer_cnt = ', num2str(layer_cnt), ', layerRange_X: ', num2str([min(xMat(:)), max(xMat(:)), abs(xMat(2, 1) - xMat(1, 1))])]);
+    displaytimelog(['func: ', func_name, '. ', 'layer_cnt = ', num2str(layer_cnt), ', layerRange_Y: ', num2str([min(yMat(:)), max(yMat(:)), abs(yMat(1, 2) - yMat(1, 1))])]);
+    displaytimelog(['func: ', func_name, '. ', 'layer_cnt = ', num2str(layer_cnt), ', layerRange_Z: ', num2str([min(zMat(:)), max(zMat(:)), abs(max(zMat(:)) - min(zMat(:)))])]);
+
+    %
 end
 
 displaytimelog(['func: ', func_name, '. ', 'layer_cnt: ', num2str(layer_cnt), ', layerType: ', layerType]);
@@ -132,6 +148,7 @@ if( 0 == layer_cnt), return; end
 [~, idxZ] = sort(meanZ(1 : layer_cnt), 'descend');
 layerGridModel = layerGridModel(idxZ, :);
 layerCoeffModel = layerCoeffModel(idxZ, :);
+layerRangeModel = layerRangeModel(idxZ, :);
 
  [layerCoeffModelTY, layerCoeffModel_zdomainTY] = fitting_tanyan(layerGridModel);
 %
@@ -161,6 +178,10 @@ if ~isempty(pathSave)
         pathlayerCoeffModel_zdomainTY = [layerType, 'CoeffModel_zdomainTY'];
         displaytimelog(['func: ', func_name, '. ', 'pathlayerCoeffModel_zdomainTY: ', pathSave, pathlayerCoeffModel_zdomainTY]);
         savedata(layerCoeffModel_zdomainTY, pathSave, pathlayerCoeffModel_zdomainTY, '.mat');
+
+        pathlayerRangeModel = [layerType, 'RangeModel'];
+        displaytimelog(['func: ', func_name, '. ', 'pathlayerRangeModel: ', pathSave, pathlayerRangeModel]);
+        savedata(layerRangeModel, pathSave, pathlayerRangeModel, '.mat');
 
     end
 end

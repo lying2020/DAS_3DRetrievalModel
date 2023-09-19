@@ -7,7 +7,7 @@
 % log:
 % 2020-10-14: Modify the description and comments
 % this code is used to obtain the z coordinates of the corresponding layer
-function zArray = layerz_tanyan(layerCoeffModel,layerGridModel, xyArray, idxLayer)
+function zArray = layerz_tanyan(layerCoeffModel,layerGridModel, layerRangeModel, xyArray, idxLayer)
 %% --------------------------------------------------------------------------------
 %  INPUT:
 % layerCoeffModel: layer model, numLayer* 1 cell array.  

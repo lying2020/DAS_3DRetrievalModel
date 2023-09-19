@@ -1,4 +1,4 @@
-function [norvec] = getnorvec(layerCoeffModel,layerGridModel,xyArray,idxLayer)
+function [norvec] = getnorvec(layerCoeffModel,layerGridModel,layerRangeModel, xyArray,idxLayer)
 
 
 num = length(idxLayer);
