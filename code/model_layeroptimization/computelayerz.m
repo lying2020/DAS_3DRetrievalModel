@@ -17,6 +17,11 @@ function zArray = computelayerz(layerCoeffModel, layerGridModel, layerRangeModel
 % layerGridModel: layer model. numLayer* numDim cell. The discret point set of the given surface,
 % each row of cells includes  a m* n matrix containing grid points data of x, y, z - direction of the same layer;
 % layer data should be stored from top to bottom.
+% layerRangeModel: numLayer * 1 cell.
+% each cell contains a 3 * 3 matrix.
+% [ x_min, x_max, x_interval;
+%   y_min, y_max, y_interval;
+%   z_min, z_max, 1 ];
 % xyArray: num* 2 matrix. 每一行代表的是在对应层的x和y值.    eg: xyArray = [1 2; 2 3; 4 5; 4 3; 4 3; 3 3];
 % idxLayer: num* 1. 代表的是xy 的每一行对应的层索引。eg: idxLayer = [1 2 3 3 4 4]';
 %
@@ -53,6 +58,9 @@ for i = 1: num
     layerRange = layerRangeModel{idxLayer(i), 1};
     ir = ceil((x0 - layerRange(1, 1)) / layerRange(1, 3));
     ic = ceil((y0 - layerRange(2, 1)) / layerRange(2, 3));
+    % relative value.
+    x0 = mod(x0, layerRange(1, 3)) - layerRange(1, 3) / 2.0;
+    y0 = mod(y0, layerRange(2, 3)) - layerRange(2, 3) / 2.0;
     coeff0 = coeffMat{ir, ic};
     coeffLen = length(coeff0);
     coeff = zeros(1, 10);

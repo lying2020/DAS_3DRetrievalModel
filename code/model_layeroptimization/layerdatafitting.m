@@ -9,7 +9,7 @@
 % 2020-10-29: Modify the description and comments
 % this code is used to solve all fitting polynomial coefficients of a given layer grid point data.
 %% -----------------------------------------------------------------------------------------------------
-function [coeffMat, resnormMat] = layerdatafitting(xMat, yMat, zMat, fittingType)
+function [coeffMat, resnormMat] = layerdatafitting(xMat, yMat, zMat, gridStepSize, fittingType)
 % -----------------------------------------------------------------------------------------------------
 % INPUT:
 % xMat, yMat, zMat: xLen* yLen matrix, containing grid points data of x, y, z - direction of the given surface;
@@ -25,7 +25,8 @@ function [coeffMat, resnormMat] = layerdatafitting(xMat, yMat, zMat, fittingType
 
 %% -----------------------------------------------------------------------------------------------------
 % some default parameters set.     
-if nargin < 4, fittingType = 'linear';     end
+if nargin < 4, fittingType = 'linear';  end
+if nargin < 3, gridStepSize = [10, 10]; end
 if isempty(xMat), coeffMat = cell(0); resnormMat = []; return; end
 % -----------------------------------------------------------------------------------------------------
 [xLen, yLen] = size(xMat);
@@ -39,9 +40,9 @@ resnormMat = zeros(xLen-1, yLen-1);
 %
 for ir = 2:xLen
     for ic = 2:yLen
-        rArray =  ir-1 : ir+2; % ir : ir+1;
+        rArray = ir-1 : ir+2; % ir : ir+1;
         cArray = ic-1 : ic+2; % ic : ic+1;
-        [coeff, ~, resnorm] = layersurfacefitting(xMat(rArray, cArray) , yMat(rArray, cArray), zMat(rArray, cArray), fittingType);
+        [coeff, ~, resnorm] = layersurfacefitting(xMat(rArray, cArray) , yMat(rArray, cArray), zMat(rArray, cArray), gridStepSize, fittingType);
         coeffMat{ir-1, ic-1} = coeff;
         resnormMat(ir-1, ic-1) = resnorm;
        %% --  test ---------------------------------------------------------------------------------------------------

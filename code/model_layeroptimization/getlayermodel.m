@@ -122,7 +122,7 @@ for iFile = 1 : numLayer
     end
     %% coeffMat is a (m-1)*(n-1) cell.
     if contains('faultModel', layerType), fittingType = 'linear'; end
-    coeffMat = layerdatafitting(xMat, yMat, zMat, fittingType);
+    coeffMat = layerdatafitting(xMat, yMat, zMat, gridStepSize, fittingType);
     %
     layerGridModel(layer_cnt, 1:3)= {xMat, yMat, zMat};
     %

@@ -48,7 +48,7 @@ if any(strcmp(scatter_method, gridType))
     displaytimelog(['func: ', func_name, '. ', 'size(xMat): ', num2str(size(xMat))]);
     % 1st row, 1st column, and the end row, ascending order.
     xSeq0 = xMat(:, 1);
-    x_interp_num = 1+ ceil(abs(xSeq0(2: nrow_xMat) - xSeq0(1: nrow_xMat-1))/stepSize(1));
+    x_interp_num = 1 + ceil(abs(xSeq0(2: nrow_xMat) - xSeq0(1: nrow_xMat-1))/stepSize(1));
     % m-2 overlap points.
     x_total_points_num = sum(x_interp_num) - (nrow_xMat-2);
     displaytimelog(['func: ', func_name, '. ', 'stepSize(1): ', num2str(stepSize(1)), ', x_interp_num: ', num2str(sum(x_interp_num)), ', x_total_points_num: ', num2str(x_total_points_num)]);

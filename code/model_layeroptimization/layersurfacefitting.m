@@ -11,12 +11,12 @@
 % we have to think about how quickly we can reuse code if we're only going to do quadric or linear surface fitting.
 % and, what can we do when we only give 9 points instead of 16 points for xMat ...
 %% -----------------------------------------------------------------------------------------------------
-function [coeff, func, resnorm] = layersurfacefitting(xMat, yMat, zMat, fittingType)
+function [coeff, func, resnorm] = layersurfacefitting(xMat, yMat, zMat, gridStepSize, fittingType)
 % -----------------------------------------------------------------------------------------------------
 % 我们要考虑到，如果我们只打算进行二次曲面拟合或者线性曲面拟合的时候，怎么快速的重复利用代码。
 % 或者我们只给9个点，而不是16个点的时候，又可以怎么去处理。
 % INPUT:
-% xMat, yMat, zMat: m* n matrix, discrete point data to be fitted.
+% xMat, yMat, zMat: 4 * 4 matrix, discrete point data to be fitted.
 % fittingType: fitting type. ( 'cubic'  | 'quad'  |  'nonlinear'  |  'linear')
 %                       num coeff =      10              6                  4                       3
 %
@@ -29,10 +29,24 @@ function [coeff, func, resnorm] = layersurfacefitting(xMat, yMat, zMat, fittingT
 %  func = @(aa, x, y) aa(1) + aa(2)*y + aa(3)*x + aa(4)*x.*y ... ;
 %% -----------------------------------------------------------------------------------------------------
 % default parameter set.
-if nargin < 4, fittingType = 'linear';     end
+% some default parameters set.     
+if nargin < 4, fittingType = 'linear';  end
+if nargin < 3, gridStepSize = [10, 10]; end
 % -----------------------------------------------------------------------------------------------------
 % A * aa = f; => aa = pin(A)*f;
-X = xMat(:);    Y = yMat(:);     f = zMat(:);
+mX = mean(xMat(:));  % xMat(2, 1) + gridStepSize(1) / 2.0;  %
+mY = mean(yMat(:));  % yMat(1, 2) + gridStepSize(2) / 2.0;  %
+
+% x1    x1    x1    x1
+% 
+% x2    x2    x2    x2
+%         [mX]
+% x3    x3    x3    x3
+% 
+% x4    x4    x4    x4
+
+X = xMat(:) - mX;    Y = yMat(:) - mY;     f = zMat(:);
+
 % chose fitting type ...
 if contains('cubic', fittingType)
     func = @(aa, x, y) aa(10)*x.*x.*x + aa(9)*x.*x.*y + aa(8)*x.*y.*y + aa(7)*y.*y.*y ...
