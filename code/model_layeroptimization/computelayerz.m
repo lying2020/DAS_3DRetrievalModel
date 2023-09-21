@@ -56,8 +56,12 @@ if isempty(layerGridModel), return;  end
 for i = 1: num
     coeffMat = layerCoeffModel{idxLayer(i), 1};
     layerRange = layerRangeModel{idxLayer(i), 1};
-    ir = ceil((x0 - layerRange(1, 1)) / layerRange(1, 3));
-    ic = ceil((y0 - layerRange(2, 1)) / layerRange(2, 3));
+    x0 = xyArray(i, 1);  y0 = xyArray(i, 2);
+    ir = floor((x0 - layerRange(1, 1)) / layerRange(1, 3) + 1);
+    ic = floor((y0 - layerRange(2, 1)) / layerRange(2, 3) + 1);
+    [maxi,maxj] = size(coeffMat);
+    ir = max(1, min(maxi, ir));
+    ic = max(1, min(maxj, ic));
     % relative value.
     x0 = mod(x0, layerRange(1, 3)) - layerRange(1, 3) / 2.0;
     y0 = mod(y0, layerRange(2, 3)) - layerRange(2, 3) / 2.0;
