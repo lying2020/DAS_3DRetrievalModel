@@ -15,14 +15,14 @@ add_default_folder_path();
 % %% %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %% import data model
 
-read_geological_model_xinjiang_2020;
-% geological_model_name = 'geological_model_xinjiang_2020_XJ';
-
 read_geological_model_2023_T('_T106')
 geological_model_name = 'geological_model_2023_T106';
 
 read_geological_model_2023_T('_T131')
 % geological_model_name = 'geological_model_2023_T131';
+
+% read_geological_model_xinjiang_2020;
+% geological_model_name = 'geological_model_xinjiang_2020_XJ';
 
 %%
 [addpath_name, ~]=fileparts(mfilename('fullpath'));
@@ -67,9 +67,8 @@ layerGridModel  = importdata([output_mat_data_path, filesep, 'layerGridModel.mat
 % displaytimelog(['func: ', func_name, '. ', 'importdata velocityModel ... ']);
 % velocityModel   = importdata([output_mat_data_path, filesep, 'velocityModel.mat']);
 
-
-% layerCoeffModel = importdata([output_mat_data_path, filesep, 'layerCoeffModelTY.mat']);
-% velocityModel   = importdata([output_mat_data_path, filesep, 'velocityModelTY.mat']);
+layerCoeffModel = importdata([output_mat_data_path, filesep, 'layerCoeffModelTY.mat']);
+velocityModel   = importdata([output_mat_data_path, filesep, 'velocityModelTY.mat']);
 
 
 % displaytimelog(['func: ', func_name, '. ', 'importdata layergriddata1000 / layerModel1000 / VelModnew ... ']);
@@ -93,7 +92,7 @@ bottom_sensor_coordinate = undergroundCoordsSet(end, :);
 sensors_num = size(undergroundCoordsSet,1);
 displaytimelog(['func: ', func_name, '. ', 'sensors_num: ', num2str(sensors_num), ', bottom_sensor_coordinate: ', num2str(bottom_sensor_coordinate)]);
 
-retrieval_model_default_area = [-3000, 3000; -3000, 3000 ; -2500, -200];
+retrieval_model_default_area = [-1500, 1500; -1500, 1500 ; -2500, -300];
 displaytimelog(['func: ', func_name, '. ', 'default area. retrieval_model_area: x = ', num2str(retrieval_model_default_area(1, :)), ...
                             ', y = ', num2str(retrieval_model_default_area(2, :)), ', z = ', num2str(retrieval_model_default_area(3, :))]);
 

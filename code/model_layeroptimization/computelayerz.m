@@ -27,6 +27,16 @@ function zArray = computelayerz(layerCoeffModel, layerGridModel, layerRangeModel
 %
 % OUTPUT:
 % zArray: num* 1. 对应的输入的xy变量的每一行的x, y坐标与所在层的z坐标。
+%
+%
+%
+%  DEBUG ! ! !
+dbstop if error;
+format long % short % 
+%
+% clear
+func_name = mfilename;
+
 %% -----------------------------------------------------------------------------------------------------
 %
 num = length(idxLayer);
@@ -52,19 +62,22 @@ if isempty(layerGridModel), return;  end
 
 
 %% -------------------------------------------------------------------------------------------------
-
 for i = 1: num
     coeffMat = layerCoeffModel{idxLayer(i), 1};
     layerRange = layerRangeModel{idxLayer(i), 1};
-    x0 = xyArray(i, 1);  y0 = xyArray(i, 2);
-    ir = floor((x0 - layerRange(1, 1)) / layerRange(1, 3) + 1);
-    ic = floor((y0 - layerRange(2, 1)) / layerRange(2, 3) + 1);
+    displaytimelog(['func: ', func_name, '. ', 'idxLayer(i): ', num2str(idxLayer(i)), ', layerRangeX: ', num2str(layerRange(1, :)), ', layerRangeY: ', num2str(layerRange(2, :))]);
+    xx = xyArray(i, 1);  yy = xyArray(i, 2);
+    ir = floor((xx - layerRange(1, 1)) / layerRange(1, 3) + 1);
+    ic = floor((yy - layerRange(2, 1)) / layerRange(2, 3) + 1);
     [maxi,maxj] = size(coeffMat);
     ir = max(1, min(maxi, ir));
     ic = max(1, min(maxj, ic));
+    displaytimelog(['func: ', func_name, '. ', 'ir: ', num2str(ir), ', ic: ', num2str(ic), ', xx: ', num2str(xx), ', yy: ', num2str(yy)]);
+
     % relative value.
-    x0 = mod(x0, layerRange(1, 3)) - layerRange(1, 3) / 2.0;
-    y0 = mod(y0, layerRange(2, 3)) - layerRange(2, 3) / 2.0;
+    x0 = mod(xx, layerRange(1, 3)) - layerRange(1, 3) / 2.0;
+    y0 = mod(yy, layerRange(2, 3)) - layerRange(2, 3) / 2.0;
+
     coeff0 = coeffMat{ir, ic};
     coeffLen = length(coeff0);
     coeff = zeros(1, 10);
@@ -77,6 +90,8 @@ for i = 1: num
         zArray(i, 1) = coeff(10)*x0.*x0.*x0 + coeff(9)*x0.*x0.*y0 + coeff(8)*x0.*y0.*y0 + coeff(7)*y0.*y0.*y0 + ...
                        coeff(6)*x0.*x0 + coeff(5)*y0.*y0 + coeff(4)*x0.*y0 + coeff(3)*x0 + coeff(2)*y0 + coeff(1)*1;
     end
+
+    displaytimelog(['func: ', func_name, '. ', 'x0: ', num2str(x0), ', y0: ', num2str(y0), ', zArray: ', num2str(zArray(i, 1)), ', coeff0: ', num2str(coeff0)]);
 
 end
 

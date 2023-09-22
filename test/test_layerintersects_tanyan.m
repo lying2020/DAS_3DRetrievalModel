@@ -29,7 +29,7 @@ seCoords = [startpoint; endpoint] - baseCoord;
 % filenameList is a cell array
 
 if  ~exist('layerGridModel', 'var')
-     [layerGridModel, layerCoeffModel, layerRangeModel, layerCoeffModel_zdomain, layerCoeffModelLY, layerGridModelLY] = test_get_layerMat(baseCoord);
+     [layerGridModel, layerCoeffModel, layerCoeffModel_zdomain, layerCoeffModelLY, layerGridModelLY, layerRangeModelLY] = test_get_layerMat(baseCoord);
 
 end
 
@@ -101,7 +101,7 @@ end
 
 toc
 
-function [layerGridModelTY, layerCoeffModelTY, layerRangeModel, layerCoeffModel_zdomainTY, layerCoeffModelLY, layerGridModelLY] = test_get_layerMat(baseCoord, filenameList_layer)
+function [layerGridModelTY, layerCoeffModelTY, layerCoeffModel_zdomainTY, layerCoeffModelLY, layerGridModelLY, layerRangeModelLY] = test_get_layerMat(baseCoord, filenameList_layer)
 
 type = 'layer';
 if exist('filenameList_layer', 'var')
@@ -127,7 +127,7 @@ layerGridModelTY = grid_tanyan(layerdata,baseCoord,inter,20,20); % new data
 gridFlag = true; gridType = 'linear'; gridStepSize = [10, 10]; gridRetractionDist = [10, 10]; fittingType = 'cubic'; layerType = 'layer';
 layerModelParam = struct('gridFlag', gridFlag, 'gridType', gridType, 'gridStepSize', gridStepSize, 'gridRetractionDist', gridRetractionDist, ...
                                                   'fittingType', fittingType, 'layerType', layerType, 'pathSave', []);
-[baseCoord, layerCoeffModelLY, layerGridModelLY, layerRangeModel] = getlayermodel(filenameList_layer, baseCoord, layerModelParam);
+[baseCoord, layerCoeffModelLY, layerGridModelLY, layerRangeModelLY] = getlayermodel(filenameList_layer, baseCoord, layerModelParam);
 
 
 end

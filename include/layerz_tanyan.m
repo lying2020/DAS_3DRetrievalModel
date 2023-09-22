@@ -17,8 +17,17 @@ function zArray = layerz_tanyan(layerCoeffModel,layerGridModel, layerRangeModel,
 %
 % OUTPUT:
 % zArray: num* 1.  
+%
+%  DEBUG ! ! !
+dbstop if error;
+format long % short % 
+%
+% clear
+func_name = mfilename;
+
 %% -------------------------------------------------------------------------------
 %
+
 num = length(idxLayer);
 zArray = zeros(num, 1);
 %
@@ -34,26 +43,32 @@ for i = 1: num
     coeffMat = layerCoeffModel{ idxLayer(i) };
     xMat = layerGridModel{ idxLayer(i),1 };
     yMat = layerGridModel{ idxLayer(i),2 };
-    inter = xMat(1,2) - xMat(1,1);
+    inter = xMat(2,2) - xMat(1,1);
+    displaytimelog(['func: ', func_name, '. ', 'idxLayer(i): ', num2str(idxLayer(i)), ', layerRangeX: ', num2str([xMat(1,1), inter]), ', layerRangeY: ', num2str([yMat(1,1), inter])]);
     id = floor((xyArray(i, 2) - yMat(1,1))/inter+1);
     jd = floor((xyArray(i, 1) - xMat(1,1))/inter+1);
     [maxi,maxj] = size(coeffMat);
     id = max(1, min(maxi, id));
     jd = max(1, min(maxj, jd));
+    displaytimelog(['func: ', func_name, '. ', 'ir: ', num2str(id), ', ic: ', num2str(jd), ', xx: ', num2str(xyArray(i, 2)), ', yy: ', num2str(xyArray(i, 1))]);
 
 %     displaytimelog(['id: ', num2str(id), ', jd: ', num2str(jd), ', size: ', num2str(size(coeffMat))]);
-    coeff = coeffMat{id,jd};
+    coeff0 = coeffMat{id,jd};
     % Linear | Quadric | Cubic function fitted at mesh point
     % % function: layerdatafitting
     % Linear | Quadric | Cubic function fitted at mesh point
-    % gridsfunc = @(x, y) coeff(10)*x.*x.*x + coeff(9)*x.*x.*y + coeff(8)*x.*y.*y + coeff(7)*y.*y.*y + ...
-    %             coeff(6)*x.^2 + coeff(5)*y.^2 + coeff(4)*x.*y + coeff(3)*x + coeff(2)*y + coeff(1);
+    % gridsfunc = @(x, y) coeff0(10)*x.*x.*x + coeff0(9)*x.*x.*y + coeff0(8)*x.*y.*y + coeff0(7)*y.*y.*y + ...
+    %             coeff0(6)*x.^2 + coeff0(5)*y.^2 + coeff0(4)*x.*y + coeff0(3)*x + coeff0(2)*y + coeff0(1);
 
     % % function: fitting_tanyan
-    gridsfunc = @(x, y) coeff(1)*x.*x.*x + coeff(2)*x.*x.*y + coeff(3)*x.*y.*y + coeff(4)*y.*y.*y + ...
-                coeff(5)*x.^2 + coeff(6)*y.^2 + coeff(7)*x.*y + coeff(8)*x + coeff(9)*y + coeff(10) * 1;
+    gridsfunc = @(x, y) coeff0(1)*x.*x.*x + coeff0(2)*x.*x.*y + coeff0(3)*x.*y.*y + coeff0(4)*y.*y.*y + ...
+                coeff0(5)*x.^2 + coeff0(6)*y.^2 + coeff0(7)*x.*y + coeff0(8)*x + coeff0(9)*y + coeff0(10) * 1;
 
     zArray(i, 1) = gridsfunc(xyArray(i, 1) - xMat(id, jd)+ inter/2, xyArray(i,2) - yMat(id,jd)+inter/2);
+    x0 = xyArray(i, 1) - xMat(id, jd) + inter/2;
+    y0 = xyArray(i, 2) - yMat(id, jd) + inter/2;
+    displaytimelog(['func: ', func_name, '. ', 'x0: ', num2str(x0), ', y0: ', num2str(y0), ', zArray: ', num2str(zArray(i, 1)), ', coeff0: ', num2str(coeff0)]);
+
 end
 
 end
