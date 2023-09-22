@@ -44,13 +44,13 @@ for i = 1: num
     xMat = layerGridModel{ idxLayer(i),1 };
     yMat = layerGridModel{ idxLayer(i),2 };
     inter = xMat(2,2) - xMat(1,1);
-    displaytimelog(['func: ', func_name, '. ', 'idxLayer(i): ', num2str(idxLayer(i)), ', layerRangeX: ', num2str([xMat(1,1), inter]), ', layerRangeY: ', num2str([yMat(1,1), inter])]);
+    displaytimelog(['func: ', func_name, '. ', 'idxLayer(i): ', num2str(idxLayer(i)), ', layerRangeX: ', num2str([xMat(1,1), xMat(end, end), inter]), ', layerRangeY: ', num2str([yMat(1,1), yMat(end, end), inter])]);
     id = floor((xyArray(i, 2) - yMat(1,1))/inter+1);
     jd = floor((xyArray(i, 1) - xMat(1,1))/inter+1);
-    [maxi,maxj] = size(coeffMat);
+    [maxi, maxj] = size(coeffMat);
     id = max(1, min(maxi, id));
     jd = max(1, min(maxj, jd));
-    displaytimelog(['func: ', func_name, '. ', 'ir: ', num2str(id), ', ic: ', num2str(jd), ', xx: ', num2str(xyArray(i, 2)), ', yy: ', num2str(xyArray(i, 1))]);
+    displaytimelog(['func: ', func_name, '. ', 'ir: ', num2str(jd), ', ic: ', num2str(id), ', xx: ', num2str(xyArray(i, 1)), ', yy: ', num2str(xyArray(i, 2))]);
 
 %     displaytimelog(['id: ', num2str(id), ', jd: ', num2str(jd), ', size: ', num2str(size(coeffMat))]);
     coeff0 = coeffMat{id,jd};
@@ -67,7 +67,7 @@ for i = 1: num
     zArray(i, 1) = gridsfunc(xyArray(i, 1) - xMat(id, jd)+ inter/2, xyArray(i,2) - yMat(id,jd)+inter/2);
     x0 = xyArray(i, 1) - xMat(id, jd) + inter/2;
     y0 = xyArray(i, 2) - yMat(id, jd) + inter/2;
-    displaytimelog(['func: ', func_name, '. ', 'x0: ', num2str(x0), ', y0: ', num2str(y0), ', zArray: ', num2str(zArray(i, 1)), ', coeff0: ', num2str(coeff0)]);
+    displaytimelog(['func: ', func_name, '. ', 'x0: ', num2str(x0), ', y0: ', num2str(y0), ', xMat(id, jd): ', num2str(xMat(id, jd)), ', yMat(id, jd): ', num2str(yMat(id, jd)), ', zArray: ', num2str(zArray(i, 1))]);
 
 end
 

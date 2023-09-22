@@ -9,7 +9,7 @@
 % 2020-10-29: Modify the description and comments
 % this code is used to transform the data points into different models
 %% -----------------------------------------------------------------------------------------------------
-function  [baseCoord, layerCoeffModel, layerGridModel, layerRangeModel, layerCoeffModelTY, layerCoeffModel_zdomainTY] = getlayermodel(filenameList, baseCoord, layerModelParam)
+function  [baseCoord, layerCoeffModel, layerGridModel, layerRangeModel, layerCoeffModelTY, layerCoeffModel_zdomainTY, layerGridModelTY] = getlayermodel(filenameList, baseCoord, layerModelParam)
 % -----------------------------------------------------------------------------------------------------
 % INPUT:
 % filenameList: num*1 cell, a list of filenames for the layer file
@@ -150,7 +150,6 @@ layerGridModel = layerGridModel(idxZ, :);
 layerCoeffModel = layerCoeffModel(idxZ, :);
 layerRangeModel = layerRangeModel(idxZ, :);
 
- [layerCoeffModelTY, layerCoeffModel_zdomainTY] = fitting_tanyan(layerGridModel);
 %
 %
 %
@@ -171,14 +170,6 @@ if ~isempty(pathSave)
         displaytimelog(['func: ', func_name, '. ', 'pathlayerCoeffModel: ' , pathSave, filesep, pathlayerCoeffModel]);
         savedata(layerCoeffModel, pathSave, pathlayerCoeffModel, '.mat');
 
-        pathlayerCoeffModelTY = [layerType, 'CoeffModelTY'];
-        displaytimelog(['func: ', func_name, '. ', 'pathlayerCoeffModelTY: ', pathSave, filesep, pathlayerCoeffModelTY]);
-        savedata(layerCoeffModelTY, pathSave, pathlayerCoeffModelTY, '.mat');
-
-        pathlayerCoeffModel_zdomainTY = [layerType, 'CoeffModel_zdomainTY'];
-        displaytimelog(['func: ', func_name, '. ', 'pathlayerCoeffModel_zdomainTY: ', pathSave, filesep, pathlayerCoeffModel_zdomainTY]);
-        savedata(layerCoeffModel_zdomainTY, pathSave, pathlayerCoeffModel_zdomainTY, '.mat');
-
         pathlayerRangeModel = [layerType, 'RangeModel'];
         displaytimelog(['func: ', func_name, '. ', 'pathlayerRangeModel: ', pathSave, filesep, pathlayerRangeModel]);
         savedata(layerRangeModel, pathSave, pathlayerRangeModel, '.mat');
@@ -188,11 +179,40 @@ end
 
 
 
+if nargout > 4
+    layer_cnt = 0;
+    inter = 10;
+    for iFile = 1:length(filenameList)
+        layerTmp = readtxtdata(filenameList{iFile}, layerType);
+        if isempty(layerTmp)
+            displaytimelog(['func: ', func_name, '. ', 'isempty(layerTmp) == true.']);
+            continue;
+        end
+        layer_cnt = layer_cnt + 1;
+        layerdata{layer_cnt} = layerTmp;
+    end
 
+    layerGridModelTY = grid_tanyan(layerdata, baseCoord, inter, gridRetractionDist(1),gridRetractionDist(2)); % new data
+    [layerCoeffModelTY, layerCoeffModel_zdomainTY] = fitting_tanyan(layerGridModelTY);
 
+    if ~isempty(pathSave)
+        if isfolder(pathSave)
 
+            pathlayerGridModelTY = [layerType, 'GridModelTY'];
+            displaytimelog(['func: ', func_name, '. ', 'pathlayerGridModelTY: ', pathSave, filesep, pathlayerGridModelTY]);
+            savedata(layerGridModel, pathSave, pathlayerGridModelTY, '.mat');
 
+            pathlayerCoeffModelTY = [layerType, 'CoeffModelTY'];
+            displaytimelog(['func: ', func_name, '. ', 'pathlayerCoeffModelTY: ', pathSave, filesep, pathlayerCoeffModelTY]);
+            savedata(layerCoeffModelTY, pathSave, pathlayerCoeffModelTY, '.mat');
 
+            pathlayerCoeffModel_zdomainTY = [layerType, 'CoeffModel_zdomainTY'];
+            displaytimelog(['func: ', func_name, '. ', 'pathlayerCoeffModel_zdomainTY: ', pathSave, filesep, pathlayerCoeffModel_zdomainTY]);
+            savedata(layerCoeffModel_zdomainTY, pathSave, pathlayerCoeffModel_zdomainTY, '.mat');
 
+        end
+    end
 
+end
 
+end

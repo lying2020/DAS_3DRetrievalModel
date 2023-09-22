@@ -76,7 +76,7 @@ gridFlag = true;  gridType = 'linear';  gridStepSize = [10, 10];  gridRetraction
 % gridFlag = true;  gridType = 'linear';  gridStepSize = [10, 10];  gridRetractionDist = [10, 10];   fittingType = 'nonlinear';  layerType = 'layer';
 layerModelParam = struct('gridFlag', gridFlag, 'gridType', gridType, 'gridStepSize', gridStepSize, 'gridRetractionDist', gridRetractionDist, ...
                                                   'fittingType', fittingType, 'layerType', layerType, 'pathSave', output_mat_data_path);
-[baseCoord, layerCoeffModel, layerGridModel, layerRangeModel, layerCoeffModelTY, layerCoeffModel_zdomainTY] = getlayermodel(filename_list_layers, baseCoord, layerModelParam);
+[baseCoord, layerCoeffModel, layerGridModel, layerRangeModel, layerCoeffModelTY, layerCoeffModel_zdomainTY, layerGridModelTY] = getlayermodel(filename_list_layers, baseCoord, layerModelParam);
 
 savedata(baseCoord, output_mat_data_path, 'baseCoord', '.txt');
 % DATA_MODEL.baseCoord = baseCoord;
@@ -87,6 +87,8 @@ DATA_MODEL.layerRangeModel = layerRangeModel;
 % ** TANYAN layerGridModel  ***************************************************************************
 DATA_MODEL.layerCoeffModelTY = layerCoeffModelTY;
 DATA_MODEL.layerCoeffModel_zdomainTY = layerCoeffModel_zdomainTY;
+DATA_MODEL.layerGridModelTY = layerGridModelTY;
+
 
 time_layers = showtimenow;
 displaytimelog(['func: ', func_name, '. ', 'time_layers: ', time_layers]);

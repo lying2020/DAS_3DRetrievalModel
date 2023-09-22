@@ -64,6 +64,8 @@ if isempty(layerGridModel), return;  end
 %% -------------------------------------------------------------------------------------------------
 for i = 1: num
     coeffMat = layerCoeffModel{idxLayer(i), 1};
+    xMat = layerGridModel{idxLayer(i), 1};
+    yMat = layerGridModel{idxLayer(i), 2};
     layerRange = layerRangeModel{idxLayer(i), 1};
     displaytimelog(['func: ', func_name, '. ', 'idxLayer(i): ', num2str(idxLayer(i)), ', layerRangeX: ', num2str(layerRange(1, :)), ', layerRangeY: ', num2str(layerRange(2, :))]);
     xx = xyArray(i, 1);  yy = xyArray(i, 2);
@@ -91,7 +93,7 @@ for i = 1: num
                        coeff(6)*x0.*x0 + coeff(5)*y0.*y0 + coeff(4)*x0.*y0 + coeff(3)*x0 + coeff(2)*y0 + coeff(1)*1;
     end
 
-    displaytimelog(['func: ', func_name, '. ', 'x0: ', num2str(x0), ', y0: ', num2str(y0), ', zArray: ', num2str(zArray(i, 1)), ', coeff0: ', num2str(coeff0)]);
+    displaytimelog(['func: ', func_name, '. ', 'x0: ', num2str(x0), ', y0: ', num2str(y0), ', xMat(ir, ic): ', num2str(xMat(ir, ic)), ', yMat(ir, ic): ', num2str(yMat(ir, ic)), ', zArray: ', num2str(zArray(i, 1))]);
 
 end
 

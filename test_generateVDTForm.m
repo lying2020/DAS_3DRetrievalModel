@@ -58,18 +58,17 @@ displaytimelog(['func: ', func_name, '. ', 'input_geological_model_path: ', inpu
 output_mat_data_path = geological_model.output_mat_data_path;
 displaytimelog(['func: ', func_name, '. ', 'output_mat_data_path: ', output_mat_data_path]);
 
-
-displaytimelog(['func: ', func_name, '. ', 'importdata layerGridModel ... ']);
-layerGridModel  = importdata([output_mat_data_path, filesep, 'layerGridModel.mat']);
-
+% displaytimelog(['func: ', func_name, '. ', 'importdata layerGridModel ... ']);
+% layerGridModel  = importdata([output_mat_data_path, filesep, 'layerGridModel.mat']);
 % displaytimelog(['func: ', func_name, '. ', 'importdata layerCoeffModel ... ']);
 % layerCoeffModel = importdata([output_mat_data_path, filesep, 'layerCoeffModel.mat']);
 % displaytimelog(['func: ', func_name, '. ', 'importdata velocityModel ... ']);
 % velocityModel   = importdata([output_mat_data_path, filesep, 'velocityModel.mat']);
 
+% displaytimelog(['func: ', func_name, '. ', 'importdata layerGridModelTY ... ']);
+layerGridModel  = importdata([output_mat_data_path, filesep, 'layerGridModelTY.mat']);
 layerCoeffModel = importdata([output_mat_data_path, filesep, 'layerCoeffModelTY.mat']);
 velocityModel   = importdata([output_mat_data_path, filesep, 'velocityModelTY.mat']);
-
 
 % displaytimelog(['func: ', func_name, '. ', 'importdata layergriddata1000 / layerModel1000 / VelModnew ... ']);
 % layerGridModel = load_mat_data('layergriddata1000.mat');
