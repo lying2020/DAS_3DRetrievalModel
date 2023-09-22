@@ -158,29 +158,29 @@ layerRangeModel = layerRangeModel(idxZ, :);
 if ~isempty(pathSave)
     if isfolder(pathSave)
         pathlayerModelParam = [layerType, 'ModelParam'];
-        displaytimelog(['func: ', func_name, '. ', 'pathlayerModelParam: ', pathSave, pathlayerModelParam]);
+        displaytimelog(['func: ', func_name, '. ', 'pathlayerModelParam: ', pathSave, filesep, pathlayerModelParam]);
         savedata(layerModelParam, pathSave, pathlayerModelParam, '.mat');
 
         % pathlayerGridModel = [layerType, 'GridModel_', num2str(numLayer)];
         pathlayerGridModel = [layerType, 'GridModel'];
-        displaytimelog(['func: ', func_name, '. ', 'pathlayerGridModel: ', pathSave, pathlayerGridModel]);
+        displaytimelog(['func: ', func_name, '. ', 'pathlayerGridModel: ', pathSave, filesep, pathlayerGridModel]);
         savedata(layerGridModel, pathSave, pathlayerGridModel, '.mat');
 
         % pathlayerCoeffModel = [layerType, 'CoeffModel_', num2str(numLayer)];
         pathlayerCoeffModel = [layerType, 'CoeffModel'];
-        displaytimelog(['func: ', func_name, '. ', 'pathlayerCoeffModel: ' , pathSave, pathlayerCoeffModel]);
+        displaytimelog(['func: ', func_name, '. ', 'pathlayerCoeffModel: ' , pathSave, filesep, pathlayerCoeffModel]);
         savedata(layerCoeffModel, pathSave, pathlayerCoeffModel, '.mat');
 
         pathlayerCoeffModelTY = [layerType, 'CoeffModelTY'];
-        displaytimelog(['func: ', func_name, '. ', 'pathlayerCoeffModelTY: ', pathSave, pathlayerCoeffModelTY]);
+        displaytimelog(['func: ', func_name, '. ', 'pathlayerCoeffModelTY: ', pathSave, filesep, pathlayerCoeffModelTY]);
         savedata(layerCoeffModelTY, pathSave, pathlayerCoeffModelTY, '.mat');
 
         pathlayerCoeffModel_zdomainTY = [layerType, 'CoeffModel_zdomainTY'];
-        displaytimelog(['func: ', func_name, '. ', 'pathlayerCoeffModel_zdomainTY: ', pathSave, pathlayerCoeffModel_zdomainTY]);
+        displaytimelog(['func: ', func_name, '. ', 'pathlayerCoeffModel_zdomainTY: ', pathSave, filesep, pathlayerCoeffModel_zdomainTY]);
         savedata(layerCoeffModel_zdomainTY, pathSave, pathlayerCoeffModel_zdomainTY, '.mat');
 
         pathlayerRangeModel = [layerType, 'RangeModel'];
-        displaytimelog(['func: ', func_name, '. ', 'pathlayerRangeModel: ', pathSave, pathlayerRangeModel]);
+        displaytimelog(['func: ', func_name, '. ', 'pathlayerRangeModel: ', pathSave, filesep, pathlayerRangeModel]);
         savedata(layerRangeModel, pathSave, pathlayerRangeModel, '.mat');
 
     end

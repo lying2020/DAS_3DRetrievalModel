@@ -14,7 +14,7 @@ tic
 
 func_name = mfilename;
 
-
+% read_geological_model_xinjiang_2020
 %% %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 if exist('input_data_path', 'var')
     disp(['func: ', func_name, '. ', 'Variable input_data_path exists']);

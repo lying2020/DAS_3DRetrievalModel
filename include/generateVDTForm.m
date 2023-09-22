@@ -15,7 +15,7 @@ displaytimelog(['func: ', func_name]);
 mkdir(output_retrieval_model_filename);
 displaytimelog(['func: ', func_name, '. ' 'output_retrieval_model_filename: ' output_retrieval_model_filename]);
 
-num_xyz = floor(abs(retrieval_relative_model_domain(:, 2) - retrieval_relative_model_domain(:, 1)) ./ retrieval_model_grid_size) + 1;
+num_xyz = max(floor(abs(retrieval_relative_model_domain(:, 2) - retrieval_relative_model_domain(:, 1)) ./ retrieval_model_grid_size), 1);
 
 coordBegin = retrieval_relative_model_domain(1:3,1)';
 % VDTForm = zeros(numx, numy, numz, nums, 2);

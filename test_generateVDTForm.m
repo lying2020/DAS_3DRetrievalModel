@@ -15,13 +15,13 @@ add_default_folder_path();
 % %% %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %% import data model
 
-% read_geological_model_xinjiang_2020;
+read_geological_model_xinjiang_2020;
 % geological_model_name = 'geological_model_xinjiang_2020_XJ';
 
-% read_geological_model_2023_T('_T106')
+read_geological_model_2023_T('_T106')
 geological_model_name = 'geological_model_2023_T106';
 
-% read_geological_model_2023_T('_T131')
+read_geological_model_2023_T('_T131')
 % geological_model_name = 'geological_model_2023_T131';
 
 %%
@@ -78,20 +78,6 @@ layerGridModel  = importdata([output_mat_data_path, filesep, 'layerGridModel.mat
 % velocityModel =  load_mat_data('VelModnew.mat');
 %
 %
-
-% numLayer = size(layerGridModel, 1);
-% layerRangeModel = cell(numLayer, 1);
-% for i_layer = 1 : numLayer
-%     xMat = layerGridModel{i_layer, 1};
-%     yMat = layerGridModel{i_layer, 2};
-%     zMat = layerGridModel{i_layer, 3};
-%     layerRangeModel{i_layer} = [min(xMat(:)), max(xMat(:)), abs(xMat(2, 1) - xMat(1, 1)); ...
-%                                 min(yMat(:)), max(yMat(:)), abs(yMat(1, 2) - yMat(1, 1)); ...
-%                                 min(zMat(:)), max(zMat(:)), 1];
-
-% end
-% savedata(layerRangeModel, output_mat_data_path, 'layerRangeModel', '.mat');
-
 layerRangeModel = importdata([output_mat_data_path, filesep, 'layerRangeModel.mat']);
 
 baseCoord = importdata([output_mat_data_path, filesep, 'baseCoord.mat']);
@@ -127,8 +113,11 @@ RMDomain_file_name =  [output_result_data_path, filesep, 'Domain_', output_retri
 displaytimelog(['func: ', func_name, '. ', 'RMDomain_file_name: ', RMDomain_file_name]);
 save(RMDomain_file_name, 'retrieval_model_area');
 
+return;
 % retrieval_model_domain:  [x_min, x_max; y_min, y_max; z_min, z_max]; % 3*2
-retrieval_model_relative_domain = [bottom_sensor_coordinate ; bottom_sensor_coordinate]' + retrieval_model_area;
+% retrieval_model_relative_domain = [bottom_sensor_coordinate ; bottom_sensor_coordinate]' + retrieval_model_area;
+top_sensor_coordinate = undergroundCoordsSet(1, :);
+retrieval_model_relative_domain = [top_sensor_coordinate ; top_sensor_coordinate]' + retrieval_model_area;
 retrieval_model_relative_domain_with_grid_size = [retrieval_model_relative_domain,  retrieval_model_grid_size];
 
 VDTForm = generateVDTForm(layerCoeffModel, layerGridModel, layerRangeModel, velocityModel, undergroundCoordsSet, ...

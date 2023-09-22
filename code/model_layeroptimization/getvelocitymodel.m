@@ -9,7 +9,7 @@
 % 2020-10-29: Modify the description and comments
 % this code is used to obtain the equivalent velocity between the different layers
 %% -----------------------------------------------------------------------------------------------------
-function [velocityModel, velocityCount, velocityModelTY, xMat, yMat, zMat, velocityMat]= getvelocitymodel(filenameList, baseCoord, layerCoeffModel, layerGridModel, pathSave)  %  , type)
+function [velocityModel, velocityCount, velocityModelTY, xMat, yMat, zMat, velocityMat]= getvelocitymodel(filenameList, baseCoord, layerCoeffModel, layerGridModel, layerRangeModel, pathSave)  %  , type)
 % -----------------------------------------------------------------------------------------------------
 % INPUT: 
 % filenameList: 1*1 cell, a list of filenames for the velocity file
@@ -38,15 +38,17 @@ function [velocityModel, velocityCount, velocityModelTY, xMat, yMat, zMat, veloc
 %% -----------------------------------------------------------------------------------------------------
 % some default parameters.
 % if nargin < 5, type = 'velocity';   end
-if nargin < 4
-    if nargin < 2
-        [layerGridModel, layerCoeffModel, baseCoord] = getlayermodel;
-    else
+if nargin < 5
+    if nargin < 1
         filenameList = getfilenamelist('layer');
-        [layerGridModel, layerCoeffModel, baseCoord] = getlayermodel(filenameList, baseCoord);
     end
+    if nargin < 2
+        baseCoord =zeros(1, 3);
+    end
+
+    [baseCoord, layerCoeffModel, layerGridModel, layerRangeModel] = getlayermodel(filenameList, baseCoord);
 end
-% if nargin < 2, baseCoord =zeros(1, 3);   end
+
 type = 'velocity';
 if nargin <1,   filenameList = getfilenamelist(type);     end
 % -----------------------------------------------------------------------------------------------------
@@ -119,7 +121,7 @@ for ir = 1: xLen
         xy = [xMat(ir, ic), yMat(ir, ic)];
         xyArray = repmat(xy, numLayer, 1);
         % zArray: numLayer*1 matrix, z value for the same horizontal position and different layers
-        zArray = computelayerz(layerCoeffModel, layerGridModel, xyArray, idxLayer);
+        zArray = computelayerz(layerCoeffModel, layerGridModel, layerRangeModel, xyArray, idxLayer);
         zArrayMat = get_z_array_mat(zArray, numLayer);
         for idepth = 1: zLen
             %% -----------------------------------------------------------------------------------------------------
@@ -158,7 +160,7 @@ if (velocityModel(1, 1) < 0.001),  velocityModel(1, 1) = velocityModel(2, 1);   
 velocityModelTY = velocityModel(:, 1);
 
 %% save velocityModel into folder geologicaldata.
-if nargin > 4
+if nargin > 5
     currentpath = mfilename('fullpath');
     [pathname] = fileparts(currentpath);
     % pathname = [pathname, filesep, '..', filesep, '..', filesep, 'geologicaldata'];

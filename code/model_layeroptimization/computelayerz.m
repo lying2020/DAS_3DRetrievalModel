@@ -74,7 +74,7 @@ for i = 1: num
     elseif 6 == coeffLen
         zArray(i, 1) = coeff(6)*x0.*x0 + coeff(5)*y0.*y0 + coeff(4)*x0.*y0 + coeff(3)*x0 + coeff(2)*y0 + coeff(1)*1;
     else
-        zArray(i, 1) = coeff(10)*x0.*x0.*x0 + coeff(9)*x0.*x0.*y0 + coeff(8)*x.*y0.*y0 + coeff(7)*y0.*y0.*y0 + ...
+        zArray(i, 1) = coeff(10)*x0.*x0.*x0 + coeff(9)*x0.*x0.*y0 + coeff(8)*x0.*y0.*y0 + coeff(7)*y0.*y0.*y0 + ...
                        coeff(6)*x0.*x0 + coeff(5)*y0.*y0 + coeff(4)*x0.*y0 + coeff(3)*x0 + coeff(2)*y0 + coeff(1)*1;
     end
 

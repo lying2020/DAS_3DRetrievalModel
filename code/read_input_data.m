@@ -117,7 +117,7 @@ displaytimelog(['func: ', func_name, '. ', 'path_velocity_data: ', path_velocity
 txtData = readtxtdata(path_velocity_data, 'velocity');
 velocityData = txtData;
 
-[velocityModel, velocityCount, velocityModelTY, xMat, yMat, zMat, velocityMat]= getvelocitymodel(path_velocity_data, baseCoord, layerCoeffModel, layerGridModel, output_mat_data_path);
+[velocityModel, velocityCount, velocityModelTY, xMat, yMat, zMat, velocityMat]= getvelocitymodel(path_velocity_data, baseCoord, layerCoeffModel, layerGridModel, layerRangeModel, output_mat_data_path);
 
 % %%%
 DATA_MODEL.velocityModel = velocityModel;
