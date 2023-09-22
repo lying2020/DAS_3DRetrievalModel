@@ -75,8 +75,8 @@ for i = 1: num
     displaytimelog(['func: ', func_name, '. ', 'ir: ', num2str(ir), ', ic: ', num2str(ic), ', xx: ', num2str(xx), ', yy: ', num2str(yy)]);
 
     % relative value.
-    x0 = mod(xx, layerRange(1, 3)) - layerRange(1, 3) / 2.0;
-    y0 = mod(yy, layerRange(2, 3)) - layerRange(2, 3) / 2.0;
+    x0 = mod(xx - layerRange(1, 1), layerRange(1, 3)) - layerRange(1, 3) / 2.0;
+    y0 = mod(yy - layerRange(2, 1), layerRange(2, 3)) - layerRange(2, 3) / 2.0;
 
     coeff0 = coeffMat{ir, ic};
     coeffLen = length(coeff0);

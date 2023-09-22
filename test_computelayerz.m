@@ -48,7 +48,7 @@ layerGridModel  = importdata([output_mat_data_path, filesep, 'layerGridModel.mat
 displaytimelog(['func: ', func_name, '. ', 'importdata layerCoeffModel ... ']);
 layerCoeffModelLY = importdata([output_mat_data_path, filesep, 'layerCoeffModel.mat']);
 
-layerCoeffModelTY = importdata([output_mat_data_path, filesep, 'layerCoeffModelTY.mat']);
+% layerCoeffModelTY = importdata([output_mat_data_path, filesep, 'layerCoeffModelTY.mat']);
 
 layerRangeModel = importdata([output_mat_data_path, filesep, 'layerRangeModel.mat']);
 
@@ -60,25 +60,28 @@ displaytimelog(['func: ', func_name, '. ', 'baseCoord: ', num2str(baseCoord)]);
 
 numLayer = size(layerRangeModel, 1);
 test_num_of_each_layer = 3;
+layer_offset = 3.8;
 displaytimelog(['numLayer: ', num2str(numLayer), ', test_num_of_each_layer: ', num2str(test_num_of_each_layer)]);
 
 for i_layer = 1 : numLayer
     layerRange = layerRangeModel{i_layer, 1};
-    xx = linspace(layerRange(1, 1), layerRange(1, 2), test_num_of_each_layer);
-    yy = linspace(layerRange(2, 1), layerRange(2, 2), test_num_of_each_layer);
+    xx = linspace(layerRange(1, 1) + layer_offset, layerRange(1, 2) - layer_offset, test_num_of_each_layer);
+    yy = linspace(layerRange(2, 1) + layer_offset, layerRange(2, 2) - layer_offset, test_num_of_each_layer);
     for ix = xx
         for iy = yy
             xyArray = [ix, iy]; idxLayer = i_layer;
+            displaytimelog(['idxLayer: ', num2str(idxLayer), ', xyArray: ', num2str(xyArray)]);
 
             zArrayLY = computelayerz(layerCoeffModelLY, layerGridModel, layerRangeModel, xyArray, idxLayer);
-            zArrayTY = layerz_tanyan(layerCoeffModelTY, layerGridModel, layerRangeModel, xyArray, idxLayer);
-            error_TL = zArrayLY - zArrayTY;
-            displaytimelog(['idxLayer: ', num2str(idxLayer), ', xyArray: ', num2str(xyArray), ...
-                            ', zArrayLY: ', num2str(zArrayLY), ', zArrayTY: ', num2str(zArrayTY), ', error_TL: ', num2str(error_TL)]);
-            if (error_TL > 0.001)
-                displaytimelog(['error_TL: ', num2str(error_TL)]);
-            end
-
+            % zArrayTY = layerz_tanyan(layerCoeffModelTY, layerGridModel, layerRangeModel, xyArray, idxLayer);
+            % error_TL = zArrayLY - zArrayTY;
+            % displaytimelog(['idxLayer: ', num2str(idxLayer), ', xyArray: ', num2str(xyArray), ...
+            %                 ', zArrayLY: ', num2str(zArrayLY), ', zArrayTY: ', num2str(zArrayTY), ', error_TL: ', num2str(error_TL)]);
+            % if (error_TL > 0.001)
+            %     displaytimelog(['error_TL: ', num2str(error_TL)]);
+            % end
+            disp("   ");
+            disp("   ");
         end
     end
 
