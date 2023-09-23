@@ -22,7 +22,7 @@ function [equalVelocity, equalDistance, equalDeltaTime, refractionPointSets, num
 %   第[2*n-1,2n] 列储存第n个检波器对应的折射点位置, 坐标位置为[0,0]表示该检波器接收的地震波没有经过对应的地层
 %% ------------------------------------------------------------------------------------
 
-if nargin > 5
+if nargin > 6
     if any (abs(sourceLocationCoord) > abs(usefulRange) )
         displaytimelog(['the initial guess position the ', num2str(iEvents), ' th seismic event: ', num2str( inversionLocation)]);
         warn('The  source location is outside the specified useful range !');

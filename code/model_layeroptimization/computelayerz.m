@@ -64,17 +64,17 @@ if isempty(layerGridModel), return;  end
 %% -------------------------------------------------------------------------------------------------
 for i = 1: num
     coeffMat = layerCoeffModel{idxLayer(i), 1};
-    xMat = layerGridModel{idxLayer(i), 1};
-    yMat = layerGridModel{idxLayer(i), 2};
+%     xMat = layerGridModel{idxLayer(i), 1};
+%     yMat = layerGridModel{idxLayer(i), 2};
     layerRange = layerRangeModel{idxLayer(i), 1};
-    displaytimelog(['func: ', func_name, '. ', 'idxLayer(i): ', num2str(idxLayer(i)), ', layerRangeX: ', num2str(layerRange(1, :)), ', layerRangeY: ', num2str(layerRange(2, :))]);
+%     displaytimelog(['func: ', func_name, '. ', 'idxLayer(i): ', num2str(idxLayer(i)), ', layerRangeX: ', num2str(layerRange(1, :)), ', layerRangeY: ', num2str(layerRange(2, :))]);
     xx = xyArray(i, 1);  yy = xyArray(i, 2);
     ir = floor((xx - layerRange(1, 1)) / layerRange(1, 3) + 1);
     ic = floor((yy - layerRange(2, 1)) / layerRange(2, 3) + 1);
     [maxi,maxj] = size(coeffMat);
     ir = max(1, min(maxi, ir));
     ic = max(1, min(maxj, ic));
-    displaytimelog(['func: ', func_name, '. ', 'ir: ', num2str(ir), ', ic: ', num2str(ic), ', xx: ', num2str(xx), ', yy: ', num2str(yy)]);
+%     displaytimelog(['func: ', func_name, '. ', 'ir: ', num2str(ir), ', ic: ', num2str(ic), ', xx: ', num2str(xx), ', yy: ', num2str(yy)]);
 
     % relative value.
     x0 = mod(xx - layerRange(1, 1), layerRange(1, 3)) - layerRange(1, 3) / 2.0;
@@ -93,7 +93,7 @@ for i = 1: num
                        coeff(6)*x0.*x0 + coeff(5)*y0.*y0 + coeff(4)*x0.*y0 + coeff(3)*x0 + coeff(2)*y0 + coeff(1)*1;
     end
 
-    displaytimelog(['func: ', func_name, '. ', 'x0: ', num2str(x0), ', y0: ', num2str(y0), ', xMat(ir, ic): ', num2str(xMat(ir, ic)), ', yMat(ir, ic): ', num2str(yMat(ir, ic)), ', zArray: ', num2str(zArray(i, 1))]);
+%     displaytimelog(['func: ', func_name, '. ', 'x0: ', num2str(x0), ', y0: ', num2str(y0), ', xMat(ir, ic): ', num2str(xMat(ir, ic)), ', yMat(ir, ic): ', num2str(yMat(ir, ic)), ', zArray: ', num2str(zArray(i, 1))]);
 
 end
 

@@ -46,7 +46,7 @@ end
 
 %%
 initialguess= initialguess';
-X0=[initialguess;0 idxLayer' 0] ;
+X0=[initialguess;0 idxLayer 0] ;
 k = size(X0, 2);
 if k <= 2
 
