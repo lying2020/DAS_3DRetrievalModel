@@ -34,7 +34,7 @@ for ix = 1 : numx
 % parfor ix = 1:numx
     tmpVDTForm_X = cell(numy, numz);
     X_time_start = str2num(showtimenow(0));
-    displaytimelog(['func: ', func_name, '. ', 'numx: ', num2str(numx), ', ix: ', num2str(ix), '. X_time_start: ', X_time_start]);
+    displaytimelog(['func: ', func_name, '. ', 'numx: ', num2str(numx), ', ix: ', num2str(ix), '. X_time_start: ', num2str(X_time_start)]);
     %  for iy = 1:numy
     parfor iy = 1:numy
         for iz = 1:numz

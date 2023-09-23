@@ -16,8 +16,8 @@ func_name = mfilename;
 
 % read_geological_model_xinjiang_2020
 %% %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-if exist('input_data_path', 'var')
-    disp(['func: ', func_name, '. ', 'Variable input_data_path exists']);
+if exist('input_data_path', 'var') && exist('output_data_path', 'var') && exist('current_data_path', 'var')
+    disp(['func: ', func_name, '. ', 'Variable [input_data_path, output_data_path, current_data_path] exists']);
 else
     disp(['func: ', func_name, '. ', 'Variable input_data_path does not exist, now importdata ... ']);
     [input_data_path, output_data_path, current_data_path] = add_default_folder_path();

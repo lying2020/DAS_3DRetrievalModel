@@ -9,8 +9,8 @@ format long % short %
 % clear
 func_name = mfilename;
 
-if exist('input_data_path', 'var')
-    displaytimelog(['func: ', func_name, '. ', 'Variable input_data_path exists']);
+if exist('input_data_path', 'var') && exist('output_data_path', 'var')
+    displaytimelog(['func: ', func_name, '. ', 'Variable input_data_path / output_data_path exists']);
 else
     [input_data_path, output_data_path, ~] = add_default_folder_path();
 end
@@ -19,13 +19,13 @@ end
 % %% %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %% import data model
 
-read_geological_model_2023_T('_T106')
-% geological_model_name = 'geological_model_2023_T106';
+% read_geological_model_2023_T('_T106')
+geological_model_name = 'geological_model_2023_T106';
 
-read_geological_model_2023_T('_T131')
-geological_model_name = 'geological_model_2023_T131';
+% read_geological_model_2023_T('_T131')
+% geological_model_name = 'geological_model_2023_T131';
 
-read_geological_model_xinjiang_2020;
+% read_geological_model_xinjiang_2020;
 % geological_model_name = 'geological_model_xinjiang_2020_XJ';
 
 %%
@@ -35,12 +35,12 @@ displaytimelog(['func: ', func_name, '. ', 'current_data_path: ', current_data_p
 geological_model_mat_file_path = [current_data_path, filesep, geological_model_name, '.mat'];
 displaytimelog(['func: ', func_name, '. ', 'geological_model_mat_file_path: ', geological_model_mat_file_path]);
 
-if exist('geological_model', 'var')
-    displaytimelog(['func: ', func_name, '. ', 'Variable geological_model exists']);
-else
-    displaytimelog(['func: ', func_name, '. ', 'Variable geological_model does not exist, now importdata ... ']);
+% if exist('geological_model', 'var')
+%     displaytimelog(['func: ', func_name, '. ', 'Variable geological_model exists']);
+% else
+    % displaytimelog(['func: ', func_name, '. ', 'Variable geological_model does not exist, now importdata ... ']);
     geological_model = importdata(geological_model_mat_file_path);
-end
+% end
 
 
 %% ###################################################################

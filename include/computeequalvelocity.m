@@ -5,7 +5,7 @@ function [equalVelocity, equalDistance, equalDeltaTime, refractionPointSets, num
 % INPUT:
 %  layerGridModel: numLayer* 3  cell
 %  --  水平地层信息， 每行储存一个交界面的位置信息
-%  velocityModel: (numLayer-1)* 1  matrix
+%  velocityModel: (numLayer+1)* 1  matrix
 %  --  地层速度信息，每行储存一个地层的速度信息
 %  sensorPositions: numSensor* numDim matrix
 %  --  检波器的位置，每行储存一个检波器的坐标
@@ -16,9 +16,9 @@ function [equalVelocity, equalDistance, equalDeltaTime, refractionPointSets, num
 
 % OUTPUT:
 %   equalVelocity:  numSensor* 1 matrix   每个检波器到震源的对应的等效速度
-%   equalDistance:  numSensor* 1 matrix   每一个检波器对应的等效时间
+%   equalDistance:  numSensor* 1 matrix   每一个检波器对应的等效距离
 %   equalDeltaTime: numSensor* 1 matrix   获取震源到检波器的旅时，
-%   refractionPointSets: NumLayer*(2*NumDet) matrix  折射点的位置信息，
+%   refractionPointSets: numLayer*(2*numSensor) matrix  折射点的位置信息，
 %   第[2*n-1,2n] 列储存第n个检波器对应的折射点位置, 坐标位置为[0,0]表示该检波器接收的地震波没有经过对应的地层
 %% ------------------------------------------------------------------------------------
 
@@ -44,14 +44,6 @@ for iSensor = 1 : numSensor
     % refractionPoints = computeraytrace(relatedLayerModel,  relatedVelocityModel, sensorPositions(iSensor, :), sourceLocationCoord);
     % refractionPoints: the refraction point between the source and the iSensor th sensor
 
-    %%% 新射线反演算法的接口 %%%%
-    %     relatedLayerModel([1,end])=[];
-    %     relatedLayerFun = cell(length(relatedVelocityModel)-1, 1);
-    %     for i = 1: length(relatedLayerFun)
-    %         layer = @(x,y,z)  relatedLayerModel(i) - z;
-    %         relatedLayerFun{i} = layer;
-    %     end
-    %     refractionPoints = computeraytrace_curve_shubo(relatedLayerFun,  relatedVelocityModel,   sensorPositions(iSensor, :),  sourceLocationCoord);
     [Position, markX0, initialguessVel, errort, trivalt] = RayTrace3D_layerModel(layerCoeffModel, layerGridModel, layerRangeModel, velocityModel, sensorPositions(iSensor,:),sourceLocationCoord);
     %%%%%%%%%%%%%%%%%%%%%
 
