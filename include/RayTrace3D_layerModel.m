@@ -21,7 +21,7 @@ maxrefractionpoint = 40;
 if (sourceCoord(3) == sensorCoord(3))
     sourceCoord(3) = sourceCoord(3) + 1e-6;
 end
-[intersecp, idxLayer]=layerintersects_tanyan(layerCoeffModel, layerGridModel, layerRangeModel, sourceCoord, sensorCoord);
+[intersecp, idxLayer]=computelayerintersectscoords(layerCoeffModel, layerGridModel, layerRangeModel, sourceCoord, sensorCoord);
 initialguess = intersecp;
 intervalXY = layerGridModel{1, 1}(2, 2) - layerGridModel{1, 1}(1, 1);
 
@@ -77,7 +77,7 @@ for iX0 = 1:size(X0', 1)-1
     xyArray(1:m, 1) = p(1, 1);
     xyArray(1:m, 2) = p(1, 2);
     idx = (1:m)';
-    z = [layerz_tanyan(layerCoeffModel, layerGridModel, layerRangeModel, xyArray, idx); p(1, 3)];
+    z = [computelayerz(layerCoeffModel, layerGridModel, layerRangeModel, xyArray, idx); p(1, 3)];
     z = sortrows(z, 1);
     [row, ~] = find(z == p(1, 3));
     initialguessVel(iX0) = velocityModel(row(1));
@@ -103,7 +103,7 @@ for j=1:iteratorstep
         iteraX=X0(1:3, [ii-1, ii, ii+1]);
         iteraVelMod=initialguessVel([ii-1, ii]);
         X0(1:3, ii) = calculateSingleIntersection_layerCoeffModel_temp(iteraX, iteraVelMod, layerCoeffModel(X0(4, ii)), layerGridModel(X0(4, ii), :), layerRangeModel(X0(4, ii), :));
-        errorz = layerz_tanyan(layerCoeffModel(X0(4, ii)), layerGridModel(X0(4, ii), :), layerRangeModel(X0(4, ii), :), X0(1:2, ii)', 1) - X0(3, ii);
+        errorz = computelayerz(layerCoeffModel(X0(4, ii)), layerGridModel(X0(4, ii), :), layerRangeModel(X0(4, ii), :), X0(1:2, ii)', 1) - X0(3, ii);
         if norm(errorz) > 1
 %             warning('z coordinate error wrong');
         end
@@ -137,7 +137,7 @@ for j=1:iteratorstep
         xyArray(1:m, 1) = p(1, 1);
         xyArray(1:m, 2) = p(1, 2);
         idx = (1:m)';
-        z = [layerz_tanyan(layerCoeffModel, layerGridModel, layerRangeModel, xyArray, idx);p(1, 3)];
+        z = [computelayerz(layerCoeffModel, layerGridModel, layerRangeModel, xyArray, idx);p(1, 3)];
         z = sortrows(z, 1);
         [row, ~] = find(z == p(1, 3));
         initialguessVel(iX0) = velocityModel(row(1));
