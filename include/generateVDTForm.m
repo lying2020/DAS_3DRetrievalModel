@@ -22,7 +22,7 @@ coordBegin = retrieval_relative_model_domain(1:3,1)';
 numSensors = size(undergroundCoordsSet, 1);
 nCores = feature('numcores');
 displaytimelog(['func: ', func_name, '. ' 'nCores: ', num2str(nCores), ', numSensors: ', num2str(numSensors), ', coordBegin: ', num2str(coordBegin)]);
-% startmatlabpool(nCores,10000);
+startmatlabpool(nCores,10000);
 
 % pplayerCoeffModel = parallel.pool.Constant(layerCoeffModel);
 % mpiprofile on;
@@ -35,8 +35,8 @@ for ix = 1 : numx
     tmpVDTForm_X = cell(numy, numz);
     X_time_start = str2num(showtimenow(0));
     displaytimelog(['func: ', func_name, '. ', 'numx: ', num2str(numx), ', ix: ', num2str(ix), '. X_time_start: ', X_time_start]);
-     for iy = 1:numy
-%     parfor iy = 1:numy
+    %  for iy = 1:numy
+    parfor iy = 1:numy
         for iz = 1:numz
              tic
              sourceLocationCoord = coordBegin + retrieval_model_grid_size' .* [ix-1, iy-1, iz-1];
