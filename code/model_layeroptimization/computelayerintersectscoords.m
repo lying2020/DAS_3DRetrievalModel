@@ -50,8 +50,9 @@ pointSet = cell(0);     coeffSet = cell(0); numPoints = 0;     np1 = 1;
 %%
 for iLayer = 1 : numLayer % 3  %  
     %%  Find the quadrangle grid points of a line segment overlap with discrete points.
-    [p4, rc] = computelayerintersectsgrids(layerGridModel{iLayer, 1}, layerGridModel{iLayer, 2}, layerGridModel{iLayer, 3}, startpoint, endpoint);
-
+    [p4, rc] = computelayerintersectsgrids(layerGridModel{iLayer, 1}, layerGridModel{iLayer, 2}, layerGridModel{iLayer, 3}, layerRangeModel{iLayer}, startpoint, endpoint);
+    if (isempty(p4) || isempty(rc)), continue; end
+    layerRange = layerRangeModel{iLayer, 1};
     %% the fitting polynomial coefficients set of the corresponding layer.
     coeffMat = layerCoeffModel{iLayer, 1};
     % -----------------------------------------------------------------------------------------------------
@@ -59,8 +60,10 @@ for iLayer = 1 : numLayer % 3  %
     for ipoint = 1: length(p4)
         pts = p4{ipoint, 1}; %% pts: 4*3 matrix, quadrangle vertex coordinates.
         coeff = coeffMat{rc(ipoint, 1), rc(ipoint, 2)};
+        % zero reference_point
+        reference_point = [layerRange(1, 1) + (rc(ipoint, 1) - 0.5) * layerRange(1, 3), layerRange(2, 1) + ( rc(ipoint, 2) - 0.5) * layerRange(2, 3), 0];
         %%  Find the intersection of a line segment and a small quadrangle().
-        intersection  = solveintersection(coeff, pts, startpoint, endpoint);
+        intersection  = solveintersection(coeff, pts, startpoint, endpoint, reference_point);
         if isempty(intersection), continue; end
         % -----------------------------------------------------------------------------------------------------
         intersect_dist = last_intersection - intersection;

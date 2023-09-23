@@ -13,6 +13,9 @@ format long
 addpath(genpath('../../../include'));
 %
 func_name = mfilename;
+
+add_default_folder_path();
+
 displaytimelog(['func: ', func_name]);
 
 
@@ -27,20 +30,23 @@ startpoint = sp(n, :);
 endpoint = ep(n, :);
 seCoords = [startpoint; endpoint] - baseCoord;
 % filenameList is a cell array
+intersection = [];
+intersection0 = [];
 
-if  ~exist('layerGridModel', 'var')
-     [layerGridModel, layerCoeffModel, layerCoeffModel_zdomain, layerCoeffModelLY, layerGridModelLY, layerRangeModelLY] = test_get_layerMat(baseCoord);
-
+if  ~exist('layerGridModelLY', 'var')
+    [layerGridModel, layerCoeffModel, layerCoeffModel_zdomain, layerCoeffModelLY, layerGridModelLY, layerRangeModel] = test_get_layerMat(baseCoord);
+    
 end
 
 ax1 = axes(figure);  hold(ax1, 'on');
 scatter3(ax1, seCoords(:, 1), seCoords(:, 2), seCoords(:, 3), 50, 'filled');
 plot3(ax1, seCoords(:, 1), seCoords(:, 2), seCoords(:, 3), 'b-', 'linewidth', 4.5);
 
-for iFile = 1:num   
-    x = layerGridModel{iFile,1};
-    y = layerGridModel{iFile,2};
-    z = layerGridModel{iFile,3};
+num = size(layerGridModelLY, 1);
+for iFile = 1:num
+    x = layerGridModelLY{iFile,1};
+    y = layerGridModelLY{iFile,2};
+    z = layerGridModelLY{iFile,3};
     layersurf(ax1, x, y, z);
     % shading(ax1, 'faceted');
 end
@@ -48,54 +54,80 @@ endpoint = endpoint - startpoint;
 startpoint = [0 0 0];
 
 %%  ----------------------------------
-% 
-tic
+%
+
 % # test 1
+ax11 = axes(figure);  hold(ax11, 'on');
+for iFile = 1:num
+    x = layerGridModelLY{iFile,1};
+    y = layerGridModelLY{iFile,2};
+    z = layerGridModelLY{iFile,3};
+    layersurf(ax11, x, y, z);
+    % shading(ax1, 'faceted');
+end
+
+tic
+
 for k = [-500: 2:500]
     for s = 1:10
-%         displaytimelog(['k: ', num2str(k), '  s: ', num2str(s)]);
+        %         displaytimelog(['k: ', num2str(k), '  s: ', num2str(s)]);
         ep = endpoint - [5*k, 2*k, -1000*s];
+% ep = [-1110,-592,-4280];
         % ep = endpoint - [96 48 -2000]; iLayer = 8;  这里直线从拟合多项式之间的缝隙中穿过了。
         [intersection, idxLayer, points]  = layerintersects_tanyan(layerCoeffModel, layerGridModel, layerRangeModel, startpoint, ep);
-        [intersection0, idxLayer0, points0]  = computelayerintersectscoords(layerCoeffModelLY, layerGridModelLY, layerRangeModel, startpoint, ep);
+%         [intersection0, idxLayer0, points0]  = computelayerintersectscoords(layerCoeffModelLY, layerGridModelLY, layerRangeModel, startpoint, ep);
+        %         displaytimelog('intersectionLY: '); displaytimelog(intersection0);
+        %         if ~isempty(intersection0)
+        %             scatter3(ax1, intersection0(:, 1), intersection0(:, 2), intersection0(:, 3), 40, 'red', 'filled');
+        %             sep = [startpoint; ep];
+        %             scatter3(ax1, sep(:, 1), sep(:, 2), sep(:, 3), 40, 'filled');
+        %             plot3(ax1, sep(:, 1), sep(:, 2), sep(:, 3), 'b-', 'linewidth', 1.5);
+        %             xlabel(ax1, 'x /m');   ylabel(ax1, 'y /m');  zlabel(ax1, 'z /m');
+        %
+        %         end
+        
         if size(intersection, 1) ~= size(intersection0, 1)
-%             continue;
+            continue;
+            if (size(intersection, 1) == 4 && 3 == size(intersection0, 1))
+                        continue;
+            end
+
             displaytimelog(['k: ', num2str(k), '  s: ', num2str(s)]);
             displaytimelog('intersectionTY: '); displaytimelog(intersection);
             displaytimelog('intersectionLY: '); displaytimelog(intersection0);
-
-            ax11 = axes(figure);  hold(ax11, 'on');
-            for iFile = 1:num
-                x = layerGridModel{iFile,1};
-                y = layerGridModel{iFile,2};
-                z = layerGridModel{iFile,3};
-                layersurf(ax11, x, y, z);
-                % shading(ax1, 'faceted');
-            end
+            
+            %             ax11 = axes(figure);  hold(ax11, 'on');
+            %             for iFile = 1:num
+            %                 x = layerGridModelLY{iFile,1};
+            %                 y = layerGridModelLY{iFile,2};
+            %                 z = layerGridModelLY{iFile,3};
+            %                 layersurf(ax11, x, y, z);
+            %                 % shading(ax1, 'faceted');
+            %             end
             if ~isempty(intersection)
-                 scatter3(ax11, intersection(:, 1), intersection(:, 2), intersection(:, 3), 40, 'blue', 'filled');
+                scatter3(ax11, intersection(:, 1), intersection(:, 2), intersection(:, 3), 40, 'blue', 'filled');
             end
             if ~isempty(intersection0)
-                 scatter3(ax11, intersection0(:, 1), intersection0(:, 2), intersection0(:, 3), 40, 'red', 'filled');
+                scatter3(ax11, intersection0(:, 1), intersection0(:, 2), intersection0(:, 3), 40, 'red', 'filled');
             end
-
+            
             sep = [startpoint; ep];
             scatter3(ax11, sep(:, 1), sep(:, 2), sep(:, 3), 40, 'filled');
             plot3(ax11, sep(:, 1), sep(:, 2), sep(:, 3), 'b-', 'linewidth', 1.5);
             xlabel(ax1, 'x /m');   ylabel(ax1, 'y /m');  zlabel(ax1, 'z /m');
-
+            
             continue;
         end
-
+        
         intersects_diff = norm(intersection - intersection0);
         if (intersects_diff) > 1.0
-%             continue;
+            %             continue;
             displaytimelog(['k: ', num2str(k), '  s: ', num2str(s), ', intersects_diff: ', num2str(intersects_diff)]);
             displaytimelog('intersectionTY: '); displaytimelog(intersection);
             displaytimelog('intersectionLY: '); displaytimelog(intersection0);
-
+            
         end
-
+        
     end
 end
 
@@ -103,12 +135,15 @@ toc
 
 function [layerGridModelTY, layerCoeffModelTY, layerCoeffModel_zdomainTY, layerCoeffModelLY, layerGridModelLY, layerRangeModelLY] = test_get_layerMat(baseCoord, filenameList_layer)
 
+func_name = mfilename;
+displaytimelog(['func: ', func_name]);
+
 type = 'layer';
 if exist('filenameList_layer', 'var')
     displaytimelog(['func: ', func_name, '. ', 'Variable filenameList_layer exists']);
 else
     displaytimelog(['func: ', func_name, '. ', 'Variable filenameList_layer does not exist, now importdata ... ']);
-     filenameList_layer = getfilenamelist(type);
+    filenameList_layer = getfilenamelist(type);
 end
 
 num = length(filenameList_layer);
@@ -126,7 +161,7 @@ layerGridModelTY = grid_tanyan(layerdata,baseCoord,inter,20,20); % new data
 
 gridFlag = true; gridType = 'linear'; gridStepSize = [10, 10]; gridRetractionDist = [10, 10]; fittingType = 'cubic'; layerType = 'layer';
 layerModelParam = struct('gridFlag', gridFlag, 'gridType', gridType, 'gridStepSize', gridStepSize, 'gridRetractionDist', gridRetractionDist, ...
-                                                  'fittingType', fittingType, 'layerType', layerType, 'pathSave', []);
+    'fittingType', fittingType, 'layerType', layerType, 'pathSave', []);
 [baseCoord, layerCoeffModelLY, layerGridModelLY, layerRangeModelLY] = getlayermodel(filenameList_layer, baseCoord, layerModelParam);
 
 

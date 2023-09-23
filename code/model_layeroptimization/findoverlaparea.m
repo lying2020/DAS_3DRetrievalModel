@@ -73,8 +73,11 @@ xx = sort(xArray);
 num = length(xRange);
 seq1 = find(xRange >= xx(1));
 seq1 = [max(1, min(seq1) - 1), seq1];
-seq2 = find(xRange <= xx(2));
+% seq2 = find(xRange <= xx(2));
+if isempty(seq1), overlapRange = []; return; end
+seq2 = find(xRange(seq1) <= xx(2)) + seq1(1) - 1;
 seq2 = [seq2, min(1, max(seq2) + 1)];
+
 sol = intersect(seq1, seq2);
 
 if isempty(sol), overlapRange = []; return; end

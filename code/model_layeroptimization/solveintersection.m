@@ -9,7 +9,7 @@
 % 2020-10-29: Modify the description and comments
 % this code is used to solve the intersection of a line segment and a grid surface
 %% -----------------------------------------------------------------------------------------------------
-function intersection = solveintersection(aa, points, sp, ep)
+function intersection = solveintersection(aa, points, sp, ep, reference_point)
 % -----------------------------------------------------------------------------------------------------
 % aa: 1* numCoeff array. the fitting polynomial coefficients array of the corresponding point.
 % points:  n* numDim  matrix
@@ -20,7 +20,9 @@ function intersection = solveintersection(aa, points, sp, ep)
 % Normally, there is only one intersection. num = 1;
 %
 %% -----------------------------------------------------------------------------------------------------
-% 
+% zero reference_point
+sp = sp - reference_point;
+ep = ep - reference_point;
 v0 = ep - sp;
 %  v0 = [ep(1) - sp(1), ep(2) - sp(2), ep(3) - sp(3)];
 %  
@@ -60,7 +62,7 @@ pt(pt<0) =[];
 %
 % -----------------------------------------------------------------------------------------------------
 % ÌÞ³ýÖØ¸´×ø±êÐÐ
-points = unique(points, 'rows');
+% points =  unique(points, 'rows');  % uniquetol(points,1e-6);   %
 
 % intersection = zeros(length(pt), 3);
 intersection = [];
@@ -81,6 +83,7 @@ intersection = [];
 %     end
 % end
 
+points = points - reference_point;
 tolerance = [3.0, 3.0, 5.0];
 minCoord = min(points) - tolerance;
 maxCoord = max(points) + tolerance; 
@@ -88,10 +91,10 @@ for it=1:length(pt)
     tmp = sp + (ep - sp)* pt(it);
     % Determine if the intersection is within the rectangular region
     if all(tmp < maxCoord) && all( tmp > minCoord)
+        tmp = tmp + reference_point;
         intersection = [intersection; tmp];
     end
 end
-
 % If you have multiple points, you go to an average.   
 intersection = mean(intersection, 1);
 end
@@ -155,7 +158,7 @@ d = coeff(10)*sp(1)*sp(1)*sp(1) + coeff(9)*sp(1)*sp(1)*sp(2) + coeff(8)*sp(1)*sp
 %
 realRoot = [];
 tmp = roots([a b c d]);
-for iroot = 1:3
+for iroot = 1 : length(tmp)
     if isreal(tmp(iroot)),  realRoot = [realRoot, tmp(iroot)];    end
 end
 % %% ---------------------------------------------------------------------------------------------------------------------------

@@ -9,7 +9,7 @@
 % 2020-10-14: Modify the description and comments
 % this code is used to find the rectangular grid coordinates where the line intersects the layer
 %% -----------------------------------------------------------------------------------------------------
-function [points4, rc_array] = computelayerintersectsgrids(xMat, yMat, zMat, startpoint, endpoint)
+function [points4, rc_array] = computelayerintersectsgrids(xMat, yMat, zMat, layerRange, startpoint, endpoint)
 % -----------------------------------------------------------------------------------------------------
 % 找到直线与地层的交点所在的矩形网格点坐标
 % INPUT:
@@ -34,7 +34,8 @@ assert(~isequal(startpoint, endpoint), 'startpoint and endpoint must not be equa
 % displaytimelog(['startpoint: ', num2str(startpoint), ', endpoint: ', num2str(endpoint)]);
 % 
 
-zRange = [min(zMat(:)), max(zMat(:))];
+% zRange = [min(zMat(:)), max(zMat(:))];
+zRange = [layerRange(3, 1), layerRange(3, 2)];
 [startpoint, endpoint] = compute_overlap_z(zRange, startpoint, endpoint);
 
 % ax1 = axes(figure);  hold(ax1, 'on');
@@ -55,9 +56,17 @@ end
 
 % scatter3(ax1, xMat(:), yMat(:), zMat(:), 10, 'red', 'filled');
 
+% xy_seq = findlayerintersectsgridsseq(xMat, yMat, startpoint([1, 2]), endpoint([1, 2]));
+% xz_seq = findlayerintersectsgridsseq(xMat, zMat, startpoint([1, 3]), endpoint([1, 3]));
+% yz_seq = findlayerintersectsgridsseq(yMat, zMat, startpoint([2, 3]), endpoint([2, 3]));
+
 xy_seq = findlayerintersectsgridsseq(xMat, yMat, startpoint([1, 2]), endpoint([1, 2]) );
-xz_seq = findlayerintersectsgridsseq(xMat, zMat, startpoint([1, 3]), endpoint([1, 3]) );
-yz_seq = findlayerintersectsgridsseq(yMat, zMat, startpoint([2, 3]), endpoint([2, 3]) );
+xz_seq = findlayerintersectsgridsseq(xMat, zMat, startpoint([1, 3]), endpoint([1, 3]), xy_seq);
+yz_seq = findlayerintersectsgridsseq(yMat, zMat, startpoint([2, 3]), endpoint([2, 3]), xz_seq);
+
+% [xy_seq,  xy_rArray, xy_cArray] = findlayerintersectsgridsseq(xMat, yMat, startpoint([1, 2]), endpoint([1, 2]) );
+% [xz_seq, xz_rArray, xz_cArray] = findlayerintersectsgridsseq(xMat, zMat, startpoint([1, 3]), endpoint([1, 3]) );
+% [yz_seq, yz_rArray, yz_cArray] = findlayerintersectsgridsseq(yMat, zMat, startpoint([2, 3]), endpoint([2, 3]) );
 
 % xy_seq = findlayerintersectsgridsseq_new(xMat, yMat, startpoint([1, 2]), endpoint([1, 2]) );
 % xz_seq = findlayerintersectsgridsseq_new(xMat, zMat, startpoint([1, 3]), endpoint([1, 3]) );

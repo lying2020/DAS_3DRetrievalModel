@@ -9,7 +9,7 @@
 % this code is used to  find the vertex coordinates of the rectangle 
 % where the line coincides with the grid point rectangle region
 %% -----------------------------------------------------------------------------------------------------
-function seq = findlayerintersectsgridsseq(xMat, yMat, startpoint, endpoint)
+function [seq, rArray, cArray] = findlayerintersectsgridsseq(xMat, yMat, startpoint, endpoint, intput_seq)
 % -----------------------------------------------------------------------------------------------------
 % 找到直线与网格点矩形区域重合的网格顶点坐标
 % INTPUT: 
@@ -18,6 +18,7 @@ function seq = findlayerintersectsgridsseq(xMat, yMat, startpoint, endpoint)
 % OUTPUT: 
 % [rArray, cArray]: 1*num, the row / col index sequence of the target grid coordinates
 %% -----------------------------------------------------------------------------------------------------
+if nargin < 5
 [numRow, numCol] = size(xMat);
 v0 = repmat(endpoint - startpoint, numRow, 1);
 sol = zeros(numRow-1, numCol -1);
@@ -41,6 +42,28 @@ for i = 1: numCol - 1
 end
 [rArray, cArray] = find(sol);
 seq = numRow * (cArray - 1) + rArray;
+
+else
+    if isempty(intput_seq)
+        seq = intput_seq;
+        return;
+    end
+    [numRow, ~] = size(xMat);
+    v0 = endpoint - startpoint;
+    vec11 = [xMat(intput_seq) - startpoint(1),  yMat(intput_seq) - startpoint(2)];
+    vec12 = [xMat(intput_seq+numRow) - startpoint(1),  yMat(intput_seq+numRow) - startpoint(2)];
+    vec21 = [xMat(intput_seq+1) - startpoint(1),  yMat(intput_seq+1) - startpoint(2)];
+    vec22 = [xMat(intput_seq+numRow+1) - startpoint(1),  yMat(intput_seq+numRow+1) - startpoint(2)];
+    crossp11 = v0(:, 1).* vec11(:, 2) - v0(:, 2).* vec11(:, 1);
+    crossp12 = v0(:, 1).* vec12(:, 2) - v0(:, 2).* vec12(:, 1);
+    crossp21 = v0(:, 1).* vec21(:, 2) - v0(:, 2).* vec21(:, 1);
+    crossp22 = v0(:, 1).* vec22(:, 2) - v0(:, 2).* vec22(:, 1);
+    griddatacrossproducts = [crossp11, crossp12, crossp21, crossp22];
+    condition1 = any(griddatacrossproducts >= 0, 2);
+    condition2 = any(griddatacrossproducts <= 0, 2);
+    sol = all([condition1, condition2], 2);
+    seq = intput_seq(sol);
+end
 %% -----------------------------------------------------------------------------------------------------
 % Find the position of the subscript in the lower left corner of the overlapping rectangle
 % f1 = figure;
