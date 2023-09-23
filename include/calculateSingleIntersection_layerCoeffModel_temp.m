@@ -8,35 +8,32 @@ X3 = initialX(:, 3);
 V1 = Vel(1); V2 = Vel(2);
 xMat = layerGridModel{1, 1};
 yMat = layerGridModel{1, 2};
-minx = xMat(1, 1);
-miny = yMat(1, 1);
-
-
-inter = 10; % xMat(2, 1) - xMat(1, 1);
 coeffCellMat = layerCoeffModel{1, 1};
-% coeff = coeffCellMat{id, jd}; : 1 *  numCoeff matrix.
+% coeff = coeffCellMat{i_row, i_col}; : 1 *  numCoeff matrix.
 % coeff = [a1, a2, ..., a9, a10];
 %  f(a, x, y) = a1 + a2 * y +a3 * x + a4 * x * y  + a5 * y * y + a6 * x * x + a7 * y * y * y + a8 * x * y * y + a9 * x * x * y + a10 * x * x * x;
 
+langeRange =  layerRangeModel{1, :};
+intervalXY =[langeRange(1, 3), langeRange(2, 3)];  % xMat(2, 1) - xMat(1, 1);
 %% Define function likes dz/dx dz^2/dxdy...
-id = @(y) floor((y - miny)/inter +1);
-jd = @(x) floor((x - minx)/inter +1);
+func_i_row = @(x) floor((x - langeRange(1, 1)) / intervalXY(1) +1);
+func_i_col = @(y) floor((y - langeRange(2, 1)) / intervalXY(2) +1);
 
-  pdzdx = @(X, id, jd) (coeffCellMat{id, jd}(10) * 3 * X(1)^2 + coeffCellMat{id, jd}(9) * 2 * X(1) * X(2) + coeffCellMat{id, jd}(8) * X(2)^2 + ...
-                        coeffCellMat{id, jd}(6) * 2 * X(1)   +  coeffCellMat{id, jd}(4) * X(2)     +    coeffCellMat{id, jd}(3));
+  pdzdx = @(X, i_row, i_col) (coeffCellMat{i_row, i_col}(10) * 3 * X(1)^2 + coeffCellMat{i_row, i_col}(9) * 2 * X(1) * X(2) + coeffCellMat{i_row, i_col}(8) * X(2)^2 + ...
+                              coeffCellMat{i_row, i_col}(6) * 2 * X(1)    + coeffCellMat{i_row, i_col}(4) * X(2)         +    coeffCellMat{i_row, i_col}(3));
 
-  pdzdy = @(X, id, jd) (coeffCellMat{id, jd}(9) * X(1)^2 + coeffCellMat{id, jd}(8) * 2 * X(1) * X(2) + coeffCellMat{id, jd}(7) * 3 * X(2)^2 + ...
-                        coeffCellMat{id, jd}(4) * X(1)  +  coeffCellMat{id, jd}(5) * 2 * X(2)    +   coeffCellMat{id, jd}(2));
+  pdzdy = @(X, i_row, i_col) (coeffCellMat{i_row, i_col}(9) * X(1)^2 + coeffCellMat{i_row, i_col}(8) * 2 * X(1) * X(2) + coeffCellMat{i_row, i_col}(7) * 3 * X(2)^2 + ...
+                              coeffCellMat{i_row, i_col}(4) * X(1)   + coeffCellMat{i_row, i_col}(5) * 2 * X(2)     +    coeffCellMat{i_row, i_col}(2));
 
-pdzdxdx = @(X, id, jd) (coeffCellMat{id, jd}(10) * 3 * 2 * X(1) + coeffCellMat{id, jd}(9) * 2 * X(2) +    coeffCellMat{id, jd}(6) * 2);
-pdzdxdy = @(X, id, jd) (coeffCellMat{id, jd}(9) * 2 * X(1) +    coeffCellMat{id, jd}(8) * 2 * X(2) +    coeffCellMat{id, jd}(4));
-pdzdydy = @(X, id, jd) (coeffCellMat{id, jd}(8) * 2 * X(1) +    coeffCellMat{id, jd}(7) * 3 * 2 * X(2) +  coeffCellMat{id, jd}(5) * 2);
+pdzdxdx = @(X, i_row, i_col) (coeffCellMat{i_row, i_col}(10) * 3 * 2 * X(1) + coeffCellMat{i_row, i_col}(9) * 2 * X(2)  +    coeffCellMat{i_row, i_col}(6) * 2);
+pdzdxdy = @(X, i_row, i_col) (coeffCellMat{i_row, i_col}(9) * 2 * X(1)   +    coeffCellMat{i_row, i_col}(8) * 2 * X(2)  +    coeffCellMat{i_row, i_col}(4));
+pdzdydy = @(X, i_row, i_col) (coeffCellMat{i_row, i_col}(8) * 2 * X(1)   +    coeffCellMat{i_row, i_col}(7) * 3 * 2 * X(2) + coeffCellMat{i_row, i_col}(5) * 2);
 
-  dzdx = @(X) pdzdx(X  -  [xMat(jd(X(1)), 1)  yMat(1, id(X(2))) 0]' - [inter/2  inter/2  0]', id(X(2)), jd(X(1)));
-  dzdy = @(X) pdzdy(X  -  [xMat(jd(X(1)), 1)  yMat(1, id(X(2))) 0]' - [inter/2  inter/2  0]', id(X(2)), jd(X(1)));
-dzdxdx = @(X) pdzdxdx(X - [xMat(jd(X(1)), 1)  yMat(1, id(X(2))) 0]' - [inter/2  inter/2  0]', id(X(2)), jd(X(1)));
-dzdxdy = @(X) pdzdxdy(X - [xMat(jd(X(1)), 1)  yMat(1, id(X(2))) 0]' - [inter/2  inter/2  0]', id(X(2)), jd(X(1)));
-dzdydy = @(X) pdzdydy(X - [xMat(jd(X(1)), 1)  yMat(1, id(X(2))) 0]' - [inter/2  inter/2  0]', id(X(2)), jd(X(1)));
+  dzdx  = @(X) pdzdx(  X - [xMat(func_i_row(X(1)), 1),  yMat(1, func_i_col(X(2))), 0]' - [intervalXY/2, 0]', func_i_row(X(1)), func_i_col(X(2)));
+  dzdy  = @(X) pdzdy(  X - [xMat(func_i_row(X(1)), 1),  yMat(1, func_i_col(X(2))), 0]' - [intervalXY/2, 0]', func_i_row(X(1)), func_i_col(X(2)));
+dzdxdx  = @(X) pdzdxdx(X - [xMat(func_i_row(X(1)), 1),  yMat(1, func_i_col(X(2))), 0]' - [intervalXY/2, 0]', func_i_row(X(1)), func_i_col(X(2)));
+dzdxdy  = @(X) pdzdxdy(X - [xMat(func_i_row(X(1)), 1),  yMat(1, func_i_col(X(2))), 0]' - [intervalXY/2, 0]', func_i_row(X(1)), func_i_col(X(2)));
+dzdydy  = @(X) pdzdydy(X - [xMat(func_i_row(X(1)), 1),  yMat(1, func_i_col(X(2))), 0]' - [intervalXY/2, 0]', func_i_row(X(1)), func_i_col(X(2)));
 
 
 %%  
@@ -68,7 +65,7 @@ DF{4} = @(X) (1 + dzdy(X) * dzdy(X)+ (X(3) - X1(3)) * (dzdydy(X)))/(V1 * norm(X 
     ((X(2) - X1(2)) + (X(3) - X1(3)) * (dzdy(X)))^2 / (V1 * norm(X - X1)^3) - ...
     ((X3(2) - X(2)) + (X3(3) - X(3)) * (dzdy(X)))^2 / (V2 * norm(X3 - X)^3);
 
-%%  
+%%
 % X0 = initialX(:, 2);
 Position = Broydensolver(layerCoeffModel, layerGridModel, layerRangeModel, Ftime, F, DF, initialX, 1e-7, 10);
 end
