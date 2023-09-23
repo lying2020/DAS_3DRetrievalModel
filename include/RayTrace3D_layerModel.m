@@ -56,9 +56,7 @@ initial_guess_points = initial_guess_points';
 X0 = [initial_guess_points; 0 idxLayer 0] ;
 
 % num_pts = size(X0, 2);
-if num_pts <= 2
-
-else
+if num_pts > 2
     deleteX0 = [];
     if norm(X0(1:3, num_pts) - X0(1:3, num_pts-1)) < intervalXY/10
         deleteX0(end+1) = num_pts-1;
@@ -77,8 +75,8 @@ else
 end
 %
 clear initial_guess_velocity;
-initial_guess_velocity = zeros(1, size(X0', 1)-1);
-for iX0 = 1:size(X0', 1)-1
+initial_guess_velocity = zeros(1, num_pts - 1);
+for iX0 = 1 : num_pts-1
     p = (X0(:, iX0) + X0(:, iX0+1))./2;
     p = p';
     m = size(layerCoeffModel, 1);
@@ -88,7 +86,7 @@ for iX0 = 1:size(X0', 1)-1
     z = [computelayerz(layerCoeffModel, layerGridModel, layerRangeModel, xyArray, idx); p(1, 3)];
     z = sortrows(z, 1);
     [row, ~] = find(z == p(1, 3));
-    initial_guess_velocity(iX0) = velocityModel(row(1));
+    initial_guess_velocity(iX0) = velocityModel(row(1), 1);
 end
 
 %%
