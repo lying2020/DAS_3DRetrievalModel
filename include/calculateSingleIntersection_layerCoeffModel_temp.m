@@ -67,5 +67,5 @@ DF{4} = @(X) (1 + dzdy(X) * dzdy(X)+ (X(3) - X1(3)) * (dzdydy(X)))/(V1 * norm(X 
 
 %%
 % X0 = initialX(:, 2);
-Position = Broydensolver(layerCoeffModel, layerGridModel, layerRangeModel, Ftime, F, DF, initialX, 1e-7, 10);
+Position = Broydensolver(layerCoeffModel, layerGridModel, layerRangeModel, Ftime, F, DF, initialX, 1e-2, 10);
 end
