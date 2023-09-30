@@ -44,12 +44,12 @@ for iSensor = 1 : numSensor
     % refractionPoints = computeraytrace(relatedLayerModel,  relatedVelocityModel, sensorPositions(iSensor, :), sourceLocationCoord);
     % refractionPoints: the refraction point between the source and the iSensor th sensor
 
-    [Position, markX0, initialguessVel, errort, trivalt] = RayTrace3D_layerModel(layerCoeffModel, layerGridModel, layerRangeModel, velocityModel, sensorPositions(iSensor,:),sourceLocationCoord);
+    [Position, markX0, initial_guess_velocity, errort, trivalt] = RayTrace3D_layerModel(layerCoeffModel, layerGridModel, layerRangeModel, velocityModel, sensorPositions(iSensor,:),sourceLocationCoord);
     %%%%%%%%%%%%%%%%%%%%%
 
     % 计算地震波与在每层地层所用的时间与总旅时的比值
 %     [ratioTime, totalTime] = getratiotime(relatedVelocityModel, refractionPoints);
-    equalDeltaTime(iSensor) = trivaltime(initialguessVel, Position);
+    equalDeltaTime(iSensor) = trivaltime(initial_guess_velocity, Position);
     % 计算第i个检波器与震源之间的等效距离
     tmpDist = computedistance(Position');
     equalDistance(iSensor) = sum(tmpDist);
@@ -60,7 +60,7 @@ for iSensor = 1 : numSensor
     idxArray = ((numDim+1)* (iSensor - 1) + 1) : ((numDim+1)* iSensor);
     refractionPointSets(1:tmp,  idxArray) = Position(1:4,:)';
     numrefractionPointSets(iSensor) = tmp;
-    Vel(1:tmp-1,iSensor) = initialguessVel';
+    Vel(1:tmp-1,iSensor) = initial_guess_velocity';
 end
 
 end
