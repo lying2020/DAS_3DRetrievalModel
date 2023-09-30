@@ -34,7 +34,7 @@ function  [baseCoord, layerCoeffModel, layerGridModel, layerRangeModel, layerCoe
 %% -----------------------------------------------------------------------------------------------------
 %
 %  DEBUG ! ! !
-dbstop if error;
+% dbstop if error;
 
 func_name = mfilename;
 displaytimelog(['func: ', func_name]);

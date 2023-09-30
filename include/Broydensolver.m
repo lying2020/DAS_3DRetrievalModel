@@ -1,8 +1,8 @@
-function Result = Broydensolver(layerCoeffModel, layerGridModel, layerRangeModel, Ft, Fun, DFun, initialX, Toler, Maxnumiter)
+function Result = Broydensolver(layerCoeffModel, layerGridModel, layerRangeModel, Ft, Fun, DFun, initialX, Tolerance, max_num_iterations)
 %%INPUT:
 %*Fun:   a cell containing function handle-- such as F=@(X) X(1)+X(2)
-%*Toler:
-%*Maxnumiter: the maxmum number of iterations
+%*Tolerance:
+%*max_num_iterations: the maxmum number of iterations
 %%OUTPUT:
 %*Solution:
 % 迭代求解传播时间函数最小值。
@@ -59,7 +59,7 @@ if X1(2) < ymin
 elseif X1(2) > ymax
     X1(2) = ymax-1;
 end
-step = X1(1:2) -X0(1:2);
+step = X1(1:2) - X0(1:2);
 if step == 0
     Result = X0;
     return
@@ -72,11 +72,11 @@ if smallt > Ft(X1)
 end
 F0=F00;
 InvA0=InvA00;
-for j=1:Maxnumiter
+for i_iteration=1:max_num_iterations
     F1=zeros(numsolution, 1);
     for i =1:1:numsolution
         F1(i) = Fun{i}(X1);
-    end    
+    end
     if acstep > 10
         acstep = 0;
         count=0;
@@ -152,7 +152,7 @@ for j=1:Maxnumiter
         end
     end
     residual = max(abs(X1-X2)) ;
-    if residual < Toler
+    if residual < Tolerance
         break
     else
         InvA0 = InvA1;

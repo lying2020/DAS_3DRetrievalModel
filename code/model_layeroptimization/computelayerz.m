@@ -31,7 +31,7 @@ function zArray = computelayerz(layerCoeffModel, layerGridModel, layerRangeModel
 %
 %
 %  DEBUG ! ! !
-dbstop if error;
+% dbstop if error;
 format long % short % 
 %
 % clear
