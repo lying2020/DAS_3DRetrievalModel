@@ -12,7 +12,7 @@
 # 仅在当前目录下忽略 TODO 文件， 但不包括子目录下的 subdir/TODO
 # /TODO
 # 忽略 mat_data/ 文件夹下的所有文件
-mat_data/
+tmp_layer/
 mat_data*/
 # 忽略 doc/notes.txt, 不包括 doc/server/arch.txt
 # doc/*.txt
