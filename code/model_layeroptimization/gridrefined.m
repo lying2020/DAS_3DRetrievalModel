@@ -23,7 +23,7 @@ function [xMat2, yMat2, zMat2] = gridrefined(xMat, yMat, zMat, stepSize, gridTyp
 % X, Y, Z: the x, y, z grid point coordinates after interpolation.
 %
 %  DEBUG ! ! !
-dbstop if error;
+% dbstop if error;
 
 func_name = mfilename;
 displaytimelog(['func: ', func_name]);
