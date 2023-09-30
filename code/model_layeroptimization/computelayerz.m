@@ -35,7 +35,7 @@ function zArray = computelayerz(layerCoeffModel, layerGridModel, layerRangeModel
 format long % short % 
 %
 % clear
-func_name = mfilename;
+% func_name = mfilename;
 
 %% -----------------------------------------------------------------------------------------------------
 %
