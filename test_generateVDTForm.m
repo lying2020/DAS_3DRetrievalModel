@@ -1,7 +1,7 @@
 
 %
 %
-%
+% nohup /usr/local/Matlab/R2020a/bin/matlab  -batch test_generateVDTForm &
 %  DEBUG ! ! !
 dbstop if error;
 format long % short %

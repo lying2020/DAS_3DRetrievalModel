@@ -30,7 +30,7 @@ displaytimelog(['func: ', func_name, '. ' 'nCores: ', num2str(nCores), ', [num_x
 numx = num_xyz(1); numy = num_xyz(2);  numz = num_xyz(3);
 
 tempVDTForm = cell(numx, numy, numz);
-for ix = 1 : numx
+for ix = 9 : numx
 % parfor ix = 1:numx
     tmpVDTForm_X = cell(numy, numz);
     X_time_start = str2num(showtimenow(0));
