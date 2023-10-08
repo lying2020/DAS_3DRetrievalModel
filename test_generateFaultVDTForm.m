@@ -20,10 +20,10 @@ end
 %% import data model
 
 % read_geological_model_2023_T('_T106')
-% geological_model_name = 'geological_model_2023_T106';
+geological_model_name = 'geological_model_2023_T106';
 
-read_geological_model_2023_T('_T131')
-geological_model_name = 'geological_model_2023_T131';
+% read_geological_model_2023_T('_T131')
+% geological_model_name = 'geological_model_2023_T131';
 
 % read_geological_model_xinjiang_2020;
 % geological_model_name = 'geological_model_xinjiang_2020_XJ';
