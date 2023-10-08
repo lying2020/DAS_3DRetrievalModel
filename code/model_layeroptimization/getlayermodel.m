@@ -106,9 +106,11 @@ for iFile = 1 : numLayer
     %% Record the average of the z coordinates
     meanZ(layer_cnt, 1) = mean(mean(zMat));
    %   There is incorrect data in the coordinates of the edge
-    xMat = xMat(2:end-1, 2:end-1);
-    yMat = yMat(2:end-1, 2:end-1);
-    zMat = zMat(2:end-1, 2:end-1);
+   if ~contains('faultModel', layerType)
+        xMat = xMat(2:end-1, 2:end-1);
+        yMat = yMat(2:end-1, 2:end-1);
+        zMat = zMat(2:end-1, 2:end-1);
+   end
 
     %% If you need further grid refinement
     if gridFlag
