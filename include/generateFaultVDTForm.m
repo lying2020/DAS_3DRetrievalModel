@@ -10,9 +10,8 @@ function VDTForm = generateFaultVDTForm(layerCoeffModel, layerGridModel, layerRa
 % arrivaltimeForm   numx*numy*numz *
 % numsensor  arrivaltimedata sourceLocationDomain
 
-
-numfault = size(faultPositions,1);
-nums = size(sensorPositions,1);
+numfault = size(faultPositions, 1);
+nums = size(sensorPositions, 1);
 numpool = 4;
 nCores = feature('numcores');
 startmatlabpool(numpool,10000);   
