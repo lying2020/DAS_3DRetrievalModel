@@ -143,7 +143,7 @@ RMDomain_file_name =  [output_result_data_path, filesep, 'Domain_faultGridModel'
 displaytimelog(['func: ', func_name, '. ', 'RMDomain_file_name: ', RMDomain_file_name]);
 save(RMDomain_file_name, 'faultPositions');
 
-VDTForm = generateFaultVDTForm(layerCoeffModel, layerGridModel, velocityModel, layerRangeModel, undergroundCoordsSet, faultPositions);
+VDTForm = generateFaultVDTForm(layerCoeffModel, layerGridModel, layerRangeModel, velocityModel, undergroundCoordsSet, faultPositions);
 
 RMVDT_file_name   = [output_result_data_path, filesep, 'VDTForm_faultGridModel', num2str(numfaultPositions), '.mat'];
 displaytimelog(['func: ', func_name, '. ', 'RMVDT_file_name: ', RMVDT_file_name]);
