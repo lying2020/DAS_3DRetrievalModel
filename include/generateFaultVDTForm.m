@@ -45,6 +45,6 @@ parfor ifault = 1 : numfault
     VDTForm{ifault} = [equalVelocity'; equalTime']';
     displaytimelog(['numfault: ', num2str(numfault), ', ifault: ', num2str(ifault), ', sourceLocation: ', num2str(sourceLocation)]);
 end
-% closematlabpool;
+closematlabpool;
 
 end
