@@ -13,8 +13,9 @@ function VDTForm = generateFaultVDTForm(layerCoeffModel, layerGridModel, layerRa
 numfault = size(faultPositions, 1);
 nums = size(sensorPositions, 1);
 
-nCores = feature('numcores');
-startmatlabpool(nCores,10000);
+% nCores = feature('numcores');
+% startmatlabpool(nCores,10000);
+
 % numi = floor(numfault/numpool);
 % numi = 0;
 % tempfaultPositions = zeros(numi,numpool,3);
@@ -38,13 +39,14 @@ startmatlabpool(nCores,10000);
 % end
 
 VDTForm = cell(numfault);
-% for ifault = 1 : numfault
-parfor ifault = 1 : numfault
+for ifault = 11 : numfault
+% parfor ifault = 1 : numfault
     sourceLocation = faultPositions(ifault, :);
+    displaytimelog(['numfault: ', num2str(numfault), ', ifault: ', num2str(ifault), ', sourceLocation: ', num2str(sourceLocation)]);
     [equalVelocity, ~, equalTime] = computeequalvelocity(layerCoeffModel, layerGridModel, layerRangeModel, velocityModel, sensorPositions, sourceLocation);
     VDTForm{ifault} = [equalVelocity'; equalTime']';
-    displaytimelog(['numfault: ', num2str(numfault), ', ifault: ', num2str(ifault), ', sourceLocation: ', num2str(sourceLocation)]);
 end
-closematlabpool;
+
+% closematlabpool;
 
 end

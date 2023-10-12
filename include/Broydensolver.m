@@ -20,7 +20,9 @@ acstep = 0;
 numsolution = length(Fun);
 F00=zeros(numsolution, 1);
 DF = zeros(numsolution, numsolution);
-X1=[0; 0; X0(3)];X2=[0; 0; X0(3)];
+X1=[0; 0; X0(3)];
+X2=[0; 0; X0(3)];
+% disp(['X0: ', num2str(X0')]);
 for i =1:1:numsolution
     F00(i) = Fun{i}(X0);
 end
