@@ -46,7 +46,7 @@ for ix = 1 : numx
              tmpVDTForm_X{iy, iz} = tmp;
              % tempVDTForm{ix, iy, iz} = [equalVelocity'; equalDistance'; equalTime']';
              disp_toc = toc;
-             displaytimelog(['func: ', func_name, '. ' ' [ix, iy, iz] =  [', num2str(ix), ', ', num2str(iy), ', ', num2str(iz), '], cost time: ', num2str(disp_toc)]);
+             displaytimelog(['func: ', func_name, '. ', ' [ix, iy, iz] =  [', num2str(ix), ', ', num2str(iy), ', ', num2str(iz), '], cost time: ', num2str(disp_toc)]);
         end
     end
     X_time_end = str2num(showtimenow(0));

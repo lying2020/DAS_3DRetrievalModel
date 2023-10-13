@@ -9,6 +9,8 @@ function VDTForm = generateFaultVDTForm(layerCoeffModel, layerGridModel, layerRa
 %% output 
 % arrivaltimeForm   numx*numy*numz *
 % numsensor  arrivaltimedata sourceLocationDomain
+func_name = mfilename;
+displaytimelog(['func: ', func_name]);
 
 numfault = size(faultPositions, 1);
 nums = size(sensorPositions, 1);
@@ -38,15 +40,21 @@ nums = size(sensorPositions, 1);
 %     end
 % end
 
+nCores = feature('numcores');
+startmatlabpool(nCores,10000);
+
 VDTForm = cell(numfault);
-for ifault = 11 : numfault
-% parfor ifault = 1 : numfault
+% for ifault = 1 : numfault
+parfor ifault = 1 : numfault
+    tic
     sourceLocation = faultPositions(ifault, :);
-    displaytimelog(['numfault: ', num2str(numfault), ', ifault: ', num2str(ifault), ', sourceLocation: ', num2str(sourceLocation)]);
+%     displaytimelog(['func: ', func_name, 'numfault: ', num2str(numfault), ', ifault: ', num2str(ifault), ', sourceLocation: ', num2str(sourceLocation)]);
     [equalVelocity, ~, equalTime] = computeequalvelocity(layerCoeffModel, layerGridModel, layerRangeModel, velocityModel, sensorPositions, sourceLocation);
     VDTForm{ifault} = [equalVelocity'; equalTime']';
+    disp_toc = toc;
+    displaytimelog(['func: ', func_name, '. ',  'numfault: ', num2str(numfault), ', ifault: ', num2str(ifault), ', cost time: ', num2str(disp_toc)]);
 end
 
-% closematlabpool;
+closematlabpool;
 
 end

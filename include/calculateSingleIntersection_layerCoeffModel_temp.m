@@ -16,8 +16,8 @@ coeffCellMat = layerCoeffModel{1, 1};
 langeRange =  layerRangeModel{1, :};
 intervalXY =[langeRange(1, 3), langeRange(2, 3)];  % xMat(2, 1) - xMat(1, 1);
 %% Define function likes dz/dx dz^2/dxdy...
-func_i_row = @(x) floor((x - langeRange(1, 1)) / intervalXY(1) +1);
-func_i_col = @(y) floor((y - langeRange(2, 1)) / intervalXY(2) +1);
+func_i_row = @(x) floor(max((x - langeRange(1, 1)) / intervalXY(1), 0) +1);
+func_i_col = @(y) floor(max((y - langeRange(2, 1)) / intervalXY(2), 0) +1);
 
   pdzdx = @(X, i_row, i_col) (coeffCellMat{i_row, i_col}(10) * 3 * X(1)^2 + coeffCellMat{i_row, i_col}(9) * 2 * X(1) * X(2) + coeffCellMat{i_row, i_col}(8) * X(2)^2 + ...
                               coeffCellMat{i_row, i_col}(6) * 2 * X(1)    + coeffCellMat{i_row, i_col}(4) * X(2)         +    coeffCellMat{i_row, i_col}(3));
