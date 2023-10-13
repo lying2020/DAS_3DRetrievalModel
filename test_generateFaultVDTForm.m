@@ -1,7 +1,7 @@
 
 %
 %
-% nohup /usr/local/Matlab/R2020a/bin/matlab  -batch test_generateVDTForm &
+% nohup /usr/local/Matlab/R2020a/bin/matlab  -batch test_generateFaultVDTForm &
 %  DEBUG ! ! !
 dbstop if error;
 format long % short %
@@ -20,10 +20,10 @@ end
 %% import data model
 
 % read_geological_model_2023_T('_T106')
-geological_model_name = 'geological_model_2023_T106';
+% geological_model_name = 'geological_model_2023_T106';
 
 % read_geological_model_2023_T('_T131')
-% geological_model_name = 'geological_model_2023_T131';
+geological_model_name = 'geological_model_2023_T131';
 
 % read_geological_model_xinjiang_2020;
 % geological_model_name = 'geological_model_xinjiang_2020_XJ';
@@ -142,10 +142,12 @@ displaytimelog(['func: ', func_name, '. ', 'numfaultPositions: ', num2str(numfau
 RMDomain_file_name =  [output_result_data_path, filesep, 'Domain_faultGridModel', num2str(numfaultPositions), '.mat'];
 displaytimelog(['func: ', func_name, '. ', 'RMDomain_file_name: ', RMDomain_file_name]);
 save(RMDomain_file_name, 'faultPositions');
+output_fault_model_filename = ['_FM_fault_points_num_', num2str(numfaultPositions) ];
 
-VDTForm = generateFaultVDTForm(layerCoeffModel, layerGridModel, layerRangeModel, velocityModel, undergroundCoordsSet, faultPositions);
+VDTForm = generateFaultVDTForm(layerCoeffModel, layerGridModel, layerRangeModel, velocityModel, ...
+                                                                undergroundCoordsSet, faultPositions, [output_result_data_path, filesep, output_fault_model_filename]);
 
-RMVDT_file_name   = [output_result_data_path, filesep, 'VDTForm_faultGridModel', num2str(numfaultPositions), '.mat'];
+RMVDT_file_name   = [output_result_data_path, filesep, 'VDTForm', output_fault_model_filename, '.mat'];
 displaytimelog(['func: ', func_name, '. ', 'RMVDT_file_name: ', RMVDT_file_name]);
 save(RMVDT_file_name,'VDTForm');
 
