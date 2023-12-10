@@ -55,8 +55,8 @@ for i_tmp = 1: tmpN
     displaytimelog(['func: ', func_name, '. ', 'tmpN: ', num2str(tmpN), ', i_tmp: ', num2str(i_tmp), '. X_time_start: ', num2str(X_time_start)]);
     fault_loop = (tmpnumfault * (i_tmp - 1) + 1) :  min((tmpnumfault * i_tmp), numfaultPositions);
     tmpVDTForm = zeros(length(fault_loop), nums, 2);
-    % for ifault = fault_loop
-    parfor ifault = fault_loop
+    for ifault = fault_loop
+%     parfor ifault = fault_loop
         tic
         sourceLocation = faultPositions(ifault, :);
         %     displaytimelog(['func: ', func_name, 'numfaultPositions: ', num2str(numfaultPositions), ', ifault: ', num2str(ifault), ', sourceLocation: ', num2str(sourceLocation)]);
