@@ -20,7 +20,7 @@ end
 %% import data model
 
 geological_model_name = 'geological_model_2023_H185';
-read_geological_model_2023_T('_H185')
+% read_geological_model_2023_T('_H185')
 
 % geological_model_name = 'geological_model_2023_T106';
 % read_geological_model_2023_T('_T106')
@@ -49,7 +49,12 @@ displaytimelog(['func: ', func_name, '. ', 'geological_model_mat_file_path: ', g
     % displaytimelog(['func: ', func_name, '. ', 'Variable geological_model does not exist, now importdata ... ']);
     geological_model = importdata(geological_model_mat_file_path);
 % end
-
+% geological_model.input_geological_model_path = 'E:\BaiduNetdiskDownload\DAS_SOFTWARE_2.0\DAS_NEW_DEV\DAS_RETRIEVAL_MODEL_1.0.0\src\..\input_data\geological_model_2023_H185';
+% geological_model.output_result_data_path = '/mnt/e/BaiduNetdiskDownload/DAS_SOFTWARE_2.0/DAS_NEW_DEV/DAS_RETRIEVAL_MODEL_1.0.0/output_data/geological_model_2023_H185_retrieval_result_data';
+% geological_model.output_mat_data_path = '/mnt/e/BaiduNetdiskDownload/DAS_SOFTWARE_2.0/DAS_NEW_DEV/DAS_RETRIEVAL_MODEL_1.0.0/output_data/geological_model_2023_H185_retrieval_result_data/mat_data';
+geological_model.input_geological_model_path = 'E:\BaiduNetdiskDownload\DAS_SOFTWARE_2.0\DAS_NEW_DEV\DAS_RETRIEVAL_MODEL_1.0.0\src\..\input_data\geological_model_2023_H185';
+geological_model.output_result_data_path = 'E:\BaiduNetdiskDownload\DAS_SOFTWARE_2.0\DAS_NEW_DEV\DAS_RETRIEVAL_MODEL_1.0.0\output_data\geological_model_2023_H185_retrieval_result_data';
+geological_model.output_mat_data_path = 'E:\BaiduNetdiskDownload\DAS_SOFTWARE_2.0\DAS_NEW_DEV\DAS_RETRIEVAL_MODEL_1.0.0\output_data\geological_model_2023_H185_retrieval_result_data\mat_data';
 
 %% ###################################################################
 output_result_data_path = geological_model.output_result_data_path;
@@ -112,8 +117,8 @@ retrieval_model_area =compute_retrieval_model_area(layerGridModel, undergroundCo
 displaytimelog(['func: ', func_name, '. ', 'updated area. retrieval_model_area: x = ', num2str(retrieval_model_area(1, :)), ...
     ', y = ', num2str(retrieval_model_area(2, :)), ', z = ', num2str(retrieval_model_area(3, :))]);
 
-retrieval_model_grid_size = [20; 20; 15];
-
+retrieval_model_grid_size = [15; 15; 10];
+% retrieval_model_grid_size = [20; 20; 15];
 x_range = ['_x_', num2str(retrieval_model_area(1,1)), '_', num2str(retrieval_model_area(1,2)), '_', num2str(retrieval_model_grid_size(1))];
 y_range = ['_y_', num2str(retrieval_model_area(2,1)), '_', num2str(retrieval_model_area(2,2)), '_', num2str(retrieval_model_grid_size(2))];
 z_range = ['_z_', num2str(retrieval_model_area(3,1)), '_',  num2str(retrieval_model_area(3,2)), '_', num2str(retrieval_model_grid_size(3))];
