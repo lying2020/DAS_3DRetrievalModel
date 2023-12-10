@@ -9,10 +9,10 @@ format long % short %
 % clear
 func_name = mfilename;
 
-if exist('input_data_path', 'var') && exist('output_data_path', 'var')
+if exist('input_data_path', 'var') && exist('output_data_path', 'var')  && exist('current_data_path', 'var')
     displaytimelog(['func: ', func_name, '. ', 'Variable input_data_path / output_data_path exists']);
 else
-    [input_data_path, output_data_path, ~] = add_default_folder_path();
+    [input_data_path, output_data_path, current_data_path] = add_default_folder_path();
 end
 
 % test_generateVDTForm
@@ -32,6 +32,10 @@ geological_model_name = 'geological_model_2023_H185';
 % read_geological_model_xinjiang_2020;
 % geological_model_name = 'geological_model_xinjiang_2020_XJ';
 
+diary_file_name = [current_data_path, filesep, 'log', filesep, 'LOG_INFO_', geological_model_name, '_', showtimenow(0), '.txt'];
+diary(diary_file_name);
+diary on;
+
 %%
 [addpath_name, ~]=fileparts(mfilename('fullpath'));
 current_data_path = addpath_name;
@@ -49,9 +53,7 @@ displaytimelog(['func: ', func_name, '. ', 'geological_model_mat_file_path: ', g
 
 %% ###################################################################
 output_result_data_path = geological_model.output_result_data_path;
-diary_file_name = [output_result_data_path, filesep, 'LOG_INFO_', geological_model_name, '_', showtimenow(0), '.txt'];
-diary(diary_file_name);
-diary on;
+
 
 displaytimelog(['func: ', func_name]);
 

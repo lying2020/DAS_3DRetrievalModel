@@ -53,7 +53,8 @@ if nargin < 3;  type = 'layer';  end
 if nargin < 2; baseCoord = [0 0 0];   end
 if isempty(baseCoord), baseCoord = [0 0 0];  end
 % if txtData is empty or txtData(1, 4) is decimals ... 
-if (isempty(txtData) || rem(txtData(1, 4), 1))
+% if (isempty(txtData) || rem(txtData(1, 4), 1))
+if (isempty(txtData))
     displaytimelog(['func: ', func_name, 'ERROR FORMAT ']);
     [xMat, yMat, zMat, velocityMat, xTimes, yTimes] = deal([]); 
     return; 

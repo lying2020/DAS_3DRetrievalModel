@@ -4,7 +4,8 @@
 function [well_length, interpolated_points] = compute_sensor_coord_with_well_data(data)
 % well_length就是井的总长度，interpolated_points就是从井口到井底，每间隔5m的坐标。
 well_length = calculateWellLength(data);
-interpolated_points = calculateInterpolatedPoints(data, 5);
+sensor_interval = 4.947;   %  5;
+interpolated_points = calculateInterpolatedPoints(data, sensor_interval);
 
 end
 

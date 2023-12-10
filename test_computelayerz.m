@@ -24,7 +24,7 @@ geological_model_name = 'geological_model_2023_T106';
 [addpath_name, ~]=fileparts(mfilename('fullpath'));
 current_data_path = addpath_name;
 
-diary_file_name = [current_data_path, filesep, 'LOG_INFO_test_computelayerz_', showtimenow(0), '.txt'];
+diary_file_name = [current_data_path, filesep, 'log', filesep, 'LOG_INFO_test_computelayerz_', showtimenow(0), '.txt'];
 diary(diary_file_name);
 diary on;
 

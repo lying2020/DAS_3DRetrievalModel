@@ -1,6 +1,8 @@
 
 # ignore some file and folder
 
+log/*
+
 # 忽略 .mat 文件
 *.mat
 *.asv
